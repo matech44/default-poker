@@ -66,8 +66,8 @@ body {
 /* Poker table image container */
 #table {
 	position: relative;
-	top: 160px;
-	left:135px;
+	top: 175px;
+	left:130px;
 	width: 600px;
 }
 
