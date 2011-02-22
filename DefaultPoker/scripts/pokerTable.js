@@ -12,6 +12,36 @@ raam.bezierCurveTo(-50, 300, -50, 0, 160, 0);
 raam.closePath();
 raam.fill();
 
+var raami_efekt = canvas.getContext("2d");
+raami_efekt.beginPath();
+raami_efekt.moveTo(160, 0);
+raami_efekt.lineTo(440, 0);
+raami_efekt.bezierCurveTo(650, 0, 650, 300, 440, 300);
+raami_efekt.lineTo(160, 300);
+raami_efekt.bezierCurveTo(-50, 300, -50, 0, 160, 0);
+raami_efekt.closePath();
+raami_efekt.lineWidth=1;
+var grdRaam1=raami_efekt.createLinearGradient(300,0,300,300);
+grdRaam1.addColorStop(0,"#3B240B");
+grdRaam1.addColorStop(1,"#000000");
+raami_efekt.strokeStyle=grdRaam1;
+raami_efekt.stroke();
+
+var raami_efekt2 = canvas.getContext("2d");
+raami_efekt2.beginPath();
+raami_efekt2.moveTo(160, 5);
+raami_efekt2.lineTo(440, 5);
+raami_efekt2.bezierCurveTo(642, 5, 642, 295, 440, 295);
+raami_efekt2.lineTo(160, 295);
+raami_efekt2.bezierCurveTo(-42, 295, -42, 5, 160, 5);
+raami_efekt2.closePath();
+raami_efekt2.lineWidth=1;
+var grdRaam2=raami_efekt2.createLinearGradient(300,0,300,300);
+grdRaam2.addColorStop(0,"#000000");
+grdRaam2.addColorStop(1,"#FFFFFF");
+raami_efekt2.strokeStyle=grdRaam2;
+raami_efekt2.stroke();
+
 var laud = canvas.getContext("2d");
 var grd=laud.createLinearGradient(300,300,300,0);
 grd.addColorStop(0,"#0A2A0A");
