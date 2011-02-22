@@ -11,7 +11,7 @@ body {
 #left {
 	position: relative;
 	background-color: #303030;
-	width: 100%;
+	width: 80%;
 	height: 100%;
 	float: left;
 	min-width: 840px;
