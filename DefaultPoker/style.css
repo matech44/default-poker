@@ -1,0 +1,316 @@
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+/**
+ * PAGE STRUCTURE FORMED BY UNIQUE DIV's 
+ */
+
+/* Left container holding table and bet buttons */
+#left {
+	position: relative;
+	background-color: #303030;
+	width: 100%;
+	height: 100%;
+	float: left;
+	min-width: 840px;
+}
+
+/* Right container holding chat/statistics */
+#right {
+	position: relative;
+	width: 15%;
+	height: 100%;
+	float: right
+}
+
+/* Poker table with other players */
+#left-top {
+	position: relative;
+	clear: both;
+	width: 100%;
+	height: 100%
+}
+
+/* Bet buttons/our player? */
+#left-bottom {
+	position: relative;
+	clear: both;
+	width: 100%;
+	height: 15%
+}
+
+/* Poker table image container */
+#table {
+	position: relative;
+	top: 160px;
+	margin: auto;
+	width: 600px;
+}
+
+/* Poker table image */
+#tableimage {
+	width: 600px;
+}
+
+/**
+ * UNIQUE PLAYER DIV's
+ */
+
+#player1 {
+	position: absolute;
+	height: 160px;
+	width: 130px;
+	top:450px;
+	left:90px;
+}
+
+#player2 {
+	position: absolute;
+	height: 160px;
+	width: 130px;
+	top: 250px;
+	left: 25px;
+}
+
+#player3 {
+	position: absolute;
+	height: 160px;
+	width: 130px;
+	top: 50px;
+	left: 90px;
+}
+
+#player4 {
+	position: absolute;
+	height: 160px;
+	width: 130px;
+	top: 19px;
+	left: 290px;
+}
+
+#player5 {
+	position: absolute;
+	height: 160px;
+	width: 130px;
+	top: 19px;
+	left: 490px;
+}
+
+#player6 {
+	position: absolute;
+	height: 160px;
+	width: 130px;
+	top: 50px;
+	left: 670px;
+}
+
+#player7 {
+	position: absolute;
+	height: 160px;
+	width: 130px;
+	top: 250px;
+	left: 730px;
+}
+
+#player8 {
+	position: absolute;
+	height: 160px;
+	width: 130px;
+	top: 450px;
+	left: 670px;
+}
+
+#ourplayer {
+	position: absolute;
+	height: 120px;
+	width: 300px;
+	top: 490px;
+	left: 270px;
+}
+
+/**
+ * OUR PLAYER STRUCTURE
+ */
+ 
+#ourdisplay {
+	position:relative;
+	width: 100px;
+	float: left;
+}
+
+#ourdisplayimage {
+	width: 100px;
+}
+
+#ourcards {
+	position:relative;
+	width: 200px;
+	float: left;
+}
+
+#ourcard1 {
+	position:relative;
+	left: 20px;
+	height: 120px;
+	float: left;
+}
+
+#ourcard2 {
+	position:relative;
+	height: 120px;
+	float: right;
+}
+
+.ourcardimage {
+	height: 120px;
+}
+ 
+/**
+ * ENEMY PLAYERS STRUCTURE
+ */
+
+/* Cards container DIV on top */
+.cards {
+	height: 70px;
+	width: 100%;
+}
+
+/* First card DIV container little higher */
+.card1 {
+	position: relative;
+	top: -10px;
+	margin-left: 20px;
+	height: 70px;
+	float: left
+}
+
+/* Second card DIV container overlapping the first */
+.card2 {
+	position: relative;
+	left: -20px;
+	height: 70px;
+	float: left;
+}
+
+/* Single card IMG */
+.cardimage {
+	height: 70px;
+}
+
+/* Player display image/money/status images DIV in the center*/
+.playerdata {
+	height: 60px;
+	width: 100%;
+}
+
+/* Player display image DIV container */
+.playerdisplay {
+	position: relative;
+	float: left;
+	height: 60px;
+	width: 50%;
+}
+
+/* Player diplay IMG */
+.playerdisplayimage {
+	width: 60px;
+}
+
+/* Player money/status images DIV container */
+.playerdetail {
+	position: relative;
+	float: right;
+	width: 50%;
+}
+
+/* Player money DIV */
+.playersum  {
+	width: 100%;
+	height: 50%;
+	text-align: center;
+	font-family: "Trebuchet MS";
+	font-size: 14;
+	font-weight: bold;
+}
+
+/* Player status images DIV container */
+.playerstatus {
+	width: 100%;
+	height: 50%;
+}
+
+/* Player status IMG */
+.playerstatusimage {
+	width: 30px;
+	float: left;
+}
+
+/* Player name DIV on the bottom */
+.playername {
+	height: 30px;
+	width: 100%;
+	text-align: center;
+	font-family: "Trebuchet MS";
+	font-size: 15;
+	//font-weight: bold;
+	color: #BBBBBB;
+}
+
+/**
+ * TABLE CARDS
+ */
+ 
+#tablecards {
+	position: relative;
+	width: 500px;
+	height: 100px;
+	margin: auto;
+	top: -1500px;
+	left: 0px;
+	opacity: 0.6;
+}
+
+#tablecard1 {
+	position: relative;
+	width: 80px;
+	float: left;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#tablecard2 {
+	position: relative;
+	width: 80px;
+	float: left;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#tablecard3 {
+	position: relative;
+	width: 80px;
+	float: left;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#tablecard4 {
+	position: relative;
+	width: 80px;
+	float: left;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#tablecard5 {
+	position: relative;
+	width: 80px;
+	float: left;
+	margin-left: 10px;
+}
+
+.tablecardimage {
+	width: 80px;
+}
