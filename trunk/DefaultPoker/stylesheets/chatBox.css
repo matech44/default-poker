@@ -1,0 +1,11 @@
+@CHARSET "ISO-8859-1";
+
+#chatOutput {
+	width:210px;
+	height:270px;
+	resize: none;
+	}
+	
+#message {
+	width: 210px;
+	}

@@ -13,5 +13,5 @@ function popUp(URL) {
 			+ id
 			+ " = window.open(URL, '"
 			+ id
-			+ "', 'toolbar=0,scrollbars=0,location=0,statusbar=1,menubar=1,resizable=0,width=1050,height=650,left = 158,top = 59');");
+			+ "', 'toolbar=0,scrollbars=0,location=0,statusbar=1,menubar=1,resizable=0,width=1063,height=651,left = 158,top = 59');");
 }
