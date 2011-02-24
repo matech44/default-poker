@@ -1,11 +1,25 @@
 @CHARSET "ISO-8859-1";
 
-#chatOutput {
+textarea.chatoutput {
 	width:210px;
 	height:270px;
 	resize: none;
-	}
+	background-color: #606060;
+	border: solid 1px #808080;
+	color: #DDDDDD;
+}
 	
-#message {
+#usermsg {
 	width: 210px;
-	}
+	background-color: #606060;
+	border: solid 1px #808080;
+	font-family: "Courier New";
+	color: #DDDDDD;
+}
+
+#submitmsg {
+	background-color: #606060;
+	border: solid 1px #808080;
+	font-family: "Courier New";
+	color: #DDDDDD;
+}

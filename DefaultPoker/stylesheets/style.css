@@ -1,6 +1,7 @@
 body {
 	margin: 0px;
 	padding: 0px;
+	font-family: "Courier New";
 }
 
 /**
@@ -47,20 +48,19 @@ body {
 	width: 20%;
 	height: 100%;
 	float: left;
+	background-color: #444444;
 }
 
 #right-top {
 	position: relative;
 	width: 100%;
 	height: 50%;
-	background-color: blue;
 }
 
 #right-bottom {
 	position: relative;
 	width: 100%;
 	height: 50%;
-	background-color: black;
 }
 
 /* Poker table image container */
@@ -254,7 +254,8 @@ body {
 	text-align: center;
 	font-family: "Trebuchet MS";
 	font-size: 14;
-	font-weight: bold;
+	//font-weight: bold;
+	color: #BBBBBB;
 }
 
 /* Player status images DIV container */
@@ -274,7 +275,7 @@ body {
 	height: 30px;
 	width: 100%;
 	text-align: center;
-	font-family: "Trebuchet MS";
+	font-family: "Courier New";
 	font-size: 15;
 	//font-weight: bold;
 	color: #BBBBBB;
