@@ -12,10 +12,8 @@
 <div id="left">
 <div id="left-top">
 
-<div id="table">
-<canvas id="pokerTable" width="600" height="300">
-Your browser does not support the canvas element.</canvas> 
-</div>
+<div id="table"><canvas id="pokerTable" width="600" height="300">
+Your browser does not support the canvas element.</canvas></div>
 
 <!-- PLAYER1 -->
 <div id="player1">
@@ -99,7 +97,7 @@ Your browser does not support the canvas element.</canvas>
 <div class="playerdisplay"><img src="images/head.png"
 	class="playerdisplayimage" /></div>
 <div class="playerdetail">
-<div class="playersum"></div>
+<div class="playersum">140$</div>
 <div class="playerstatus"><img src="images/chip50.png"
 	class="playerstatusimage" /></div>
 </div>
@@ -191,17 +189,13 @@ Your browser does not support the canvas element.</canvas>
 </div>
 
 <div id="right">
-<div id="right-top">
-Andrese töö
-</div>
+<div id="right-top">Andrese töö</div>
 <div id="right-bottom">
-<textarea id=chatOutput readonly="readonly" rows="2" cols="20">
+<form id="message" action=""><textarea class="chatoutput"
+	readonly="readonly" rows="2" cols="20">
 >po-po-poker face 
-</textarea>
-<form id=message action="">  
-        <input name="usermsg" type="text" id="usermsg" size="29" />  
-        <input name="submitmsg" type="submit"  id="submitmsg" value="Send" />  
-    </form>  
+</textarea> <input name="usermsg" type="text" id="usermsg" size="29" /> <input
+	name="submitmsg" type="submit" id="submitmsg" value="Send" /></form>
 </div>
 </div>
 
