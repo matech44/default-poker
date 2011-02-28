@@ -63,6 +63,11 @@ body {
 	height: 50%;
 }
 
+#menu {
+	color: white;
+	background-color: blue;	
+	}
+
 /* Poker table image container */
 #table {
 	position: relative;
