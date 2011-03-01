@@ -194,6 +194,13 @@ body {
 	left: 270px;
 }
 
+#ourbuttons {
+	position: absolute;
+	height:	33px;
+	top: 613px;
+	left: 270px;
+}
+
 /**
  * OUR PLAYER STRUCTURE
  */
