@@ -91,15 +91,15 @@ body {
 }
 
 .tablelogoimage {
-	width: 200px;
-	height: 100px;
+	width: 250px;
+	height: 140px;
 	opacity: 0.3;
 	}
 
 #tablelogoimagediv {
 	position: absolute;
-	top: 280px;
-	left: 340px;
+	top: 260px;
+	left: 330px;
 	
 	}
 
@@ -339,50 +339,49 @@ body {
 	width: 500px;
 	height: 100px;
 	margin: auto;
-	top: -1500px;
-	left: 0px;
-	opacity: 0.6;
+	top: 280px;
+	left: 70px;
 }
 
 #tablecard1 {
 	position: relative;
-	width: 80px;
+	width: 70px;
 	float: left;
-	margin-left: 10px;
-	margin-right: 10px;
+	margin-left: 2px;
+	margin-right: 2px;
 }
 
 #tablecard2 {
 	position: relative;
-	width: 80px;
+	width: 70px;
 	float: left;
-	margin-left: 10px;
-	margin-right: 10px;
+	margin-left: 2px;
+	margin-right: 2px;
 }
 
 #tablecard3 {
 	position: relative;
-	width: 80px;
+	width: 70px;
 	float: left;
-	margin-left: 10px;
-	margin-right: 10px;
+	margin-left: 2px;
+	margin-right: 2px;
 }
 
 #tablecard4 {
 	position: relative;
-	width: 80px;
+	width: 70px;
 	float: left;
-	margin-left: 10px;
-	margin-right: 10px;
+	margin-left: 2px;
+	margin-right: 2px;
 }
 
 #tablecard5 {
 	position: relative;
-	width: 80px;
+	width: 70px;
 	float: left;
-	margin-left: 10px;
+	margin-left: 2px;
 }
 
 .tablecardimage {
-	width: 80px;
+	width: 70px;
 }
