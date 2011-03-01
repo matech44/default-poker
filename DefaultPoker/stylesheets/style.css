@@ -32,7 +32,8 @@ body {
 	position: relative;
 	clear: both;
 	width: 100%;
-	height: 100%
+	height: 100%;
+	background-color: #303030;
 }
 
 /* Bet buttons/our player? */
@@ -40,7 +41,8 @@ body {
 	position: relative;
 	clear: both;
 	width: 100%;
-	height: 15%
+	height: 15%;
+	background-color: #303030;
 }
 
 /* Right container holding chat/statistics */
@@ -56,6 +58,7 @@ body {
 	position: relative;
 	width: 100%;
 	height: 50%;
+	background-color: #303030;
 }
 
 #right-bottom {
@@ -107,9 +110,11 @@ body {
 
 #exitbutton {
 	}
+	
 #newgamebutton {
 	position:absolute;
-	left:100px;
+	left:105px;
+	top:0px;
 	}
 
 /**
