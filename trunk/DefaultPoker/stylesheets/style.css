@@ -109,12 +109,13 @@ body {
 }
 
 #exitbutton {
-	}
-	
-#newgamebutton {
 	position:absolute;
 	left:105px;
 	top:0px;
+	}
+	
+#newgamebutton {
+
 	}
 
 /**
