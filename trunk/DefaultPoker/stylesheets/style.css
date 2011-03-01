@@ -91,7 +91,7 @@ body {
 }
 
 .tablelogoimage {
-	width: 400px;
+	width: 200px;
 	height: 100px;
 	opacity: 0.3;
 	}
@@ -99,7 +99,7 @@ body {
 #tablelogoimagediv {
 	position: absolute;
 	top: 280px;
-	left: 225px;
+	left: 340px;
 	
 	}
 
