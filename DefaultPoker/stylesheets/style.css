@@ -118,6 +118,12 @@ body {
 
 	}
 
+#slider-1 {
+	position:absolute;
+	top: 620px;
+	left: 600px;
+	}
+
 /**
  * UNIQUE PLAYER DIV's
  */
