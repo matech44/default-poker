@@ -2,6 +2,7 @@ body {
 	margin: 0px;
 	padding: 0px;
 	font-family: "Courier New";
+	background-color: #303030;
 }
 
 /**
@@ -61,28 +62,49 @@ body {
 	position: relative;
 	width: 100%;
 	height: 50%;
+	background-color: #303030;
 }
 
 #menu {
-	color: white;
-	background-color: blue;	
+	positsion: absolute;
+	background-color: #303030;
 	}
 
-/* Poker table image container */
 #table {
-	position: relative;
-	top: 175px;
-	left:130px;
+	position: absolute;
+	top: 180px;
+	left: 120px;
+	height: 300px;
 	width: 600px;
 }
+
+/* Poker table image container */
+#tablecanvas {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 600px;
+}
+
+.tablelogoimage {
+	width: 400px;
+	height: 100px;
+	}
+
+#tablelogoimagediv {
+	positsion: absolute;
+	margin-top: 0px;
+	margin-left: 225px;
+	}
 
 /* Poker table image */
 #tableimage {
 	width: 600px;
 }
 
-#bottomDiv {
-	background-color: #303030;
+#exitbutton {
+	positsion: absolute;
+	left: 100px;
 	}
 
 /**
