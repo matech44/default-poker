@@ -122,7 +122,7 @@ body {
 	position:absolute;
 	top: 620px;
 	left: 530px;
-	color:blue;
+	color: white;
 	}
 
 #usermsg {
@@ -384,7 +384,7 @@ checkboxBigBlind {
 	font-family: "Trebuchet MS";
 	font-size: 14;
 	//font-weight: bold;
-	color: #BBBBBB;
+	color: #FDD017;
 }
 
 /* Player status images DIV container */
