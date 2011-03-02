@@ -415,12 +415,13 @@ checkboxBigBlind {
  */
  
 #tablecards {
-	position: relative;
+	position: absolute;
+	z-index:1;
 	width: 500px;
 	height: 100px;
 	margin: auto;
-	top: 280px;
-	left: 70px;
+	top: 270px;
+	left: 245px;
 }
 
 #tablecard1 {
@@ -464,4 +465,120 @@ checkboxBigBlind {
 
 .tablecardimage {
 	width: 70px;
+}
+
+.tablebetinfo {
+	position:absolute;
+	top:180px;
+	left:130px;
+	height:300px;
+	width:600px;
+	z-index:2;
+	color:gray;
+}
+#tablebetinfo1 {
+	position:absolute;
+	height:50px;
+	width:50px;
+	top:230px;
+	left:90px;
+}
+#tablebetinfo2 {
+	position:absolute;
+	height:50px;
+	width:50px;
+	top:130px;
+	left:15px;
+}
+#tablebetinfo3 {
+	position:absolute;
+	height:50px;
+	width:50px;
+	top:20px;
+	left:90px;
+}
+#tablebetinfo4 {
+	position:absolute;
+	height:50px;
+	width:50px;
+	top:15px;
+	left:200px;
+}
+#tablebetinfo5 {
+	position:absolute;
+	height:50px;
+	width:50px;
+	top:15px;
+	left:350px;
+}
+#tablebetinfo6 {
+	position:absolute;
+	height:50px;
+	width:50px;
+	top:30px;
+	left:480px;
+}
+#tablebetinfo7 {
+	position:absolute;
+	height:50px;
+	width:50px;
+	top:130px;
+	left:535px;
+}
+#tablebetinfo8 {
+	position:absolute;
+	height:50px;
+	width:50px;
+	top:230px;
+	left:460px;
+}
+#ourbetinfo {
+	position:absolute;
+	height:50px;
+	width:50px;
+	top:240px;
+	left:260px;
+}
+
+.chipimage {
+	height:20px;
+	float:top;	
+}
+#playerbet1 {
+	float:bottom;
+}
+#playerbet2 {
+	float:bottom;
+}
+#playerbet3 {
+	float:bottom;
+}
+#playerbet4 {
+	float:bottom;
+}
+#playerbet5 {
+	float:bottom;
+}
+#playerbet6 {
+	float:bottom;
+}
+#playerbet7 {
+	float:bottom;
+}
+#playerbet8 {
+	float:bottom;
+}
+#outbet {
+	float:bottom;
+}
+#pot {
+	position:absolute;
+	height:30px;
+	width:150px;
+	top:190px;
+	left:220px;
+	text-align:center;
+	font-size:x-large;
+	font-weight:bold;
+	color:white;
 }
