@@ -185,6 +185,18 @@
 <div id="buttonraise"><img src="images/buttonRaise.png" /></div>
 </div>
 
+<div id="checkboxSitOutDiv"> 
+Sit out: <input type="checkbox" id="checkboxSitOut"/>
+</div>
+
+<div id="checkboxNextHandDiv"> 
+Play Next Hand: <input type="checkbox" id="checkboxNextHand"/>
+</div>
+
+<div id="checkboxBigBlindDiv"> 
+Wait for Big Blind: <input type="checkbox" id="checkboxBigBlind"/>
+</div>
+
 <div id="slider-1">
 <input type="range" id="slider-input-1" min="0" max="1000" value="0" step="5" onchange="showValue(this.value)" />
 <span id="range">0</span>
@@ -194,6 +206,7 @@ function showValue(newValue)
 	document.getElementById("range").innerHTML=newValue;
 }
 </script>
+
 </div>
 
 <div id="tablecards">
