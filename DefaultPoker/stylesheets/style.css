@@ -125,6 +125,10 @@ body {
 	color:blue;
 	}
 
+#usermsg {
+	background-color: white;
+	}
+
 /**
  * UNIQUE PLAYER DIV's
  */
@@ -142,7 +146,7 @@ body {
 	height: 160px;
 	width: 130px;
 	top: 250px;
-	left: 25px;
+	left: 18px;
 }
 
 #player3 {
