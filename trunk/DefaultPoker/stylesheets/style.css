@@ -283,6 +283,36 @@ body {
 	height:33px;
 	width:55px;
 }
+#checkboxSitOut {
+	position:relative;
+	}
+#checkboxNextHand {
+	position:relative;
+	}
+checkboxBigBlind {
+	position:relative;
+	}
+#checkboxSitOutDiv {
+	color: white;
+	position:relative;
+	top: 611px;
+	left: 235px;
+	font-size: 12px;
+	}
+#checkboxNextHandDiv {
+	color: white;
+	position:relative;
+	top: 592px;
+	left: 90px;
+	font-size: 12px;
+	}
+#checkboxBigBlindDiv {
+	color: white;
+	position:relative;
+	top: 590px;
+	left: 115px;
+	font-size: 12px;
+	}
 
 /**
  * ENEMY PLAYERS STRUCTURE
