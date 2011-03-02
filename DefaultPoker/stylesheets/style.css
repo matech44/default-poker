@@ -121,7 +121,7 @@ body {
 #slider-1 {
 	position:absolute;
 	top: 620px;
-	left: 600px;
+	left: 530px;
 	}
 
 /**
@@ -200,13 +200,6 @@ body {
 	left: 270px;
 }
 
-#ourbuttons {
-	position: absolute;
-	height:	33px;
-	top: 613px;
-	left: 270px;
-}
-
 /**
  * OUR PLAYER STRUCTURE
  */
@@ -243,7 +236,53 @@ body {
 .ourcardimage {
 	height: 120px;
 }
- 
+
+/***
+* BUTTONS
+*/
+
+#ourbuttons {
+	position: absolute;
+	height:	33px;
+	width: 180px;
+	top: 613px;
+	left: 350px;
+}
+
+#buttonfold {
+	position:relative;
+	float:left;
+	margin-right:5px;
+	height:33px;
+	width:55px;
+}
+#buttoncall {
+	position:relative;
+	float:left;
+	margin-right:5px;
+	height:33px;
+	width:55px;
+}
+#buttoncheck {
+	position:relative;
+	float:left;
+	margin-right:5px;
+	height:33px;
+	width:55px;
+}
+#buttonbet {
+	position:relative;
+	float:left;
+	height:33px;
+	width:55px;
+}
+#buttonraise {
+	position:relative;
+	float:left;
+	height:33px;
+	width:55px;
+}
+
 /**
  * ENEMY PLAYERS STRUCTURE
  */
