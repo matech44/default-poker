@@ -13,7 +13,7 @@ body {
 #maincontainer {
 	margin: 0px;
 	padding: 0px;
-	min-width: 1050px;
+	min-width: 1062px;
 	min-height: 650px;
 	background-color: #303030;
 }
@@ -186,7 +186,7 @@ body {
 	height: 160px;
 	width: 130px;
 	top: 250px;
-	left: 730px;
+	left: 732px;
 }
 
 #player8 {
@@ -384,7 +384,7 @@ checkboxBigBlind {
 	font-family: "Trebuchet MS";
 	font-size: 14;
 	//font-weight: bold;
-	color: #FDD017;
+	color: #EAC117;
 }
 
 /* Player status images DIV container */
