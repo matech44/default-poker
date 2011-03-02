@@ -180,15 +180,20 @@
 </div>
 </div>
 <div id="ourbuttons">
-<img src="images/buttonFold.png" />
-<img src="images/buttonCall.png" />
-<img src="images/buttonCheck.png" />
-<img src="images/buttonBet.png" />
-<img src="images/buttonRaise.png" />
+<div id="buttonfold"><img src="images/buttonFold.png" /></div>
+<div id="buttoncall"><img src="images/buttonCall.png" /></div>
+<div id="buttonraise"><img src="images/buttonRaise.png" /></div>
 </div>
 
 <div id="slider-1">
-   <input type="range" id="slider-input-1" />
+<input type="range" id="slider-input-1" min="0" max="1000" value="0" step="5" onchange="showValue(this.value)" />
+<span id="range">0</span>
+<script type="text/javascript">
+function showValue(newValue)
+{
+	document.getElementById("range").innerHTML=newValue;
+}
+</script>
 </div>
 
 <div id="tablecards">
