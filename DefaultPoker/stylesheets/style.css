@@ -147,66 +147,48 @@ body {
  * UNIQUE PLAYER DIV's
  */
 
-#player1 {
+.players {
 	position: absolute;
 	height: 160px;
 	width: 130px;
+	}
+
+#player1 {
 	top:450px;
 	left:90px;
 }
 
 #player2 {
-	position: absolute;
-	height: 160px;
-	width: 130px;
 	top: 250px;
 	left: 18px;
 }
 
 #player3 {
-	position: absolute;
-	height: 160px;
-	width: 130px;
 	top: 50px;
 	left: 90px;
 }
 
 #player4 {
-	position: absolute;
-	height: 160px;
-	width: 130px;
 	top: 19px;
 	left: 290px;
 }
 
 #player5 {
-	position: absolute;
-	height: 160px;
-	width: 130px;
 	top: 19px;
 	left: 490px;
 }
 
 #player6 {
-	position: absolute;
-	height: 150px;
-	width: 130px;
 	top: 50px;
 	left: 670px;
 }
 
 #player7 {
-	position: absolute;
-	height: 160px;
-	width: 130px;
 	top: 250px;
 	left: 732px;
 }
 
 #player8 {
-	position: absolute;
-	height: 160px;
-	width: 130px;
 	top: 450px;
 	left: 670px;
 }
@@ -446,7 +428,10 @@ checkboxBigBlind {
 
 #tablecard1 {
 	position: relative;
+	height: 170px;
 	width: 70px;
+	background-size: 70px auto;
+	background-repeat: no-repeat;
 	float: left;
 	margin-left: 2px;
 	margin-right: 2px;
@@ -454,7 +439,10 @@ checkboxBigBlind {
 
 #tablecard2 {
 	position: relative;
+	height: 170px;
 	width: 70px;
+	background-size: 70px auto;
+	background-repeat: no-repeat;
 	float: left;
 	margin-left: 2px;
 	margin-right: 2px;
@@ -462,7 +450,10 @@ checkboxBigBlind {
 
 #tablecard3 {
 	position: relative;
+	height: 170px;
 	width: 70px;
+	background-size: 70px auto;
+	background-repeat: no-repeat;
 	float: left;
 	margin-left: 2px;
 	margin-right: 2px;
@@ -470,7 +461,10 @@ checkboxBigBlind {
 
 #tablecard4 {
 	position: relative;
+	height: 170px;
 	width: 70px;
+	background-size: 70px auto;
+	background-repeat: no-repeat;
 	float: left;
 	margin-left: 2px;
 	margin-right: 2px;
@@ -478,9 +472,13 @@ checkboxBigBlind {
 
 #tablecard5 {
 	position: relative;
+	height: 170px;
 	width: 70px;
+	background-size: 70px auto;
+	background-repeat: no-repeat;
 	float: left;
 	margin-left: 2px;
+	background-image:url("../images/cardBackSide.png");
 }
 
 .tablecardimage {
