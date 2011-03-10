@@ -112,14 +112,24 @@ body {
 }
 
 #newgamebutton {
+	background-image: url("../images/buttonNewGame.png");
+	display: block;
 	position: relative;
 	float: left;
 	margin-right: 8px;
 	width: 101px;
 	height: 30px;
 }
+#newgamebutton:hover {
+	background-image: url("../images/buttonNewGame2.png");
+}
+#newgamebutton:active {
+	background-image: url("../images/buttonNewGame1.png");
+}
 
 #exitbutton {
+	background-image: url("../images/buttonExit.png");
+	display: block;
 	position: relative;
 	float: left;
 	width: 101px;
@@ -259,6 +269,8 @@ body {
 }
 
 #buttonfold {
+	background-image: url("../images/buttonFold.png");
+	display: block;
 	position:relative;
 	float:left;
 	margin-right:5px;
@@ -266,6 +278,8 @@ body {
 	width:55px;
 }
 #buttoncall {
+	background-image: url("../images/buttonCall.png");
+	display: block;
 	position:relative;
 	float:left;
 	margin-right:5px;
@@ -286,6 +300,8 @@ body {
 	width:55px;
 }
 #buttonraise {
+	background-image: url("../images/buttonRaise.png");
+	display: block;
 	position:relative;
 	float:left;
 	height:33px;
