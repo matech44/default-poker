@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="stylesheets/statsBox.css" />
 <script type="text/javascript" src="scripts/pokerTable.js"></script>
 <script src="http://code.jquery.com/jquery-1.5.js"></script>
+<script type="text/javascript" src="scripts/animations.js"></script>
 </head>
 
 <body onLoad="draw();">
@@ -25,7 +26,7 @@ element. </canvas></div>
 	class="tablelogoimage" /></div>
 
 <!-- PLAYER1 -->
-<div id="player1">
+<div id="player1" class="players">
 <div class="cards">
 <div class="card1"><img src="images/cards/clubsAce.png"
 	class="cardimage" /></div>
@@ -44,7 +45,7 @@ element. </canvas></div>
 </div>
 
 <!-- PLAYER2 -->
-<div id="player2">
+<div id="player2" class="players">
 	<div class="cards">
 		<div class="card1">
 			<img src="images/cards/heartsSeven.png" class="cardimage" />
@@ -72,7 +73,7 @@ element. </canvas></div>
 <script>$("div#player2 > div.cards > div.card1").css("opacity", "0.4");</script>
 
 <!-- PLAYER3 -->
-<div id="player3">
+<div id="player3" class="players">
 <div class="cards">
 <div class="card1"><img src="images/cardBackSide.png"
 	class="cardimage" /></div>
@@ -92,7 +93,7 @@ element. </canvas></div>
 </div>
 
 <!-- PLAYER4 -->
-<div id="player4">
+<div id="player4" class="players">
 <div class="cards">
 <div class="card1"><img src="images/cardBackSide.png"
 	class="cardimage" /></div>
@@ -111,7 +112,7 @@ element. </canvas></div>
 </div>
 
 <!-- PLAYER5 -->
-<div id="player5">
+<div id="player5" class="players">
 <div class="cards">
 <div class="card1"><img src="images/cards/diamondsTwo.png"
 	class="cardimage" /></div>
@@ -130,7 +131,7 @@ element. </canvas></div>
 </div>
 
 <!-- PLAYER6 -->
-<div id="player6">
+<div id="player6" class="players">
 <div class="cards">
 <div class="card1"><img src="images/cardBackSide.png"
 	class="cardimage" /></div>
@@ -149,7 +150,7 @@ element. </canvas></div>
 </div>
 
 <!-- PLAYER7 -->
-<div id="player7">
+<div id="player7" class="players">
 <div class="cards">
 <div class="card1"><img src="images/cardBackSide.png"
 	class="cardimage" /></div>
@@ -168,7 +169,7 @@ element. </canvas></div>
 </div>
 
 <!-- PLAYER8 -->
-<div id="player8">
+<div id="player8" class="players">
 <div class="cards">
 <div class="card1"><img src="images/cardBackSide.png"
 	class="cardimage" /></div>
@@ -212,16 +213,11 @@ element. </canvas></div>
 </script></div>
 
 <div id="tablecards">
-<div id="tablecard1"><img src="images/cards/clubsThree.png"
-	class="tablecardimage" /></div>
-<div id="tablecard2"><img src="images/cards/diamondsQueen.png"
-	class="tablecardimage" /></div>
-<div id="tablecard3"><img src="images/cards/spadesAce.png"
-	class="tablecardimage" /></div>
-<div id="tablecard4"><img src="images/cardBackSide.png"
-	class="tablecardimage" /></div>
-<div id="tablecard5"><img src="images/cardBackSide.png"
-	class="tablecardimage" /></div>
+<div id="tablecard1"></div>
+<div id="tablecard2"></div>
+<div id="tablecard3"></div>
+<div id="tablecard4"></div>
+<div id="tablecard5"></div>
 </div>
 
 <div class="tablebetinfo">
