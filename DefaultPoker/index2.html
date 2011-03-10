@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="stylesheets/chatBox.css" />
 <link rel="stylesheet" type="text/css" href="stylesheets/statsBox.css" />
 <script type="text/javascript" src="scripts/pokerTable.js"></script>
+<script src="http://code.jquery.com/jquery-1.5.js"></script>
 </head>
 
 <body onLoad="draw();">
@@ -44,22 +45,31 @@ element. </canvas></div>
 
 <!-- PLAYER2 -->
 <div id="player2">
-<div class="cards">
-<div class="card1"><img src="images/cards/heartsSeven.png"
-	class="cardimage" /></div>
-<div class="card2"><img src="images/cards/spadesSix.png"
-	class="cardimage" /></div>
+	<div class="cards">
+		<div class="card1">
+			<img src="images/cards/heartsSeven.png" class="cardimage" />
+		</div>
+		<div class="card2">
+			<img src="images/cards/spadesSix.png" class="cardimage" />
+		</div>
+	</div>
+	<div class="playerdata">
+		<div class="playerdisplay">
+			<img src="images/displayFold.png" class="playerdisplayimage" />
+		</div>
+		<div class="playerdetail">
+			<div class="playersum">390 €</div>
+				<div class="playerstatus">
+					<img src="" class="playerstatusimage" />
+				</div>
+		</div>
+	</div>
+	<div class="playername">
+		Player2
+	</div>
 </div>
-<div class="playerdata">
-<div class="playerdisplay"><img src="images/displayFold.png"
-	class="playerdisplayimage" /></div>
-<div class="playerdetail">
-<div class="playersum">390 €</div>
-<div class="playerstatus"><img src="" class="playerstatusimage" /></div>
-</div>
-</div>
-<div class="playername">Player2</div>
-</div>
+
+<script>$("div#player2 > div.cards > div.card1").css("opacity", "0.4");</script>
 
 <!-- PLAYER3 -->
 <div id="player3">
