@@ -83,13 +83,19 @@ function Engine() {
 	this.players = new Array(9);
 	
 	/*
-	 * METHODS
+	 * METHODS FOR GUI
 	 */
 	
+	/**
+	 * sets game started? 
+	 */
 	this.startGame = function() {
-		// TODO implementation
+		// TODO implementation?
 	}
 	
+	/**
+	 * @returns Integer pot size on poker table
+	 */
 	this.getPot = function() {
 		return this.table.getPot();
 	}
