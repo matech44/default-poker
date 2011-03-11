@@ -7,8 +7,8 @@
  */
 
 var engine; // engine.js
-var animation; // animation.js
-var history; // array of ended game objects
+var animations; // animations.js
+var history; // array of ended engine objects
 
 /**
  * called in <body onload="...
@@ -16,7 +16,7 @@ var history; // array of ended game objects
  * creates animation object
  */
 function pageLoaded() {
-	animation = new Animation();
+	animations = new Animations();
 }
 
 /**
@@ -28,3 +28,5 @@ function startNewGameClicked() {
 	history.push(engine);
 	engine = new Engine();
 }
+
+// TODO create new functions...
