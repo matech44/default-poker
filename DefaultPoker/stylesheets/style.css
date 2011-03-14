@@ -350,6 +350,7 @@ checkboxBigBlind {
 /* Single card IMG */
 .cardimage {
 	height: 70px;
+	opacity: 0;
 }
 
 /* Player display image/money/status images DIV in the center*/
@@ -480,6 +481,18 @@ checkboxBigBlind {
 	margin-left: 2px;
 	background-image:url("../images/cardBackSide.png");
 }
+
+.dealoutcardClass {
+	position: absolute;
+	height: 98px;
+	width: 70px;
+	left: 295px;
+	margin-left: 2px;
+}
+
+#dealoutcard {
+	
+	}
 
 .tablecardimage {
 	width: 70px;
