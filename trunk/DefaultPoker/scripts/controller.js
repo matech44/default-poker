@@ -16,7 +16,7 @@ var history; // array of ended engine objects
  * creates animation object
  */
 function pageLoaded() {
-	animations = new Animations();
+	// animations = new Animations();
 }
 
 /**
