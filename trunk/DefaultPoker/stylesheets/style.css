@@ -4,7 +4,9 @@ body {
 	margin: 0px;
 	padding: 0px;
 	font-family: "Courier New";
-	background-color: #303030;
+	background: url("../images/bg.png");
+	background-repeat: repeat-x;
+	background-color: #000000;
 }
 
 /**
@@ -17,7 +19,7 @@ body {
 	padding: 0px;
 	min-width: 1062px;
 	min-height: 650px;
-	background-color: #303030;
+	background-color: transparent;
 }
 
 /* Left container holding table and bet buttons */
@@ -35,7 +37,7 @@ body {
 	clear: both;
 	width: 100%;
 	height: 100%;
-	background-color: #303030;
+	background-color: transparent;
 }
 
 /* Bet buttons/our player? */
@@ -44,7 +46,7 @@ body {
 	clear: both;
 	width: 100%;
 	height: 15%;
-	background-color: #303030;
+	background-color: transparent;
 }
 
 /* Right container holding chat/statistics */
@@ -59,7 +61,7 @@ body {
 	position: relative;
 	width: 100%;
 	height: 325px;
-	background-color: #303030;
+	background-color: transparent;
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
@@ -68,7 +70,7 @@ body {
 	position: relative;
 	width: 100%;
 	height: 325px;
-	background-color: #303030;
+	background-color: transparent;
 }
 
 #menu {
@@ -267,6 +269,15 @@ body {
 	height:33px;
 	width:55px;
 }
+
+#buttonfold:hover {
+	background-image: url("../images/buttonFoldHover.png");
+}
+
+#buttonfold:active {
+	background-image: url("../images/buttonFoldPress.png");
+}
+
 #buttoncall {
 	background-image: url("../images/buttonCall.png");
 	display: block;
@@ -276,19 +287,48 @@ body {
 	height:33px;
 	width:55px;
 }
+
+#buttoncall:hover {
+	background-image: url("../images/buttonCallHover.png");
+}
+
+#buttoncall:active {
+	background-image: url("../images/buttonCallPress.png");
+}
+
 #buttoncheck {
+	background-image: url("../images/buttonCheck.png");
 	position:relative;
 	float:left;
 	margin-right:5px;
 	height:33px;
 	width:55px;
 }
+
+#buttoncheck:hover {
+	background-image: url("../images/buttonCheckHover.png");
+}
+
+#buttoncheck:active {
+	background-image: url("../images/buttonCheckPress.png");
+}
+
 #buttonbet {
+	background-image: url("../images/buttonBet.png");
 	position:relative;
 	float:left;
 	height:33px;
 	width:55px;
 }
+
+#buttonbet:hover {
+	background-image: url("../images/buttonBetHover.png");
+}
+
+#buttonbet:active {
+	background-image: url("../images/buttonBetPress.png");
+}
+
 #buttonraise {
 	background-image: url("../images/buttonRaise.png");
 	display: block;
@@ -297,6 +337,15 @@ body {
 	height:33px;
 	width:55px;
 }
+
+#buttonraise:hover {
+	background-image: url("../images/buttonRaiseHover.png");
+}
+
+#buttonraise:active {
+	background-image: url("../images/buttonRaisePress.png");
+}
+
 #checkboxSitOut {
 	position:relative;
 	}
@@ -512,7 +561,7 @@ checkboxBigBlind {
 	left:130px;
 	height:300px;
 	width:600px;
-	z-index:2;
+	z-index:0;
 	color:gray;
 }
 #tablebetinfo1 {
