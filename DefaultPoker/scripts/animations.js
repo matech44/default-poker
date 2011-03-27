@@ -5,7 +5,7 @@
 $(document).ready(function(){
 
 	$("#newgamebutton").click(function(){
-	  
+		
 		//Player7
 		$("#dealoutcard1").animate({opacity: "1", left: "+=239", top: "-=21", height: "-=28", width: "-=21"}, 1000);		
 		$("#dealoutcard2").delay(300).animate({opacity: "1", left: "+=210", top: "-=30", height: "-=28", width: "-=21"}, 1000);
@@ -32,10 +32,10 @@ $(document).ready(function(){
 		$("#dealoutcard16").delay(4900).animate({opacity: "1", left: "+=148", top: "+=171", height: "-=28", width: "-=21"}, 1000);
 		
 				
-		$("#dealoutcard17").delay(5200).animate({ left: "-=80" }, 1000);
-		$("#dealoutcard18").delay(5500).animate({ left: "-=160" }, 1000);
-		$("#dealoutcard19").delay(5800).animate({ left: "-=240" }, 1000);
-		$("#dealoutcard20").delay(6100).animate({ left: "-=320" }, 1000);
+		$("#dealoutcard17").delay(5200).animate({ left: "-=75" }, 1000);
+		$("#dealoutcard18").delay(5500).animate({ left: "-=150" }, 1000);
+		$("#dealoutcard19").delay(5800).animate({ left: "-=225" }, 1000);
+		$("#dealoutcard20").delay(6100).animate({ left: "-=300" }, 1000);
 	  
 		return false;
 	
