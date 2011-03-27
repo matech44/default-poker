@@ -121,10 +121,10 @@ body {
 	height: 30px;
 }
 #newgamebutton:hover {
-	background-image: url("../images/buttonNewGame2.png");
+	background-image: url("../images/buttonNewGameHover.png");
 }
 #newgamebutton:active {
-	background-image: url("../images/buttonNewGame1.png");
+	background-image: url("../images/buttonNewGamePress.png");
 }
 
 #exitbutton {
@@ -134,6 +134,14 @@ body {
 	float: left;
 	width: 101px;
 	height: 30px;
+}
+
+#exitbutton:hover {
+	background-image: url("../images/buttonExitHover.png");
+}
+
+#exitbutton:active{
+	background-image: url("../images/buttonExitPress.png");
 }
 
 #slider-1 {
