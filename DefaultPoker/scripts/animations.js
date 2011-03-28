@@ -55,64 +55,64 @@ function dealCards(n) {
 		break;
 	case 3:
 		$(document).ready(function(){
-			dealCardsToPlayer4(0);
+			dealCardsToPlayer6(0);
 			dealCardsToPlayer5(600);
-			dealCardsToPlayer6(1200);
+			dealCardsToPlayer4(1200);
 			dealTableCards(1800);
 		});
 		break;
 	case 4:
 		$(document).ready(function(){
-			dealCardsToPlayer2(0);
-			dealCardsToPlayer3(600);
+			dealCardsToPlayer6(0);
+			dealCardsToPlayer5(600);
 			dealCardsToPlayer4(1200);
-			dealCardsToPlayer5(1800);
+			dealCardsToPlayer3(1800);
 			dealTableCards(2400);
 		});
 		break;
 	case 5:
 		$(document).ready(function(){
-			dealCardsToPlayer1(0);
-			dealCardsToPlayer2(600);
-			dealCardsToPlayer3(1200);
+			dealCardsToPlayer7(0);
+			dealCardsToPlayer6(600);
+			dealCardsToPlayer5(1200);
 			dealCardsToPlayer4(1800);
-			dealCardsToPlayer5(2400);
+			dealCardsToPlayer3(2400);
 			dealTableCards(3000);
 		});
 		break;
 	case 6:
 		$(document).ready(function(){
-			dealCardsToPlayer1(0);
-			dealCardsToPlayer2(600);
-			dealCardsToPlayer3(1200);
+			dealCardsToPlayer7(0);
+			dealCardsToPlayer6(600);
+			dealCardsToPlayer5(1200);
 			dealCardsToPlayer4(1800);
-			dealCardsToPlayer5(2400);
-			dealCardsToPlayer6(3000);
+			dealCardsToPlayer3(2400);
+			dealCardsToPlayer2(3000);
 			dealTableCards(3600);
 		});
 		break;
 	case 7:
 		$(document).ready(function(){
-			dealCardsToPlayer1(0);
-			dealCardsToPlayer2(600);
-			dealCardsToPlayer3(1200);
+			dealCardsToPlayer7(0);
+			dealCardsToPlayer6(600);
+			dealCardsToPlayer5(1200);
 			dealCardsToPlayer4(1800);
-			dealCardsToPlayer5(2400);
-			dealCardsToPlayer6(3000);
-			dealCardsToPlayer7(3600);
+			dealCardsToPlayer3(2400);
+			dealCardsToPlayer2(3000);
+			dealCardsToPlayer1(3600);
 			dealTableCards(4200);
 		});
 		break;
 	case 8:
 		$(document).ready(function(){
-			dealCardsToPlayer1(0);
-			dealCardsToPlayer2(600);
-			dealCardsToPlayer3(1200);
-			dealCardsToPlayer4(1800);
-			dealCardsToPlayer5(2400);
-			dealCardsToPlayer6(3000);
-			dealCardsToPlayer7(3600);
-			dealCardsToPlayer8(4200);
+			dealCardsToPlayer8(0);
+			dealCardsToPlayer7(600);
+			dealCardsToPlayer6(1200);
+			dealCardsToPlayer5(1800);
+			dealCardsToPlayer4(2400);
+			dealCardsToPlayer3(3000);
+			dealCardsToPlayer2(3600);
+			dealCardsToPlayer1(4200);
 			dealTableCards(4800);
 		});
 		break;
