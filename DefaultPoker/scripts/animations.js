@@ -2,6 +2,11 @@
  * 
  */
 
+function resetMoney() {
+	$(".playersum").html("0");
+	
+}
+
 function ourDisplayToFold() {
 	$(document).ready(function(){
 		$("#ourdisplayimage").fadeTo(400,0.0, function(){
@@ -32,9 +37,8 @@ function ourDisplayToRaise() {
 	});
 }
 
-function dealCards(i) {
-	var d = i;
-	switch (d){
+function dealCards(number) {
+	switch (number){
 	case 1:
 		$(document).ready(function(){
 			dealCardsToPlayer4();
@@ -183,6 +187,7 @@ function dealTableCards() {
 $(document).ready(function(){
 
 	$("#newgamebutton").click(function(){
+		resetMoney();
 		dealCards(1);
 		
 		/*
