@@ -443,6 +443,59 @@ function showPlayerNumberDialog() {
 	//}
 }
 
+function flipCards(player, card1, card2) {
+	switch (player){
+	case 1:
+		$(document).ready(function(){
+			$("#dealoutcard13").attr("src", "images/cards/" + card1 + ".png");
+			$("#dealoutcard14").attr("src", "images/cards/" + card2 + ".png");
+		});
+		break;
+	case 2:
+		$(document).ready(function(){
+			$("#dealoutcard11").attr("src", "images/cards/" + card1 + ".png");
+			$("#dealoutcard12").attr("src", "images/cards/" + card2 + ".png");
+		});
+		break;
+	case 3:
+		$(document).ready(function(){
+			$("#dealoutcard9").attr("src", "images/cards/" + card1 + ".png");
+			$("#dealoutcard10").attr("src", "images/cards/" + card2 + ".png");
+		});
+		break;
+	case 4:
+		$(document).ready(function(){
+			$("#dealoutcard7").attr("src", "images/cards/" + card1 + ".png");
+			$("#dealoutcard8").attr("src", "images/cards/" + card2 + ".png");
+		});
+		break;
+	case 5:
+		$(document).ready(function(){
+			$("#dealoutcard5").attr("src", "images/cards/" + card1 + ".png");
+			$("#dealoutcard6").attr("src", "images/cards/" + card2 + ".png");
+		});
+		break;
+	case 6:
+		$(document).ready(function(){
+			$("img#dealoutcard3").attr("src", "images/cards/" + card1 + ".png");
+			$("img#dealoutcard4").attr("src", "images/cards/" + card2 + ".png");
+		});
+		break;
+	case 7:
+		$(document).ready(function(){
+			$("#dealoutcard1").attr("src", "images/cards/" + card1 + ".png");
+			$("#dealoutcard2").attr("src", "images/cards/" + card2 + ".png");
+		});
+		break;
+	case 8:
+		$(document).ready(function(){
+			$("#dealoutcard15").attr("src", "images/cards/" + card1 + ".png");
+			$("#dealoutcard16").attr("src", "images/cards/" + card2 + ".png");
+		});
+		break;
+	}
+}
+
 $(document).ready(function(){
 	changeDisplay(1,"Idle");
 	changeDisplay(2,"Idle");
@@ -460,8 +513,6 @@ $(document).ready(function(){
 		resetMoney();
 		startNewGameClicked();
 		showAnnouncement("Preflop");
-		changeDisplay(6, "Fold");
-		
 	});
 	
 	$("#exitbutton").click(function(){
@@ -473,6 +524,22 @@ $(document).ready(function(){
 	
 	$("#buttonfold").click(function(){
 		changeOurDisplay("Fold");
+		changeDisplay(1, "Fold");
+		changeDisplay(2, "Fold");
+		changeDisplay(3, "Fold");
+		changeDisplay(4, "Fold");
+		changeDisplay(5, "Fold");
+		changeDisplay(6, "Fold");
+		changeDisplay(7, "Fold");
+		changeDisplay(8, "Fold");
+		flipCards(1, "diamondsAce", "clubsThree");
+		flipCards(2, "diamondsAce", "clubsThree");
+		flipCards(3, "diamondsAce", "clubsThree");
+		flipCards(4, "diamondsAce", "clubsThree");
+		flipCards(5, "diamondsAce", "clubsThree");
+		flipCards(6, "diamondsAce", "clubsThree");
+		flipCards(7, "diamondsAce", "clubsThree");
+		flipCards(8, "diamondsAce", "clubsThree");
 	});
 	
 	$("#buttoncall").click(function(){
