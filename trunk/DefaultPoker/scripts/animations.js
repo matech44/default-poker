@@ -40,12 +40,14 @@ function dealCards(i) {
 			dealCardsToPlayer4();
 			dealTableCards();
 		});
+		break;
 	case 2:
 		$(document).ready(function(){
 			dealCardsToPlayer3();
 			dealCardsToPlayer4();
 			dealTableCards();
 		});
+		break;
 	case 3:
 		$(document).ready(function(){
 			dealCardsToPlayer3();
@@ -53,6 +55,7 @@ function dealCards(i) {
 			dealCardsToPlayer5();
 			dealTableCards();
 		});
+		break;
 	case 4:
 		$(document).ready(function(){
 			dealCardsToPlayer2();
@@ -61,6 +64,7 @@ function dealCards(i) {
 			dealCardsToPlayer5();
 			dealTableCards();
 		});
+		break;
 	case 5:
 		$(document).ready(function(){
 			dealCardsToPlayer1();
@@ -70,6 +74,7 @@ function dealCards(i) {
 			dealCardsToPlayer5();
 			dealTableCards();
 		});
+		break;
 	case 6:
 		$(document).ready(function(){
 			dealCardsToPlayer1();
@@ -80,6 +85,7 @@ function dealCards(i) {
 			dealCardsToPlayer6();
 			dealTableCards();
 		});
+		break;
 	case 7:
 		$(document).ready(function(){
 			dealCardsToPlayer1();
@@ -91,6 +97,7 @@ function dealCards(i) {
 			dealCardsToPlayer7();
 			dealTableCards();
 		});
+		break;
 	case 8:
 		$(document).ready(function(){
 			dealCardsToPlayer1();
@@ -103,6 +110,7 @@ function dealCards(i) {
 			dealCardsToPlayer8();
 			dealTableCards();
 		});
+		break;
 	}
 }
 
