@@ -200,12 +200,20 @@ function dealTableCards(n) {
 	});
 }
 
+function showAnouncment(text) {
+	$(document).ready(function(){
+		$("#anouncment").html(text);
+		$("#anouncment").delay(600).fadeTo(800, 0);
+	});
+}
+
 $(document).ready(function(){
 
 	$("#newgamebutton").click(function(){
 		dealCards(8);
 		resetMoney();
 		startNewGameClicked();
+		showAnouncment("PREFLOP");
 	});
 	
 	$("#exitbutton").click(function(){
