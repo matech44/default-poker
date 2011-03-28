@@ -21,37 +21,31 @@ function dealCards(n) {
 
 	case 1:
 		$(document).ready(function(){
-			dealCardsToPlayer6(0);
-			dealTableCards(600);
+			dealOurCards(0)
+			dealCardsToPlayer6(600);
+			dealTableCards(1200);
 		});
 		break;
 	case 2:
 		$(document).ready(function(){
-			dealCardsToPlayer6(0);
-			dealCardsToPlayer5(600);
-			dealTableCards(1200);
+			dealOurCards(0)
+			dealCardsToPlayer6(600);
+			dealCardsToPlayer5(1200);
+			dealTableCards(1800);
 		});
 		break;
 	case 3:
 		$(document).ready(function(){
-			dealCardsToPlayer6(0);
-			dealCardsToPlayer5(600);
-			dealCardsToPlayer4(1200);
-			dealTableCards(1800);
+			dealOurCards(0)
+			dealCardsToPlayer6(600);
+			dealCardsToPlayer5(1200);
+			dealCardsToPlayer4(1800);
+			dealTableCards(2400);
 		});
 		break;
 	case 4:
 		$(document).ready(function(){
-			dealCardsToPlayer6(0);
-			dealCardsToPlayer5(600);
-			dealCardsToPlayer4(1200);
-			dealCardsToPlayer3(1800);
-			dealTableCards(2400);
-		});
-		break;
-	case 5:
-		$(document).ready(function(){
-			dealCardsToPlayer7(0);
+			dealOurCards(0)
 			dealCardsToPlayer6(600);
 			dealCardsToPlayer5(1200);
 			dealCardsToPlayer4(1800);
@@ -59,32 +53,32 @@ function dealCards(n) {
 			dealTableCards(3000);
 		});
 		break;
+	case 5:
+		$(document).ready(function(){
+			dealOurCards(0)
+			dealCardsToPlayer7(600);
+			dealCardsToPlayer6(1200);
+			dealCardsToPlayer5(1800);
+			dealCardsToPlayer4(2400);
+			dealCardsToPlayer3(3000);
+			dealTableCards(3600);
+		});
+		break;
 	case 6:
 		$(document).ready(function(){
-			dealCardsToPlayer7(0);
-			dealCardsToPlayer6(600);
-			dealCardsToPlayer5(1200);
-			dealCardsToPlayer4(1800);
-			dealCardsToPlayer3(2400);
-			dealCardsToPlayer2(3000);
-			dealTableCards(3600);
+			dealOurCards(0)
+			dealCardsToPlayer7(600);
+			dealCardsToPlayer6(1200);
+			dealCardsToPlayer5(1800);
+			dealCardsToPlayer4(2400);
+			dealCardsToPlayer3(3000);
+			dealCardsToPlayer2(3600);
+			dealTableCards(4200);
 		});
 		break;
 	case 7:
 		$(document).ready(function(){
-			dealCardsToPlayer7(0);
-			dealCardsToPlayer6(600);
-			dealCardsToPlayer5(1200);
-			dealCardsToPlayer4(1800);
-			dealCardsToPlayer3(2400);
-			dealCardsToPlayer2(3000);
-			dealCardsToPlayer1(3600);
-			dealTableCards(4200);
-		});
-		break;
-	case 8:
-		$(document).ready(function(){
-			dealCardsToPlayer8(0);
+			dealOurCards(0)
 			dealCardsToPlayer7(600);
 			dealCardsToPlayer6(1200);
 			dealCardsToPlayer5(1800);
@@ -93,6 +87,20 @@ function dealCards(n) {
 			dealCardsToPlayer2(3600);
 			dealCardsToPlayer1(4200);
 			dealTableCards(4800);
+		});
+		break;
+	case 8:
+		$(document).ready(function(){
+			dealOurCards(0)
+			dealCardsToPlayer8(600);
+			dealCardsToPlayer7(1200);
+			dealCardsToPlayer6(1800);
+			dealCardsToPlayer5(2400);
+			dealCardsToPlayer4(3000);
+			dealCardsToPlayer3(3600);
+			dealCardsToPlayer2(4200);
+			dealCardsToPlayer1(4800);
+			dealTableCards(5400);
 		});
 		break;
 	}
@@ -183,8 +191,8 @@ function unDealCards(n) {
 function dealOurCards(n) {
 
 	$(document).ready(function(){
-		$("#dealourcard1").delay(n).animate({opacity: "1", left: "-=403", top: "+=180", height: "-=28", width: "-=21"}, 1000);
-		$("#dealourcard2").delay(n+300).animate({opacity: "1", left: "-=432", top: "+=171", height: "-=28", width: "-=21"}, 1000);
+		$("#dealourcard1").delay(n).animate({opacity: "1", left: "-=55", top: "+=219", height: "+=23", width: "+=18"}, 1000);
+		$("#dealourcard2").delay(n+300).animate({opacity: "1", left: "-=153", top: "+=219", height: "+=23", width: "+=18"}, 1000);
 	});
 }
 
@@ -448,11 +456,12 @@ $(document).ready(function(){
 		var players = showPlayerNumberDialog();
 		hidePlayers(8-players);
 		dealCards(parseInt(players));
-		unDealCards(parseInt(players));
+		//unDealCards(parseInt(players));
 		resetMoney();
 		startNewGameClicked();
 		showAnnouncement("Preflop");
-		changeDisplay(6, "Fold")
+		changeDisplay(6, "Fold");
+		
 	});
 	
 	$("#exitbutton").click(function(){
