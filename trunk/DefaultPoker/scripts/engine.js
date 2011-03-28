@@ -129,7 +129,7 @@ function Round(table) {
 	/**
 	 * Player raises
 	 */
-	this.playerRaise= function(id, bet) {
+	this.playerRaise = function(id, bet) {
 		this.players[id].setBet(this.players[id].getBet() + bet);
 		this.players[id].reduceChips(bet);
 	};
@@ -156,11 +156,18 @@ function Round(table) {
 	};
 	
 	/**
-	 * all players
+	 * player
 	 */
 	this.getPlayer = function(id) {
 		return this.players[id];
-	};	
+	};
+	
+	/**
+	 * 
+	 */
+	this.setPlayerCards = function(id, cards) {
+		this.players[id].setCards(cards);
+	};
 }
 
 /**
@@ -172,7 +179,8 @@ function Game() {
 	this.table = new Table();
 	this.rounds = new Array();
 	this.currentround;
-	this.cards;
+	this.cardsystem = new CardSystem();
+	this.gamecards = this.cardsystem.getAllCards();
 
 	/*
 	 * METHODS
@@ -184,123 +192,78 @@ function Game() {
 	this.startNewRound = function() {
 		if(this.currentround) {
 			this.rounds.push(this.currentround);
-		};
-
-		this.currentround = new Round();
-	};
-	
-	/**
-	 * returns all possible cards(for random card)
-	 */
-	this.getAllPossibleCards = function() {
-		var cardvalue = ['A', 2, 3, 4, 5, 6, 7, 8, 9,'T','J','Q','K'];
-		var cardsuit = ['diamonds', 'spades', 'hearts', 'clubs'];
-		var cards = new Array();
-		for(value in cardvalue) {
-			for(suit in cardsuit) {
-				cards.push(gaga.createCard(value, suit));
-			}
 		}
 		
-		return cards;	
+		this.currentround = new Round();
 	};
-	
-	this.gamecards = this.getAllPossibleCards();
 
 	/**
 	 * deals cards to Table object
 	 */
 	this.dealTableCards = function() {
-		this.table.setCards( [this.randomCard(), this.randomCard(), this.randomCard(),
-		                      this.randomCard(), this.randomCard()] );
+		var cards = new Array();
+		
+		for(var i = 0; i < 5; i++) {
+			cards.push(this.randomCard());
+		}
+		
+		this.table.setCards(cards);
+		
+		return cards;
 	};
 
 	/**
 	 * deals cards to Player objects
 	 */
 	this.dealPlayerCards = function()  {
-		var cardarray = [this.randomCard(), this.randomCard()];
+		var cards;
 		
 		for(var i = 0; i < this.currentround.getPlayers().length; i++) {
-			this.currentround.getPlayers()[i].setCards(cardarray);
+			cards = new Array()
+			for(var j = 0; j < 2; j++) {
+				cards.push(this.randomCard());
+			}
+			this.currentround.setPlayerCards(i, cards);
 		}
+		
+		return cards;
 	};
 	
-	this.randInt = function(a, b) {
-		return (Math.floor(Math.random()*(b-a+1)))+a;
-	}
 
 	/**
 	 * @returns random number
 	 */
 	this.randomCard = function() {
-		var randomvalue = this.randInt(0, this.gamecards.lenght-1);
-		return this.gamecards.splice(randomvalue, 1);
+		var amount = this.gamecards.length;
+		var randomvalue = Math.floor(Math.random()*(amount-1));
+		
+		return this.gamecards.splice(randomvalue, 1)[0];
 	};
 
-	/**
-	 * @returns Players best hand
-	 */
-	this.getBestHand = function(player) {
-		this.cards = new Array();
-		var combinations = [[1,2,3], [1,2,4],[1,2,5],[1,3,4],[1,3,5],[1,4,5],[2,3,4],[2,3,5],[2,4,5],[3,4,5]];
-		
-		for(var playercard in player.getCards()) {
-			this.cards.push(playercard);
-		}
-		
-		for(var tablecard in this.table.getCards()) {
-			this.cards.push(tablecard);
-		}
-		
-		var besthand = gaga.createHand([
-										[2, 'spades'],
-										[3, 'clubs'],
-										[4, 'diamonds'],
-										[5, 'clubs'],
-										[7, 'diamonds']
-										]);
-		for (combination in combinations) {
-			var hand = gaga.createHand([
-										[2, 'spades'],
-										[3, 'clubs'],
-										[4, 'diamonds'],
-										[5, 'clubs'],
-										[7, 'diamonds']
-										]);
-		
-			if(besthand.identify().rank < hand.identify().rank) {
-				besthand = hand;
-			}
-		}
-		
-		return besthand;
-	};
 	
 	/**
 	 * @returns Player with winning hand
 	 */
 	this.getWinningPlayer = function() {
-		var players = this.currentround.getPlayers();
-		var bestplayer = new Player('Error', true);
-		var besthand = gaga.createHand([
-		                                [2,'hearts'],
-		                                [3,'clubs'],
-		                                [5,'spades'],
-		                                [6,'hearts'],
-		                                [8,'clubs']
-		                                ]);
-										
+		var playerhand;
+		var strongest = 0;
+		var besthand;
+		var bestplayer;
+		
 		for(var i = 0; i < this.currentround.getPlayers().length; i++) {
-			var player = this.currentround.getPlayers()[i];
-			var besthand2 = this.getBestHand(player);
-			if(besthand.identify().rank < besthand2.identify().rank) {
-				besthand = hand;
-				bestplayer = player;
-			}				
+			playerhand = this.currentround.getPlayers()[i].getCards().concat(this.table.getCards());
+			
+
+			this.cardsystem.setCards(playerhand);
+			
+			if(this.cardsystem.getValue().strength > strongest) {
+				strongest = this.cardsystem.getValue().strength;
+				besthand = this.cardsystem.getValue();
+				bestplayer = this.currentround.getPlayers()[i];
+			}
 		}
 		
-		return bestplayer;
+		return {player : bestplayer, hand : besthand};
 	};
 
 	/**
@@ -324,20 +287,13 @@ function Game() {
  * 
  * @returns {PokerStructure}
  */
-function PokerStructure() {
+function Engine() {
 	this.currentgame;
 	this.games = new Array();
 	
 	/*
 	 * METHODS
 	 */
-	
-	/**
-	 * sets game started?
-	 */
-	this.initializeStructure = function() {
-		this.startNewGame();
-	};
 
 	/**
 	 * starts new game
@@ -345,7 +301,7 @@ function PokerStructure() {
 	this.startNewGame = function() {
 		if(this.currentgame) {
 			games.push(this.currentgame);
-		};
+		}
 
 		this.currentgame = new Game();
 	};	
