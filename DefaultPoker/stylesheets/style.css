@@ -159,9 +159,9 @@ body {
 	font-weight: bold;
 	color: white;
 	z-index: 5;
-	position: absolute;
+	position: relative;
 	top: 200px;
-	left: 180px;
+	text-align: center;
 }
 
 /**
