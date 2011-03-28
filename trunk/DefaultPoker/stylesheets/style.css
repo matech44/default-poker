@@ -153,6 +153,17 @@ body {
 	color: white;
 	}
 
+#anouncment {
+	font-family: "Courier New";
+	font-size: 120px;
+	font-weight: bold;
+	color: white;
+	z-index: 5;
+	position: absolute;
+	top: 200px;
+	left: 180px;
+}
+
 /**
  * UNIQUE PLAYER DIV's
  */
