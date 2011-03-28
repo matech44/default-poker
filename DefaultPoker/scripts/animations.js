@@ -200,10 +200,10 @@ function dealTableCards(n) {
 	});
 }
 
-function showAnouncment(text) {
+function showAnnouncement(text) {
 	$(document).ready(function(){
-		$("#anouncment").html(text);
-		$("#anouncment").delay(600).fadeTo(800, 0);
+		$("#announcement").html(text);
+		$("#announcement").delay(600).fadeTo(800, 0);
 	});
 }
 
@@ -213,7 +213,7 @@ $(document).ready(function(){
 		dealCards(8);
 		resetMoney();
 		startNewGameClicked();
-		showAnouncment("PREFLOP");
+		showAnnouncement("PREFLOP");
 	});
 	
 	$("#exitbutton").click(function(){
