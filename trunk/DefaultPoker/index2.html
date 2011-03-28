@@ -5,10 +5,9 @@
 <link rel="stylesheet" type="text/css" href="stylesheets/chatBox.css" />
 <link rel="stylesheet" type="text/css" href="stylesheets/statsBox.css" />
 <script type="text/javascript" src="scripts/pokerTable.js"></script>
-<script src="http://code.jquery.com/jquery-1.5.js"></script>
+<script type="text/javascript" src="scripts/jquery-1.5.js"></script>
 <script type="text/javascript" src="scripts/animations.js"></script>
-<script type="text/javascript" src="scripts/gaga.js"></script>
-<script type="text/javascript" src="scripts/underscore.min.js"></script>
+<script type="text/javascript" src="scripts/hand_eval.js"></script>
 <script type="text/javascript" src="scripts/engine.js"></script>
 <script type="text/javascript" src="scripts/controller.js"></script>
 </head>
@@ -293,7 +292,7 @@ element. </canvas></div>
 			</div>
 		</div>
 		<div>
-			<textarea class="statsoutput" readonly="readonly"> > Player1 won this hand
+			<textarea id="stats" class="statsoutput" readonly="readonly"> > Player1 won this hand
 			</textarea>
 		</div>
 	</div>
