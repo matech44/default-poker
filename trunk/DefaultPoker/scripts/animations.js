@@ -521,7 +521,7 @@ $(document).ready(function(){
 		var players = showPlayerNumberDialog();
 		hidePlayers(8-players);
 		dealCards(parseInt(players));
-		//unDealCards(parseInt(players));
+		unDealCards(parseInt(players));
 		resetMoney();
 		startNewGameClicked();
 		showAnnouncement("Preflop");
