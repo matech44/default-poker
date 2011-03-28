@@ -4,21 +4,24 @@ textarea.chatoutput {
 	width:210px;
 	height:270px;
 	resize: none;
-	background-color: #606060;
+	/*background-color: #606060;*/
+	background-color: transparent;
 	border: solid 1px #808080;
 	color: #DDDDDD;
 }
 	
 #usermsg {
 	width: 210px;
-	background-color: #777777;
+	/*background-color: #777777;*/
+	background-color: transparent;
 	border: solid 1px #808080;
 	font-family: "Courier New";
 	color: white;
 }
 
 #submitmsg {
-	background-color: #606060;
+	/*background-color: #606060;*/
+	background-color: transparent;
 	border: solid 1px #808080;
 	font-family: "Courier New";
 	color: #DDDDDD;
