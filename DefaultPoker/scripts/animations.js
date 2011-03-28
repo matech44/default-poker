@@ -283,14 +283,94 @@ function showAnnouncement(text) {
 	});
 }
 
+function changeDisplay(player, choice){
+	$(document).ready(function(){
+		$("#player"+player).children(".playerdata").children(".playerdisplay")
+			.children(".playerdisplayimage")
+				.attr("src","images/display" + choice + ".png");
+	});
+}
+
+function hidePlayer(player) {
+	$(document).ready(function(){
+		$("#player"+player).hide();
+	});
+}
+
+function hidePlayers(number) {
+	switch (number){
+	case 0:
+		break;
+	case 1:
+		hidePlayer(8);
+		break;
+	case 2:
+		hidePlayer(1);
+		hidePlayer(8);
+		break;
+	case 3:
+		hidePlayer(1);
+		hidePlayer(2);
+		hidePlayer(8);
+		break;
+	case 4:
+		hidePlayer(1);
+		hidePlayer(2);
+		hidePlayer(7);
+		hidePlayer(8);
+		break;
+	case 5:
+		hidePlayer(1);
+		hidePlayer(2);
+		hidePlayer(3);
+		hidePlayer(7);
+		hidePlayer(8);
+		break;
+	case 6:
+		hidePlayer(1);
+		hidePlayer(2);
+		hidePlayer(3);
+		hidePlayer(4);
+		hidePlayer(7);
+		hidePlayer(8);
+		break;
+	case 7:
+		hidePlayer(1);
+		hidePlayer(2);
+		hidePlayer(3);
+		hidePlayer(4);
+		hidePlayer(5);
+		hidePlayer(7);
+		hidePlayer(8);
+		break;
+	}
+}
+
+function showPlayerNumberDialog() {
+	var playernumber = prompt("Please enter number of players","1-8");
+	//if (playernumber!=null && playernumber!="" && playernumber!="1-8") {
+	return playernumber;
+	//}
+}
+
 $(document).ready(function(){
 
 	$("#newgamebutton").click(function(){
-		dealCards(8);
-		unDealCardsToPlayer7(8);
+		changeDisplay(1,"Idle");
+		changeDisplay(2,"Idle");
+		changeDisplay(3,"Idle");
+		changeDisplay(4,"Idle");
+		changeDisplay(5,"Idle");
+		changeDisplay(6,"Idle");
+		changeDisplay(7,"Idle");
+		changeDisplay(8,"Idle");
+		var players = showPlayerNumberDialog();
+		hidePlayers(8-players);
+		dealCards(parseInt(players));
+		//unDealCardsToPlayer7(8);
 		resetMoney();
 		startNewGameClicked();
-		showAnnouncement("FLOP");
+		showAnnouncement("Preflop");	
 	});
 	
 	$("#exitbutton").click(function(){
