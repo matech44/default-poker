@@ -41,4 +41,28 @@ $(document).ready(function(){
 	
 	});
 	
+	$("#buttonfold").click(function(){
+		$("#ourdisplayimage").fadeTo(400,0.0, function(){
+				$("#ourdisplayimage").attr("src","images/displayFold.png");
+				});
+		$("#ourdisplayimage").fadeTo(500,100.0);
+		return false;
+	});
+	
+	$("#buttoncall").click(function(){
+		$("#ourdisplayimage").fadeTo(400,0.0, function(){
+			$("#ourdisplayimage").attr("src","images/displayCall.png");
+		});
+		$("#ourdisplayimage").fadeTo(500,100.0);
+		return false;
+	});
+	
+	$("#buttonraise").click(function(){
+		$("#ourdisplayimage").fadeTo(400,0.0, function(){
+			$("#ourdisplayimage").attr("src","images/displayRaise.png");
+		});
+		$("#ourdisplayimage").fadeTo(500,100.0);
+		return false;
+	});
+	
 });
