@@ -2,6 +2,37 @@
  * 
  */
 
+function ourDisplayToFold() {
+	$(document).ready(function(){
+		$("#ourdisplayimage").fadeTo(400,0.0, function(){
+			$("#ourdisplayimage").attr("src","images/displayFold.png");
+			});
+		$("#ourdisplayimage").fadeTo(500,100.0);
+		return false;
+	});
+}
+
+function ourDisplayToCall() {
+	$(document).ready(function(){
+		$("#ourdisplayimage").fadeTo(400,0.0, function(){
+			$("#ourdisplayimage").attr("src","images/displayCall.png");
+			});
+		$("#ourdisplayimage").fadeTo(500,100.0);
+		return false;
+	});
+}
+
+function ourDisplayToRaise() {
+	$(document).ready(function(){
+		$("#ourdisplayimage").fadeTo(400,0.0, function(){
+			$("#ourdisplayimage").attr("src","images/displayRaise.png");
+			});
+		$("#ourdisplayimage").fadeTo(500,100.0);
+		return false;
+	});
+}
+
+
 $(document).ready(function(){
 
 	$("#newgamebutton").click(function(){
@@ -49,27 +80,15 @@ $(document).ready(function(){
 	});
 	
 	$("#buttonfold").click(function(){
-		$("#ourdisplayimage").fadeTo(400,0.0, function(){
-				$("#ourdisplayimage").attr("src","images/displayFold.png");
-				});
-		$("#ourdisplayimage").fadeTo(500,100.0);
-		return false;
+		ourDisplayToFold();
 	});
 	
 	$("#buttoncall").click(function(){
-		$("#ourdisplayimage").fadeTo(400,0.0, function(){
-			$("#ourdisplayimage").attr("src","images/displayCall.png");
-		});
-		$("#ourdisplayimage").fadeTo(500,100.0);
-		return false;
+		ourDisplayToCall();
 	});
 	
 	$("#buttonraise").click(function(){
-		$("#ourdisplayimage").fadeTo(400,0.0, function(){
-			$("#ourdisplayimage").attr("src","images/displayRaise.png");
-		});
-		$("#ourdisplayimage").fadeTo(500,100.0);
-		return false;
+		ourDisplayToRaise();
 	});
 	
 });
