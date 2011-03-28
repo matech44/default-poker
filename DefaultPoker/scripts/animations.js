@@ -6,6 +6,8 @@ $(document).ready(function(){
 
 	$("#newgamebutton").click(function(){
 		
+		jQnotice("Your notification");
+		
 		//Player7
 		$("#dealoutcard1").animate({opacity: "1", left: "+=239", top: "-=21", height: "-=28", width: "-=21"}, 1000);		
 		$("#dealoutcard2").delay(300).animate({opacity: "1", left: "+=210", top: "-=30", height: "-=28", width: "-=21"}, 1000);
@@ -39,6 +41,13 @@ $(document).ready(function(){
 	  
 		return false;
 	
+	});
+	
+	$("#exitbutton").click(function(){
+		if (confirm("Getting a life?"))
+		{
+			window.close();
+		}
 	});
 	
 	$("#buttonfold").click(function(){
