@@ -2,6 +2,11 @@
  * 
  */
 
+function resetMoney() {
+	$(".playersum").html("0 €");
+	$("#pot").html("0 €");
+	}
+
 function ourDisplayToFold() {
 	$(document).ready(function(){
 		$("#ourdisplayimage").fadeTo(400,0.0, function(){
@@ -199,6 +204,7 @@ $(document).ready(function(){
 
 	$("#newgamebutton").click(function(){
 		dealCards(8);
+		resetMoney();
 		startNewGameClicked();
 	});
 	
