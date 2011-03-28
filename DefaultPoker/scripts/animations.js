@@ -7,33 +7,12 @@ function resetMoney() {
 	$("#pot").html("0 €");
 	}
 
-function ourDisplayToFold() {
+function changeOurDisplay(choice) {
 	$(document).ready(function(){
 		$("#ourdisplayimage").fadeTo(400,0.0, function(){
-			$("#ourdisplayimage").attr("src","images/displayFold.png");
-			});
+			$("#ourdisplayimage").attr("src","images/display" + choice + ".png");
+		});
 		$("#ourdisplayimage").fadeTo(500,100.0);
-		return false;
-	});
-}
-
-function ourDisplayToCall() {
-	$(document).ready(function(){
-		$("#ourdisplayimage").fadeTo(400,0.0, function(){
-			$("#ourdisplayimage").attr("src","images/displayCall.png");
-			});
-		$("#ourdisplayimage").fadeTo(500,100.0);
-		return false;
-	});
-}
-
-function ourDisplayToRaise() {
-	$(document).ready(function(){
-		$("#ourdisplayimage").fadeTo(400,0.0, function(){
-			$("#ourdisplayimage").attr("src","images/displayRaise.png");
-			});
-		$("#ourdisplayimage").fadeTo(500,100.0);
-		return false;
 	});
 }
 
@@ -484,15 +463,15 @@ $(document).ready(function(){
 	});
 	
 	$("#buttonfold").click(function(){
-		ourDisplayToFold();
+		changeOurDisplay("Fold");
 	});
 	
 	$("#buttoncall").click(function(){
-		ourDisplayToCall();
+		changeOurDisplay("Call");
 	});
 	
 	$("#buttonraise").click(function(){
-		ourDisplayToRaise();
+		changeOurDisplay("Raise");
 	});
 	
 });
