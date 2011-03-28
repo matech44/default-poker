@@ -199,6 +199,7 @@ $(document).ready(function(){
 
 	$("#newgamebutton").click(function(){
 		dealCards(8);
+		startNewGameClicked();
 	});
 	
 	$("#exitbutton").click(function(){
