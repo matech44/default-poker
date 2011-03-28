@@ -203,7 +203,10 @@ function dealTableCards(n) {
 function showAnnouncement(text) {
 	$(document).ready(function(){
 		$("#announcement").html(text);
-		$("#announcement").delay(600).fadeTo(800, 0);
+		$("#announcement").delay(600).fadeTo(800, 0, function(){
+			$("#announcement").html("");
+		});
+		$("#announcement").fadeTo(0, 100);
 	});
 }
 
@@ -213,7 +216,7 @@ $(document).ready(function(){
 		dealCards(8);
 		resetMoney();
 		startNewGameClicked();
-		showAnnouncement("PREFLOP");
+		showAnnouncement("FLOP");
 	});
 	
 	$("#exitbutton").click(function(){
