@@ -119,6 +119,95 @@ function dealCards(n) {
 	}
 }
 
+function unDealCards(n) {
+	switch (n){
+
+	case 1:
+		$(document).ready(function(){
+			unDealCardsToPlayer6(0);
+			unDealTableCards(600);
+		});
+		break;
+	case 2:
+		$(document).ready(function(){
+			unDealCardsToPlayer6(0);
+			unDealCardsToPlayer5(600);
+			unDealTableCards(1200);
+		});
+		break;
+	case 3:
+		$(document).ready(function(){
+			unDealCardsToPlayer6(0);
+			unDealCardsToPlayer5(600);
+			unDealCardsToPlayer4(1200);
+			unDealTableCards(1800);
+		});
+		break;
+	case 4:
+		$(document).ready(function(){
+			unDealCardsToPlayer6(0);
+			unDealCardsToPlayer5(600);
+			unDealCardsToPlayer4(1200);
+			unDealCardsToPlayer3(1800);
+			unDealTableCards(2400);
+		});
+		break;
+	case 5:
+		$(document).ready(function(){
+			unDealCardsToPlayer7(0);
+			unDealCardsToPlayer6(600);
+			unDealCardsToPlayer5(1200);
+			unDealCardsToPlayer4(1800);
+			unDealCardsToPlayer3(2400);
+			unDealTableCards(3000);
+		});
+		break;
+	case 6:
+		$(document).ready(function(){
+			unDealCardsToPlayer7(0);
+			unDealCardsToPlayer6(600);
+			unDealCardsToPlayer5(1200);
+			unDealCardsToPlayer4(1800);
+			unDealCardsToPlayer3(2400);
+			unDealCardsToPlayer2(3000);
+			unDealTableCards(3600);
+		});
+		break;
+	case 7:
+		$(document).ready(function(){
+			unDealCardsToPlayer7(0);
+			unDealCardsToPlayer6(600);
+			unDealCardsToPlayer5(1200);
+			unDealCardsToPlayer4(1800);
+			unDealCardsToPlayer3(2400);
+			unDealCardsToPlayer2(3000);
+			unDealCardsToPlayer1(3600);
+			unDealTableCards(4200);
+		});
+		break;
+	case 8:
+		$(document).ready(function(){
+			unDealCardsToPlayer8(0);
+			unDealCardsToPlayer7(600);
+			unDealCardsToPlayer6(1200);
+			unDealCardsToPlayer5(1800);
+			unDealCardsToPlayer4(2400);
+			unDealCardsToPlayer3(3000);
+			unDealCardsToPlayer2(3600);
+			unDealCardsToPlayer1(4200);
+			unDealTableCards(4800);
+		});
+		break;
+	}
+}
+
+function dealOurCards(n) {
+
+	$(document).ready(function(){
+		$("#dealourcard1").delay(n).animate({opacity: "1", left: "-=403", top: "+=180", height: "-=28", width: "-=21"}, 1000);
+		$("#dealourcard2").delay(n+300).animate({opacity: "1", left: "-=432", top: "+=171", height: "-=28", width: "-=21"}, 1000);
+	});
+}
 
 function dealCardsToPlayer1(n) {
 
@@ -273,6 +362,16 @@ function dealTableCards(n) {
 	});
 }
 
+function unDealTableCards(n) {
+
+	$(document).ready(function(){
+		$("#dealoutcard17").delay(n).animate({ left: "+=75" }, 1000);
+		$("#dealoutcard18").delay(n+300).animate({ left: "+=150" }, 1000);
+		$("#dealoutcard19").delay(n+600).animate({ left: "+=225" }, 1000);
+		$("#dealoutcard20").delay(n+900).animate({ left: "+=300" }, 1000);
+	});
+}
+
 function showAnnouncement(text) {
 	$(document).ready(function(){
 		$("#announcement").html(text);
@@ -356,6 +455,9 @@ function showPlayerNumberDialog() {
 $(document).ready(function(){
 
 	$("#newgamebutton").click(function(){
+
+		dealCards(8);
+		unDealCards(8);
 		changeDisplay(1,"Idle");
 		changeDisplay(2,"Idle");
 		changeDisplay(3,"Idle");
