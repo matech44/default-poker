@@ -385,8 +385,12 @@ function showAnnouncement(text) {
 function changeDisplay(player, choice){
 	$(document).ready(function(){
 		$("#player"+player).children(".playerdata").children(".playerdisplay")
-			.children(".playerdisplayimage")
-				.attr("src","images/display" + choice + ".png");
+		.children(".playerdisplayimage").fadeTo(500,0.0, function(){
+			$("#player"+player).children(".playerdata").children(".playerdisplay")
+			.children(".playerdisplayimage").attr("src","images/display" + choice + ".png");
+		});
+		$("#player"+player).children(".playerdata").children(".playerdisplay")
+		.children(".playerdisplayimage").fadeTo(3000,100.0);
 	});
 }
 
@@ -453,26 +457,23 @@ function showPlayerNumberDialog() {
 }
 
 $(document).ready(function(){
-
+	changeDisplay(1,"Idle");
+	changeDisplay(2,"Idle");
+	changeDisplay(3,"Idle");
+	changeDisplay(4,"Idle");
+	changeDisplay(5,"Idle");
+	changeDisplay(6,"Idle");
+	changeDisplay(7,"Idle");
+	changeDisplay(8,"Idle");
 	$("#newgamebutton").click(function(){
-
-		dealCards(8);
-		unDealCards(8);
-		changeDisplay(1,"Idle");
-		changeDisplay(2,"Idle");
-		changeDisplay(3,"Idle");
-		changeDisplay(4,"Idle");
-		changeDisplay(5,"Idle");
-		changeDisplay(6,"Idle");
-		changeDisplay(7,"Idle");
-		changeDisplay(8,"Idle");
 		var players = showPlayerNumberDialog();
 		hidePlayers(8-players);
 		dealCards(parseInt(players));
-		//unDealCardsToPlayer7(8);
+		unDealCards(parseInt(players));
 		resetMoney();
 		startNewGameClicked();
-		showAnnouncement("Preflop");	
+		showAnnouncement("Preflop");
+		changeDisplay(6, "Fold")
 	});
 	
 	$("#exitbutton").click(function(){
