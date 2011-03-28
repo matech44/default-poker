@@ -32,8 +32,9 @@ function ourDisplayToRaise() {
 	});
 }
 
-function dealCards(var i) {
-	switch (i){
+function dealCards(i) {
+	var d = i;
+	switch (d){
 	case 1:
 		$(document).ready(function(){
 			dealCardsToPlayer4();
@@ -105,56 +106,56 @@ function dealCards(var i) {
 	}
 }
 
-function dealCardsToPlayer1 {
+function dealCardsToPlayer1() {
 	$(document).ready(function(){
 		$("#dealoutcard13").delay(4000).animate({opacity: "1", left: "-=403", top: "+=180", height: "-=28", width: "-=21"}, 1000);
 		$("#dealoutcard14").delay(4300).animate({opacity: "1", left: "-=432", top: "+=171", height: "-=28", width: "-=21"}, 1000);
 		
 	});
 }
-function dealCardsToPlayer2 {
+function dealCardsToPlayer2() {
 	$(document).ready(function(){
 		$("#dealoutcard11").delay(3300).animate({opacity: "1", left: "-=475", top: "-=21", height: "-=28", width: "-=21"}, 1000);
 		$("#dealoutcard12").delay(3700).animate({opacity: "1", left: "-=504", top: "-=30", height: "-=28", width: "-=21"}, 1000);
 		
 	});
 }
-function dealCardsToPlayer3 {
+function dealCardsToPlayer3() {
 	$(document).ready(function(){
 		$("#dealoutcard9").delay(2700).animate({opacity: "1", left: "-=403", top: "-=220", height: "-=28", width: "-=21"}, 1000);
 		$("#dealoutcard10").delay(3000).animate({opacity: "1", left: "-=433", top: "-=231", height: "-=28", width: "-=21"}, 1000);
 		
 	});
 }
-function dealCardsToPlayer4 {
+function dealCardsToPlayer4() {
 	$(document).ready(function(){
 		$("#dealoutcard7").delay(2100).animate({opacity: "1", left: "-=202", top: "-=250", height: "-=28", width: "-=21"}, 1000);
 		$("#dealoutcard8").delay(2400).animate({opacity: "1", left: "-=233", top: "-=262", height: "-=28", width: "-=21"}, 1000);
 		
 	});
 }
-function dealCardsToPlayer5 {
+function dealCardsToPlayer5() {
 	$(document).ready(function(){
 		$("#dealoutcard5").delay(1500).animate({opacity: "1", left: "-=3", top: "-=250", height: "-=28", width: "-=21"}, 1000);
 		$("#dealoutcard6").delay(1800).animate({opacity: "1", left: "-=32", top: "-=262", height: "-=28", width: "-=21"}, 1000);
 		
 	});
 }
-function dealCardsToPlayer6 {
+function dealCardsToPlayer6() {
 	$(document).ready(function(){
 		$("#dealoutcard3").delay(900).animate({opacity: "1", left: "+=178", top: "-=220", height: "-=28", width: "-=21"}, 1000);
 		$("#dealoutcard4").delay(1200).animate({opacity: "1", left: "+=148", top: "-=230", height: "-=28", width: "-=21"}, 1000);
 		
 	});
 }
-function dealCardsToPlayer7 {
+function dealCardsToPlayer7() {
 	$(document).ready(function(){
 		$("#dealoutcard1").animate({opacity: "1", left: "+=239", top: "-=21", height: "-=28", width: "-=21"}, 1000);		
 		$("#dealoutcard2").delay(300).animate({opacity: "1", left: "+=210", top: "-=30", height: "-=28", width: "-=21"}, 1000);
 		
 	});
 }
-function dealCardsToPlayer8 {
+function dealCardsToPlayer8() {
 	$(document).ready(function(){
 		$("#dealoutcard15").delay(4600).animate({opacity: "1", left: "+=178", top: "+=180", height: "-=28", width: "-=21"}, 1000);
 		$("#dealoutcard16").delay(4900).animate({opacity: "1", left: "+=148", top: "+=171", height: "-=28", width: "-=21"}, 1000);
@@ -162,7 +163,7 @@ function dealCardsToPlayer8 {
 	});
 }
 
-function dealTableCards {
+function dealTableCards() {
 	$(document).ready(function(){
 		$("#dealoutcard17").delay(5200).animate({ left: "-=75" }, 1000);
 		$("#dealoutcard18").delay(5500).animate({ left: "-=150" }, 1000);
@@ -174,7 +175,7 @@ function dealTableCards {
 $(document).ready(function(){
 
 	$("#newgamebutton").click(function(){
-		dealCards(5);
+		dealCards(1);
 		
 		/*
 		//Player7
