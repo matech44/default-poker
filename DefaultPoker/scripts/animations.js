@@ -508,6 +508,26 @@ function flipCards(player, card1, card2) {
 	}
 }
 
+function setDealer(player) {
+	clearDealer();
+	$(document).ready(function(){
+		$("#player"+player).children(".playerdata").children(".playerdetail")
+		.children(".playerstatus").children(".playerstatusimage")
+		.show();
+	});
+
+}
+
+function clearDealer() {
+	for (i=1;i<=8;i++){
+		$(document).ready(function(){
+			$("#player"+i).children(".playerdata").children(".playerdetail")
+			.children(".playerstatus").children(".playerstatusimage")
+			.hide();
+		});
+	}
+}
+
 $(document).ready(function(){
 	changeDisplay(1,"Idle");
 	changeDisplay(2,"Idle");
@@ -518,6 +538,7 @@ $(document).ready(function(){
 	changeDisplay(7,"Idle");
 	changeDisplay(8,"Idle");
 	$("#newgamebutton").click(function(){
+		setDealer(6);
 		var players = showPlayerNumberDialog();
 		hidePlayers(8-players);
 		dealCards(parseInt(players));
@@ -555,6 +576,7 @@ $(document).ready(function(){
 	});
 	
 	$("#buttoncall").click(function(){
+		setDealer(8);
 		changeOurDisplay("Call");
 	});
 	
