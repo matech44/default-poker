@@ -450,7 +450,7 @@ function hidePlayers(number) {
 }
 
 function showPlayerNumberDialog() {
-	var playernumber = prompt("Please enter number of players","1-8");
+	var playernumber = prompt("Please enter number of players (1-8).","");
 	//if (playernumber!=null && playernumber!="" && playernumber!="1-8") {
 	return playernumber;
 	//}
