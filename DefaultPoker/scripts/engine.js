@@ -20,6 +20,8 @@ function Player(name, is_bot) {
 	this.is_bot = is_bot;
 	this.chips = 100;
 	this.bet = 0;
+	this.turn = 0;
+	this.seat;
 	this.cards = new Array();
 	
 	/*
@@ -92,9 +94,9 @@ function Table() {
  * 
  * @returns {Round}
  */
-function Round(table) {
-	this.table = table;
+function Round() {
 	this.players = new Array();
+	this.turn = 0;
 	this.smallblind = 3;
 	this.bigblind = 6;
 
@@ -176,6 +178,7 @@ function Round(table) {
  * @returns {Game}
  */
 function Game() {
+	this.status = 0; // 0 - preflop; 1 - flop; 2 - turn; 3 - river;
 	this.table = new Table();
 	this.rounds = new Array();
 	this.currentround;
@@ -190,11 +193,16 @@ function Game() {
 	 * 
 	 */
 	this.startNewRound = function() {
+		var players = new Array();
+		
 		if(this.currentround) {
+			players = this.currentround.players;
 			this.rounds.push(this.currentround);
 		}
 		
 		this.currentround = new Round();
+		this.currentround.players = players;
+		this.status++;
 	};
 
 	/**
@@ -290,6 +298,8 @@ function Game() {
 function Engine() {
 	this.currentgame;
 	this.games = new Array();
+	this.initialized = 0;
+	this.ticker;
 	
 	/*
 	 * METHODS
@@ -317,8 +327,8 @@ function Engine() {
 	 * creates new Player object
 	 */
 	this.createPlayer = function(name) {
-		var player = new Player(name, false);
-		var playerid = this.currentgame.getCurrentRound().players.length;
+		var player = new Player(name, 0);
+		var playerid = this.currentgame.currentround.players.length;
 		this.currentgame.getCurrentRound().players.push(player);
 		return playerid;
 	};
@@ -327,9 +337,78 @@ function Engine() {
 	 * creates new Player object
 	 */
 	this.createBot = function(name) {
-		var bot = new Player(name, true);
+		var bot = new Player(name, 1);
 		this.currentgame.getCurrentRound().players.push(bot);
 	};
+	
+	/**
+	 * starts ticks
+	 */
+	this.startTicker = function() {
+		this.ticker = setInterval('engine.progress()', 2000);
+	};
+	
+	/**
+	 * one tick
+	 */
+	this.progress = function() {
+		var statushash = {
+				1 : 'Preflop', 
+				2 : 'Flop',
+				3 : 'Turn',
+				4 : 'River'
+			}
+		
+		/* first tick */
+		if(!this.initialized) {
+			hidePlayers(9-this.currentgame.currentround.players.length);
+			dealCards(this.currentgame.currentround.players.length-1);
+			this.initialized = 1;
+			showAnnouncement(statushash[this.currentgame.status]);
+			return;
+		}
+		
+		/* new round */
+		if(this.currentgame.currentround.turn == this.currentgame.currentround.players.length) {
+			this.currentgame.startNewRound();
+			
+			/* flop, deal table cards, show first three */
+			if(this.currentgame.status == 2) {
+				dealTableCards(0);
+				flipFlop(
+						this.currentgame.table.cards[0].getMapping(), 
+						this.currentgame.table.cards[1].getMapping(), 
+						this.currentgame.table.cards[2].getMapping()
+						);
+			}
+			
+			/* turn, show card */
+			if(this.currentgame.status == 3) {
+				flipTurn(this.currentgame.table.cards[3].getMapping());
+			}
+			
+			/* river, show last card */
+			if(this.currentgame.status == 4) {
+				flipRiver(this.currentgame.table.cards[4].getMapping());
+			}
+			
+			/* show new status */
+			showAnnouncement(statushash[this.currentgame.status]);
+			
+			return;
+		}
+		
+		/* real playing from here */
+		
+		/* bot */
+		if(this.currentgame.currentround.players[this.currentgame.currentround.turn].is_bot) {
+			
+		/* player */
+		} else {
+			
+		}
+		
+		this.currentgame.currentround.turn++;
+	};
 }
-
 
