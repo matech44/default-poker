@@ -7,6 +7,15 @@ function resetMoney() {
 	$("#pot").html("0 €");
 	}
 
+function setPlayerMoney(playerNum, sum) {
+	$("div#player"+playerNum+"> div.playerdata > div.playerdetail > div.playersum").html(sum+" €");
+	
+}
+
+function addTextToHistory(text) {
+		$("#stats").append(text+ "\n");
+}
+
 function changeOurDisplay(choice) {
 	$(document).ready(function(){
 		$("#ourdisplayimage").fadeTo(400,0.0, function(){
@@ -547,6 +556,14 @@ function flipOurCardsFront(card1, card2) {
 	});
 }
 
+function playerCardsBackside() {
+	$(document).ready(function(){
+		for(i=1; i<21; i++) {
+		$("#dealoutcard"+i).attr("src", "images/cardBackSide.png");
+		}
+	});
+}
+
 function setDealer(player) {
 	clearDealer();
 	$(document).ready(function(){
@@ -580,11 +597,16 @@ $(document).ready(function(){
 		//setDealer(6);
 		//var players = showPlayerNumberDialog();
 		//hidePlayers(8-players);
-		dealCards(parseInt(players));
+		//dealCards(parseInt(players));
+		//dealCards(2);
+		//flipCards(6,"clubsTwo" , "clubsNine")
 		//unDealCards(parseInt(players));
 		//resetMoney();
 		//startNewGameClicked();
 		//showAnnouncement("Preflop");
+		//playerCardsBackside();
+		//setPlayerMoney(5, "200");
+		addTextToHistory("Haha õnnestus");
 
 	});
 	
