@@ -349,6 +349,21 @@ function Engine() {
 	};
 	
 	/**
+	 * ends progressing
+	 */
+	this.endTicker = function() {
+		clearInterval(this.ticker);
+	};
+	
+	/**
+	 * ends progressing
+	 */
+	this.pauseTicker = function(time) {
+		clearInterval(this.ticker);
+		setTimeout('engine.startTicker()', time);
+	};
+	
+	/**
 	 * one progress
 	 */
 	this.progress = function() {
@@ -357,15 +372,23 @@ function Engine() {
 				2 : 'Flop',
 				3 : 'Turn',
 				4 : 'River',
-				5 : 'Winner is ' + this.currentgame.getWinningPlayer().player.name
-			}
+				5 : 'Show hands',
+				6 : this.currentgame.getWinningPlayer().player.name + ' takes pot'
+			};
 		
-		/* first tick */
+		var seatsequence = [0, 6, 5, 4, 3, 7, 2, 1, 8];
+		
+		/* first tick, set up */
 		if(!this.initialized) {
+			for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
+				this.currentgame.currentround.players[i].seat = seatsequence[i];
+			}
 			hidePlayers(9-this.currentgame.currentround.players.length);
 			dealCards(this.currentgame.currentround.players.length-1);
 			this.initialized = 1;
 			showAnnouncement(statushash[this.currentgame.status]);
+			
+			/* skip real play */
 			return;
 		}
 		
@@ -395,12 +418,34 @@ function Engine() {
 			
 			/* river, show last card */
 			if(this.currentgame.status == 5) {
+				for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
+					if(this.currentgame.currentround.players[i].seat) {
+						flipCards(
+								this.currentgame.currentround.players[i].seat, 
+								this.currentgame.currentround.players[i].cards[0].getMapping(),
+								this.currentgame.currentround.players[i].cards[1].getMapping()
+								);
+					} else {
+						flipOurCardsFront(
+								this.currentgame.currentround.players[i].cards[0].getMapping(),
+								this.currentgame.currentround.players[i].cards[1].getMapping()
+								);
+					}
+				}
+				this.pauseTicker(4000);
+			}
+			
+			/* river, show last card */
+			if(this.currentgame.status == 6) {
 				unDealCards(this.currentgame.currentround.players.length-1);
+				unDealOurCards(0);
+				this.endTicker();
 			}
 			
 			/* show new status */
 			showAnnouncement(statushash[this.currentgame.status]);
 			
+			/* skip real play */
 			return;
 		}
 		
