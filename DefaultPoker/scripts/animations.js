@@ -2,6 +2,11 @@
  * 
  */
 
+function changePlayerName(playerNum, newName) {
+	$("div#player"+playerNum+"> div.playername").html(newName);
+	
+}
+
 function resetMoney() {
 	$(".playersum").html("0 €");
 	$("#pot").html("0 €");
@@ -404,7 +409,7 @@ function changeDisplay(player, choice){
 
 function hidePlayer(player) {
 	$(document).ready(function(){
-		$("#player"+player).hide();
+		$("#player"+player).fadeOut(900);
 	});
 }
 
@@ -561,6 +566,8 @@ function playerCardsBackside() {
 		for(i=1; i<21; i++) {
 		$("#dealoutcard"+i).attr("src", "images/cardBackSide.png");
 		}
+		$("#dealourcard1").attr("src", "images/cardBackSide.png");
+		$("#dealourcard2").attr("src", "images/cardBackSide.png");
 	});
 }
 
@@ -606,7 +613,8 @@ $(document).ready(function(){
 		//showAnnouncement("Preflop");
 		//playerCardsBackside();
 		//setPlayerMoney(5, "200");
-		addTextToHistory("Haha õnnestus");
+		//addTextToHistory("Haha õnnestus");
+		//changePlayerName(6, "Olen uus");
 
 	});
 	
