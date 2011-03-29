@@ -40,6 +40,33 @@ function Card(value, suit) {
 		
 		return valuehash[this.value] + " " + suithash[this.suit];
 	}
+	
+	this.getMapping = function() {
+		var valuehash = {
+				2 : 'Two',
+				3 : 'Three',
+				4 : 'Four',
+				5 : 'Five',
+				6 : 'Six',
+				7 : 'Seven',
+				8 : 'Eight',
+				9 : 'Nine',
+				10 : 'Ten',
+				11 : 'Jack',
+				12 : 'Queen',
+				13 : 'King',
+				14 : 'Ace'
+			}
+	
+		var suithash = {
+				1 : 'diamonds', 
+				2 : 'spades',
+				3 : 'hearts',
+				4 : 'clubs'
+			}
+		
+		return suithash[this.suit]+valuehash[this.value];
+	}
 }
 
 /**

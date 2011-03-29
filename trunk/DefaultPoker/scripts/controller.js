@@ -31,11 +31,13 @@ function startNewGameClicked() {
 	engine.currentgame.startNewRound();
 	
 	var player1id = engine.createPlayer("Andres");
-	var player2id = engine.createPlayer("Ardi");
-	var player3id = engine.createPlayer("Sepp");
+	var player2id = engine.createBot("Ardi");
+	var player3id = engine.createBot("Sepp");
 	
 	engine.currentgame.dealTableCards();
 	engine.currentgame.dealPlayerCards();
+	
+	engine.startTicker();
 	
 	document.getElementById("stats").innerHTML = "Table cards: \n";
 	
