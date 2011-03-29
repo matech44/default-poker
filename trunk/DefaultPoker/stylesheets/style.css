@@ -640,6 +640,8 @@ checkboxBigBlind {
 }
 
 .chipimage {
+	opacity:0;
+	position: absolute;
 	height:20px;
 	float:top;	
 }
