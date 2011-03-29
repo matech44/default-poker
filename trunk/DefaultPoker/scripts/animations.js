@@ -2,9 +2,12 @@
  * 
  */
 
+function changePlayerBet(playerNum, newBet) {
+	$("#playerbet"+playerNum).html(newBet+ " €");
+}
+
 function changePlayerName(playerNum, newName) {
 	$("div#player"+playerNum+"> div.playername").html(newName);
-	
 }
 
 function resetMoney() {
@@ -615,6 +618,9 @@ $(document).ready(function(){
 		//setPlayerMoney(5, "200");
 		//addTextToHistory("Haha õnnestus");
 		//changePlayerName(6, "Olen uus");
+		//changePlayerBet(5, "300");
+		chipsToPlayers();
+		chipsToPot(6);
 
 	});
 	
@@ -624,6 +630,55 @@ $(document).ready(function(){
 			window.close();
 		}
 	});
+	
+	function chipsToPlayers() {
+		$("#chipimageplayer1").animate({opacity: "0", left: "+=110", top: "+=540"}, 1000);
+		$("#chipimageplayer2").animate({opacity: "0", left: "+=40", top: "+=340"}, 1000);
+		$("#chipimageplayer3").animate({opacity: "0", left: "+=110", top: "+=140"}, 1000);
+		$("#chipimageplayer4").animate({opacity: "0", left: "+=315", top: "+=110"}, 1000);
+		$("#chipimageplayer5").animate({opacity: "0", left: "+=510", top: "+=110"}, 1000);
+		$("#chipimageplayer6").animate({opacity: "0", left: "+=690", top: "+=140"}, 1000);
+		$("#chipimageplayer7").animate({opacity: "0", left: "+=750", top: "+=340"}, 1000);
+		$("#chipimageplayer8").animate({opacity: "0", left: "+=690", top: "+=540"}, 1000);
+	}
+	
+	//Before calling this make sure you have called chipsToPlayers()
+	function chipsToPot(playerNum) {
+		switch (playerNum){
+
+		case 1:
+		$("#chipimageplayer1").animate({opacity: "1", left: "+=310", top: "-=167"}, 1000).fadeTo(1000,0);
+		break;
+		
+		case 2:
+		$("#chipimageplayer2").animate({opacity: "1", left: "+=380", top: "+=35"}, 1000).fadeTo(1000,0);
+		break;
+		
+		case 3:
+		$("#chipimageplayer3").animate({opacity: "1", left: "+=310", top: "+=235"}, 1000).fadeTo(1000,0);
+		break;
+		
+		case 4:
+		$("#chipimageplayer4").animate({opacity: "1", left: "+=105", top: "+=265"}, 1000).fadeTo(1000,0);
+		break;
+		
+		case 5:
+		$("#chipimageplayer5").animate({opacity: "1", left: "-=90", top: "+=265"}, 1000).fadeTo(1000,0);
+		break;
+		
+		case 6:
+		$("#chipimageplayer6").animate({opacity: "1", left: "-=270", top: "+=235"}, 1000).fadeTo(1000,0);
+		break;
+		
+		case 7:
+		$("#chipimageplayer7").animate({opacity: "1", left: "-=330", top: "+=35"}, 1000).fadeTo(1000,0);
+		break;
+		
+		case 8:
+		$("#chipimageplayer8").animate({opacity: "1", left: "-=270", top: "-=167"}, 1000).fadeTo(1000,0);
+		
+		}
+	}
 	
 	$("#buttonfold").click(function(){
 		changeOurDisplay("Fold");
