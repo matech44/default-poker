@@ -399,6 +399,18 @@ function hidePlayer(player) {
 	});
 }
 
+function hidePlayerButtons(i) {
+	if (i == true) {
+		$("#ourbuttons").hide('slow', function() {
+		  });
+	}
+	
+	if (i== false) {
+		$("#ourbuttons").show(600);	
+	}
+}
+
+
 function hidePlayers(number) {
 	switch (number){
 	case 0:
@@ -528,6 +540,13 @@ function flipRiver(card) {
 	});
 }
 
+function flipOurCardsFront(card1, card2) {
+	$(document).ready(function(){
+		$("#dealourcard1").attr("src", "images/cards/" + card1 + ".png");
+		$("#dealourcard2").attr("src", "images/cards/" + card2 + ".png");
+	});
+}
+
 function setDealer(player) {
 	clearDealer();
 	$(document).ready(function(){
@@ -561,11 +580,12 @@ $(document).ready(function(){
 		//setDealer(6);
 		//var players = showPlayerNumberDialog();
 		//hidePlayers(8-players);
-		//dealCards(parseInt(players));
+		dealCards(parseInt(players));
 		//unDealCards(parseInt(players));
 		//resetMoney();
-		startNewGameClicked();
+		//startNewGameClicked();
 		//showAnnouncement("Preflop");
+
 	});
 	
 	$("#exitbutton").click(function(){
