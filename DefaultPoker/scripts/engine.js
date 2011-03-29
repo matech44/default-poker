@@ -342,21 +342,22 @@ function Engine() {
 	};
 	
 	/**
-	 * starts ticks
+	 * starts progressing
 	 */
 	this.startTicker = function() {
-		this.ticker = setInterval('engine.progress()', 2000);
+		this.ticker = setInterval('engine.progress()', 1000);
 	};
 	
 	/**
-	 * one tick
+	 * one progress
 	 */
 	this.progress = function() {
 		var statushash = {
 				1 : 'Preflop', 
 				2 : 'Flop',
 				3 : 'Turn',
-				4 : 'River'
+				4 : 'River',
+				5 : 'Winner is ' + this.currentgame.getWinningPlayer().player.name
 			}
 		
 		/* first tick */
@@ -390,6 +391,11 @@ function Engine() {
 			/* river, show last card */
 			if(this.currentgame.status == 4) {
 				flipRiver(this.currentgame.table.cards[4].getMapping());
+			}
+			
+			/* river, show last card */
+			if(this.currentgame.status == 5) {
+				unDealCards(this.currentgame.currentround.players.length-1);
 			}
 			
 			/* show new status */
