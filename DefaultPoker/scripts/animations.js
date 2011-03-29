@@ -508,46 +508,6 @@ function flipCards(player, card1, card2) {
 	}
 }
 
-function flipFlop(card1, card2, card3) {
-		$(document).ready(function(){
-			$("#dealoutcard16").attr("src", "images/cards/" + card1 + ".png");
-			$("#dealoutcard17").attr("src", "images/cards/" + card2 + ".png");
-			$("#dealoutcard18").attr("src", "images/cards/" + card3 + ".png");
-		});
-}
-
-function flipTurn(card) {
-	$(document).ready(function(){
-		$("#dealoutcard19").attr("src", "images/cards/" + card + ".png");
-	});
-}
-
-function flipRiver(card) {
-	$(document).ready(function(){
-		$("#dealoutcard20").attr("src", "images/cards/" + card + ".png");
-	});
-}
-
-function setDealer(player) {
-	clearDealer();
-	$(document).ready(function(){
-		$("#player"+player).children(".playerdata").children(".playerdetail")
-		.children(".playerstatus").children(".playerstatusimage")
-		.show();
-	});
-
-}
-
-function clearDealer() {
-	for (i=1;i<=8;i++){
-		$(document).ready(function(){
-			$("#player"+i).children(".playerdata").children(".playerdetail")
-			.children(".playerstatus").children(".playerstatusimage")
-			.hide();
-		});
-	}
-}
-
 $(document).ready(function(){
 	changeDisplay(1,"Idle");
 	changeDisplay(2,"Idle");
