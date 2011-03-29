@@ -23,7 +23,7 @@ function dealCards(n) {
 		$(document).ready(function(){
 			dealOurCards(0)
 			dealCardsToPlayer6(600);
-			dealTableCards(1200);
+			//dealTableCards(1200);
 		});
 		break;
 	case 2:
@@ -31,7 +31,7 @@ function dealCards(n) {
 			dealOurCards(0)
 			dealCardsToPlayer6(600);
 			dealCardsToPlayer5(1200);
-			dealTableCards(1800);
+			//dealTableCards(1800);
 		});
 		break;
 	case 3:
@@ -40,7 +40,7 @@ function dealCards(n) {
 			dealCardsToPlayer6(600);
 			dealCardsToPlayer5(1200);
 			dealCardsToPlayer4(1800);
-			dealTableCards(2400);
+			//dealTableCards(2400);
 		});
 		break;
 	case 4:
@@ -50,7 +50,7 @@ function dealCards(n) {
 			dealCardsToPlayer5(1200);
 			dealCardsToPlayer4(1800);
 			dealCardsToPlayer3(2400);
-			dealTableCards(3000);
+			//dealTableCards(3000);
 		});
 		break;
 	case 5:
@@ -61,7 +61,7 @@ function dealCards(n) {
 			dealCardsToPlayer5(1800);
 			dealCardsToPlayer4(2400);
 			dealCardsToPlayer3(3000);
-			dealTableCards(3600);
+			//dealTableCards(3600);
 		});
 		break;
 	case 6:
@@ -73,7 +73,7 @@ function dealCards(n) {
 			dealCardsToPlayer4(2400);
 			dealCardsToPlayer3(3000);
 			dealCardsToPlayer2(3600);
-			dealTableCards(4200);
+			//dealTableCards(4200);
 		});
 		break;
 	case 7:
@@ -86,7 +86,7 @@ function dealCards(n) {
 			dealCardsToPlayer3(3000);
 			dealCardsToPlayer2(3600);
 			dealCardsToPlayer1(4200);
-			dealTableCards(4800);
+			//dealTableCards(4800);
 		});
 		break;
 	case 8:
@@ -100,7 +100,7 @@ function dealCards(n) {
 			dealCardsToPlayer3(3600);
 			dealCardsToPlayer2(4200);
 			dealCardsToPlayer1(4800);
-			dealTableCards(5400);
+			//dealTableCards(5400);
 		});
 		break;
 	}
@@ -508,6 +508,26 @@ function flipCards(player, card1, card2) {
 	}
 }
 
+function flipFlop(card1, card2, card3) {
+		$(document).ready(function(){
+			$("#dealoutcard16").attr("src", "images/cards/" + card1 + ".png");
+			$("#dealoutcard17").attr("src", "images/cards/" + card2 + ".png");
+			$("#dealoutcard18").attr("src", "images/cards/" + card3 + ".png");
+		});
+}
+
+function flipTurn(card) {
+	$(document).ready(function(){
+		$("#dealoutcard19").attr("src", "images/cards/" + card + ".png");
+	});
+}
+
+function flipRiver(card) {
+	$(document).ready(function(){
+		$("#dealoutcard20").attr("src", "images/cards/" + card + ".png");
+	});
+}
+
 function setDealer(player) {
 	clearDealer();
 	$(document).ready(function(){
@@ -538,14 +558,14 @@ $(document).ready(function(){
 	changeDisplay(7,"Idle");
 	changeDisplay(8,"Idle");
 	$("#newgamebutton").click(function(){
-		setDealer(6);
-		var players = showPlayerNumberDialog();
-		hidePlayers(8-players);
-		dealCards(parseInt(players));
-		unDealCards(parseInt(players));
-		resetMoney();
+		//setDealer(6);
+		//var players = showPlayerNumberDialog();
+		//hidePlayers(8-players);
+		//dealCards(parseInt(players));
+		//unDealCards(parseInt(players));
+		//resetMoney();
 		startNewGameClicked();
-		showAnnouncement("Preflop");
+		//showAnnouncement("Preflop");
 	});
 	
 	$("#exitbutton").click(function(){
