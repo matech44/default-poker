@@ -123,7 +123,10 @@ function resetMoney() {
 
 function setPlayerMoney(playerNum, sum) {
 	$("div#player"+playerNum+"> div.playerdata > div.playerdetail > div.playersum").html(sum+" €");
-	
+}
+
+function setOurMoney(sum) {
+	$("div#ourplayer > div#oursum").html(sum+" €");
 }
 
 function addTextToHistory(text) {
