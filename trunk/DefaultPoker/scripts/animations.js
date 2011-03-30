@@ -106,6 +106,7 @@
 		$("#chipimageplayer8").animate({opacity: "1", left: "+=185", top: "+=60"}, 1);	
 		break;
 		}
+	}
 
 function changePlayerBet(playerNum, newBet) {
 	$("#playerbet"+playerNum).html(newBet+ " €");
@@ -719,7 +720,7 @@ $(document).ready(function(){
 		//flipCards(6,"clubsTwo" , "clubsNine")
 		//unDealCards(parseInt(players));
 		//resetMoney();
-		//startNewGameClicked();
+		startNewGameClicked();
 		//showAnnouncement("Preflop");
 		//playerCardsBackside();
 		//setPlayerMoney(5, "200");
@@ -748,21 +749,13 @@ $(document).ready(function(){
 	});
 	
 	$("#buttoncall").click(function(){
-		/*engine.startTicker();
+		engine.startTicker();
 		hidePlayerButtons(true);
-		changeOurDisplay("Call");*/
+		changeOurDisplay("Call");
 	});
 	
 	$("#buttonraise").click(function(){
-		//changeOurDisplay("Raise");
-		/*changePlayerBet(1, 200);
-		changePlayerBet(2, 200);
-		changePlayerBet(3, 200);
-		changePlayerBet(4, 200);
-		changePlayerBet(5, 200);
-		changePlayerBet(6, 200);
-		changePlayerBet(7, 200);
-		changePlayerBet(8, 200);*/
+		changeOurDisplay("Raise");
 	});
 	
 });
