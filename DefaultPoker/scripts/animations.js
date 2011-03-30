@@ -388,13 +388,15 @@ function unDealTableCards(n) {
 	});
 }
 
-function showAnnouncement(text) {
+function showAnnouncement(duration, textsize, text) {
 	$(document).ready(function(){
+		$("#announcement").css("font-size", textsize + "px");
 		$("#announcement").html(text);
-		$("#announcement").delay(600).fadeTo(800, 0, function(){
+		$("#announcement").delay(duration).fadeTo(800, 0, function(){
 			$("#announcement").html("");
 		});
 		$("#announcement").fadeTo(0, 100);
+		//$("#announcement").css("font-size", "120px");
 	});
 }
 
