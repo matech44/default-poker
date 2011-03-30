@@ -36,6 +36,9 @@ function startNewGameClicked() {
 	var player4id = engine.createBot("Jumal");
 	var player5id = engine.createBot("Jeesus");
 	var player6id = engine.createBot("Pirokunn");
+	var player7id = engine.createBot("Ahv");
+	var player8id = engine.createBot("Ahv");
+	var player9id = engine.createBot("Pahv");
 	
 	engine.currentgame.dealTableCards();
 	engine.currentgame.dealPlayerCards();
