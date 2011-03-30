@@ -400,6 +400,7 @@ function Engine() {
 			addTextToHistory("Starting new game...");
 			for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
 				this.currentgame.currentround.players[i].seat = seatsequence[i];
+				this.currentgame.currentround.players[i].fold = 0;
 				if(i)
 					changePlayerName(seatsequence[i], this.currentgame.currentround.players[i].name);
 			}
@@ -471,6 +472,7 @@ function Engine() {
 			
 			/* collect cards */
 			if(this.currentgame.status == 6) {
+				showPlayers();
 				showAnnouncement(4000, 40, this.currentgame.getWinningPlayer().player.name + 
 						" takes pot with " + this.currentgame.getWinningPlayer().hand.value);
 				addTextToHistory(this.currentgame.getWinningPlayer().player.name + 
