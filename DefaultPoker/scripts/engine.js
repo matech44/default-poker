@@ -19,6 +19,7 @@ function Player(name, is_bot) {
 	this.name = name;
 	this.is_bot = is_bot;
 	this.chips = 100;
+	this.fold = 0;
 	this.bet = 0;
 	this.turn = 0;
 	this.seat;
@@ -283,6 +284,8 @@ function Game() {
 		var playerhand;
 		var hand;
 		
+		if(this.currentround.players[id].fold) return {value : "Fold", strength : 0};
+		
 		playerhand = this.currentround.getPlayers()[id].getCards().concat(this.table.getCards());
 		this.cardsystem.setCards(playerhand);
 		hand = this.cardsystem.getValue();
@@ -361,7 +364,7 @@ function Engine() {
 	 * starts progressing
 	 */
 	this.startTicker = function() {
-		this.ticker = setInterval('engine.progress()', 1000);
+		this.ticker = setInterval('engine.progress()', 800);
 	};
 	
 	/**
@@ -383,17 +386,14 @@ function Engine() {
 	 * one progress
 	 */
 	this.progress = function() {
-		var statushash = {
-				1 : 'Preflop', 
-				2 : 'Flop',
-				3 : 'Turn',
-				4 : 'River',
-				5 : 'Show hands',
-				6 : this.currentgame.getWinningPlayer().player.name +
-						' wins'
-			};
 		
 		var seatsequence = [0, 6, 5, 4, 3, 7, 2, 1, 8];
+		
+		var foldedplayers;
+		
+		for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
+			if(this.currentgame.currentround.players[i].fold) foldedplayers++;
+		}
 		
 		/* first tick, set up */
 		if(!this.initialized) {
@@ -416,7 +416,7 @@ function Engine() {
 			dealCards(this.currentgame.currentround.players.length-1);
 			resetMoney();
 			this.initialized = 1;
-			showAnnouncement(statushash[this.currentgame.status]);
+			showAnnouncement(1000, 100, "Preflop");
 			
 			/* skip real play */
 			return;
@@ -428,6 +428,7 @@ function Engine() {
 			
 			/* flop, deal table cards, show first three */
 			if(this.currentgame.status == 2) {
+				showAnnouncement(1000, 100, "Flop");
 				dealTableCards(0);
 				flipFlop(
 						this.currentgame.table.cards[0].getMapping(), 
@@ -438,16 +439,19 @@ function Engine() {
 			
 			/* turn, show card */
 			if(this.currentgame.status == 3) {
+				showAnnouncement(1000, 100, "Turn");
 				flipTurn(this.currentgame.table.cards[3].getMapping());
 			}
 			
 			/* river, show last card */
 			if(this.currentgame.status == 4) {
+				showAnnouncement(1000, 100, "River");
 				flipRiver(this.currentgame.table.cards[4].getMapping());
 			}
 			
 			/* show hands */
 			if(this.currentgame.status == 5) {
+				showAnnouncement(1000, 100, "Show hands");
 				for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
 					if(this.currentgame.currentround.players[i].seat) {
 						flipCards(
@@ -458,14 +462,17 @@ function Engine() {
 					}
 				}
 				for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
-					addTextToHistory(this.currentgame.currentround.players[i].name + " has " +
-							this.currentgame.getPlayerHand(i).value);
+					if(this.currentgame.getPlayerHand(i).strength)
+						addTextToHistory(this.currentgame.currentround.players[i].name + " has " +
+								this.currentgame.getPlayerHand(i).value);
 				}
 				this.pauseTicker(4000);
 			}
 			
 			/* collect cards */
 			if(this.currentgame.status == 6) {
+				showAnnouncement(4000, 40, this.currentgame.getWinningPlayer().player.name + 
+						" takes pot with " + this.currentgame.getWinningPlayer().hand.value);
 				addTextToHistory(this.currentgame.getWinningPlayer().player.name + 
 						" takes pot with " + this.currentgame.getWinningPlayer().hand.value);
 				playerCardsBackside();
@@ -475,7 +482,6 @@ function Engine() {
 			}
 			
 			/* show new status */
-			showAnnouncement(statushash[this.currentgame.status]);
 			
 			/* skip real play */
 			return;
@@ -485,6 +491,12 @@ function Engine() {
 		
 		/* bot */
 		if(this.currentgame.currentround.players[this.currentgame.currentround.turn].is_bot) {
+			
+			if(this.currentgame.currentround.players[this.currentgame.currentround.turn].fold) {
+				this.currentgame.currentround.turn++;
+				return;
+			}
+			
 			var displayhash = {
 				0 : 'Fold',
 				1 : 'Check',
@@ -501,6 +513,7 @@ function Engine() {
 			
 			if(!randomvalue) {
 				this.currentgame.currentround.players[this.currentgame.currentround.turn].fold = 1;
+				fadePlayer(this.currentgame.currentround.players[this.currentgame.currentround.turn].seat);
 			}
 
 		/* player */
