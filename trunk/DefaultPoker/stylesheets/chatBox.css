@@ -1,6 +1,6 @@
 @CHARSET "ISO-8859-1";
 
-textarea.chatoutput {
+#chatoutput {
 	width:210px;
 	height:270px;
 	resize: none;
@@ -24,5 +24,9 @@ textarea.chatoutput {
 	background-color: transparent;
 	border: solid 1px #808080;
 	font-family: "Courier New";
+	font-size: medium;
+	text-align: center;
+	width: 45px;
+	height: 18px;
 	color: #DDDDDD;
 }

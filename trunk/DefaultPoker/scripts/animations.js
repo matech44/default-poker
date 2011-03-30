@@ -130,6 +130,10 @@ function addTextToHistory(text) {
 		$("#stats").append(text+ "\n");
 }
 
+function addTextToChat(name, text) {
+	$("#chatoutput").append(name + ": " + text + "\n");
+}
+
 function changeOurDisplay(choice) {
 	$(document).ready(function(){
 		$("#ourdisplayimage").fadeTo(400,0.0, function(){
@@ -742,6 +746,11 @@ $(document).ready(function(){
 			window.close();
 		}
 	});
+	
+	$("#submitmsg").click(function(){ 
+		 var text = $("input#usermsg").val();
+		 addTextToChat("Sander", text)
+	 });
 	
 	$("#buttonfold").click(function(){
 		chipsToPlayers();
