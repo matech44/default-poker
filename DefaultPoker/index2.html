@@ -10,6 +10,7 @@
 <script type="text/javascript" src="scripts/hand_eval.js"></script>
 <script type="text/javascript" src="scripts/engine.js"></script>
 <script type="text/javascript" src="scripts/controller.js"></script>
+<script type="text/javascript" src="scripts/chat.js"></script>
 </head>
 
 <body onLoad="draw(); clearDealer();">
@@ -311,12 +312,12 @@ element. </canvas></div>
 
 	<div id="right-bottom">
 		<form id="message" action="">
-			<div><textarea class="chatoutput" readonly="readonly"> > po-po-poker face 
+			<div><textarea id="chatoutput" readonly="readonly"> > ChatBox > > >
 				</textarea>
 			</div>
 			<div>
 				<input type="text" id="usermsg" />
-				<input name="submitmsg" type="submit" id="submitmsg" value="Send" /></div>
+				<div id="submitmsg">Send</div> /div></div>
 		</form>
 	</div>
 </div>
