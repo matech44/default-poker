@@ -164,6 +164,10 @@ function resetMoney() {
 	$("#pot").html("0 €");
 	}
 
+function setPot(sum) {
+	$("#pot").html(sum + " €");
+}
+
 function setPlayerMoney(playerNum, sum) {
 	$("div#player"+playerNum+"> div.playerdata > div.playerdetail > div.playersum").html(sum+" €");
 }
@@ -770,7 +774,7 @@ $(document).ready(function(){
 		//flipCards(6,"clubsTwo" , "clubsNine")
 		//unDealCards(parseInt(players));
 		//resetMoney();
-		//startNewGameClicked();
+		startNewGameClicked();
 		//showAnnouncement("Preflop");
 		//playerCardsBackside();
 		//setPlayerMoney(5, "200");
