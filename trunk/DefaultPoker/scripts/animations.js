@@ -26,42 +26,80 @@
 	}
 	
 	//Before calling this make sure you have called chipsToPlayers()
+	function chipsToBet(playerNum) {
+		switch (playerNum) {
+		case 1:
+		$("#chipimageplayer1").animate({opacity: "1", left: "+=125", top: "-=110"}, 1000).fadeTo(1000,1);
+		break;
+		case 2:
+		$("#chipimageplayer2").animate({opacity: "1", left: "+=120", top: "-=10"}, 1000).fadeTo(1000,1);
+		break;
+		case 3:
+		$("#chipimageplayer3").animate({opacity: "1", left: "+=125", top: "+=80"}, 1000).fadeTo(1000,1);
+		break;
+		case 4:
+		$("#chipimageplayer4").animate({opacity: "1", left: "+=30", top: "+=105"}, 1000).fadeTo(1000,1);
+		break;
+		case 5:
+		$("#chipimageplayer5").animate({opacity: "1", left: "-=20", top: "+=105"}, 1000).fadeTo(1000,1);
+		break;
+		case 6:
+		$("#chipimageplayer6").animate({opacity: "1", left: "-=65", top: "+=90"}, 1000).fadeTo(1000,1);
+		break;
+		case 7:
+		$("#chipimageplayer7").animate({opacity: "1", left: "-=70", top: "-=10"}, 1000).fadeTo(1000,1);
+		break;
+		case 8:
+		$("#chipimageplayer8").animate({opacity: "1", left: "-=90", top: "-=110"}, 1000).fadeTo(1000,1);
+		break;
+		}
+	}
+	
+	//Before calling this make sure you have called chipsToBet() chipsToPlayers()
 	function chipsToPot(playerNum) {
 		switch (playerNum){
-
+		
 		case 1:
-		$("#chipimageplayer1").animate({opacity: "1", left: "+=310", top: "-=167"}, 1000).fadeTo(1000,0);
+		$("#chipimageplayer1").animate({opacity: "1", left: "+=180", top: "-=60"}, 1000).fadeTo(400,0);
+		$("#chipimageplayer1").animate({opacity: "0", left: "-=180", top: "+=60"}, 1);
 		break;
 		
 		case 2:
-		$("#chipimageplayer2").animate({opacity: "1", left: "+=380", top: "+=35"}, 1000).fadeTo(1000,0);
+		$("#chipimageplayer2").animate({opacity: "1", left: "+=255", top: "+=40"}, 1000).fadeTo(400,0);
+		$("#chipimageplayer2").animate({opacity: "0", left: "-=255", top: "-=40"}, 1);
+		
 		break;
 		
 		case 3:
-		$("#chipimageplayer3").animate({opacity: "1", left: "+=310", top: "+=235"}, 1000).fadeTo(1000,0);
+		$("#chipimageplayer3").animate({opacity: "1", left: "+=180", top: "+=150"}, 1000).fadeTo(400,0);
+		$("#chipimageplayer3").animate({opacity: "1", left: "-=180", top: "-=150"}, 1);
 		break;
 		
 		case 4:
-		$("#chipimageplayer4").animate({opacity: "1", left: "+=105", top: "+=265"}, 1000).fadeTo(1000,0);
+		$("#chipimageplayer4").animate({opacity: "1", left: "+=70", top: "+=155"}, 1000).fadeTo(400,0);
+		$("#chipimageplayer4").animate({opacity: "1", left: "-=70", top: "-=155"}, 1);
 		break;
 		
 		case 5:
-		$("#chipimageplayer5").animate({opacity: "1", left: "-=90", top: "+=265"}, 1000).fadeTo(1000,0);
+		$("#chipimageplayer5").animate({opacity: "1", left: "-=75", top: "+=155"}, 1000).fadeTo(400,0);
+		$("#chipimageplayer5").animate({opacity: "1", left: "+=75", top: "-=155"}, 1);
 		break;
 		
 		case 6:
-		$("#chipimageplayer6").animate({opacity: "1", left: "-=270", top: "+=235"}, 1000).fadeTo(1000,0);
+		$("#chipimageplayer6").animate({opacity: "1", left: "-=210", top: "+=140"}, 1000).fadeTo(400,0);
+		$("#chipimageplayer6").animate({opacity: "1", left: "+=210", top: "-=140"}, 1);
 		break;
 		
 		case 7:
-		$("#chipimageplayer7").animate({opacity: "1", left: "-=330", top: "+=35"}, 1000).fadeTo(1000,0);
+		$("#chipimageplayer7").animate({opacity: "1", left: "-=265", top: "+=40"}, 1000).fadeTo(400,0);
+		$("#chipimageplayer7").animate({opacity: "1", left: "+=265", top: "-=40"}, 1);
 		break;
 		
 		case 8:
-		$("#chipimageplayer8").animate({opacity: "1", left: "-=270", top: "-=167"}, 1000).fadeTo(1000,0);
-		
+		$("#chipimageplayer8").animate({opacity: "1", left: "-=185", top: "-=60"}, 1000).fadeTo(400,0);	
+		$("#chipimageplayer8").animate({opacity: "1", left: "+=185", top: "+=60"}, 1);	
+		break;
 		}
-	}
 
 function changePlayerBet(playerNum, newBet) {
 	$("#playerbet"+playerNum).html(newBet+ " €");
@@ -629,7 +667,7 @@ function flipOurCardsFront(card1, card2) {
 
 function playerCardsBackside() {
 	$(document).ready(function(){
-		for(i=1; i<21; i++) {
+		for(i=1; i<22; i++) {
 		$("#dealoutcard"+i).attr("src", "images/cardBackSide.png");
 		}
 		$("#dealourcard1").attr("src", "images/cardBackSide.png");
@@ -699,17 +737,26 @@ $(document).ready(function(){
 	});
 	
 	$("#buttonfold").click(function(){
+		chipsToPlayers();
 		
 	});
 	
 	$("#buttoncall").click(function(){
-		engine.startTicker();
+		/*engine.startTicker();
 		hidePlayerButtons(true);
-		changeOurDisplay("Call");
+		changeOurDisplay("Call");*/
 	});
 	
 	$("#buttonraise").click(function(){
-		changeOurDisplay("Raise");
+		//changeOurDisplay("Raise");
+		/*changePlayerBet(1, 200);
+		changePlayerBet(2, 200);
+		changePlayerBet(3, 200);
+		changePlayerBet(4, 200);
+		changePlayerBet(5, 200);
+		changePlayerBet(6, 200);
+		changePlayerBet(7, 200);
+		changePlayerBet(8, 200);*/
 	});
 	
 });
