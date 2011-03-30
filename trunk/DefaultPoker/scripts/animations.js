@@ -5,6 +5,12 @@
 	function fadePlayer(player) {
 		$(document).ready(function(){
 			$("#player"+player).fadeTo(1000, 0.5);
+			if(player == 8) {
+				$("#dealoutcard"+15).fadeTo(1000, 0.5);
+				$("#dealoutcard"+16).fadeTo(1000, 0.5);
+			}
+			$("#dealoutcard"+(16-(2*player))).fadeTo(1000, 0.5);
+			$("#dealoutcard"+(16-(2*player+1))).fadeTo(1000, 0.5);
 		});
 	}
 	
