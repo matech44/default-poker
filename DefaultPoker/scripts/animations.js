@@ -29,6 +29,13 @@
 		$("#chipimageplayer6").animate({opacity: "0", left: "+=690", top: "+=140"}, 1000);
 		$("#chipimageplayer7").animate({opacity: "0", left: "+=750", top: "+=340"}, 1000);
 		$("#chipimageplayer8").animate({opacity: "0", left: "+=690", top: "+=540"}, 1000);
+		$("#chipimageourplayer").animate({opacity: "0", left: "+=310", top: "+=530"}, 1000);
+	}
+	
+	function ourChipToBet() {
+		$("#chipimageourplayer").animate({opacity: "1", left: "+=105", top: "-=158"}, 1000).fadeTo(400,0);
+		$("#chipimageourplayer").animate({opacity: "1", left: "-=105", top: "+=158"}, 1);
+
 	}
 	
 	//Before calling this make sure you have called chipsToPlayers()
@@ -527,7 +534,7 @@ function changeDisplay(player, choice){
 
 function hidePlayer(player) {
 	$(document).ready(function(){
-		$("#player"+player).fadeOut(900);
+		$("#player"+player).fadeOut(900).remove();
 	});
 }
 
@@ -740,7 +747,6 @@ $(document).ready(function(){
 		//chipsToPot(4);
 		//chipsToPot(5);
 		//chipsToPot(6);
-
 	});
 	
 	$("#exitbutton").click(function(){
@@ -752,7 +758,7 @@ $(document).ready(function(){
 	
 	$("#submitmsg").click(function(){ 
 		 var text = $("input#usermsg").val();
-		 addTextToChat("Sander", text)
+		 addTextToChat("You", text)
 	 });
 	
 	$("#buttonfold").click(function(){
