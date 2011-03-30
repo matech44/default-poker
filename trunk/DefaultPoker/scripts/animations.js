@@ -602,21 +602,21 @@ function flipCards(player, card1, card2) {
 
 function flipFlop(card1, card2, card3) {
 		$(document).ready(function(){
-			$("#dealoutcard16").attr("src", "images/cards/" + card1 + ".png");
-			$("#dealoutcard17").attr("src", "images/cards/" + card2 + ".png");
-			$("#dealoutcard18").attr("src", "images/cards/" + card3 + ".png");
+			$("#dealoutcard18").attr("src", "images/cards/" + card1 + ".png");
+			$("#dealoutcard19").attr("src", "images/cards/" + card2 + ".png");
+			$("#dealoutcard20").attr("src", "images/cards/" + card3 + ".png");
 		});
 }
 
 function flipTurn(card) {
 	$(document).ready(function(){
-		$("#dealoutcard19").attr("src", "images/cards/" + card + ".png");
+		$("#dealoutcard17").attr("src", "images/cards/" + card + ".png");
 	});
 }
 
 function flipRiver(card) {
 	$(document).ready(function(){
-		$("#dealoutcard20").attr("src", "images/cards/" + card + ".png");
+		$("#dealoutcard21").attr("src", "images/cards/" + card + ".png");
 	});
 }
 
