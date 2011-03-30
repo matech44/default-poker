@@ -97,6 +97,7 @@ function Table() {
 function Round() {
 	this.players = new Array();
 	this.turn = 0;
+	this.fold = 0;
 	this.smallblind = 3;
 	this.bigblind = 6;
 
@@ -259,9 +260,10 @@ function Game() {
 		var bestplayer;
 		
 		for(var i = 0; i < this.currentround.getPlayers().length; i++) {
+			if(this.currentround.players[i].fold) continue;
+			
 			playerhand = this.currentround.getPlayers()[i].getCards().concat(this.table.getCards());
 			
-
 			this.cardsystem.setCards(playerhand);
 			
 			if(this.cardsystem.getValue().strength > strongest) {
@@ -272,6 +274,20 @@ function Game() {
 		}
 		
 		return {player : bestplayer, hand : besthand};
+	};
+	
+	/**
+	 * @returns Player with winning hand
+	 */
+	this.getPlayerHand = function(id) {
+		var playerhand;
+		var hand;
+		
+		playerhand = this.currentround.getPlayers()[id].getCards().concat(this.table.getCards());
+		this.cardsystem.setCards(playerhand);
+		hand = this.cardsystem.getValue();
+		
+		return hand;
 	};
 
 	/**
@@ -373,18 +389,32 @@ function Engine() {
 				3 : 'Turn',
 				4 : 'River',
 				5 : 'Show hands',
-				6 : this.currentgame.getWinningPlayer().player.name + ' takes pot'
+				6 : this.currentgame.getWinningPlayer().player.name +
+						' wins'
 			};
 		
 		var seatsequence = [0, 6, 5, 4, 3, 7, 2, 1, 8];
 		
 		/* first tick, set up */
 		if(!this.initialized) {
+			addTextToHistory("Starting new game...");
 			for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
 				this.currentgame.currentround.players[i].seat = seatsequence[i];
+				if(i)
+					changePlayerName(seatsequence[i], this.currentgame.currentround.players[i].name);
+			}
+			for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
+				if(!this.currentgame.currentround.players[i].is_bot) {
+					flipOurCardsFront(
+							this.currentgame.currentround.players[i].cards[0].getMapping(),
+							this.currentgame.currentround.players[i].cards[1].getMapping()
+							);
+				}
 			}
 			hidePlayers(9-this.currentgame.currentround.players.length);
+			hidePlayerButtons(true);
 			dealCards(this.currentgame.currentround.players.length-1);
+			resetMoney();
 			this.initialized = 1;
 			showAnnouncement(statushash[this.currentgame.status]);
 			
@@ -416,7 +446,7 @@ function Engine() {
 				flipRiver(this.currentgame.table.cards[4].getMapping());
 			}
 			
-			/* river, show last card */
+			/* show hands */
 			if(this.currentgame.status == 5) {
 				for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
 					if(this.currentgame.currentround.players[i].seat) {
@@ -425,18 +455,20 @@ function Engine() {
 								this.currentgame.currentround.players[i].cards[0].getMapping(),
 								this.currentgame.currentround.players[i].cards[1].getMapping()
 								);
-					} else {
-						flipOurCardsFront(
-								this.currentgame.currentround.players[i].cards[0].getMapping(),
-								this.currentgame.currentround.players[i].cards[1].getMapping()
-								);
 					}
+				}
+				for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
+					addTextToHistory(this.currentgame.currentround.players[i].name + " has " +
+							this.currentgame.getPlayerHand(i).value);
 				}
 				this.pauseTicker(4000);
 			}
 			
-			/* river, show last card */
+			/* collect cards */
 			if(this.currentgame.status == 6) {
+				addTextToHistory(this.currentgame.getWinningPlayer().player.name + 
+						" takes pot with " + this.currentgame.getWinningPlayer().hand.value);
+				playerCardsBackside();
 				unDealCards(this.currentgame.currentround.players.length-1);
 				unDealOurCards(0);
 				this.endTicker();
@@ -453,10 +485,28 @@ function Engine() {
 		
 		/* bot */
 		if(this.currentgame.currentround.players[this.currentgame.currentround.turn].is_bot) {
+			var displayhash = {
+				0 : 'Fold',
+				1 : 'Check',
+				2 : 'Check',
+				3 : 'Check'
+			};
 			
+			var randomvalue = Math.floor(Math.random()*4);
+			
+			changeDisplay(
+					this.currentgame.currentround.players[this.currentgame.currentround.turn].seat,
+					displayhash[randomvalue]
+					);
+			
+			if(!randomvalue) {
+				this.currentgame.currentround.players[this.currentgame.currentround.turn].fold = 1;
+			}
+
 		/* player */
 		} else {
-			
+			hidePlayerButtons(false);
+			this.endTicker();
 		}
 		
 		this.currentgame.currentround.turn++;
