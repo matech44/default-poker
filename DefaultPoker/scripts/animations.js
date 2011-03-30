@@ -612,15 +612,19 @@ $(document).ready(function(){
 		//flipCards(6,"clubsTwo" , "clubsNine")
 		//unDealCards(parseInt(players));
 		//resetMoney();
-		//startNewGameClicked();
+		startNewGameClicked();
 		//showAnnouncement("Preflop");
 		//playerCardsBackside();
 		//setPlayerMoney(5, "200");
 		//addTextToHistory("Haha õnnestus");
 		//changePlayerName(6, "Olen uus");
 		//changePlayerBet(5, "300");
-		chipsToPlayers();
-		chipsToPot(6);
+		//chipsToPlayers();
+		//chipsToPot(2);
+		//chipsToPot(3);
+		//chipsToPot(4);
+		//chipsToPot(5);
+		//chipsToPot(6);
 
 	});
 	
@@ -681,27 +685,12 @@ $(document).ready(function(){
 	}
 	
 	$("#buttonfold").click(function(){
-		changeOurDisplay("Fold");
-		changeDisplay(1, "Fold");
-		changeDisplay(2, "Fold");
-		changeDisplay(3, "Fold");
-		changeDisplay(4, "Fold");
-		changeDisplay(5, "Fold");
-		changeDisplay(6, "Fold");
-		changeDisplay(7, "Fold");
-		changeDisplay(8, "Fold");
-		flipCards(1, "diamondsAce", "clubsThree");
-		flipCards(2, "diamondsAce", "clubsThree");
-		flipCards(3, "diamondsAce", "clubsThree");
-		flipCards(4, "diamondsAce", "clubsThree");
-		flipCards(5, "diamondsAce", "clubsThree");
-		flipCards(6, "diamondsAce", "clubsThree");
-		flipCards(7, "diamondsAce", "clubsThree");
-		flipCards(8, "diamondsAce", "clubsThree");
+
 	});
 	
 	$("#buttoncall").click(function(){
-		setDealer(8);
+		engine.startTicker();
+		hidePlayerButtons(true);
 		changeOurDisplay("Call");
 	});
 	
