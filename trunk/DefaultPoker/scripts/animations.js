@@ -574,7 +574,14 @@ function changeDisplay(player, choice){
 
 function hidePlayer(player) {
 	$(document).ready(function(){
-		$("#player"+player).fadeOut(900).remove();
+		$("#player"+player).fadeOut(600);
+	});
+	setTimeout('removePlayer(player)', 900);
+}
+
+function removePlayer(player) {
+	$(document).ready(function(){
+		$("#player"+player).remove();
 	});
 }
 
