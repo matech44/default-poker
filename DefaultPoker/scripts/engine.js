@@ -441,10 +441,8 @@ function Engine() {
 							);
 				}
 			}
-			this.currentgame.currentround.players[0].dealer = 1;
 			hidePlayers(9-this.currentgame.currentround.players.length);
 			hidePlayerButtons(true);
-			chipsToPlayers();
 			dealCards(this.currentgame.currentround.players.length-1);
 			
 			/* DISPLAY PLAYER CHIP AMOUNT */
@@ -454,9 +452,12 @@ function Engine() {
 			
 			this.initialized = 1;
 			showAnnouncement(1000, 100, "Preflop");
-			this.currentgame.table.bet = 10;
-			this.currentgame.currentround.players[turnsequence[1]].bet = this.currentgame.smallblind;
-			this.currentgame.currentround.players[turnsequence[2]].bet = this.currentgame.bigblind;
+			
+			this.currentgame.table.bet = this.currentgame.bigblind;
+			this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.players.length-2]].dealer = 1;
+			setDealer(turnsequence[this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.players.length-3]].seat]);
+			this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.players.length-2]].bet = this.currentgame.smallblind;
+			this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.players.length-1]].bet = this.currentgame.bigblind;
 			
 			/* skip real play */
 			return;
