@@ -22,6 +22,7 @@ function Player(name, is_bot) {
 	this.fold = 0;
 	this.bet = 0;
 	this.turn = 0;
+	this.dealer = 0;
 	this.seat;
 	this.cards = new Array();
 	
@@ -62,6 +63,7 @@ function Player(name, is_bot) {
  * @returns {Table}
  */
 function Table() {
+	this.bet = 0;
 	this.pot = 0;
 	this.cards = new Array();
 	
@@ -364,7 +366,7 @@ function Engine() {
 	 * starts progressing
 	 */
 	this.startTicker = function() {
-		this.ticker = setInterval('engine.progress()', 800);
+		this.ticker = setInterval('engine.progress()', 2000);
 	};
 	
 	/**
@@ -387,16 +389,40 @@ function Engine() {
 	 */
 	this.progress = function() {
 		
-		var seatsequence = [0, 6, 5, 4, 3, 7, 2, 1, 8];
-		var turnsequence = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+		/* 
+		 * SEAT MAPPING 
+		 */
 		
-		var foldedplayers;
+		var sequences = [0, 6, 5, 4, 3, 7, 2, 1, 8];
+		var seatsequence = new Array();
+		var tempseatsequence = new Array();
+		var turnsequence = new Array();
 		
-		for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
-			if(this.currentgame.currentround.players[i].fold) foldedplayers++;
+		for(var i = 0; i < sequences.length; i++) {
+			seatsequence.push(sequences[i]);
 		}
 		
-		/* first tick, set up */
+		for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
+			tempseatsequence.push(seatsequence[i]);
+		}
+		
+		for(var i = 0; i < tempseatsequence.length; i++) {
+			var min = 100;
+			var minindex;
+			for(var j = 0; j < tempseatsequence.length; j++) {
+				if(tempseatsequence[j] < min) {
+					min = tempseatsequence[j];
+					minindex = j;
+				}
+			}
+			turnsequence.push(minindex);
+			tempseatsequence[minindex] = 100;
+		}
+		
+		/* 
+		 * SETUP 
+		 */
+		
 		if(!this.initialized) {
 			addTextToHistory("Starting new game...");
 			for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
@@ -413,24 +439,68 @@ function Engine() {
 							);
 				}
 			}
+			this.currentgame.currentround.players[0].dealer = 1;
 			hidePlayers(9-this.currentgame.currentround.players.length);
 			hidePlayerButtons(true);
+			chipsToPlayers();
 			dealCards(this.currentgame.currentround.players.length-1);
-			resetMoney();
+			
+			/* DISPLAY PLAYER CHIP AMOUNT */
+			for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
+				setPlayerMoney(seatsequence[i], this.currentgame.currentround.players[i].chips);
+			}
+			
 			this.initialized = 1;
 			showAnnouncement(1000, 100, "Preflop");
+			this.currentgame.table.bet = 10;
+			this.currentgame.currentround.players[turnsequence[1]].bet = 5;
+			this.currentgame.currentround.players[turnsequence[2]].bet = 10;
 			
 			/* skip real play */
 			return;
 		}
 		
-		/* new round */
-		if(this.currentgame.currentround.turn == this.currentgame.currentround.players.length) {
+		/* DISPLAY PLAYER BET AMOUNT */
+		for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
+			if(!this.currentgame.currentround.players[turnsequence[i]].bet) continue;
+			changePlayerBet(
+					this.currentgame.currentround.players[turnsequence[i]].seat, 
+					this.currentgame.currentround.players[turnsequence[i]].bet
+					);
+		}
+		
+		/* 
+		 * ALL PLAYERS HAVE MADE TURN 
+		 */
+		
+		if(this.currentgame.currentround.turn >= this.currentgame.currentround.players.length) {
 			this.currentgame.startNewRound();
 			
 			/* flop, deal table cards, show first three */
 			if(this.currentgame.status == 2) {
 				showAnnouncement(1000, 100, "Flop");
+				
+				
+				/* send all chips to pot */
+				var chipssum = 0;
+				
+				for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
+					chipsToPot(this.currentgame.currentround.players[turnsequence[i]].seat);
+					chipssum += this.currentgame.currentround.players[turnsequence[i]].bet;
+					this.currentgame.currentround.players[turnsequence[i]].bet = 0;
+					changePlayerBet(
+							this.currentgame.currentround.players[turnsequence[i]].seat, 
+							""
+							);
+				}
+				
+				ourChipToPot();
+				
+				changeOurBet("");
+				
+				this.currentgame.table.bet = 0;
+				setPot(chipssum);
+				
 				dealTableCards(0);
 				flipFlop(
 						this.currentgame.table.cards[0].getMapping(), 
@@ -468,6 +538,7 @@ function Engine() {
 						addTextToHistory(this.currentgame.currentround.players[i].name + " has " +
 								this.currentgame.getPlayerHand(i).value);
 				}
+				this.currentgame.currentround.turn = this.currentgame.currentround.players.length;
 				this.pauseTicker(4000);
 			}
 			
@@ -481,50 +552,73 @@ function Engine() {
 				playerCardsBackside();
 				unDealCards(this.currentgame.currentround.players.length-1);
 				unDealOurCards(0);
+				
 				this.endTicker();
 			}
-			
-			/* show new status */
 			
 			/* skip real play */
 			return;
 		}
 		
-		/* real playing from here */
+		/* 
+		 * PLAYERS CHOOSE 
+		 */
 		
-		/* bot */
-		if(this.currentgame.currentround.players[this.currentgame.currentround.turn].is_bot) {
-			
-			if(this.currentgame.currentround.players[this.currentgame.currentround.turn].fold) {
+		/* IF PLAYER HAS FOLDED, SKIP */
+		if(this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.turn]].fold) {
+			while(this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.turn]].fold) {
 				this.currentgame.currentround.turn++;
-				return;
 			}
-			
-			var displayhash = {
-				0 : 'Fold',
-				1 : 'Check',
-				2 : 'Check',
-				3 : 'Check'
-			};
+		}
+		
+		/* BOT CHOOSES */
+		if(this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.turn]].is_bot) {
 			
 			var randomvalue = Math.floor(Math.random()*4);
 			
-			changeDisplay(
-					this.currentgame.currentround.players[this.currentgame.currentround.turn].seat,
-					displayhash[randomvalue]
-					);
-			
 			if(!randomvalue) {
-				this.currentgame.currentround.players[this.currentgame.currentround.turn].fold = 1;
-				fadePlayer(this.currentgame.currentround.players[this.currentgame.currentround.turn].seat);
+				this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.turn]].fold = 1;
+				fadePlayer(this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.turn]].seat);
+				changeDisplay(
+						this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.turn]].seat,
+						"Fold"
+						);
+			} else {
+				if(this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.turn]].bet < this.currentgame.table.bet) {
+					this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.turn]].chips -= (this.currentgame.table.bet - 
+							this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.turn]].bet);
+					this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.turn]].bet = this.currentgame.table.bet;
+					setPlayerMoney(
+							this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.turn]].seat, 
+							this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.turn]].chips
+							);
+					chipsToBet(this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.turn]].seat);
+					changePlayerBet(
+							this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.turn]].seat, 
+							this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.turn]].bet
+							);
+					changeDisplay(
+							this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.turn]].seat,
+							"Call"
+							);
+				} else {
+					changeDisplay(
+							this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.turn]].seat,
+							"Check"
+							);
+				}
 			}
 
-		/* player */
-		} else {
+		/* PLAYER CHOOSES */
+		}
+
+		if(!this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.turn]].is_bot) {
 			hidePlayerButtons(false);
 			this.endTicker();
+			return;
 		}
 		
+		/* INCREMENT TURN */
 		this.currentgame.currentround.turn++;
 	};
 }
