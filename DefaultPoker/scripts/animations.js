@@ -4,13 +4,13 @@
 
 	function fadePlayer(player) {
 		$(document).ready(function(){
-			$("#player"+player).fadeTo(1000, 0.4);
+			$("#player"+player).fadeTo(1000, 0.3);
 			if(player == 8) {
-				$("#dealoutcard"+15).fadeTo(1000, 0.4);
-				$("#dealoutcard"+16).fadeTo(1000, 0.4);
+				$("#dealoutcard"+15).fadeTo(1000, 0.3);
+				$("#dealoutcard"+16).fadeTo(1000, 0.3);
 			}
-			$("#dealoutcard"+(16-(2*player))).fadeTo(1000, 0.4);
-			$("#dealoutcard"+(16-(2*player+1))).fadeTo(1000, 0.4);
+			$("#dealoutcard"+(16-(2*player))).fadeTo(1000, 0.3);
+			$("#dealoutcard"+(16-(2*player+1))).fadeTo(1000, 0.3);
 		});
 	}
 	
@@ -152,7 +152,11 @@
 	}
 
 function changePlayerBet(playerNum, newBet) {
-	$("#playerbet"+playerNum).html(newBet+ " €");
+	$("#playerbet"+playerNum).html(newBet+ "");
+}
+
+function changeOurBet(newBet) {
+	$("#ourbet").html(newBet+ "");
 }
 
 function changePlayerName(playerNum, newName) {
@@ -161,7 +165,7 @@ function changePlayerName(playerNum, newName) {
 
 function resetMoney() {
 	$(".playersum").html("0 €");
-	$("#pot").html("0 €");
+	$("#pot").html("0");
 	}
 
 function setPot(sum) {
@@ -806,11 +810,21 @@ $(document).ready(function(){
 	 });
 	
 	$("#buttonfold").click(function(){
-		chipsToPlayers();
-		
+		engine.currentgame.currentround.players[0].fold = 1;
+		engine.startTicker();
+		hidePlayerButtons(true);
+		changeOurDisplay("Fold");
 	});
 	
 	$("#buttoncall").click(function(){
+		if(engine.currentgame.currentround.players[0].bet < engine.currentgame.table.bet) {
+			ourChipToTable();
+			engine.currentgame.currentround.players[0].bet = engine.currentgame.table.bet;
+			engine.currentgame.currentround.players[0].chips -= engine.currentgame.table.bet;
+			setOurMoney(engine.currentgame.currentround.players[0].chips);
+			changeOurBet(engine.currentgame.currentround.players[0].bet);
+		}
+		engine.currentgame.currentround.turn++;
 		engine.startTicker();
 		hidePlayerButtons(true);
 		changeOurDisplay("Call");
