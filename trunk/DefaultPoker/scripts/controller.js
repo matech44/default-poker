@@ -27,6 +27,8 @@ function pageLoaded() {
 function startNewGameClicked() {
 	engine = new Engine();
 	
+	hideMainDiv(false);
+	
 	engine.startNewGame();
 	engine.currentgame.startNewRound();
 	
