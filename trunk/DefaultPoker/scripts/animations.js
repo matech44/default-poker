@@ -852,14 +852,9 @@ function clearDealer() {
 }
 
 $(document).ready(function(){
-	changeDisplay(1,"Idle");
-	changeDisplay(2,"Idle");
-	changeDisplay(3,"Idle");
-	changeDisplay(4,"Idle");
-	changeDisplay(5,"Idle");
-	changeDisplay(6,"Idle");
-	changeDisplay(7,"Idle");
-	changeDisplay(8,"Idle");
+	for(i=1; i<9; i++) {
+		changeDisplay(i,"Idle");
+	}
 	
 	$("#newgamebutton").click(function(){
 		startNewGameClicked();
@@ -875,8 +870,8 @@ $(document).ready(function(){
 	$("#message").submit(function(event){
 		event.preventDefault();
 		var input = $("input#usermsg");
-		 addTextToChat("You", input.val());
-		 input.val('');
+		addTextToChat("You", input.val());
+		input.val('');
 	 });
 	
 	$("#buttonfold").click(function(){
