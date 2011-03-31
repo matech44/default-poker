@@ -2,18 +2,16 @@
  * 
  */	
 
-	/*function hideMainDiv(i) {
-		function hidePlayerButtons(i) {
+	function hideMainDiv(i) {
 			if (i == true) {
-				$("#ourbuttons").hide('slow', function() {
+				$("#left").hide('fast', function() {
 				  });
 			}
 			
 			if (i== false) {
-				$("#ourbuttons").show(600);	
+				$("#left").show(600);	
 			}
-		}
-	}*/
+	}
 
 	function fadePlayer(player) {
 		$(document).ready(function(){
