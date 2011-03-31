@@ -4,13 +4,21 @@
 
 	function fadePlayer(player) {
 		$(document).ready(function(){
-			$("#player"+player).fadeTo(1000, 0.3);
 			if(player == 8) {
 				$("#dealoutcard"+15).fadeTo(1000, 0.3);
 				$("#dealoutcard"+16).fadeTo(1000, 0.3);
 			}
 			$("#dealoutcard"+(16-(2*player))).fadeTo(1000, 0.3);
 			$("#dealoutcard"+(16-(2*player+1))).fadeTo(1000, 0.3);
+		});
+	}
+	
+	function fadeOurPlayer() {
+		$(document).ready(function(){
+			$("#ourplayer").fadeTo(1000, 0.3);
+			$("#dealourcard1").fadeTo(1000, 0.3);
+			$("#dealourcard2").fadeTo(1000, 0.3);
+			
 		});
 	}
 	
@@ -796,7 +804,6 @@ $(document).ready(function(){
 		//addTextToHistory("Haha õnnestus");
 		//changePlayerName(6, "Olen uus");
 		//changePlayerBet(5, "300");
-		
 	});
 	
 	$("#exitbutton").click(function(){
