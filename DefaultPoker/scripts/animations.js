@@ -2,238 +2,238 @@
  * 
  */	
 
-	function hideMainDiv(i) {
-			if (i == true) {
-				$("#left").hide("slow");
-				$("div#right > div#right-top > div#loginfo").hide("slow");
-			}
+function hideMainDiv(i) {
+		if (i == true) {
+			$("#left").hide("slow");
+			$("div#right > div#right-top > div#loginfo").hide("slow");
+		}
 			
-			if (i== false) {
-				$("#left").show(600);
-				$("div#right > div#right-top > div#loginfo").show(600);
-			}
-	}
+		if (i== false) {
+			$("#left").show(600);
+			$("div#right > div#right-top > div#loginfo").show(600);
+		}
+}
 
-	function fadePlayer(player) {
-		$(document).ready(function(){
-			if(player == 8) {
-				$("#dealoutcard"+15).fadeTo(1000, 0.3);
-				$("#dealoutcard"+16).fadeTo(1000, 0.3);
-			}
-			$("#dealoutcard"+(16-(2*player))).fadeTo(1000, 0.3);
-			$("#dealoutcard"+(16-(2*player+1))).fadeTo(1000, 0.3);
-		});
-	}
+function fadePlayer(player) {
+	$(document).ready(function(){
+		if(player == 8) {
+			$("#dealoutcard"+15).fadeTo(1000, 0.3);
+			$("#dealoutcard"+16).fadeTo(1000, 0.3);
+		}
+		$("#dealoutcard"+(16-(2*player))).fadeTo(1000, 0.3);
+		$("#dealoutcard"+(16-(2*player+1))).fadeTo(1000, 0.3);
+	});
+}
 	
-	function fadeOurPlayer() {
-		$(document).ready(function(){
-			$("#ourplayer").fadeTo(1000, 0.3);
-			$("#dealourcard1").fadeTo(1000, 0.3);
-			$("#dealourcard2").fadeTo(1000, 0.3);
+function fadeOurPlayer() {
+	$(document).ready(function(){
+		$("#ourplayer").fadeTo(1000, 0.3);
+		$("#dealourcard1").fadeTo(1000, 0.3);
+		$("#dealourcard2").fadeTo(1000, 0.3);
 			
-		});
-	}
+	});
+}
 	
-	function showPlayers() {
-		for(i=1; i<9; i++) {
-			$("#player"+i).fadeTo(1000, 1);
-		}
+function showPlayers() {
+	for(i=1; i<9; i++) {
+		$("#player"+i).fadeTo(1000, 1);
 	}
+}
 
-	function chipsToPlayers() {
-		$("#chipimageplayer1").animate({opacity: "0", left: "+=110", top: "+=540"}, 1000);
-		$("#chipimageplayer2").animate({opacity: "0", left: "+=40", top: "+=340"}, 1000);
-		$("#chipimageplayer3").animate({opacity: "0", left: "+=110", top: "+=140"}, 1000);
-		$("#chipimageplayer4").animate({opacity: "0", left: "+=315", top: "+=110"}, 1000);
-		$("#chipimageplayer5").animate({opacity: "0", left: "+=510", top: "+=110"}, 1000);
-		$("#chipimageplayer6").animate({opacity: "0", left: "+=690", top: "+=140"}, 1000);
-		$("#chipimageplayer7").animate({opacity: "0", left: "+=750", top: "+=340"}, 1000);
-		$("#chipimageplayer8").animate({opacity: "0", left: "+=690", top: "+=540"}, 1000);
-		$("#chipimageourplayer").animate({opacity: "0", left: "+=310", top: "+=530"}, 1000);
-	}
+function chipsToPlayers() {
+	$("#chipimageplayer1").animate({opacity: "0", left: "+=110", top: "+=540"}, 1000);
+	$("#chipimageplayer2").animate({opacity: "0", left: "+=40", top: "+=340"}, 1000);
+	$("#chipimageplayer3").animate({opacity: "0", left: "+=110", top: "+=140"}, 1000);
+	$("#chipimageplayer4").animate({opacity: "0", left: "+=315", top: "+=110"}, 1000);
+	$("#chipimageplayer5").animate({opacity: "0", left: "+=510", top: "+=110"}, 1000);
+	$("#chipimageplayer6").animate({opacity: "0", left: "+=690", top: "+=140"}, 1000);
+	$("#chipimageplayer7").animate({opacity: "0", left: "+=750", top: "+=340"}, 1000);
+	$("#chipimageplayer8").animate({opacity: "0", left: "+=690", top: "+=540"}, 1000);
+	$("#chipimageourplayer").animate({opacity: "0", left: "+=310", top: "+=530"}, 1000);
+}
 	
-	function ourChipToTable() {
-		$("#chipimageourplayer").animate({opacity: "1", left: "+=90", top: "-=95"}, 1000).fadeTo(1000,0);
-		$("#chipimageourplayer").animate({opacity: "0", left: "-=90", top: "+=95"}, 1);
+function ourChipToTable() {
+	$("#chipimageourplayer").animate({opacity: "1", left: "+=90", top: "-=95"}, 1000).fadeTo(1000,0);
+	$("#chipimageourplayer").animate({opacity: "0", left: "-=90", top: "+=95"}, 1);
 
-	}
+}
 	
-	function ourChipToPot() {
-		$("#chipimageourplayer").animate({opacity: "0", left: "+=90", top: "-=95"}, 1);
-		$("#chipimageourplayer").animate({opacity: "1", left: "+=15", top: "-=63"}, 500).fadeTo(300,0);
-		$("#chipimageourplayer").animate({opacity: "0", left: "-=15", top: "+=63"}, 1);
-		$("#chipimageourplayer").animate({opacity: "0", left: "-=90", top: "+=95"}, 1);
-	}
+function ourChipToPot() {
+	$("#chipimageourplayer").animate({opacity: "0", left: "+=90", top: "-=95"}, 1);
+	$("#chipimageourplayer").animate({opacity: "1", left: "+=15", top: "-=63"}, 500).fadeTo(300,0);
+	$("#chipimageourplayer").animate({opacity: "0", left: "-=15", top: "+=63"}, 1);
+	$("#chipimageourplayer").animate({opacity: "0", left: "-=90", top: "+=95"}, 1);
+}
 	
-	//Before calling this make sure you have called chipsToBet() chipsToPlayers()
-	function chipsToWinningPlayer(playerNum) {
-		switch (playerNum){
+//Before calling this make sure you have called chipsToBet() chipsToPlayers()
+function chipsToWinningPlayer(playerNum) {
+	switch (playerNum){
 		
-		case 1:
-			$("#chipimageplayer1").animate({opacity: "0", left: "+=125", top: "-=110"}, 1);
-			$("#chipimageplayer1").animate({opacity: "0", left: "+=180", top: "-=60"}, 1);
-			$("#chipimageplayer1").animate({opacity: "1", left: "-=180", top: "+=60"}, 500).fadeTo(300,0);
-			$("#chipimageplayer1").animate({opacity: "0", left: "-=125", top: "+=110"}, 1);
-			break;
+	case 1:
+		$("#chipimageplayer1").animate({opacity: "0", left: "+=125", top: "-=110"}, 1);
+		$("#chipimageplayer1").animate({opacity: "0", left: "+=180", top: "-=60"}, 1);
+		$("#chipimageplayer1").animate({opacity: "1", left: "-=180", top: "+=60"}, 500).fadeTo(300,0);
+		$("#chipimageplayer1").animate({opacity: "0", left: "-=125", top: "+=110"}, 1);
+		break;
 		
-		case 2:
-			$("#chipimageplayer2").animate({opacity: "0", left: "+=120", top: "-=10"}, 1);
-			$("#chipimageplayer2").animate({opacity: "1", left: "+=255", top: "+=40"}, 1);
-			$("#chipimageplayer2").animate({opacity: "1", left: "-=255", top: "-=40"}, 500).fadeTo(300,0);
-			$("#chipimageplayer2").animate({opacity: "0", left: "-=120", top: "+=10"}, 1);
-			break;
+	case 2:
+		$("#chipimageplayer2").animate({opacity: "0", left: "+=120", top: "-=10"}, 1);
+		$("#chipimageplayer2").animate({opacity: "1", left: "+=255", top: "+=40"}, 1);
+		$("#chipimageplayer2").animate({opacity: "1", left: "-=255", top: "-=40"}, 500).fadeTo(300,0);
+		$("#chipimageplayer2").animate({opacity: "0", left: "-=120", top: "+=10"}, 1);
+		break;
 		
-		case 3:
-			$("#chipimageplayer3").animate({opacity: "0", left: "+=125", top: "+=80"}, 1);
-			$("#chipimageplayer3").animate({opacity: "1", left: "+=180", top: "+=150"}, 1);
-			$("#chipimageplayer3").animate({opacity: "1", left: "-=180", top: "-=150"}, 500).fadeTo(300,0);
-			$("#chipimageplayer3").animate({opacity: "0", left: "-=125", top: "-=80"}, 1);
-			break;
+	case 3:
+		$("#chipimageplayer3").animate({opacity: "0", left: "+=125", top: "+=80"}, 1);
+		$("#chipimageplayer3").animate({opacity: "1", left: "+=180", top: "+=150"}, 1);
+		$("#chipimageplayer3").animate({opacity: "1", left: "-=180", top: "-=150"}, 500).fadeTo(300,0);
+		$("#chipimageplayer3").animate({opacity: "0", left: "-=125", top: "-=80"}, 1);
+		break;
 		
-		case 4:
-			$("#chipimageplayer4").animate({opacity: "0", left: "+=30", top: "+=105"}, 1);
-			$("#chipimageplayer4").animate({opacity: "1", left: "+=70", top: "+=155"}, 1);
-			$("#chipimageplayer4").animate({opacity: "1", left: "-=70", top: "-=155"}, 500).fadeTo(300,0);
-			$("#chipimageplayer4").animate({opacity: "0", left: "-=30", top: "-=105"}, 1);
-			break;
+	case 4:
+		$("#chipimageplayer4").animate({opacity: "0", left: "+=30", top: "+=105"}, 1);
+		$("#chipimageplayer4").animate({opacity: "1", left: "+=70", top: "+=155"}, 1);
+		$("#chipimageplayer4").animate({opacity: "1", left: "-=70", top: "-=155"}, 500).fadeTo(300,0);
+		$("#chipimageplayer4").animate({opacity: "0", left: "-=30", top: "-=105"}, 1);
+		break;
 		
-		case 5:
-			$("#chipimageplayer5").animate({opacity: "0", left: "-=20", top: "+=105"}, 1);
-			$("#chipimageplayer5").animate({opacity: "1", left: "-=75", top: "+=155"}, 1);
-			$("#chipimageplayer5").animate({opacity: "1", left: "+=75", top: "-=155"}, 500).fadeTo(300,0);
-			$("#chipimageplayer5").animate({opacity: "0", left: "+=20", top: "-=105"}, 1);
-			break;
+	case 5:
+		$("#chipimageplayer5").animate({opacity: "0", left: "-=20", top: "+=105"}, 1);
+		$("#chipimageplayer5").animate({opacity: "1", left: "-=75", top: "+=155"}, 1);
+		$("#chipimageplayer5").animate({opacity: "1", left: "+=75", top: "-=155"}, 500).fadeTo(300,0);
+		$("#chipimageplayer5").animate({opacity: "0", left: "+=20", top: "-=105"}, 1);
+		break;
 		
-		case 6:
-			$("#chipimageplayer6").animate({opacity: "0", left: "-=65", top: "+=90"}, 1);
-			$("#chipimageplayer6").animate({opacity: "1", left: "-=210", top: "+=140"}, 1);
-			$("#chipimageplayer6").animate({opacity: "1", left: "+=210", top: "-=140"}, 500).fadeTo(300,0);
-			$("#chipimageplayer6").animate({opacity: "0", left: "+=65", top: "-=90"}, 1);
-			break;
+	case 6:
+		$("#chipimageplayer6").animate({opacity: "0", left: "-=65", top: "+=90"}, 1);
+		$("#chipimageplayer6").animate({opacity: "1", left: "-=210", top: "+=140"}, 1);
+		$("#chipimageplayer6").animate({opacity: "1", left: "+=210", top: "-=140"}, 500).fadeTo(300,0);
+		$("#chipimageplayer6").animate({opacity: "0", left: "+=65", top: "-=90"}, 1);
+		break;
 		
-		case 7:
-			$("#chipimageplayer7").animate({opacity: "0", left: "-=70", top: "-=10"}, 1);
-			$("#chipimageplayer7").animate({opacity: "1", left: "-=265", top: "+=40"}, 1);
-			$("#chipimageplayer7").animate({opacity: "1", left: "+=265", top: "-=40"}, 500).fadeTo(300,0);
-			$("#chipimageplayer7").animate({opacity: "0", left: "+=70", top: "+=10"}, 1);
-			break;
+	case 7:
+		$("#chipimageplayer7").animate({opacity: "0", left: "-=70", top: "-=10"}, 1);
+		$("#chipimageplayer7").animate({opacity: "1", left: "-=265", top: "+=40"}, 1);
+		$("#chipimageplayer7").animate({opacity: "1", left: "+=265", top: "-=40"}, 500).fadeTo(300,0);
+		$("#chipimageplayer7").animate({opacity: "0", left: "+=70", top: "+=10"}, 1);
+		break;
 		
-		case 8:
-			$("#chipimageplayer8").animate({opacity: "0", left: "-=90", top: "-=110"}, 1);
-			$("#chipimageplayer8").animate({opacity: "1", left: "-=185", top: "-=60"}, 1);
-			$("#chipimageplayer8").animate({opacity: "1", left: "+=185", top: "+=60"}, 500).fadeTo(300,0);	
-			$("#chipimageplayer8").animate({opacity: "0", left: "+=90", top: "+=110"}, 1);
-			break;
-		}
+	case 8:
+		$("#chipimageplayer8").animate({opacity: "0", left: "-=90", top: "-=110"}, 1);
+		$("#chipimageplayer8").animate({opacity: "1", left: "-=185", top: "-=60"}, 1);
+		$("#chipimageplayer8").animate({opacity: "1", left: "+=185", top: "+=60"}, 500).fadeTo(300,0);	
+		$("#chipimageplayer8").animate({opacity: "0", left: "+=90", top: "+=110"}, 1);
+		break;
 	}
+}
 	
-	//Before calling this make sure you have called chipsToPlayers()
-	function chipsToBet(playerNum) {
-		switch (playerNum) {
+//Before calling this make sure you have called chipsToPlayers()
+function chipsToBet(playerNum) {
+	switch (playerNum) {
 		
-		case 1:
-			$("#chipimageplayer1").animate({opacity: "1", left: "+=125", top: "-=110"}, 1000).fadeTo(1000,0);
-			$("#chipimageplayer1").animate({opacity: "0", left: "-=125", top: "+=110"}, 1);
-			break;
+	case 1:
+		$("#chipimageplayer1").animate({opacity: "1", left: "+=125", top: "-=110"}, 1000).fadeTo(1000,0);
+		$("#chipimageplayer1").animate({opacity: "0", left: "-=125", top: "+=110"}, 1);
+		break;
 			
-		case 2:
-			$("#chipimageplayer2").animate({opacity: "1", left: "+=120", top: "-=10"}, 1000).fadeTo(1000,0);
-			$("#chipimageplayer2").animate({opacity: "0", left: "-=120", top: "+=10"}, 1);
-			break;
+	case 2:
+		$("#chipimageplayer2").animate({opacity: "1", left: "+=120", top: "-=10"}, 1000).fadeTo(1000,0);
+		$("#chipimageplayer2").animate({opacity: "0", left: "-=120", top: "+=10"}, 1);
+		break;
 		
-		case 3:
-			$("#chipimageplayer3").animate({opacity: "1", left: "+=125", top: "+=80"}, 1000).fadeTo(1000,0);
-			$("#chipimageplayer3").animate({opacity: "0", left: "-=125", top: "-=80"}, 1);
-			break;
+	case 3:
+		$("#chipimageplayer3").animate({opacity: "1", left: "+=125", top: "+=80"}, 1000).fadeTo(1000,0);
+		$("#chipimageplayer3").animate({opacity: "0", left: "-=125", top: "-=80"}, 1);
+		break;
 		
-		case 4:
-			$("#chipimageplayer4").animate({opacity: "1", left: "+=30", top: "+=105"}, 1000).fadeTo(1000,0);
-			$("#chipimageplayer4").animate({opacity: "0", left: "-=30", top: "-=105"}, 1);
-			break;
+	case 4:
+		$("#chipimageplayer4").animate({opacity: "1", left: "+=30", top: "+=105"}, 1000).fadeTo(1000,0);
+		$("#chipimageplayer4").animate({opacity: "0", left: "-=30", top: "-=105"}, 1);
+		break;
 		
-		case 5:
-			$("#chipimageplayer5").animate({opacity: "1", left: "-=20", top: "+=105"}, 1000).fadeTo(1000,0);
-			$("#chipimageplayer5").animate({opacity: "0", left: "+=20", top: "-=105"}, 1);
-			break;
+	case 5:
+		$("#chipimageplayer5").animate({opacity: "1", left: "-=20", top: "+=105"}, 1000).fadeTo(1000,0);
+		$("#chipimageplayer5").animate({opacity: "0", left: "+=20", top: "-=105"}, 1);
+		break;
 		
-		case 6:
-			$("#chipimageplayer6").animate({opacity: "1", left: "-=65", top: "+=90"}, 1000).fadeTo(1000,0);
-			$("#chipimageplayer6").animate({opacity: "0", left: "+=65", top: "-=90"}, 1);
-			break;
+	case 6:
+		$("#chipimageplayer6").animate({opacity: "1", left: "-=65", top: "+=90"}, 1000).fadeTo(1000,0);
+		$("#chipimageplayer6").animate({opacity: "0", left: "+=65", top: "-=90"}, 1);
+		break;
 		
-		case 7:
-			$("#chipimageplayer7").animate({opacity: "1", left: "-=70", top: "-=10"}, 1000).fadeTo(1000,0);
-			$("#chipimageplayer7").animate({opacity: "0", left: "+=70", top: "+=10"}, 1);
-			break;
+	case 7:
+		$("#chipimageplayer7").animate({opacity: "1", left: "-=70", top: "-=10"}, 1000).fadeTo(1000,0);
+		$("#chipimageplayer7").animate({opacity: "0", left: "+=70", top: "+=10"}, 1);
+		break;
 		
-		case 8:
-			$("#chipimageplayer8").animate({opacity: "1", left: "-=90", top: "-=110"}, 1000).fadeTo(1000,0);
-			$("#chipimageplayer8").animate({opacity: "0", left: "+=90", top: "+=110"}, 1);
-			break;
-		}
+	case 8:
+		$("#chipimageplayer8").animate({opacity: "1", left: "-=90", top: "-=110"}, 1000).fadeTo(1000,0);
+		$("#chipimageplayer8").animate({opacity: "0", left: "+=90", top: "+=110"}, 1);
+		break;
 	}
+}
 	
-	//Before calling this make sure you have called chipsToBet() chipsToPlayers()
-	function chipsToPot(playerNum) {
-		switch (playerNum){
+//Before calling this make sure you have called chipsToBet() chipsToPlayers()
+function chipsToPot(playerNum) {
+	switch (playerNum){
 		
-		case 1:
-			$("#chipimageplayer1").animate({opacity: "0", left: "+=125", top: "-=110"}, 1);
-			$("#chipimageplayer1").animate({opacity: "1", left: "+=180", top: "-=60"}, 500).fadeTo(300,1);
-			$("#chipimageplayer1").animate({opacity: "1", left: "-=180", top: "+=60"}, 1);
-			$("#chipimageplayer1").animate({opacity: "0", left: "-=125", top: "+=110"}, 1);
-			break;
+	case 1:
+		$("#chipimageplayer1").animate({opacity: "0", left: "+=125", top: "-=110"}, 1);
+		$("#chipimageplayer1").animate({opacity: "1", left: "+=180", top: "-=60"}, 500).fadeTo(300,1);
+		$("#chipimageplayer1").animate({opacity: "1", left: "-=180", top: "+=60"}, 1);
+		$("#chipimageplayer1").animate({opacity: "0", left: "-=125", top: "+=110"}, 1);
+		break;
 		
-		case 2:
-			$("#chipimageplayer2").animate({opacity: "0", left: "+=120", top: "-=10"}, 1);
-			$("#chipimageplayer2").animate({opacity: "1", left: "+=255", top: "+=40"}, 500).fadeTo(300,0);
-			$("#chipimageplayer2").animate({opacity: "1", left: "-=255", top: "-=40"}, 1);
-			$("#chipimageplayer2").animate({opacity: "0", left: "-=120", top: "+=10"}, 1);
-			break;
+	case 2:
+		$("#chipimageplayer2").animate({opacity: "0", left: "+=120", top: "-=10"}, 1);
+		$("#chipimageplayer2").animate({opacity: "1", left: "+=255", top: "+=40"}, 500).fadeTo(300,0);
+		$("#chipimageplayer2").animate({opacity: "1", left: "-=255", top: "-=40"}, 1);
+		$("#chipimageplayer2").animate({opacity: "0", left: "-=120", top: "+=10"}, 1);
+		break;
 		
-		case 3:
-			$("#chipimageplayer3").animate({opacity: "0", left: "+=125", top: "+=80"}, 1);
-			$("#chipimageplayer3").animate({opacity: "1", left: "+=180", top: "+=150"}, 500).fadeTo(300,0);
-			$("#chipimageplayer3").animate({opacity: "1", left: "-=180", top: "-=150"}, 1);
-			$("#chipimageplayer3").animate({opacity: "0", left: "-=125", top: "-=80"}, 1);
-			break;
+	case 3:
+		$("#chipimageplayer3").animate({opacity: "0", left: "+=125", top: "+=80"}, 1);
+		$("#chipimageplayer3").animate({opacity: "1", left: "+=180", top: "+=150"}, 500).fadeTo(300,0);
+		$("#chipimageplayer3").animate({opacity: "1", left: "-=180", top: "-=150"}, 1);
+		$("#chipimageplayer3").animate({opacity: "0", left: "-=125", top: "-=80"}, 1);
+		break;
 		
-		case 4:
-			$("#chipimageplayer4").animate({opacity: "0", left: "+=30", top: "+=105"}, 1);
-			$("#chipimageplayer4").animate({opacity: "1", left: "+=70", top: "+=155"}, 500).fadeTo(300,0);
-			$("#chipimageplayer4").animate({opacity: "1", left: "-=70", top: "-=155"}, 1);
-			$("#chipimageplayer4").animate({opacity: "0", left: "-=30", top: "-=105"}, 1);
-			break;
+	case 4:
+		$("#chipimageplayer4").animate({opacity: "0", left: "+=30", top: "+=105"}, 1);
+		$("#chipimageplayer4").animate({opacity: "1", left: "+=70", top: "+=155"}, 500).fadeTo(300,0);
+		$("#chipimageplayer4").animate({opacity: "1", left: "-=70", top: "-=155"}, 1);
+		$("#chipimageplayer4").animate({opacity: "0", left: "-=30", top: "-=105"}, 1);
+		break;
 		
-		case 5:
-			$("#chipimageplayer5").animate({opacity: "0", left: "-=20", top: "+=105"}, 1);
-			$("#chipimageplayer5").animate({opacity: "1", left: "-=75", top: "+=155"}, 500).fadeTo(300,0);
-			$("#chipimageplayer5").animate({opacity: "1", left: "+=75", top: "-=155"}, 1);
-			$("#chipimageplayer5").animate({opacity: "0", left: "+=20", top: "-=105"}, 1);
-			break;
+	case 5:
+		$("#chipimageplayer5").animate({opacity: "0", left: "-=20", top: "+=105"}, 1);
+		$("#chipimageplayer5").animate({opacity: "1", left: "-=75", top: "+=155"}, 500).fadeTo(300,0);
+		$("#chipimageplayer5").animate({opacity: "1", left: "+=75", top: "-=155"}, 1);
+		$("#chipimageplayer5").animate({opacity: "0", left: "+=20", top: "-=105"}, 1);
+		break;
 		
-		case 6:
-			$("#chipimageplayer6").animate({opacity: "0", left: "-=65", top: "+=90"}, 1);
-			$("#chipimageplayer6").animate({opacity: "1", left: "-=210", top: "+=140"}, 500).fadeTo(300,0);
-			$("#chipimageplayer6").animate({opacity: "1", left: "+=210", top: "-=140"}, 1);
-			$("#chipimageplayer6").animate({opacity: "0", left: "+=65", top: "-=90"}, 1);
-			break;
+	case 6:
+		$("#chipimageplayer6").animate({opacity: "0", left: "-=65", top: "+=90"}, 1);
+		$("#chipimageplayer6").animate({opacity: "1", left: "-=210", top: "+=140"}, 500).fadeTo(300,0);
+		$("#chipimageplayer6").animate({opacity: "1", left: "+=210", top: "-=140"}, 1);
+		$("#chipimageplayer6").animate({opacity: "0", left: "+=65", top: "-=90"}, 1);
+		break;
 		
-		case 7:
-			$("#chipimageplayer7").animate({opacity: "0", left: "-=70", top: "-=10"}, 1);
-			$("#chipimageplayer7").animate({opacity: "1", left: "-=265", top: "+=40"}, 500).fadeTo(300,0);
-			$("#chipimageplayer7").animate({opacity: "1", left: "+=265", top: "-=40"}, 1);
-			$("#chipimageplayer7").animate({opacity: "0", left: "+=70", top: "+=10"}, 1);
-			break;
+	case 7:
+		$("#chipimageplayer7").animate({opacity: "0", left: "-=70", top: "-=10"}, 1);
+		$("#chipimageplayer7").animate({opacity: "1", left: "-=265", top: "+=40"}, 500).fadeTo(300,0);
+		$("#chipimageplayer7").animate({opacity: "1", left: "+=265", top: "-=40"}, 1);
+		$("#chipimageplayer7").animate({opacity: "0", left: "+=70", top: "+=10"}, 1);
+		break;
 		
-		case 8:
-			$("#chipimageplayer8").animate({opacity: "0", left: "-=90", top: "-=110"}, 1);
-			$("#chipimageplayer8").animate({opacity: "1", left: "-=185", top: "-=60"}, 500).fadeTo(300,0);	
-			$("#chipimageplayer8").animate({opacity: "1", left: "+=185", top: "+=60"}, 1);
-			$("#chipimageplayer8").animate({opacity: "0", left: "+=90", top: "+=110"}, 1);
-			break;
-		}
+	case 8:
+		$("#chipimageplayer8").animate({opacity: "0", left: "-=90", top: "-=110"}, 1);
+		$("#chipimageplayer8").animate({opacity: "1", left: "-=185", top: "-=60"}, 500).fadeTo(300,0);	
+		$("#chipimageplayer8").animate({opacity: "1", left: "+=185", top: "+=60"}, 1);
+		$("#chipimageplayer8").animate({opacity: "0", left: "+=90", top: "+=110"}, 1);
+		break;
 	}
+}
 
 function changePlayerBet(playerNum, newBet) {
 	$("#playerbet"+playerNum).html(newBet+ "");
