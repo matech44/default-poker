@@ -368,7 +368,7 @@ function Engine() {
 	 * starts progressing
 	 */
 	this.startTicker = function() {
-		this.ticker = setInterval('engine.progress()', 2000);
+		this.ticker = setInterval('engine.progress()', 1200);
 	};
 	
 	/**
@@ -603,7 +603,19 @@ function Engine() {
 			
 			/* collect cards */
 			if(this.currentgame.status == 6) {
-				showPlayers();
+				
+				/* chips to winning player */
+				for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
+					if(this.currentgame.currentround.players[i].name == this.currentgame.getWinningPlayer().player.name) {
+						this.currentgame.currentround.players[i].chips += this.currentgame.table.pot;
+						setPlayerMoney(turnsequence[this.currentgame.currentround.players[i].turn], this.currentgame.currentround.players[i].chips);
+					}
+				}
+				
+				this.currentgame.table.pot = 0;
+				setPot(this.currentgame.table.pot);
+				
+				//showPlayers();
 				showAnnouncement(4000, 40, this.currentgame.getWinningPlayer().player.name + 
 						" takes pot with " + this.currentgame.getWinningPlayer().hand.value);
 				addTextToHistory(this.currentgame.getWinningPlayer().player.name + 
@@ -633,7 +645,7 @@ function Engine() {
 		/* BOT CHOOSES */
 		if(this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.turn]].is_bot) {
 			
-			var randomvalue = Math.floor(Math.random()*4);
+			var randomvalue = Math.floor(Math.random()*6);
 			
 			if(!randomvalue) {
 				this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.turn]].fold = 1;

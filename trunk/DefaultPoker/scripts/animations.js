@@ -884,25 +884,37 @@ $(document).ready(function(){
 	$("#buttonfold").click(function(){
 		engine.currentgame.currentround.players[0].fold = 1;
 		engine.startTicker();
+		fadeOurPlayer();
 		hidePlayerButtons(true);
 		changeOurDisplay("Fold");
 	});
 	
 	$("#buttoncall").click(function(){
+		var display = "Check";
 		if(engine.currentgame.currentround.players[0].bet < engine.currentgame.table.bet) {
 			ourChipToTable();
 			engine.currentgame.currentround.players[0].bet = engine.currentgame.table.bet;
 			engine.currentgame.currentround.players[0].chips -= engine.currentgame.table.bet;
 			setOurMoney(engine.currentgame.currentround.players[0].chips);
 			changeOurBet(engine.currentgame.currentround.players[0].bet);
+			display = "Call";
 		}
 		engine.currentgame.currentround.turn++;
 		engine.startTicker();
 		hidePlayerButtons(true);
-		changeOurDisplay("Call");
+		changeOurDisplay(display);
 	});
 	
 	$("#buttonraise").click(function(){
+		engine.currentgame.table.bet = engine.currentgame.bigblind;
+		engine.currentgame.currentround.players[0].chips -= engine.currentgame.table.bet;
+		engine.currentgame.currentround.players[0].bet = engine.currentgame.bigblind;
+		setOurMoney(engine.currentgame.currentround.players[0].chips);
+		changeOurBet(engine.currentgame.currentround.players[0].bet);
+		engine.currentgame.currentround.turn++;
+		engine.startTicker();
+		ourChipToTable();
+		hidePlayerButtons(true);
 		changeOurDisplay("Raise");
 	});
 	
