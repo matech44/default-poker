@@ -4,10 +4,8 @@
 
 	function hideMainDiv(i) {
 			if (i == true) {
-				$("#left").hide('fast', function() {
-				});
-				$("div#right > div#right-top > div#loginfo").hide('fast', function() {
-				});
+				$("#left").hide("slow");
+				$("div#right > div#right-top > div#loginfo").hide("slow");
 			}
 			
 			if (i== false) {
