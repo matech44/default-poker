@@ -33,13 +33,17 @@
 	}
 	
 	function ourChipToTable() {
-		$("#chipimageourplayer").animate({opacity: "1", left: "+=90", top: "-=95"}, 1000).fadeTo(1000,1);
+		$("#chipimageourplayer").animate({opacity: "1", left: "+=90", top: "-=95"}, 1000).fadeTo(1000,0);
 		$("#chipimageourplayer").animate({opacity: "0", left: "-=90", top: "+=95"}, 1);
 
 	}
 	
 	function ourChipToPot() {
-		$("#chipimageourplayer").animate({opacity: "1", left: "+=15", top: "-=63"}, 700).fadeTo(400,0);
+		$("#chipimageourplayer").animate({opacity: "0", left: "+=90", top: "-=95"}, 1);
+		$("#chipimageourplayer").animate({opacity: "1", left: "+=15", top: "-=63"}, 500).fadeTo(300,0);
+		$("#chipimageourplayer").animate({opacity: "0", left: "-=15", top: "+=63"}, 1);
+		$("#chipimageourplayer").animate({opacity: "0", left: "-=90", top: "+=95"}, 1);
+
 
 	}
 	
