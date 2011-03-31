@@ -30,12 +30,13 @@ function startNewGameClicked() {
 	engine.startNewGame();
 	engine.currentgame.startNewRound();
 	
-	var player1id = engine.createPlayer("Andres");
-	var player2id = engine.createBot("Ardi");
-	var player3id = engine.createBot("Sepp");
-	var player4id = engine.createBot("Jumal");
-	var player5id = engine.createBot("Jeesus");
-	var player6id = engine.createBot("Pirokunn");
+	engine.createPlayer("Andres");
+	engine.createBot("Ardi");
+	engine.createBot("Sepp");
+	engine.createBot("Jumal");
+	engine.createBot("Jeesus");
+	engine.createBot("Pirokunn");
+
 
 	
 	engine.currentgame.dealTableCards();
