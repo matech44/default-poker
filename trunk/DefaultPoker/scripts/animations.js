@@ -65,7 +65,7 @@ function ourChipToPot() {
 	$("#chipimageourplayer").animate({opacity: "0", left: "-=90", top: "+=95"}, 1);
 }
 	
-//Before calling this make sure you have called chipsToBet() chipsToPlayers()
+//Before calling this make sure you have called chipsToPlayers()
 function chipsToWinningPlayer(playerNum) {
 	switch (playerNum){
 		
