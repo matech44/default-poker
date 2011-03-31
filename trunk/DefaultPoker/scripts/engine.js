@@ -368,7 +368,7 @@ function Engine() {
 	 * starts progressing
 	 */
 	this.startTicker = function() {
-		this.ticker = setInterval('engine.progress()', 1200);
+		this.ticker = setInterval('engine.progress()', 2000);
 	};
 	
 	/**
@@ -445,11 +445,6 @@ function Engine() {
 			hidePlayerButtons(true);
 			dealCards(this.currentgame.currentround.players.length-1);
 			
-			/* DISPLAY PLAYER CHIP AMOUNT */
-			for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
-				setPlayerMoney(seatsequence[i], this.currentgame.currentround.players[i].chips);
-			}
-			
 			this.initialized = 1;
 			showAnnouncement(1000, 100, "Preflop");
 			
@@ -458,6 +453,13 @@ function Engine() {
 			setDealer(turnsequence[this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.players.length-3]].seat]);
 			this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.players.length-2]].bet = this.currentgame.smallblind;
 			this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.players.length-1]].bet = this.currentgame.bigblind;
+			this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.players.length-2]].chips -= this.currentgame.smallblind;
+			this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.players.length-1]].chips -= this.currentgame.bigblind;
+			
+			/* DISPLAY PLAYER CHIP AMOUNT */
+			for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
+				setPlayerMoney(seatsequence[i], this.currentgame.currentround.players[i].chips);
+			}
 			
 			/* skip real play */
 			return;
@@ -606,12 +608,12 @@ function Engine() {
 			if(this.currentgame.status == 6) {
 				
 				/* chips to winning player */
-				for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
+				/*for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
 					if(this.currentgame.currentround.players[i].name == this.currentgame.getWinningPlayer().player.name) {
 						this.currentgame.currentround.players[i].chips += this.currentgame.table.pot;
-						setPlayerMoney(turnsequence[this.currentgame.currentround.players[i].turn], this.currentgame.currentround.players[i].chips);
+						setPlayerMoney(this.currentgame.currentround.players[turnsequence[i]].seat, this.currentgame.currentround.players[i].chips);
 					}
-				}
+				}*/
 				
 				this.currentgame.table.pot = 0;
 				setPot(this.currentgame.table.pot);
@@ -680,9 +682,9 @@ function Engine() {
 							);
 				}
 			}
-
-		/* PLAYER CHOOSES */
 		}
+		
+		/* PLAYER CHOOSES */
 
 		if(!this.currentgame.currentround.players[turnsequence[this.currentgame.currentround.turn]].is_bot) {
 			hidePlayerButtons(false);
