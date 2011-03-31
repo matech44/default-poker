@@ -798,9 +798,11 @@ $(document).ready(function(){
 		}
 	});
 	
-	$("#submitmsg").click(function(){ 
-		 var text = $("input#usermsg").val();
-		 addTextToChat("You", text)
+	$("#message").submit(function(event){
+		event.preventDefault();
+		var input = $("input#usermsg");
+		 addTextToChat("You", input.val());
+		 input.val('');
 	 });
 	
 	$("#buttonfold").click(function(){
