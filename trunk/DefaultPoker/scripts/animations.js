@@ -788,22 +788,9 @@ $(document).ready(function(){
 	changeDisplay(6,"Idle");
 	changeDisplay(7,"Idle");
 	changeDisplay(8,"Idle");
+	
 	$("#newgamebutton").click(function(){
-		//setDealer(6);
-		//var players = showPlayerNumberDialog();
-		//hidePlayers(8-players);
-		//dealCards(parseInt(players));
-		//dealCards(2);
-		//flipCards(6,"clubsTwo" , "clubsNine")
-		//unDealCards(parseInt(players));
-		//resetMoney();
 		startNewGameClicked();
-		//showAnnouncement("Preflop");
-		//playerCardsBackside();
-		//setPlayerMoney(5, "200");
-		//addTextToHistory("Haha õnnestus");
-		//changePlayerName(6, "Olen uus");
-		//changePlayerBet(5, "300");
 	});
 	
 	$("#exitbutton").click(function(){
