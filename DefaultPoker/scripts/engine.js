@@ -188,6 +188,8 @@ function Game() {
 	this.currentround;
 	this.cardsystem = new CardSystem();
 	this.gamecards = this.cardsystem.getAllCards();
+	this.smallblind = 5;
+	this.bigblind = 10;
 
 	/*
 	 * METHODS
@@ -453,8 +455,8 @@ function Engine() {
 			this.initialized = 1;
 			showAnnouncement(1000, 100, "Preflop");
 			this.currentgame.table.bet = 10;
-			this.currentgame.currentround.players[turnsequence[1]].bet = 5;
-			this.currentgame.currentround.players[turnsequence[2]].bet = 10;
+			this.currentgame.currentround.players[turnsequence[1]].bet = this.currentgame.smallblind;
+			this.currentgame.currentround.players[turnsequence[2]].bet = this.currentgame.bigblind;
 			
 			/* skip real play */
 			return;
@@ -482,11 +484,11 @@ function Engine() {
 				
 				
 				/* send all chips to pot */
-				var chipssum = 0;
+				this.currentgame.table.pot = 0;
 				
 				for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
 					chipsToPot(this.currentgame.currentround.players[turnsequence[i]].seat);
-					chipssum += this.currentgame.currentround.players[turnsequence[i]].bet;
+					this.currentgame.table.pot += this.currentgame.currentround.players[turnsequence[i]].bet;
 					this.currentgame.currentround.players[turnsequence[i]].bet = 0;
 					changePlayerBet(
 							this.currentgame.currentround.players[turnsequence[i]].seat, 
@@ -499,7 +501,7 @@ function Engine() {
 				changeOurBet("");
 				
 				this.currentgame.table.bet = 0;
-				setPot(chipssum);
+				setPot(this.currentgame.table.pot);
 				
 				dealTableCards(0);
 				flipFlop(
@@ -512,18 +514,75 @@ function Engine() {
 			/* turn, show card */
 			if(this.currentgame.status == 3) {
 				showAnnouncement(1000, 100, "Turn");
+				
+				/* send all chips to pot */		
+				for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
+					chipsToPot(this.currentgame.currentround.players[turnsequence[i]].seat);
+					this.currentgame.table.pot += this.currentgame.currentround.players[turnsequence[i]].bet;
+					this.currentgame.currentround.players[turnsequence[i]].bet = 0;
+					changePlayerBet(
+							this.currentgame.currentround.players[turnsequence[i]].seat, 
+							""
+							);
+				}
+				
+				ourChipToPot();
+				
+				changeOurBet("");
+				
+				this.currentgame.table.bet = 0;
+				setPot(this.currentgame.table.pot);
+				
 				flipTurn(this.currentgame.table.cards[3].getMapping());
 			}
 			
 			/* river, show last card */
 			if(this.currentgame.status == 4) {
 				showAnnouncement(1000, 100, "River");
+				
+				/* send all chips to pot */		
+				for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
+					chipsToPot(this.currentgame.currentround.players[turnsequence[i]].seat);
+					this.currentgame.table.pot += this.currentgame.currentround.players[turnsequence[i]].bet;
+					this.currentgame.currentround.players[turnsequence[i]].bet = 0;
+					changePlayerBet(
+							this.currentgame.currentround.players[turnsequence[i]].seat, 
+							""
+							);
+				}
+				
+				ourChipToPot();
+				
+				changeOurBet("");
+				
+				this.currentgame.table.bet = 0;
+				setPot(this.currentgame.table.pot);
+				
 				flipRiver(this.currentgame.table.cards[4].getMapping());
 			}
 			
 			/* show hands */
 			if(this.currentgame.status == 5) {
 				showAnnouncement(1000, 100, "Show hands");
+				
+				/* send all chips to pot */		
+				for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
+					chipsToPot(this.currentgame.currentround.players[turnsequence[i]].seat);
+					this.currentgame.table.pot += this.currentgame.currentround.players[turnsequence[i]].bet;
+					this.currentgame.currentround.players[turnsequence[i]].bet = 0;
+					changePlayerBet(
+							this.currentgame.currentround.players[turnsequence[i]].seat, 
+							""
+							);
+				}
+				
+				ourChipToPot();
+				
+				changeOurBet("");
+				
+				this.currentgame.table.bet = 0;
+				setPot(this.currentgame.table.pot);
+				
 				for(var i = 0; i < this.currentgame.currentround.players.length; i++) {
 					if(this.currentgame.currentround.players[i].seat) {
 						flipCards(
