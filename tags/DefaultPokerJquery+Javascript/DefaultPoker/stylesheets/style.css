@@ -1,0 +1,693 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family: "Courier New";
+	background: url("../images/bg.png");
+	background-repeat: repeat-x;
+	background-color: #000000;
+}
+
+/**
+ * PAGE STRUCTURE FORMED BY UNIQUE DIV's 
+ */
+ 
+/* Holds everything */
+#maincontainer {
+	margin: 0px;
+	padding: 0px;
+	min-width: 1062px;
+	min-height: 650px;
+	background-color: transparent;
+}
+
+/* Left container holding table and bet buttons */
+#left {
+	position: relative;
+	width: 80%;
+	height: 100%;
+	float: left;
+	//min-width: 840px;
+}
+
+/* Poker table with other players */
+#left-top {
+	position: relative;
+	clear: both;
+	width: 100%;
+	height: 100%;
+	background-color: transparent;
+}
+
+/* Bet buttons/our player? */
+#left-bottom {
+	position: relative;
+	clear: both;
+	width: 100%;
+	height: 15%;
+	background-color: transparent;
+}
+
+/* Right container holding chat/statistics */
+#right {
+	position: relative;
+	width: 20%;
+	height: 670px;
+	float: left;
+}
+
+#right-top {
+	position: relative;
+	width: 100%;
+	height: 325px;
+	background-color: transparent;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#right-bottom {
+	position: relative;
+	width: 100%;
+	height: 325px;
+	background-color: transparent;
+}
+
+#menu {
+	position: relative;
+	height: 30px;
+	padding-bottom: 4px;
+}
+
+#table {
+	position: absolute;
+	top: 180px;
+	left: 130px;
+	height: 300px;
+	width: 600px;
+}
+
+/* Poker table image container */
+#tablecanvas {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 600px;
+}
+
+.tablelogoimage {
+	width: 250px;
+	height: 140px;
+	opacity: 0.3;
+	}
+
+#tablelogoimagediv {
+	position: absolute;
+	top: 260px;
+	left: 330px;
+	
+	}
+
+/* Poker table image */
+#tableimage {
+	width: 600px;
+}
+
+#newgamebutton {
+	background-image: url("../images/buttonNewGame.png");
+	display: block;
+	position: relative;
+	float: left;
+	margin-right: 8px;
+	width: 101px;
+	height: 30px;
+}
+#newgamebutton:hover {
+	background-image: url("../images/buttonNewGameHover.png");
+}
+#newgamebutton:active {
+	background-image: url("../images/buttonNewGamePress.png");
+}
+
+#exitbutton {
+	background-image: url("../images/buttonExit.png");
+	display: block;
+	position: relative;
+	float: left;
+	width: 101px;
+	height: 30px;
+}
+
+#exitbutton:hover {
+	background-image: url("../images/buttonExitHover.png");
+}
+
+#exitbutton:active{
+	background-image: url("../images/buttonExitPress.png");
+}
+
+#slider-1 {
+	position:absolute;
+	top: 620px;
+	left: 530px;
+	color: white;
+	}
+
+#announcement {
+	font-family: "Courier New";
+	font-size: 120px;
+	font-weight: bold;
+	color: #87AFC7;
+	z-index: 5;
+	position: relative;
+	top: 200px;
+	text-align: center;
+}
+
+/**
+ * UNIQUE PLAYER DIV's
+ */
+
+.players {
+	position: absolute;
+	height: 160px;
+	width: 130px;
+	}
+
+#player1 {
+	top:450px;
+	left:90px;
+}
+
+#player2 {
+	top: 250px;
+	left: 18px;
+}
+
+#player3 {
+	top: 50px;
+	left: 90px;
+}
+
+#player4 {
+	top: 19px;
+	left: 290px;
+}
+
+#player5 {
+	top: 19px;
+	left: 490px;
+}
+
+#player6 {
+	top: 50px;
+	left: 670px;
+}
+
+#player7 {
+	top: 250px;
+	left: 732px;
+}
+
+#player8 {
+	top: 450px;
+	left: 670px;
+}
+
+#ourplayer {
+	position: absolute;
+	height: 120px;
+	width: 300px;
+	top: 490px;
+	left: 270px;
+}
+
+/**
+ * OUR PLAYER STRUCTURE
+ */
+ 
+#ourdisplay {
+	position:relative;
+	width: 100px;
+	float: left;
+}
+
+#ourdisplayimage {
+	width: 100px;
+}
+
+#ourcards {
+	position:relative;
+	width: 200px;
+	float: left;
+}
+
+#ourcard1 {
+	position:relative;
+	left: 20px;
+	height: 120px;
+	float: left;
+}
+
+#ourcard2 {
+	position:relative;
+	height: 120px;
+	float: right;
+}
+
+.ourcardimage {
+	height: 120px;
+}
+
+/***
+* BUTTONS
+*/
+
+#ourbuttons {
+	position: absolute;
+	height:	33px;
+	width: 180px;
+	top: 613px;
+	left: 350px;
+}
+
+#buttonfold {
+	background-image: url("../images/buttonFold.png");
+	display: block;
+	position:relative;
+	float:left;
+	margin-right:5px;
+	height:33px;
+	width:55px;
+}
+
+#buttonfold:hover {
+	background-image: url("../images/buttonFoldHover.png");
+}
+
+#buttonfold:active {
+	background-image: url("../images/buttonFoldPress.png");
+}
+
+#buttoncall {
+	background-image: url("../images/buttonCall.png");
+	display: block;
+	position:relative;
+	float:left;
+	margin-right:5px;
+	height:33px;
+	width:55px;
+}
+
+#buttoncall:hover {
+	background-image: url("../images/buttonCallHover.png");
+}
+
+#buttoncall:active {
+	background-image: url("../images/buttonCallPress.png");
+}
+
+#buttoncheck {
+	background-image: url("../images/buttonCheck.png");
+	position:relative;
+	float:left;
+	margin-right:5px;
+	height:33px;
+	width:55px;
+}
+
+#buttoncheck:hover {
+	background-image: url("../images/buttonCheckHover.png");
+}
+
+#buttoncheck:active {
+	background-image: url("../images/buttonCheckPress.png");
+}
+
+#buttonbet {
+	background-image: url("../images/buttonBet.png");
+	position:relative;
+	float:left;
+	height:33px;
+	width:55px;
+}
+
+#buttonbet:hover {
+	background-image: url("../images/buttonBetHover.png");
+}
+
+#buttonbet:active {
+	background-image: url("../images/buttonBetPress.png");
+}
+
+#buttonraise {
+	background-image: url("../images/buttonRaise.png");
+	display: block;
+	position:relative;
+	float:left;
+	height:33px;
+	width:55px;
+}
+
+#buttonraise:hover {
+	background-image: url("../images/buttonRaiseHover.png");
+}
+
+#buttonraise:active {
+	background-image: url("../images/buttonRaisePress.png");
+}
+
+#checkboxSitOut {
+	position:relative;
+	}
+#checkboxNextHand {
+	position:relative;
+	}
+checkboxBigBlind {
+	position:relative;
+	}
+#checkboxSitOutDiv {
+	color: white;
+	position:relative;
+	top: 611px;
+	left: 235px;
+	font-size: 12px;
+	}
+#checkboxNextHandDiv {
+	color: white;
+	position:relative;
+	top: 592px;
+	left: 90px;
+	font-size: 12px;
+	}
+#checkboxBigBlindDiv {
+	color: white;
+	position:relative;
+	top: 590px;
+	left: 115px;
+	font-size: 12px;
+	}
+
+/**
+ * ENEMY PLAYERS STRUCTURE
+ */
+
+/* Cards container DIV on top */
+.cards {
+	height: 70px;
+	width: 100%;
+}
+
+/* First card DIV container little higher */
+.card1 {
+	position: relative;
+	top: -10px;
+	margin-left: 20px;
+	height: 70px;
+	float: left
+}
+
+/* Second card DIV container overlapping the first */
+.card2 {
+	position: relative;
+	left: -20px;
+	height: 70px;
+	float: left;
+}
+
+/* Single card IMG */
+.cardimage {
+	height: 70px;
+	opacity: 0;
+}
+
+.playerbetbox {
+	
+	}
+
+/* Player display image/money/status images DIV in the center*/
+.playerdata {
+	height: 60px;
+	width: 100%;
+}
+
+/* Player display image DIV container */
+.playerdisplay {
+	position: relative;
+	float: left;
+	height: 60px;
+	width: 50%;
+}
+
+/* Player diplay IMG */
+.playerdisplayimage {
+	width: 60px;
+}
+
+/* Player money/status images DIV container */
+.playerdetail {
+	position: relative;
+	float: right;
+	width: 50%;
+}
+
+/* Player money DIV */
+.playersum  {
+	width: 100%;
+	height: 50%;
+	text-align: center;
+	font-family: "Trebuchet MS";
+	font-size: 14;
+	//font-weight: bold;
+	color: #EAC117;
+}
+
+#oursum {
+	color: #EAC117;
+	}
+
+/* Player status images DIV container */
+.playerstatus {
+	width: 100%;
+	height: 50%;
+}
+
+/* Player status IMG */
+.playerstatusimage {
+	width: 30px;
+	float: left;
+}
+
+/* Player name DIV on the bottom */
+.playername {
+	height: 30px;
+	width: 100%;
+	text-align: center;
+	font-family: "Courier New";
+	font-size: 15;
+	//font-weight: bold;
+	color: #BBBBBB;
+}
+
+/**
+ * TABLE CARDS
+ */
+ 
+#tablecards {
+	position: absolute;
+	z-index:1;
+	width: 500px;
+	height: 100px;
+	margin: auto;
+	top: 270px;
+	left: 245px;
+}
+
+#tablecard1 {
+	position: relative;
+	height: 170px;
+	width: 70px;
+	background-size: 70px auto;
+	background-repeat: no-repeat;
+	float: left;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+#tablecard2 {
+	position: relative;
+	height: 170px;
+	width: 70px;
+	background-size: 70px auto;
+	background-repeat: no-repeat;
+	float: left;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+#tablecard3 {
+	position: relative;
+	height: 170px;
+	width: 70px;
+	background-size: 70px auto;
+	background-repeat: no-repeat;
+	float: left;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+#tablecard4 {
+	position: relative;
+	height: 170px;
+	width: 70px;
+	background-size: 70px auto;
+	background-repeat: no-repeat;
+	float: left;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+#tablecard5 {
+	position: relative;
+	height: 170px;
+	width: 70px;
+	background-size: 70px auto;
+	background-repeat: no-repeat;
+	float: left;
+	margin-left: 2px;
+	background-image:url("../images/cardBackSide.png");
+}
+
+.dealoutcardClass {
+	position: absolute;
+	height: 98px;
+	width: 70px;
+	left: 295px;
+	margin-left: 2px;
+}
+
+#dealoutcard {
+	
+	}
+
+.tablecardimage {
+	width: 70px;
+}
+
+.tablebetinfo {
+	position:absolute;
+	top:180px;
+	left:130px;
+	height:300px;
+	width:600px;
+	z-index:0;
+	color:#EAC117;
+}
+#tablebetinfo1 {
+	position:absolute;
+	height:50px;
+	width:50px;
+	top:230px;
+	left:90px;
+}
+#tablebetinfo2 {
+	position:absolute;
+	height:50px;
+	width:50px;
+	top:130px;
+	left:15px;
+}
+#tablebetinfo3 {
+	position:absolute;
+	height:50px;
+	width:50px;
+	top:20px;
+	left:90px;
+}
+#tablebetinfo4 {
+	position:absolute;
+	height:50px;
+	width:50px;
+	top:15px;
+	left:200px;
+}
+#tablebetinfo5 {
+	position:absolute;
+	height:50px;
+	width:50px;
+	top:15px;
+	left:350px;
+}
+#tablebetinfo6 {
+	position:absolute;
+	height:50px;
+	width:50px;
+	top:30px;
+	left:480px;
+}
+#tablebetinfo7 {
+	position:absolute;
+	height:50px;
+	width:50px;
+	top:130px;
+	left:535px;
+}
+#tablebetinfo8 {
+	position:absolute;
+	height:50px;
+	width:50px;
+	top:230px;
+	left:460px;
+}
+#ourbetinfo {
+	position:absolute;
+	height:50px;
+	width:50px;
+	top:240px;
+	left:260px;
+}
+
+.chipimage {
+	opacity:0;
+	position: absolute;
+	height:20px;
+	float:top;	
+}
+#playerbet1 {
+	float:bottom;
+}
+#playerbet2 {
+	float:bottom;
+}
+#playerbet3 {
+	float:bottom;
+}
+#playerbet4 {
+	float:bottom;
+}
+#playerbet5 {
+	float:bottom;
+}
+#playerbet6 {
+	float:bottom;
+}
+#playerbet7 {
+	float:bottom;
+}
+#playerbet8 {
+	float:bottom;
+}
+#outbet {
+	float:bottom;
+}
+#pot {
+	position:absolute;
+	height:30px;
+	width:150px;
+	top:190px;
+	left:220px;
+	text-align:center;
+	font-size:x-large;
+	font-weight:bold;
+	color:white;
+}
