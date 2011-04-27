@@ -1,15 +1,20 @@
 package ee.ut.defaultpoker.model;
 
 public abstract class Player {
+	private int id;
 	private String name;
-	private boolean is_bot;
 	private int chips;
 	private int bet=0;
-	private int turn=0;
-	private boolean dealer;
 	private boolean fold;
-	private int seat;
 	String[] cards;
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getId() {
+		return this.id;
+	}
 	
 	public void setCards(String[] cards) {
 		this.cards = cards;
