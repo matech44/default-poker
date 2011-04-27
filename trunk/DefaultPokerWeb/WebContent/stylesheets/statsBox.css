@@ -1,0 +1,12 @@
+@CHARSET "ISO-8859-1";
+
+textarea.statsoutput {
+	width:210px;
+	height:296px;
+	resize: none;
+	/*background-color: #505050;*/
+	background-color: transparent;
+	border: solid 1px #808080;
+	color: #EAC117;
+}
+
