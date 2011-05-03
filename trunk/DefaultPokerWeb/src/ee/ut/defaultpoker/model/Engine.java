@@ -11,7 +11,8 @@ import ee.ut.defaultpoker.evaluation.Deck;
 public class Engine {
 	private int status;
 	private int currentPlayerId;
-	List<Card> tablecards = new ArrayList<Card>();
+	/*List<Card> tablecards = new ArrayList<Card>();*/
+	Card[] tablecards = new Card[5];
 	Deck deck = new Deck();
 	private int pot;
 	HashMap<Integer, Player> players = new HashMap<Integer, Player>();
@@ -34,10 +35,10 @@ public class Engine {
 	public void setCurrentPlayerId(int currentPlayerId) {
 		this.currentPlayerId = currentPlayerId;
 	}
-	public List<Card> getTablecards() {
+	public Card[] getTablecards() {
 		return tablecards;
 	}
-	public void setTablecards(List<Card> tablecards) {
+	public void setTablecards(Card[] tablecards) {
 		this.tablecards = tablecards;
 	}
 	public Deck getDeck() {
@@ -75,6 +76,27 @@ public class Engine {
 		
 	}
 	
+	public void createNewDeck() {
+		deck = new Deck();
+	}
 	
+	public void dealPlayerCards(int numberOfPlayers) {
+		Iterator<Player> itr = players.values().iterator();
+		Card[] cards = new Card[2];
+		while (itr.hasNext()) {
+			cards[0] = deck.drawFromDeck();
+			cards[1] = deck.drawFromDeck();
+			((Player) itr.next()).setCards(cards);
+	    }
+	}
 	
+	public void dealTableCards(int numberOfPlayers) {
+		Card[] cards = new Card[5];
+		cards[0] = deck.drawFromDeck();
+		cards[1] = deck.drawFromDeck();
+		cards[2] = deck.drawFromDeck();
+		cards[3] = deck.drawFromDeck();
+		cards[4] = deck.drawFromDeck();
+		tablecards = cards;
+	}
 }
