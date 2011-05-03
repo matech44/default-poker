@@ -72,6 +72,10 @@ public class Engine {
 		return highestBet;
 	}
 	
+	public void playerCall(int id) {
+		players.get(id).setBet(getHighestBet());
+	}
+	
 	public void playerCheck(int id) {
 		
 	}
