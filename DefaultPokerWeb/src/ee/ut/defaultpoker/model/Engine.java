@@ -1,7 +1,6 @@
 package ee.ut.defaultpoker.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -16,8 +15,6 @@ public class Engine {
 	Deck deck = new Deck();
 	private int pot;
 	HashMap<Integer, Player> players = new HashMap<Integer, Player>();
-	
-	Collection c = players.values();
 	
 	public HashMap<Integer, Player> getPlayers() {
 		return players;
@@ -49,9 +46,11 @@ public class Engine {
 	public void setDeck(Deck deck) {
 		this.deck = deck;
 	}
+	
 	public int getPot() {
 		return pot;
 	}
+	
 	public void setPot(int pot) {
 		this.pot = pot;
 	}
@@ -60,12 +59,16 @@ public class Engine {
 		players.get(id).setFold(true);
 	}
 	
-	public void getHighestBet() {
-		Iterator itr = c.iterator();
-	    int highest = 0;
+	public int getHighestBet() {
+		Iterator<Player> itr = players.values().iterator();
+	    int highestBet = 0;
 		while (itr.hasNext()) {
-	    	if c
+	    	int subject = ((Player)itr.next()).getBet();
+	    	if (subject > highestBet) {
+	    		highestBet = subject;
+	    	}
 	    }
+		return highestBet;
 	}
 	
 	public void playerCheck(int id) {
