@@ -1,12 +1,12 @@
 package ee.ut.defaultpoker.model;
-
+import ee.ut.defaultpoker.evaluation.Card;
 public abstract class Player {
 	private int id;
 	private String name;
 	private int chips;
 	private int bet=0;
 	private boolean fold;
-	String[] cards;
+	private Card[] cards = new Card[2];
 	
 	
 	
@@ -26,11 +26,11 @@ public abstract class Player {
 		return this.id;
 	}
 	
-	public void setCards(String[] cards) {
+	public void setCards(Card[] cards) {
 		this.cards = cards;
 	}
 	
-	public String[] getCards() {
+	public Card[] getCards() {
 		return this.cards;
 	}
 	
