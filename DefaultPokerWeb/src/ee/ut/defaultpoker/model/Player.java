@@ -4,7 +4,7 @@ public abstract class Player {
 	private int id;
 	private String name;
 	private int chips;
-	private int bet=0;
+	private int bet;
 	private boolean fold;
 	private Card[] cards = new Card[2];
 	
