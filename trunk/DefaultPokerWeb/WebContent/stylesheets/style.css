@@ -214,6 +214,11 @@ body {
 	left: 670px;
 }
 
+#player9 {
+	top: 500px;
+	left: 470px;
+}
+/*
 #ourplayer {
 	position: absolute;
 	height: 120px;
@@ -225,7 +230,7 @@ body {
 /**
  * OUR PLAYER STRUCTURE
  */
- 
+ /*
 #ourdisplay {
 	position:relative;
 	width: 100px;
@@ -258,27 +263,45 @@ body {
 .ourcardimage {
 	height: 120px;
 }
-
+*/
 /***
 * BUTTONS
 */
-
-#ourbuttons {
+.gamepanel {
 	position: absolute;
-	height:	33px;
-	width: 180px;
-	top: 613px;
-	left: 350px;
+	height:	115px;
+	width: 225px;
+	padding: 5px 0 0 5px;
+	top: 500px;
+	left: 230px;
+	border-radius: 20px;
+	background-color: rgba(50,50,50,0.7);
+}
+
+.gamebuttons {
+	position: relative;
+	float: left;
+	height:	110px;
+	width: 97px;
+}
+
+.gameinfo {
+	width: 113px;
+	height: 100px;
+	position: relative;
+	float: left;
+	padding: 10px 0 0 10px;
+	color: white;
 }
 
 #buttonfold {
 	background-image: url("../images/buttonFold.png");
 	display: block;
 	position:relative;
+	margin-bottom: 5px;
 	float:left;
-	margin-right:5px;
 	height:33px;
-	width:55px;
+	width:97px;
 }
 
 #buttonfold:hover {
@@ -290,23 +313,42 @@ body {
 }
 
 #buttoncall {
-	background-image: url("../images/buttonCall.png");
+	background-image: url("../images/buttonCheck.png");
 	display: block;
 	position:relative;
+	margin-bottom: 5px;
 	float:left;
-	margin-right:5px;
 	height:33px;
-	width:55px;
+	width:97px;
 }
 
 #buttoncall:hover {
-	background-image: url("../images/buttonCallHover.png");
+	background-image: url("../images/buttonCheckHover.png");
 }
 
 #buttoncall:active {
-	background-image: url("../images/buttonCallPress.png");
+	background-image: url("../images/buttonCheckPress.png");
 }
 
+#buttonraise {
+	background-image: url("../images/buttonRaise.png");
+	display: block;
+	position:relative;
+	margin-bottom: 5px;
+	float:left;
+	height:33px;
+	width:97px;
+}
+
+#buttonraise:hover {
+	background-image: url("../images/buttonRaiseHover.png");
+}
+
+#buttonraise:active {
+	background-image: url("../images/buttonRaisePress.png");
+}
+
+/*
 #buttoncheck {
 	background-image: url("../images/buttonCheck.png");
 	position:relative;
@@ -339,23 +381,7 @@ body {
 #buttonbet:active {
 	background-image: url("../images/buttonBetPress.png");
 }
-
-#buttonraise {
-	background-image: url("../images/buttonRaise.png");
-	display: block;
-	position:relative;
-	float:left;
-	height:33px;
-	width:55px;
-}
-
-#buttonraise:hover {
-	background-image: url("../images/buttonRaiseHover.png");
-}
-
-#buttonraise:active {
-	background-image: url("../images/buttonRaisePress.png");
-}
+*/
 
 #checkboxSitOut {
 	position:relative;
@@ -404,7 +430,7 @@ checkboxBigBlind {
 	top: -10px;
 	margin-left: 20px;
 	height: 70px;
-	float: left
+	float: left;
 }
 
 /* Second card DIV container overlapping the first */
@@ -677,9 +703,14 @@ checkboxBigBlind {
 #playerbet8 {
 	float:bottom;
 }
+#playerbet9 {
+	float:bottom;
+}
+/*
 #outbet {
 	float:bottom;
 }
+*/
 #pot {
 	position:absolute;
 	height:30px;
