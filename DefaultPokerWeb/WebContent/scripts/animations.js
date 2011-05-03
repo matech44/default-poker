@@ -12,18 +12,93 @@ function hideMainDiv(i) {
 			$("div#right > div#right-top > div#loginfo").show(600);
 		}
 }
-
+/// OK!
 function fadePlayer(player) {
 	$(document).ready(function(){
-		if(player == 8) {
-			$("#dealoutcard"+15).fadeTo(1000, 0.3);
-			$("#dealoutcard"+16).fadeTo(1000, 0.3);
+		switch (player) {
+		case 1:
+			$("#dealoutcard1").fadeTo(1000, 0.3);
+			$("#dealoutcard2").fadeTo(1000, 0.3);
+			break;
+		case 2:
+			$("#dealoutcard3").fadeTo(1000, 0.3);
+			$("#dealoutcard4").fadeTo(1000, 0.3);
+			break;
+		case 3:
+			$("#dealoutcard5").fadeTo(1000, 0.3);
+			$("#dealoutcard6").fadeTo(1000, 0.3);
+			break;
+		case 4:
+			$("#dealoutcard7").fadeTo(1000, 0.3);
+			$("#dealoutcard8").fadeTo(1000, 0.3);
+			break;
+		case 5:
+			$("#dealoutcard9").fadeTo(1000, 0.3);
+			$("#dealoutcard10").fadeTo(1000, 0.3);
+			break;
+		case 6:
+			$("#dealoutcard11").fadeTo(1000, 0.3);
+			$("#dealoutcard12").fadeTo(1000, 0.3);
+			break;
+		case 7:
+			$("#dealoutcard13").fadeTo(1000, 0.3);
+			$("#dealoutcard14").fadeTo(1000, 0.3);
+			break;
+		case 8:
+			$("#dealoutcard15").fadeTo(1000, 0.3);
+			$("#dealoutcard16").fadeTo(1000, 0.3);
+			break;
+		case 9:
+			$("#dealoutcard17").fadeTo(1000, 0.3);
+			$("#dealoutcard18").fadeTo(1000, 0.3);
+			break;
 		}
-		$("#dealoutcard"+(16-(2*player))).fadeTo(1000, 0.3);
-		$("#dealoutcard"+(16-(2*player+1))).fadeTo(1000, 0.3);
 	});
 }
-	
+
+function fadeBackPlayer(player) {
+	$(document).ready(function(){
+		switch (player) {
+		case 1:
+			$("#dealoutcard1").fadeTo(1000, 1);
+			$("#dealoutcard2").fadeTo(1000, 1);
+			break;
+		case 2:
+			$("#dealoutcard3").fadeTo(1000, 1);
+			$("#dealoutcard4").fadeTo(1000, 1);
+			break;
+		case 3:
+			$("#dealoutcard5").fadeTo(1000, 1);
+			$("#dealoutcard6").fadeTo(1000, 1);
+			break;
+		case 4:
+			$("#dealoutcard7").fadeTo(1000, 1);
+			$("#dealoutcard8").fadeTo(1000, 1);
+			break;
+		case 5:
+			$("#dealoutcard9").fadeTo(1000, 1);
+			$("#dealoutcard10").fadeTo(1000, 1);
+			break;
+		case 6:
+			$("#dealoutcard11").fadeTo(1000, 1);
+			$("#dealoutcard12").fadeTo(1000, 1);
+			break;
+		case 7:
+			$("#dealoutcard13").fadeTo(1000, 1);
+			$("#dealoutcard14").fadeTo(1000, 1);
+			break;
+		case 8:
+			$("#dealoutcard15").fadeTo(1000, 1);
+			$("#dealoutcard16").fadeTo(1000, 1);
+			break;
+		case 9:
+			$("#dealoutcard17").fadeTo(1000, 1);
+			$("#dealoutcard18").fadeTo(1000, 1);
+			break;
+		}
+	});
+}
+/*
 function fadeOurPlayer() {
 	$(document).ready(function(){
 		$("#ourplayer").fadeTo(1000, 0.3);
@@ -31,14 +106,14 @@ function fadeOurPlayer() {
 		$("#dealourcard2").fadeTo(1000, 0.3);
 			
 	});
-}
-	
+}*/
+/// OK!
 function showPlayers() {
-	for(i=1; i<9; i++) {
+	for(i=1; i<10; i++) {
 		$("#player"+i).fadeTo(1000, 1);
 	}
 }
-
+/*
 function chipsToPlayers() {
 	$("#chipimageplayer1").animate({opacity: "0", left: "+=110", top: "+=540"}, 1000);
 	$("#chipimageplayer2").animate({opacity: "0", left: "+=40", top: "+=340"}, 1000);
@@ -48,15 +123,17 @@ function chipsToPlayers() {
 	$("#chipimageplayer6").animate({opacity: "0", left: "+=690", top: "+=140"}, 1000);
 	$("#chipimageplayer7").animate({opacity: "0", left: "+=750", top: "+=340"}, 1000);
 	$("#chipimageplayer8").animate({opacity: "0", left: "+=690", top: "+=540"}, 1000);
-	$("#chipimageourplayer").animate({opacity: "0", left: "+=310", top: "+=530"}, 1000);
+	$("#chipimageplayer9").animate({opacity: "0", left: "+=590", top: "+=540"}, 1000);
+	/*$("#chipimageourplayer").animate({opacity: "0", left: "+=310", top: "+=530"}, 1000);*//*
 }
-	
+*/
+/*
 function ourChipToTable() {
 	$("#chipimageourplayer").animate({opacity: "1", left: "+=90", top: "-=95"}, 1000).fadeTo(1000,0);
 	$("#chipimageourplayer").animate({opacity: "0", left: "-=90", top: "+=95"}, 1);
 
 }
-	
+
 function ourChipToPot() {
 	$("#chipimageourplayer").animate({opacity: "0", left: "+=90", top: "-=95"}, 1);
 	$("#chipimageourplayer").animate({opacity: "1", left: "+=15", top: "-=63"}, 500).fadeTo(300,0);
@@ -124,8 +201,9 @@ function chipsToWinningPlayer(playerNum) {
 		break;
 	}
 }
-	
+*/
 //Before calling this make sure you have called chipsToPlayers()
+/*
 function chipsToBet(playerNum) {
 	switch (playerNum) {
 	case 1:
@@ -169,8 +247,9 @@ function chipsToBet(playerNum) {
 		break;
 	}
 }
-	
+*/
 //Before calling this make sure you have called chipsToBet() chipsToPlayers()
+/*
 function chipsToPot(playerNum) {
 	switch (playerNum){
 	case 1:
@@ -231,13 +310,15 @@ function chipsToPot(playerNum) {
 	}
 }
 
+*//*Lõppeb see osa*/
+
 function changePlayerBet(playerNum, newBet) {
 	$("#playerbet"+playerNum).html(newBet+ "");
 }
-
+/*
 function changeOurBet(newBet) {
 	$("#ourbet").html(newBet+ "");
-}
+}*/
 
 function changePlayerName(playerNum, newName) {
 	$("div#player"+playerNum+"> div.playername").html(newName);
@@ -255,11 +336,11 @@ function setPot(sum) {
 function setPlayerMoney(playerNum, sum) {
 	$("div#player"+playerNum+"> div.playerdata > div.playerdetail > div.playersum").html(sum+" €");
 }
-
+/*
 function setOurMoney(sum) {
 	$("div#ourplayer > div#oursum").html(sum+" €");
 }
-
+*/
 function addTextToHistory(text) {
 		$("#stats").append(text+ "\n");
 }
@@ -267,7 +348,7 @@ function addTextToHistory(text) {
 function addTextToChat(name, text) {
 	$("#chatoutput").append(name + ": " + text + "\n");
 }
-
+/*
 function changeOurDisplay(choice) {
 	$(document).ready(function(){
 		$("#ourdisplayimage").fadeTo(400,0.0, function(){
@@ -276,92 +357,72 @@ function changeOurDisplay(choice) {
 		$("#ourdisplayimage").fadeTo(500,100.0);
 	});
 }
-
+*/
+/// TODO!
 function dealCards(n) {
 	switch (n){
 	case 1:
-		$(document).ready(function(){
-			dealOurCards(0)
-			dealCardsToPlayer6(600);
-			//dealTableCards(1200);
-		});
+		dealCardsToPlayer1(300);
 		break;
 	case 2:
-		$(document).ready(function(){
-			dealOurCards(0)
-			dealCardsToPlayer6(600);
-			dealCardsToPlayer5(1200);
-			//dealTableCards(1800);
-		});
+		dealCardsToPlayer1(300);
+		dealCardsToPlayer2(600);
 		break;
 	case 3:
-		$(document).ready(function(){
-			dealOurCards(0)
-			dealCardsToPlayer6(600);
-			dealCardsToPlayer5(1200);
-			dealCardsToPlayer4(1800);
-			//dealTableCards(2400);
-		});
+		dealCardsToPlayer1(300);
+		dealCardsToPlayer2(600);
+		dealCardsToPlayer3(800);
 		break;
 	case 4:
-		$(document).ready(function(){
-			dealOurCards(0)
-			dealCardsToPlayer6(600);
-			dealCardsToPlayer5(1200);
-			dealCardsToPlayer4(1800);
-			dealCardsToPlayer3(2400);
-			//dealTableCards(3000);
-		});
+		dealCardsToPlayer1(300);
+		dealCardsToPlayer2(600);
+		dealCardsToPlayer3(800);
+		dealCardsToPlayer4(1200);
 		break;
 	case 5:
-		$(document).ready(function(){
-			dealOurCards(0)
-			dealCardsToPlayer7(600);
-			dealCardsToPlayer6(1200);
-			dealCardsToPlayer5(1800);
-			dealCardsToPlayer4(2400);
-			dealCardsToPlayer3(3000);
-			//dealTableCards(3600);
-		});
+		dealCardsToPlayer1(300);
+		dealCardsToPlayer2(600);
+		dealCardsToPlayer3(800);
+		dealCardsToPlayer4(1200);
+		dealCardsToPlayer5(1500);
 		break;
 	case 6:
-		$(document).ready(function(){
-			dealOurCards(0)
-			dealCardsToPlayer7(600);
-			dealCardsToPlayer6(1200);
-			dealCardsToPlayer5(1800);
-			dealCardsToPlayer4(2400);
-			dealCardsToPlayer3(3000);
-			dealCardsToPlayer2(3600);
-			//dealTableCards(4200);
-		});
+		dealCardsToPlayer1(300);
+		dealCardsToPlayer2(600);
+		dealCardsToPlayer3(800);
+		dealCardsToPlayer4(1200);
+		dealCardsToPlayer5(1500);
+		dealCardsToPlayer6(1800);
 		break;
 	case 7:
-		$(document).ready(function(){
-			dealOurCards(0)
-			dealCardsToPlayer7(600);
-			dealCardsToPlayer6(1200);
-			dealCardsToPlayer5(1800);
-			dealCardsToPlayer4(2400);
-			dealCardsToPlayer3(3000);
-			dealCardsToPlayer2(3600);
-			dealCardsToPlayer1(4200);
-			//dealTableCards(4800);
-		});
+		dealCardsToPlayer1(300);
+		dealCardsToPlayer2(600);
+		dealCardsToPlayer3(800);
+		dealCardsToPlayer4(1200);
+		dealCardsToPlayer5(1500);
+		dealCardsToPlayer6(1800);
+		dealCardsToPlayer7(2100);
 		break;
 	case 8:
-		$(document).ready(function(){
-			dealOurCards(0)
-			dealCardsToPlayer8(600);
-			dealCardsToPlayer7(1200);
-			dealCardsToPlayer6(1800);
-			dealCardsToPlayer5(2400);
-			dealCardsToPlayer4(3000);
-			dealCardsToPlayer3(3600);
-			dealCardsToPlayer2(4200);
-			dealCardsToPlayer1(4800);
-			//dealTableCards(5400);
-		});
+		dealCardsToPlayer1(300);
+		dealCardsToPlayer2(600);
+		dealCardsToPlayer3(800);
+		dealCardsToPlayer4(1200);
+		dealCardsToPlayer5(1500);
+		dealCardsToPlayer6(1800);
+		dealCardsToPlayer7(2100);
+		dealCardsToPlayer8(2400);
+		break;
+	case 9:
+		dealCardsToPlayer1(300);
+		dealCardsToPlayer2(600);
+		dealCardsToPlayer3(800);
+		dealCardsToPlayer4(1200);
+		dealCardsToPlayer5(1500);
+		dealCardsToPlayer6(1800);
+		dealCardsToPlayer7(2100);
+		dealCardsToPlayer8(2400);
+		dealCardsToPlayer9(2700);
 		break;
 	}
 }
@@ -369,84 +430,71 @@ function dealCards(n) {
 function unDealCards(n) {
 	switch (n){
 	case 1:
-		$(document).ready(function(){
-			unDealCardsToPlayer6(0);
-			unDealTableCards(600);
-		});
+		unDealCardsToPlayer1(300);
 		break;
 	case 2:
-		$(document).ready(function(){
-			unDealCardsToPlayer6(0);
-			unDealCardsToPlayer5(600);
-			unDealTableCards(1200);
-		});
+		unDealCardsToPlayer1(300);
+		unDealCardsToPlayer2(600);
 		break;
 	case 3:
-		$(document).ready(function(){
-			unDealCardsToPlayer6(0);
-			unDealCardsToPlayer5(600);
-			unDealCardsToPlayer4(1200);
-			unDealTableCards(1800);
-		});
+		unDealCardsToPlayer1(300);
+		unDealCardsToPlayer2(600);
+		unDealCardsToPlayer3(900);
 		break;
 	case 4:
-		$(document).ready(function(){
-			unDealCardsToPlayer6(0);
-			unDealCardsToPlayer5(600);
-			unDealCardsToPlayer4(1200);
-			unDealCardsToPlayer3(1800);
-			unDealTableCards(2400);
-		});
+		unDealCardsToPlayer1(300);
+		unDealCardsToPlayer2(600);
+		unDealCardsToPlayer3(900);
+		unDealCardsToPlayer4(1200);
 		break;
 	case 5:
-		$(document).ready(function(){
-			unDealCardsToPlayer7(0);
-			unDealCardsToPlayer6(600);
-			unDealCardsToPlayer5(1200);
-			unDealCardsToPlayer4(1800);
-			unDealCardsToPlayer3(2400);
-			unDealTableCards(3000);
-		});
+		unDealCardsToPlayer1(300);
+		unDealCardsToPlayer2(600);
+		unDealCardsToPlayer3(900);
+		unDealCardsToPlayer4(1200);
+		unDealCardsToPlayer5(1500);
 		break;
 	case 6:
-		$(document).ready(function(){
-			unDealCardsToPlayer7(0);
-			unDealCardsToPlayer6(600);
-			unDealCardsToPlayer5(1200);
-			unDealCardsToPlayer4(1800);
-			unDealCardsToPlayer3(2400);
-			unDealCardsToPlayer2(3000);
-			unDealTableCards(3600);
-		});
+		unDealCardsToPlayer1(300);
+		unDealCardsToPlayer2(600);
+		unDealCardsToPlayer3(900);
+		unDealCardsToPlayer4(1200);
+		unDealCardsToPlayer5(1500);
+		unDealCardsToPlayer6(1800);
 		break;
 	case 7:
-		$(document).ready(function(){
-			unDealCardsToPlayer7(0);
-			unDealCardsToPlayer6(600);
-			unDealCardsToPlayer5(1200);
-			unDealCardsToPlayer4(1800);
-			unDealCardsToPlayer3(2400);
-			unDealCardsToPlayer2(3000);
-			unDealCardsToPlayer1(3600);
-			unDealTableCards(4200);
-		});
+		unDealCardsToPlayer1(300);
+		unDealCardsToPlayer2(600);
+		unDealCardsToPlayer3(900);
+		unDealCardsToPlayer4(1200);
+		unDealCardsToPlayer5(1500);
+		unDealCardsToPlayer6(1800);
+		unDealCardsToPlayer7(2100);
 		break;
 	case 8:
-		$(document).ready(function(){
-			unDealCardsToPlayer8(0);
-			unDealCardsToPlayer7(600);
-			unDealCardsToPlayer6(1200);
-			unDealCardsToPlayer5(1800);
-			unDealCardsToPlayer4(2400);
-			unDealCardsToPlayer3(3000);
-			unDealCardsToPlayer2(3600);
-			unDealCardsToPlayer1(4200);
-			unDealTableCards(4800);
-		});
+		unDealCardsToPlayer1(300);
+		unDealCardsToPlayer2(600);
+		unDealCardsToPlayer3(900);
+		unDealCardsToPlayer4(1200);
+		unDealCardsToPlayer5(1500);
+		unDealCardsToPlayer6(1800);
+		unDealCardsToPlayer7(2100);
+		unDealCardsToPlayer8(2400);
+		break;
+	case 9:
+		unDealCardsToPlayer1(300);
+		unDealCardsToPlayer2(600);
+		unDealCardsToPlayer3(900);
+		unDealCardsToPlayer4(1200);
+		unDealCardsToPlayer5(1500);
+		unDealCardsToPlayer6(1800);
+		unDealCardsToPlayer7(2100);
+		unDealCardsToPlayer8(2400);
+		unDealCardsToPlayer9(2700);
 		break;
 	}
 }
-
+/*
 function dealOurCards(n) {
 	$(document).ready(function(){
 		$("#dealourcard1").delay(n).animate({opacity: "1", left: "-=153", top: "+=219", height: "+=23", width: "+=18"}, 1000);
@@ -460,46 +508,46 @@ function unDealOurCards(n) {
 		$("#dealourcard2").delay(n+300).animate({opacity: "1", left: "+=55", top: "-=219", height: "-=23", width: "-=18"}, 1000);
 	});
 }
-
+*/
 function dealCardsToPlayer1(n) {
 	$(document).ready(function(){
-		$("#dealoutcard13").delay(n).animate({opacity: "1", left: "-=432", top: "+=171", height: "-=28", width: "-=21"}, 1000);
-		$("#dealoutcard14").delay(n+300).animate({opacity: "1", left: "-=403", top: "+=180", height: "-=28", width: "-=21"}, 1000);
+		$("#dealoutcard1").delay(n).animate({opacity: "1", left: "-=432", top: "+=171", height: "-=28", width: "-=21"}, 1000);
+		$("#dealoutcard2").delay(n+300).animate({opacity: "1", left: "-=403", top: "+=180", height: "-=28", width: "-=21"}, 1000);
 	});
 }
 
 function unDealCardsToPlayer1(n) {
 	$(document).ready(function(){
-		$("#dealoutcard13").delay(n).animate({opacity: "1", left: "+=432", top: "-=171", height: "+=28", width: "+=21"}, 1000);
-		$("#dealoutcard14").delay(n+300).animate({opacity: "1", left: "+=403", top: "-=180", height: "+=28", width: "+=21"}, 1000);
+		$("#dealoutcard1").delay(n).animate({opacity: "1", left: "+=432", top: "-=171", height: "+=28", width: "+=21"}, 1000);
+		$("#dealoutcard2").delay(n+300).animate({opacity: "1", left: "+=403", top: "-=180", height: "+=28", width: "+=21"}, 1000);
 	});
 }
 
 function dealCardsToPlayer2(n) {
 	$(document).ready(function(){
-		$("#dealoutcard11").delay(n).animate({opacity: "1", left: "-=504", top: "-=30", height: "-=28", width: "-=21"}, 1000);
-		$("#dealoutcard12").delay(n+300).animate({opacity: "1", left: "-=475", top: "-=21", height: "-=28", width: "-=21"}, 1000);
+		$("#dealoutcard3").delay(n).animate({opacity: "1", left: "-=504", top: "-=30", height: "-=28", width: "-=21"}, 1000);
+		$("#dealoutcard4").delay(n+300).animate({opacity: "1", left: "-=475", top: "-=21", height: "-=28", width: "-=21"}, 1000);
 	});
 }
 
 function unDealCardsToPlayer2(n) {
 	$(document).ready(function(){
-		$("#dealoutcard11").delay(n).animate({opacity: "1", left: "+=504", top: "+=30", height: "+=28", width: "+=21"}, 1000);
-		$("#dealoutcard12").delay(n+300).animate({opacity: "1", left: "+=475", top: "+=21", height: "+=28", width: "+=21"}, 1000);
+		$("#dealoutcard3").delay(n).animate({opacity: "1", left: "+=504", top: "+=30", height: "+=28", width: "+=21"}, 1000);
+		$("#dealoutcard4").delay(n+300).animate({opacity: "1", left: "+=475", top: "+=21", height: "+=28", width: "+=21"}, 1000);
 	});
 }
 
 function dealCardsToPlayer3(n) {
 	$(document).ready(function(){
-		$("#dealoutcard9").delay(n).animate({opacity: "1", left: "-=433", top: "-=231", height: "-=28", width: "-=21"}, 1000);
-		$("#dealoutcard10").delay(n+300).animate({opacity: "1", left: "-=403", top: "-=220", height: "-=28", width: "-=21"}, 1000);
+		$("#dealoutcard5").delay(n).animate({opacity: "1", left: "-=433", top: "-=231", height: "-=28", width: "-=21"}, 1000);
+		$("#dealoutcard6").delay(n+300).animate({opacity: "1", left: "-=403", top: "-=220", height: "-=28", width: "-=21"}, 1000);
 	});
 }
 
 function unDealCardsToPlayer3(n) {
 	$(document).ready(function(){
-		$("#dealoutcard9").delay(n).animate({opacity: "1", left: "+=433", top: "+=231", height: "+=28", width: "+=21"}, 1000);
-		$("#dealoutcard10").delay(n+300).animate({opacity: "1", left: "+=403", top: "+=220", height: "+=28", width: "+=21"}, 1000);
+		$("#dealoutcard5").delay(n).animate({opacity: "1", left: "+=433", top: "+=231", height: "+=28", width: "+=21"}, 1000);
+		$("#dealoutcard6").delay(n+300).animate({opacity: "1", left: "+=403", top: "+=220", height: "+=28", width: "+=21"}, 1000);
 	});
 }
 
@@ -519,43 +567,43 @@ function unDealCardsToPlayer4(n) {
 
 function dealCardsToPlayer5(n) {
 	$(document).ready(function(){
-		$("#dealoutcard5").delay(n).animate({opacity: "1", left: "-=32", top: "-=262", height: "-=28", width: "-=21"}, 1000);
-		$("#dealoutcard6").delay(n+300).animate({opacity: "1", left: "-=3", top: "-=250", height: "-=28", width: "-=21"}, 1000);
+		$("#dealoutcard9").delay(n).animate({opacity: "1", left: "-=32", top: "-=262", height: "-=28", width: "-=21"}, 1000);
+		$("#dealoutcard10").delay(n+300).animate({opacity: "1", left: "-=3", top: "-=250", height: "-=28", width: "-=21"}, 1000);
 	});
 }
 
 function unDealCardsToPlayer5(n) {
 	$(document).ready(function(){
-		$("#dealoutcard5").delay(n).animate({opacity: "1", left: "+=32", top: "+=262", height: "+=28", width: "+=21"}, 1000);
-		$("#dealoutcard6").delay(n+300).animate({opacity: "1", left: "+=3", top: "+=250", height: "+=28", width: "+=21"}, 1000);
+		$("#dealoutcard9").delay(n).animate({opacity: "1", left: "+=32", top: "+=262", height: "+=28", width: "+=21"}, 1000);
+		$("#dealoutcard10").delay(n+300).animate({opacity: "1", left: "+=3", top: "+=250", height: "+=28", width: "+=21"}, 1000);
 	});
 }
 
 function dealCardsToPlayer6(n) {
 	$(document).ready(function(){
-		$("#dealoutcard3").delay(n).animate({opacity: "1", left: "+=148", top: "-=230", height: "-=28", width: "-=21"}, 1000);
-		$("#dealoutcard4").delay(n+300).animate({opacity: "1", left: "+=178", top: "-=220", height: "-=28", width: "-=21"}, 1000);
+		$("#dealoutcard11").delay(n).animate({opacity: "1", left: "+=148", top: "-=230", height: "-=28", width: "-=21"}, 1000);
+		$("#dealoutcard12").delay(n+300).animate({opacity: "1", left: "+=178", top: "-=220", height: "-=28", width: "-=21"}, 1000);
 	});
 }
 
 function unDealCardsToPlayer6(n) {
 	$(document).ready(function(){
-		$("#dealoutcard3").delay(n).animate({opacity: "1", left: "-=148", top: "+=230", height: "+=28", width: "+=21"}, 1000);
-		$("#dealoutcard4").delay(n+300).animate({opacity: "1", left: "-=178", top: "+=220", height: "+=28", width: "+=21"}, 1000);
+		$("#dealoutcard11").delay(n).animate({opacity: "1", left: "-=148", top: "+=230", height: "+=28", width: "+=21"}, 1000);
+		$("#dealoutcard12").delay(n+300).animate({opacity: "1", left: "-=178", top: "+=220", height: "+=28", width: "+=21"}, 1000);
 	});
 }
 
 function dealCardsToPlayer7(n) {
 	$(document).ready(function(){
-		$("#dealoutcard1").delay(n).animate({opacity: "1", left: "+=210", top: "-=30", height: "-=28", width: "-=21"}, 1000);
-		$("#dealoutcard2").delay(n+300).animate({opacity: "1", left: "+=239", top: "-=21", height: "-=28", width: "-=21"}, 1000);
+		$("#dealoutcard13").delay(n).animate({opacity: "1", left: "+=210", top: "-=30", height: "-=28", width: "-=21"}, 1000);
+		$("#dealoutcard14").delay(n+300).animate({opacity: "1", left: "+=239", top: "-=21", height: "-=28", width: "-=21"}, 1000);
 	});
 }
 
 function unDealCardsToPlayer7(n) {
 	$(document).ready(function(){
-		$("#dealoutcard1").delay(n).animate({opacity: "1", left: "-=210", top: "+=30", height: "+=28", width: "+=21"}, 1000);
-		$("#dealoutcard2").delay(n+300).animate({opacity: "1", left: "-=239", top: "+=21", height: "+=28", width: "+=21"}, 1000);		
+		$("#dealoutcard13").delay(n).animate({opacity: "1", left: "-=210", top: "+=30", height: "+=28", width: "+=21"}, 1000);
+		$("#dealoutcard14").delay(n+300).animate({opacity: "1", left: "-=239", top: "+=21", height: "+=28", width: "+=21"}, 1000);		
 	});
 }
 
@@ -572,23 +620,37 @@ function unDealCardsToPlayer8(n) {
 		$("#dealoutcard16").delay(n+300).animate({opacity: "1", left: "-=178", top: "-=180", height: "+=28", width: "+=21"}, 1000);
 	});
 }
+/// TODO!
+function dealCardsToPlayer9(n) {
+	$(document).ready(function(){
+		$("#dealoutcard17").delay(n).animate({opacity: "1", left: "-=52", top: "+=221", height: "-=28", width: "-=21"}, 1000);
+		$("#dealoutcard18").delay(n+300).animate({opacity: "1", left: "-=22", top: "+=230", height: "-=28", width: "-=21"}, 1000);
+	});
+}
+/// TODO!
+function unDealCardsToPlayer9(n) {
+	$(document).ready(function(){
+		$("#dealoutcard17").delay(n).animate({opacity: "1", left: "+=52", top: "-=221", height: "+=28", width: "+=21"}, 1000);
+		$("#dealoutcard18").delay(n+300).animate({opacity: "1", left: "+=22", top: "-=230", height: "+=28", width: "+=21"}, 1000);
+	});
+}
 
 
 function dealTableCards(n) {
 	$(document).ready(function(){
-		$("#dealoutcard17").delay(n).animate({ left: "-=75" }, 1000);
-		$("#dealoutcard18").delay(n+300).animate({ left: "-=150" }, 1000);
-		$("#dealoutcard19").delay(n+600).animate({ left: "-=225" }, 1000);
-		$("#dealoutcard20").delay(n+900).animate({ left: "-=300" }, 1000);
+		$("#dealoutcard19").delay(n).animate({ left: "-=300" }, 1000);
+		$("#dealoutcard20").delay(n+300).animate({ left: "-=225" }, 1000);
+		$("#dealoutcard21").delay(n+600).animate({ left: "-=150" }, 1000);
+		$("#dealoutcard22").delay(n+900).animate({ left: "-=75" }, 1000);
 	});
 }
 
 function unDealTableCards(n) {
 	$(document).ready(function(){
-		$("#dealoutcard17").delay(n).animate({ left: "+=75" }, 1000);
-		$("#dealoutcard18").delay(n+300).animate({ left: "+=150" }, 1000);
-		$("#dealoutcard19").delay(n+600).animate({ left: "+=225" }, 1000);
-		$("#dealoutcard20").delay(n+900).animate({ left: "+=300" }, 1000);
+		$("#dealoutcard19").delay(n).animate({ left: "+=300" }, 1000);
+		$("#dealoutcard20").delay(n+300).animate({ left: "+=225" }, 1000);
+		$("#dealoutcard21").delay(n+600).animate({ left: "+=150" }, 1000);
+		$("#dealoutcard22").delay(n+900).animate({ left: "+=75" }, 1000);
 	});
 }
 
@@ -644,46 +706,67 @@ function hidePlayers(number) {
 	case 0:
 		break;
 	case 1:
-		hidePlayer(8);
+		hidePlayer(9);
 		break;
 	case 2:
-		hidePlayer(1);
+		hidePlayer(9);
 		hidePlayer(8);
 		break;
 	case 3:
-		hidePlayer(1);
-		hidePlayer(2);
+		hidePlayer(9);
 		hidePlayer(8);
+		hidePlayer(7);
 		break;
 	case 4:
-		hidePlayer(1);
-		hidePlayer(2);
-		hidePlayer(7);
+		hidePlayer(9);
 		hidePlayer(8);
+		hidePlayer(7);
+		hidePlayer(6);
 		break;
 	case 5:
-		hidePlayer(1);
-		hidePlayer(2);
-		hidePlayer(3);
-		hidePlayer(7);
+		hidePlayer(9);
 		hidePlayer(8);
+		hidePlayer(7);
+		hidePlayer(6);
+		hidePlayer(5);
 		break;
 	case 6:
-		hidePlayer(1);
-		hidePlayer(2);
-		hidePlayer(3);
-		hidePlayer(4);
-		hidePlayer(7);
+		hidePlayer(9);
 		hidePlayer(8);
+		hidePlayer(7);
+		hidePlayer(6);
+		hidePlayer(5);
+		hidePlayer(4);
 		break;
 	case 7:
-		hidePlayer(1);
-		hidePlayer(2);
-		hidePlayer(3);
-		hidePlayer(4);
-		hidePlayer(5);
-		hidePlayer(7);
+		hidePlayer(9);
 		hidePlayer(8);
+		hidePlayer(7);
+		hidePlayer(6);
+		hidePlayer(5);
+		hidePlayer(4);
+		hidePlayer(3);
+		break;
+	case 8:
+		hidePlayer(9);
+		hidePlayer(8);
+		hidePlayer(7);
+		hidePlayer(6);
+		hidePlayer(5);
+		hidePlayer(4);
+		hidePlayer(3);
+		hidePlayer(2);
+		break;
+	case 9:
+		hidePlayer(9);
+		hidePlayer(8);
+		hidePlayer(7);
+		hidePlayer(6);
+		hidePlayer(5);
+		hidePlayer(4);
+		hidePlayer(3);
+		hidePlayer(2);
+		hidePlayer(1);
 		break;
 	}
 }
@@ -699,20 +782,20 @@ function flipCards(player, card1, card2) {
 	switch (player){
 	case 1:
 		$(document).ready(function(){
-			$("#dealoutcard13").attr("src", "images/cards/" + card1 + ".png");
-			$("#dealoutcard14").attr("src", "images/cards/" + card2 + ".png");
+			$("#dealoutcard1").attr("src", "images/cards/" + card1 + ".png");
+			$("#dealoutcard2").attr("src", "images/cards/" + card2 + ".png");
 		});
 		break;
 	case 2:
 		$(document).ready(function(){
-			$("#dealoutcard11").attr("src", "images/cards/" + card1 + ".png");
-			$("#dealoutcard12").attr("src", "images/cards/" + card2 + ".png");
+			$("#dealoutcard3").attr("src", "images/cards/" + card1 + ".png");
+			$("#dealoutcard4").attr("src", "images/cards/" + card2 + ".png");
 		});
 		break;
 	case 3:
 		$(document).ready(function(){
-			$("#dealoutcard9").attr("src", "images/cards/" + card1 + ".png");
-			$("#dealoutcard10").attr("src", "images/cards/" + card2 + ".png");
+			$("#dealoutcard5").attr("src", "images/cards/" + card1 + ".png");
+			$("#dealoutcard6").attr("src", "images/cards/" + card2 + ".png");
 		});
 		break;
 	case 4:
@@ -723,20 +806,20 @@ function flipCards(player, card1, card2) {
 		break;
 	case 5:
 		$(document).ready(function(){
-			$("#dealoutcard5").attr("src", "images/cards/" + card1 + ".png");
-			$("#dealoutcard6").attr("src", "images/cards/" + card2 + ".png");
+			$("#dealoutcard9").attr("src", "images/cards/" + card1 + ".png");
+			$("#dealoutcard10").attr("src", "images/cards/" + card2 + ".png");
 		});
 		break;
 	case 6:
 		$(document).ready(function(){
-			$("img#dealoutcard3").attr("src", "images/cards/" + card1 + ".png");
-			$("img#dealoutcard4").attr("src", "images/cards/" + card2 + ".png");
+			$("img#dealoutcard11").attr("src", "images/cards/" + card1 + ".png");
+			$("img#dealoutcard12").attr("src", "images/cards/" + card2 + ".png");
 		});
 		break;
 	case 7:
 		$(document).ready(function(){
-			$("#dealoutcard1").attr("src", "images/cards/" + card1 + ".png");
-			$("#dealoutcard2").attr("src", "images/cards/" + card2 + ".png");
+			$("#dealoutcard13").attr("src", "images/cards/" + card1 + ".png");
+			$("#dealoutcard14").attr("src", "images/cards/" + card2 + ".png");
 		});
 		break;
 	case 8:
@@ -745,36 +828,42 @@ function flipCards(player, card1, card2) {
 			$("#dealoutcard16").attr("src", "images/cards/" + card2 + ".png");
 		});
 		break;
+	case 9:
+		$(document).ready(function(){
+			$("#dealoutcard17").attr("src", "images/cards/" + card1 + ".png");
+			$("#dealoutcard18").attr("src", "images/cards/" + card2 + ".png");
+		});
+		break;
 	}
 }
 
 function flipFlop(card1, card2, card3) {
 		$(document).ready(function(){
-			$("#dealoutcard18").attr("src", "images/cards/" + card1 + ".png");
-			$("#dealoutcard19").attr("src", "images/cards/" + card2 + ".png");
-			$("#dealoutcard20").attr("src", "images/cards/" + card3 + ".png");
+			$("#dealoutcard19").attr("src", "images/cards/" + card1 + ".png");
+			$("#dealoutcard20").attr("src", "images/cards/" + card2 + ".png");
+			$("#dealoutcard21").attr("src", "images/cards/" + card3 + ".png");
 		});
 }
 
 function flipTurn(card) {
 	$(document).ready(function(){
-		$("#dealoutcard17").attr("src", "images/cards/" + card + ".png");
+		$("#dealoutcard22").attr("src", "images/cards/" + card + ".png");
 	});
 }
 
 function flipRiver(card) {
 	$(document).ready(function(){
-		$("#dealoutcard21").attr("src", "images/cards/" + card + ".png");
+		$("#dealoutcard23").attr("src", "images/cards/" + card + ".png");
 	});
 }
-
+/*
 function flipOurCardsFront(card1, card2) {
 	$(document).ready(function(){
 		$("#dealourcard1").attr("src", "images/cards/" + card1 + ".png");
 		$("#dealourcard2").attr("src", "images/cards/" + card2 + ".png");
 	});
 }
-
+*/
 function playerCardsBackside() {
 	$(document).ready(function(){
 		for(i=1; i<22; i++) {
@@ -794,9 +883,9 @@ function setDealer(player) {
 	});
 
 }
-
+/// OK!
 function clearDealer() {
-	for (i=1;i<=8;i++){
+	for (i=1;i<=9;i++){
 		$(document).ready(function(){
 			$("#player"+i).children(".playerdata").children(".playerdetail")
 			.children(".playerstatus").children(".playerstatusimage")
@@ -806,12 +895,14 @@ function clearDealer() {
 }
 
 $(document).ready(function(){
-	for(i=1; i<9; i++) {
+	for(i=1; i<10; i++) {
 		changeDisplay(i,"Idle");
 	}
 	
 	$("#newgamebutton").click(function(){
+		/*
 		startNewGameClicked();
+		 */
 	});
 	
 	$("#exitbutton").click(function(){
@@ -829,15 +920,15 @@ $(document).ready(function(){
 	 });
 	
 	$("#buttonfold").click(function(){
-		engine.currentgame.currentround.players[0].fold = 1;
+		/*engine.currentgame.currentround.players[0].fold = 1;
 		engine.startTicker();
 		fadeOurPlayer();
 		hidePlayerButtons(true);
-		changeOurDisplay("Fold");
+		changeOurDisplay("Fold");*/
 	});
 	
 	$("#buttoncall").click(function(){
-		var display = "Check";
+		/*var display = "Check";
 		if(engine.currentgame.currentround.players[0].bet < engine.currentgame.table.bet) {
 			ourChipToTable();
 			engine.currentgame.currentround.players[0].bet = engine.currentgame.table.bet;
@@ -849,11 +940,11 @@ $(document).ready(function(){
 		engine.currentgame.currentround.turn++;
 		engine.startTicker();
 		hidePlayerButtons(true);
-		changeOurDisplay(display);
+		changeOurDisplay(display);*/
 	});
 	
 	$("#buttonraise").click(function(){
-		engine.currentgame.table.bet = engine.currentgame.bigblind;
+		/*engine.currentgame.table.bet = engine.currentgame.bigblind;
 		engine.currentgame.currentround.players[0].chips -= engine.currentgame.table.bet;
 		engine.currentgame.currentround.players[0].bet = engine.currentgame.bigblind;
 		setOurMoney(engine.currentgame.currentround.players[0].chips);
@@ -862,7 +953,7 @@ $(document).ready(function(){
 		engine.startTicker();
 		ourChipToTable();
 		hidePlayerButtons(true);
-		changeOurDisplay("Raise");
+		changeOurDisplay("Raise");*/
 	});
 	
 });
