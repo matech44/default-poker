@@ -1,22 +1,23 @@
 package ee.ut.defaultpoker.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import ee.ut.defaultpoker.evaluation.Card;
 import ee.ut.defaultpoker.evaluation.Deck;
 
 public class Engine {
-	List<Player> players = new ArrayList<Player>();
 	private int status;
 	private int currentPlayerId;
 	List<Card> tablecards = new ArrayList<Card>();
 	Deck deck = new Deck();
 	private int pot;
-	public List<Player> getPlayers() {
+	HashMap<Integer, Player> players = new HashMap<Integer, Player>();
+	public HashMap<Integer, Player> getPlayers() {
 		return players;
 	}
-	public void setPlayers(List<Player> players) {
+	public void setPlayers(HashMap<Integer, Player> players) {
 		this.players = players;
 	}
 	public int getStatus() {
@@ -50,8 +51,17 @@ public class Engine {
 		this.pot = pot;
 	}
 	
+	public void playerFold(int id) {
+		players.get(id).setFold(true);
+	}
 	
+	public void getHighestBet(int id) {
+		
+	}
 	
+	public void playerCheck(int id) {
+		
+	}
 	
 	
 	
