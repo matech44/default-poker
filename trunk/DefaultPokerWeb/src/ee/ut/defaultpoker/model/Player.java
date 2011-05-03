@@ -8,6 +8,16 @@ public abstract class Player {
 	private boolean fold;
 	String[] cards;
 	
+	
+	
+	public boolean getFold() {
+		return fold;
+	}
+
+	public void setFold(boolean fold) {
+		this.fold = fold;
+	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
