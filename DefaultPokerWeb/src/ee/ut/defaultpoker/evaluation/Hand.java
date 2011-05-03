@@ -4,15 +4,21 @@ public class Hand {
 	private Card[] cards;
 	private int[] value;
 
-	Hand(Deck d)
+	Hand(Card[] __cards)
 	{
 		value = new int[6];
 		cards = new Card[5];
+		/*
 		for (int x=0; x<5; x++)
 		{
 			cards[x] = d.drawFromDeck();
 		}
-
+		*/
+		for (int x=0; x<5; x++)
+		{
+			cards[x] = __cards[x];
+		}
+		
 		int[] ranks = new int[14];
 		int[] orderedRanks = new int[5];	 //miscellaneous cards that are not otherwise significant
 		boolean flush=true, straight=false;

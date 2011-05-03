@@ -21,8 +21,9 @@ public class Deck {
 			 }
 		}
 
-		int size = cards.size() -1;
-
+		/*int size = cards.size() -1;*/
+		int size = cards.size();
+		
 		for (short i=0; i<100; i++)
 		{
 			index_1 = generator.nextInt( size );
