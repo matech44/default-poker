@@ -10,6 +10,8 @@ import ee.ut.defaultpoker.evaluation.Deck;
 
 public class Engine {
 	private int currentPlayerId;
+	private boolean checkEnabled = false;
+	private int betAmount;
 	private int smallBlind = 5;
 	private int bigBlind = 10;
 	Card[] tablecards = new Card[5];
@@ -97,10 +99,19 @@ public class Engine {
 	}
 
 	public void playerCheck(String session) {
-		if (currentPlayerId == getPlayerBySession(session).getId()){
+		if (currentPlayerId == getPlayerBySession(session).getId() & checkEnabled){
 			selectNextPlayerOrRound();
 		}
 	}
+	
+	public void playerRaise(String session) {
+		if (currentPlayerId == getPlayerBySession(session).getId()){
+			if (checkEnabled) checkEnabled = false;
+			getPlayerBySession(session).increaseBet(betAmount);
+			selectNextPlayerOrRound();
+		}
+	}
+
 
 	public void createNewDeck() {
 		deck = new Deck();
@@ -119,7 +130,7 @@ public class Engine {
 		 players.add(player);
 	}
 
-	public void dealTableCards(int numberOfPlayers) {
+	public void dealTableCards() {
 		Card[] cards = new Card[5];
 		cards[0] = deck.drawFromDeck();
 		cards[1] = deck.drawFromDeck();
@@ -129,7 +140,14 @@ public class Engine {
 		tablecards = cards;
 	}
 	
+	public void resetPlayerHasActed() {
+		for (Player player : players) {
+			player.setHasActed(false);
+		}
+	}
+	
 	public void selectNextPlayerOrRound() {
+		boolean everybodyReady = true;
 		int activePlayers = 0;
 		for (Player player : players) {
 			if (player.isActive()) activePlayers++;
@@ -143,19 +161,57 @@ public class Engine {
 	    	  } 
 	      } else {
 	          if(round == Round.PREFLOP) {
+	        	  betAmount = 10;
 	        	  currentPlayerId++;
+	        	  dealTableCards();
 	        	  round = Round.FLOP;
 	          }	
 	          else if(round == Round.FLOP) {
-	        	  round = Round.TURN;
+	        	  betAmount = 10;
+	        	  for (Player player : players) {
+	        		  if (!player.isHasActed())  everybodyReady = false; break;
+	        	  }
+	        	  if (everybodyReady) {
+	        		  if (areBetsEqual()) {
+	        			  resetPlayerHasActed();
+	        			  round = Round.TURN;
+	        		  }
+	        	  }
+	        	  currentPlayerId++;
 	          }
 	          else if(round == Round.TURN) {
-	        	  round = Round.RIVER;
+	        	  betAmount = 10;
+	        	  for (Player player : players) {
+	        		  if (!player.isHasActed())  everybodyReady = false; break;
+	        	  }
+	        	  if (everybodyReady) {
+	        		  if (areBetsEqual()) {
+	        			  resetPlayerHasActed();
+	        			  round = Round.RIVER;
+	        		  }
+	        	  }
+	        	  currentPlayerId++;
 	          }
 	          else if(round == Round.RIVER) {
-	        	  round = Round.BETWEEN_HANDS;
+	        	  betAmount = 20;
+	        	  for (Player player : players) {
+	        		  if (!player.isHasActed())  everybodyReady = false;
+	        	  }
+	        	  if (everybodyReady) {
+	        		  if (areBetsEqual()) {
+	        			  resetPlayerHasActed();
+	        			  round = Round.BETWEEN_HANDS;
+	        			  closeHand();
+	        		  } else {
+	        			  currentPlayerId++;
+	        		  }
+	        	  } else currentPlayerId++;
 	          }
 	      }
+	}
+	
+	public void closeHand() {
+		
 	}
 	
 	public int fixateDealer() {
