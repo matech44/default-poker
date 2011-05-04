@@ -93,4 +93,8 @@ public class Engine {
 	          }
 	      }
 	}
+	
+	public void addToPot(int amount) {
+		this.pot=this.pot+amount;
+	}
 }
