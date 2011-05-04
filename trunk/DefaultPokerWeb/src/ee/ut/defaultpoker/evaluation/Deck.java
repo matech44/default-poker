@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Deck {
-	private ArrayList<Card> cards;
+	public ArrayList<Card> cards;
 
 	public Deck()
 	{
@@ -24,7 +24,7 @@ public class Deck {
 		/*int size = cards.size() -1;*/
 		int size = cards.size();
 		
-		for (short i=0; i<100; i++)
+		for (short i=0; i<150; i++)
 		{
 			index_1 = generator.nextInt( size );
 			index_2 = generator.nextInt( size );
@@ -33,6 +33,7 @@ public class Deck {
 			cards.set( index_2 , cards.get( index_1 ) );
 			cards.set( index_1, temp );
 		}
+		
 	}
 
 	public Card drawFromDeck()
