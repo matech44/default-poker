@@ -14,57 +14,16 @@ public class Engine {
 	Deck deck = new Deck();
 	private int pot;
 	List<Player> activePlayers = new ArrayList();
-	HashMap<Integer, Player> players = new HashMap<Integer, Player>();
+	HashMap<String, Player> players = new HashMap<String, Player>();
 	
 	public enum Round  {
-		  PREFLOP, FLOP, TURN, RIVER	
+		  SETUP, PREFLOP, FLOP, TURN, RIVER, BETWEEN_HANDS;
 	      }
 
 	Round round;
 
-
-	public HashMap<Integer, Player> getPlayers() {
-		return players;
-	}
-
-	public void setPlayers(HashMap<Integer, Player> players) {
-		this.players = players;
-	}
-
-	public int getCurrentPlayerId() {
-		return currentPlayerId;
-	}
-
-	public void setCurrentPlayerId(int currentPlayerId) {
-		this.currentPlayerId = currentPlayerId;
-	}
-
-	public Card[] getTablecards() {
-		return tablecards;
-	}
-
-	public void setTablecards(Card[] tablecards) {
-		this.tablecards = tablecards;
-	}
-
-	public Deck getDeck() {
-		return deck;
-	}
-
-	public void setDeck(Deck deck) {
-		this.deck = deck;
-	}
-
-	public int getPot() {
-		return pot;
-	}
-
-	public void setPot(int pot) {
-		this.pot = pot;
-	}
-
-	public void playerFold(int id) {
-		players.get(id).setFold(true);
+	public void playerFold(String session) {
+		players.get(session).setFold(true);
 	}
 
 	public int getHighestBet() {
@@ -79,11 +38,11 @@ public class Engine {
 		return highestBet;
 	}
 
-	public void playerCall(int id) {
-		players.get(id).setBet(getHighestBet());
+	public void playerCall(String session) {
+		players.get(session).setBet(getHighestBet());
 	}
 
-	public void playerCheck(int id) {
+	public void playerCheck(String session) {
 
 	}
 
@@ -111,9 +70,22 @@ public class Engine {
 		tablecards = cards;
 	}
 	
-	
-	
-	private void selectNextPlayerOrRound() {
-	
+	public void selectNextPlayerOrRound() {
+	      if(activePlayers.size() != 0) {
+	          //chooseNextPlayer();
+	      } else {
+	          if(round == Round.PREFLOP) {
+	        	  round = Round.FLOP;
+	          }	
+	          else if(round == Round.FLOP) {
+	        	  round = Round.TURN;
+	          }
+	          else if(round == Round.TURN) {
+	        	  round = Round.RIVER;
+	          }
+	          else if(round == Round.RIVER) {
+	        	  round = Round.BETWEEN_HANDS;
+	          }
+	      }
 	}
 }
