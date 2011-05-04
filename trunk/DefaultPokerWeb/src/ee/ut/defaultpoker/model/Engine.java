@@ -59,6 +59,11 @@ public class Engine {
 			((Player) itr.next()).setCards(cards);
 		}
 	}
+	
+	public void createPlayer(String session, String name) {
+		 Player player = new Player(name);
+		 players.put(session, player);
+	}
 
 	public void dealTableCards(int numberOfPlayers) {
 		Card[] cards = new Card[5];
