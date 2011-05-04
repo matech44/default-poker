@@ -24,6 +24,34 @@ public class Engine {
 
 	Round round;
 	
+	public void collectBets() {
+		for (Player player : players) {
+			if (player != null) {
+				pot += player.getBet();
+				player.setBet(0);
+				player.setHasActed(false);
+			}
+		}
+	}
+	
+	public boolean areBetsEqual() {
+		int bet= 0;
+		boolean equality=true;
+		for (Player player : players) {
+			if (player.isActive()) {
+				bet = player.getBet();
+				break;
+			}
+		}
+		for (Player player : players) {
+				if (player.isActive() && player.getBet()!=bet) {
+					equality=false;
+					break;
+				}
+		}
+		return equality;
+	}
+	
 	public Player getPlayerBySession(String __session) {
 		for (Player player : players){
 			if (player.getSession() == __session) return player;
