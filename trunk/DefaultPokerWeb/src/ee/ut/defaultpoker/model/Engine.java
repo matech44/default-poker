@@ -35,6 +35,7 @@ public class Engine {
 		if (currentPlayerId == getPlayerBySession(session).getId()){
 			getPlayerBySession(session).setFold(true);
 			getPlayerBySession(session).setActive(false);
+			selectNextPlayerOrRound();
 		}
 	}
 
@@ -51,7 +52,9 @@ public class Engine {
 
 	public void playerCall(String session) {
 		if (currentPlayerId == getPlayerBySession(session).getId()){
-			getPlayerBySession(session).setBet(getHighestBet());
+			getPlayerBySession(session).increaseBet(getHighestBet() - getPlayerBySession(session).getBet());
+			getPlayerBySession(session).setHasActed(true);
+			selectNextPlayerOrRound();
 		}
 	}
 	
@@ -66,7 +69,9 @@ public class Engine {
 	}
 
 	public void playerCheck(String session) {
-
+		if (currentPlayerId == getPlayerBySession(session).getId()){
+			selectNextPlayerOrRound();
+		}
 	}
 
 	public void createNewDeck() {
@@ -101,10 +106,16 @@ public class Engine {
 		for (Player player : players) {
 			if (player.isActive()) activePlayers++;
 		}
-	      if(activePlayers != 0) {
-	          //chooseNextPlayer();
+	      if(activePlayers == 0) {
+	          /// WHY?
+	      } 
+	      if (activePlayers == 1) {
+	    	  for (Player player : players) {  
+	    		  if (player.isActive()); ///TODO! Siis tema v6itis
+	    	  } 
 	      } else {
 	          if(round == Round.PREFLOP) {
+	        	  currentPlayerId++;
 	        	  round = Round.FLOP;
 	          }	
 	          else if(round == Round.FLOP) {
@@ -170,12 +181,13 @@ public class Engine {
 			currentPlayerId++;
 			players.get(currentPlayerId).setBet(bigBlind);
 			this.setPot(bigBlind);
-			currentPlayerId++;
 			for (Player player : players) {
 				if (player.isActive()){
 					dealPlayerCards(player);
 				}
 			}
+			
+			selectNextPlayerOrRound();
 			
 		} else {
 			
