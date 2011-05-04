@@ -32,7 +32,10 @@ public class Engine {
 	}
 
 	public void playerFold(String session) {
-		getPlayerBySession(session).setFold(true);
+		if (currentPlayerId == getPlayerBySession(session).getId()){
+			getPlayerBySession(session).setFold(true);
+			getPlayerBySession(session).setActive(false);
+		}
 	}
 
 	public int getHighestBet() {
@@ -47,7 +50,9 @@ public class Engine {
 	}
 
 	public void playerCall(String session) {
-		getPlayerBySession(session).setBet(getHighestBet());
+		if (currentPlayerId == getPlayerBySession(session).getId()){
+			getPlayerBySession(session).setBet(getHighestBet());
+		}
 	}
 	
 	public void setPot(int __pot) {
@@ -136,8 +141,16 @@ public class Engine {
 		return 0;
 	}
 	
+	public void initializePlayers() {
+		for (int i=0 ; i < players.size() ; i++) {
+			players.get(i).setId(i);
+		}
+	}
+	
 	public void startNewHand() {
 		if (round == Round.SETUP || round == Round.BETWEEN_HANDS) {
+			initializePlayers();
+			
 			for (Player player : players) {
 				if (player.getChips() < smallBlind ) {
 					player.setActive(false);
