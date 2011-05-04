@@ -52,6 +52,11 @@ public class Player {
 		this.chips-=amount;
 	}
 	
+	public void increaseBet(int amount) {
+		setBet(amount);
+		reduceChips(amount);
+	}
+	
 	public int getChips() {
 		return this.chips;
 	}
