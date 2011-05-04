@@ -6,6 +6,7 @@ public class Player {
 	private int chips;
 	private int bet;
 	private boolean fold;
+	private boolean dealer;
 	private Card[] cards = new Card[2];
 	
 	public Player() {
@@ -66,6 +67,14 @@ public class Player {
 	
 	public void setName(String setName) {
 		this.name=setName;
+	}
+
+	public void setDealer(boolean dealer) {
+		this.dealer = dealer;
+	}
+
+	public boolean isDealer() {
+		return dealer;
 	}
 	
 	
