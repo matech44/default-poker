@@ -1,6 +1,6 @@
 package ee.ut.defaultpoker.model;
 import ee.ut.defaultpoker.evaluation.Card;
-public abstract class Player {
+public class Player {
 	private int id;
 	private String name;
 	private int chips;
@@ -8,8 +8,14 @@ public abstract class Player {
 	private boolean fold;
 	private Card[] cards = new Card[2];
 	
+	public Player() {
+		
+	}
 	
-	
+	public Player(String name) {
+		this.name=name;
+	}
+
 	public boolean getFold() {
 		return fold;
 	}
