@@ -15,7 +15,7 @@ public class Engine {
 	Card[] tablecards = new Card[5];
 	Deck deck = new Deck();
 	private int pot;
-	List<Player> activePlayers = new ArrayList();
+	List<Player> activePlayers = new ArrayList<Player>();
 	HashMap<String, Player> players = new HashMap<String, Player>();
 	
 	public enum Round  {
