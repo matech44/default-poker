@@ -3,10 +3,13 @@ import ee.ut.defaultpoker.evaluation.Card;
 public class Player {
 	private int id;
 	private String name;
-	private int chips;
+	private int chips = 500;
 	private int bet;
-	private boolean fold;
-	private boolean dealer;
+	private boolean fold = false;
+	private boolean dealer = false;
+	private String session;
+	private boolean active = true;
+	private boolean hasActed = false;
 	private Card[] cards = new Card[2];
 	
 	public Player() {
@@ -75,6 +78,30 @@ public class Player {
 
 	public boolean isDealer() {
 		return dealer;
+	}
+
+	public void setSession(String session) {
+		this.session = session;
+	}
+
+	public String getSession() {
+		return session;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setHasActed(boolean hasActed) {
+		this.hasActed = hasActed;
+	}
+
+	public boolean isHasActed() {
+		return hasActed;
 	}
 	
 	
