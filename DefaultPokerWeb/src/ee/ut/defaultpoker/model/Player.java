@@ -16,6 +16,10 @@ public class Player {
 		
 	}
 	
+	public boolean getHasActed() {
+		return this.hasActed;
+	}
+	
 	public Player(String name) {
 		this.name=name;
 	}
