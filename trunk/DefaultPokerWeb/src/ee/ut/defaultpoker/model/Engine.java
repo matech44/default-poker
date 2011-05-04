@@ -15,24 +15,30 @@ public class Engine {
 	Card[] tablecards = new Card[5];
 	Deck deck = new Deck();
 	private int pot;
-	List<Player> activePlayers = new ArrayList<Player>();
-	HashMap<String, Player> players = new HashMap<String, Player>();
+	//List<Player> activePlayers = new ArrayList<Player>();
+	List<Player> players = new ArrayList<Player>();
 	
 	public enum Round  {
 		  SETUP, PREFLOP, FLOP, TURN, RIVER, BETWEEN_HANDS;
 	      }
 
 	Round round;
+	
+	public Player getPlayerBySession(String __session) {
+		for (Player player : players){
+			if (player.getSession() == __session) return player;
+		}
+		return null; ///TODO!
+	}
 
 	public void playerFold(String session) {
-		players.get(session).setFold(true);
+		getPlayerBySession(session).setFold(true);
 	}
 
 	public int getHighestBet() {
-		Iterator<Player> itr = players.values().iterator();
 		int highestBet = 0;
-		while (itr.hasNext()) {
-			int subject = ((Player) itr.next()).getBet();
+		for (Player player : players){
+			int subject = player.getBet();
 			if (subject > highestBet) {
 				highestBet = subject;
 			}
@@ -41,7 +47,7 @@ public class Engine {
 	}
 
 	public void playerCall(String session) {
-		players.get(session).setBet(getHighestBet());
+		getPlayerBySession(session).setBet(getHighestBet());
 	}
 	
 	public void setPot(int __pot) {
@@ -49,8 +55,7 @@ public class Engine {
 	}
 	
 	public void checkDeck() {
-		int controll = (this.activePlayers.size() * 2) + 5;
-		if (this.deck.getTotalCards() < controll) {
+		if (this.deck.getTotalCards() < ((this.players.size() * 2) + 5)) {
 			this.deck = new Deck();
 		}
 	}
@@ -63,19 +68,17 @@ public class Engine {
 		deck = new Deck();
 	}
 
-	public void dealPlayerCards(int numberOfPlayers) {
-		Iterator<Player> itr = players.values().iterator();
+	public void dealPlayerCards(Player __player) {
 		Card[] cards = new Card[2];
-		while (itr.hasNext()) {
-			cards[0] = deck.drawFromDeck();
-			cards[1] = deck.drawFromDeck();
-			((Player) itr.next()).setCards(cards);
-		}
+		cards[0] = deck.drawFromDeck();
+		cards[1] = deck.drawFromDeck();
+		__player.setCards(cards);
 	}
 	
 	public void createPlayer(String session, String name) {
 		 Player player = new Player(name);
-		 players.put(session, player);
+		 player.setSession(session);
+		 players.add(player);
 	}
 
 	public void dealTableCards(int numberOfPlayers) {
@@ -89,7 +92,11 @@ public class Engine {
 	}
 	
 	public void selectNextPlayerOrRound() {
-	      if(activePlayers.size() != 0) {
+		int activePlayers = 0;
+		for (Player player : players) {
+			if (player.isActive()) activePlayers++;
+		}
+	      if(activePlayers != 0) {
 	          //chooseNextPlayer();
 	      } else {
 	          if(round == Round.PREFLOP) {
@@ -108,49 +115,54 @@ public class Engine {
 	}
 	
 	public int fixateDealer() {
-		for (int i=0; i>activePlayers.size() ; i++) {
-			if (activePlayers.get(i) != null & activePlayers.get(i).isDealer()) {
-				activePlayers.get(i).setDealer(false);
-				if (activePlayers.get(i+1) != null) {
-					activePlayers.get(i+1).setDealer(true);
-					return i+1;
-				} else {
-					activePlayers.get(0).setDealer(true);
-					return 0;
+		for (int i=0 ; i<players.size() ; i++) {
+			if (players.get(i).isDealer()) {
+				players.get(i).setDealer(false);
+				for (int j=i+1; j<players.size() ; j++) {
+					if (players.get(j).isActive()){
+						players.get(j).setDealer(true);
+						return j;
+					}
 				}
-			} else {
-				activePlayers.get(0).setDealer(true);
-				return 0;
+				for (int j=0; j<i+1 ; j++) {
+					if (players.get(j).isActive()){
+						players.get(j).setDealer(true);
+						return j;
+					}
+				}
 			}
 		}
-		activePlayers.get(0).setDealer(true);
+		players.get(0).setDealer(true); ///TODO!
 		return 0;
 	}
 	
 	public void startNewHand() {
 		if (round == Round.SETUP || round == Round.BETWEEN_HANDS) {
-			
-			
-			for (int i=0;i>activePlayers.size();i++) {
-				if (activePlayers.get(i) != null & activePlayers.get(i).getChips() < smallBlind ) {
-					activePlayers.remove(i);
+			for (Player player : players) {
+				if (player.getChips() < smallBlind ) {
+					player.setActive(false);
 				} else {
-					activePlayers.get(i).setFold(false);
+					player.setActive(true);
+					player.setFold(false);
 				}
 			}
 			
-			this.setPot(0);
-			this.checkDeck();
-			int dealerPos = this.fixateDealer();
-			int currentPlayerId = dealerPos + 1;
+			setPot(0);
+			checkDeck();
+			int dealerPos = fixateDealer();
+			this.currentPlayerId = dealerPos + 1;
 			this.round = Round.PREFLOP;
 			
-			activePlayers.get(currentPlayerId).setBet(smallBlind);
+			players.get(currentPlayerId).setBet(smallBlind);
 			currentPlayerId++;
-			activePlayers.get(currentPlayerId).setBet(bigBlind);
+			players.get(currentPlayerId).setBet(bigBlind);
 			this.setPot(bigBlind);
 			currentPlayerId++;
-			this.dealPlayerCards(activePlayers.size());
+			for (Player player : players) {
+				if (player.isActive()){
+					dealPlayerCards(player);
+				}
+			}
 			
 		} else {
 			
