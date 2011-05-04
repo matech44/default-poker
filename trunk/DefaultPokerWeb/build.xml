@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="DefaultPokerWeb" default="" basedir=".">
+
+	<!-- ==================== File and Directory Names ======================== -->
+
+	<property name="app.name" value="${ant.project.name}" />
+	<property name="app.path" value="/${app.name}" />
+	<property name="app.version" value="0.1-dev" />
+	<property name="build.home" value="${basedir}/build" />
+	<property name="src.home" value="${basedir}/src" />
+	<property name="web.home" value="${basedir}/WebContent" />
+	<property name="WEB-INF.home" value="${web.home}/WEB-INF" />
+	<property name="lib.home" value="${WEB-INF.home}/lib" />
+	<property name="web.xml" value="${WEB-INF.home}/web.xml" />
+	<property name="war.file" value="${build.home}/${app.name}.war" />
+
+	<property name="build.WEB-INF" value="${build.home}/WEB-INF" />
+	<property name="build.classes" value="${build.WEB-INF}/classes" />
+	<property name="build.lib" value="${build.WEB-INF}/lib" />
+	<property name="build.web.xml" value="${build.WEB-INF}/web.xml" />
+
+	<!-- UPDATE THIS! -->
+	<property name="catalina.home" value="../../../../apache-tomcat-7.0.8" />
+
+	<!-- ==================== External Dependencies =========================== -->
+
+	<!--
+	<property name="foo.jar" value="/path/to/foo.jar"/>
+	-->
+
+	<!-- ==================== Compilation Classpath =========================== -->
+
+	<path id="compile.classpath">
+		<!-- <pathelement location="${foo.jar}" /> -->
+
+		<fileset dir="${catalina.home}/lib">
+			<include name="*.jar" />
+		</fileset>
+
+		<fileset dir="${lib.home}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<!-- ==================== Compile Target ================================== -->
+
+	<target name="compile" depends="prepare" description="Compile Java sources">
+		<echo>=== COMPILE ===</echo>
+
+		<javac srcdir="${src.home}" destdir="${build.classes}" debug="true" deprecation="false" optimize="true">
+			<classpath refid="compile.classpath" />
+		</javac>
+
+		<copy todir="${build.classes}">
+			<fileset dir="${src.home}" excludes="**/*.java" />
+		</copy>
+	</target>
+
+	<!-- ==================== Prepare Target ================================== -->
+
+	<target name="prepare">
+		<echo>=== PREPARE ===</echo>
+
+		<mkdir  dir="${build.home}"/>
+
+		<copy todir="${build.home}">
+			<fileset dir="${web.home}"/>
+		</copy>
+
+		<mkdir  dir="${build.classes}"/>
+
+		<mkdir  dir="${build.home}/WEB-INF/lib"/>
+		<!--
+	    <copy todir="${build.home}/WEB-INF/lib" file="${foo.jar}"/>
+		-->
+	</target>
+
+	<!-- ==================== Package target ===================================== -->
+
+	<target name="package" depends="compile">
+		<echo>=== PACKAGE ===</echo>
+
+		<copy todir="${build.classes}">
+			<fileset dir="${src.home}">
+				<include name="**/*.xml"/>
+				<include name="**/*.xsl"/>
+			</fileset>
+		</copy>
+
+		<war destfile="${war.file}" webxml="${build.web.xml}" basedir="${build.home}">
+			<fileset dir="${build.home}"/>
+			<lib dir="${build.lib}" />
+			<classes dir="${build.classes}" />
+		</war>
+	</target>
+
+	<!-- ==================== Deploy target ===================================== -->
+
+	<target name="deploy" depends="package">
+		<echo>=== DEPLOY ===</echo>
+
+		<copy file="${war.file}" todir="${catalina.home}/webapps"/>
+	</target>
+
+	<!-- ==================== Clean target ====================================== -->
+
+	<target name="clean" description="Cleans this project">
+		<echo>=== CLEAN ===</echo>
+		
+		<delete dir="${build.home}" failonerror="false" />
+		<delete file="${catalina.home}/webapps/${app.name}.war" failonerror="false" />
+	</target>
+
+</project>
