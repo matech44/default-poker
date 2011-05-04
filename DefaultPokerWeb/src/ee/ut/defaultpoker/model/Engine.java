@@ -10,6 +10,8 @@ import ee.ut.defaultpoker.evaluation.Deck;
 
 public class Engine {
 	private int currentPlayerId;
+	private int smallBlind = 5;
+	private int bigBlind = 10;
 	Card[] tablecards = new Card[5];
 	Deck deck = new Deck();
 	private int pot;
@@ -40,6 +42,17 @@ public class Engine {
 
 	public void playerCall(String session) {
 		players.get(session).setBet(getHighestBet());
+	}
+	
+	public void setPot(int __pot) {
+		this.pot = __pot;
+	}
+	
+	public void checkDeck() {
+		int controll = (this.activePlayers.size() * 2) + 5;
+		if (this.deck.getTotalCards() < controll) {
+			this.deck = new Deck();
+		}
 	}
 
 	public void playerCheck(String session) {
@@ -92,6 +105,56 @@ public class Engine {
 	        	  round = Round.BETWEEN_HANDS;
 	          }
 	      }
+	}
+	
+	public int fixateDealer() {
+		for (int i=0; i>activePlayers.size() ; i++) {
+			if (activePlayers.get(i) != null & activePlayers.get(i).isDealer()) {
+				activePlayers.get(i).setDealer(false);
+				if (activePlayers.get(i+1) != null) {
+					activePlayers.get(i+1).setDealer(true);
+					return i+1;
+				} else {
+					activePlayers.get(0).setDealer(true);
+					return 0;
+				}
+			} else {
+				activePlayers.get(0).setDealer(true);
+				return 0;
+			}
+		}
+		activePlayers.get(0).setDealer(true);
+		return 0;
+	}
+	
+	public void startNewHand() {
+		if (round == Round.SETUP || round == Round.BETWEEN_HANDS) {
+			
+			
+			for (int i=0;i>activePlayers.size();i++) {
+				if (activePlayers.get(i) != null & activePlayers.get(i).getChips() < smallBlind ) {
+					activePlayers.remove(i);
+				} else {
+					activePlayers.get(i).setFold(false);
+				}
+			}
+			
+			this.setPot(0);
+			this.checkDeck();
+			int dealerPos = this.fixateDealer();
+			int currentPlayerId = dealerPos + 1;
+			this.round = Round.PREFLOP;
+			
+			activePlayers.get(currentPlayerId).setBet(smallBlind);
+			currentPlayerId++;
+			activePlayers.get(currentPlayerId).setBet(bigBlind);
+			this.setPot(bigBlind);
+			currentPlayerId++;
+			this.dealPlayerCards(activePlayers.size());
+			
+		} else {
+			
+		}
 	}
 	
 	public void addToPot(int amount) {
