@@ -1,8 +1,6 @@
 package ee.ut.defaultpoker.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import ee.ut.defaultpoker.evaluation.Card;
@@ -165,7 +163,7 @@ public class Engine {
 	        	  currentPlayerId++;
 	        	  dealTableCards();
 	        	  round = Round.FLOP;
-	          }	
+	          }
 	          else if(round == Round.FLOP) {
 	        	  betAmount = 10;
 	        	  for (Player player : players) {
