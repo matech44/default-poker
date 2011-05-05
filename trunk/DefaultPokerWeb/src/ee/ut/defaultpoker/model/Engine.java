@@ -262,13 +262,13 @@ public class Engine {
 	public Hand findBestHand(Card card1, Card card2, Card card3, 
 	                          Card card4, Card card5, Card card6, 
 	                          Card card7) {
-		System.out.println("***** Mootor");
-		
 		Card[] cards = { card1, card2, card3, card4, card5, card6, card7 };
-		Card card = new Card(0,0);
-		System.out.println(card.getRank() + " / " + card.getSuit());
-		Hand bestHand = new Hand(card, card, card, card, card);
-		bestHand.displayAll();
+		Card lowCard1 = new Card(0,0);
+		Card lowCard2 = new Card(1,2);
+		Card lowCard3 = new Card(2,6);
+		Card lowCard4 = new Card(3,5);
+		Card lowCard5 = new Card(0,3);
+		Hand bestHand = new Hand(lowCard1, lowCard2, lowCard3, lowCard4, lowCard5);
 		Hand tempHand = new Hand();
 		int combinations[][] = {	
 							{0, 1, 2, 3, 4},
