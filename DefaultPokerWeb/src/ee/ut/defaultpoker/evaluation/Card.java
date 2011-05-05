@@ -17,6 +17,12 @@ public class Card
 		this.rank=rank;
 		this.suit=suit;
 	}
+	
+	public Card(int suit, int rank)
+	{
+		this.rank= (short) rank;
+		this.suit= (short) suit;
+	}
 
 	public @Override String toString()
 	{

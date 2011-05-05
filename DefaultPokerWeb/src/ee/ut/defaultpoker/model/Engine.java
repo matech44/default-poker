@@ -8,8 +8,8 @@ import ee.ut.defaultpoker.evaluation.Deck;
 import ee.ut.defaultpoker.evaluation.Hand;
 
 public class Engine {
-	private int currentPlayerId;
-	private int winnerPlayerId;
+	public int currentPlayerId = 0;
+	public int winnerPlayerId;
 	private boolean checkEnabled = false;
 	private int betAmount;
 	private int smallBlind = 5;
@@ -17,14 +17,21 @@ public class Engine {
 	Card[] tablecards = new Card[5];
 	Deck deck = new Deck();
 	private int pot;
-	//List<Player> activePlayers = new ArrayList<Player>();
 	List<Player> players = new ArrayList<Player>();
 	
 	public enum Round  {
-		  SETUP, PREFLOP, FLOP, TURN, RIVER, BETWEEN_HANDS;
+		  SETUP, PREFLOP, FLOP, TURN, RIVER, CLOSING, BETWEEN_HANDS;
 	      }
 
 	Round round;
+	
+	public Engine() {
+		round = Round.SETUP;
+	}
+	
+	public int getPot() {
+		return this.pot;
+	}
 	
 	public void collectBets() {
 		for (Player player : players) {
@@ -36,8 +43,8 @@ public class Engine {
 	}
 	
 	public boolean areBetsEqual() {
-		int bet= 0;
-		boolean equality=true;
+		int bet = 0;
+		boolean equality = true;
 		for (Player player : players) {
 			if (player.isActive()) {
 				bet = player.getBet();
@@ -45,8 +52,8 @@ public class Engine {
 			}
 		}
 		for (Player player : players) {
-				if (player.isActive() && player.getBet()!=bet) {
-					equality=false;
+				if (player.isActive() == true && player.getBet()!= bet) {
+					equality = false;
 					break;
 				}
 		}
@@ -70,6 +77,7 @@ public class Engine {
 	public void playerFold(String session) {
 		if (currentPlayerId == getPlayerBySession(session).getId()){
 			getPlayerBySession(session).setFold(true);
+			getPlayerBySession(session).setHasActed(true);
 			getPlayerBySession(session).setActive(false);
 			selectNextPlayerOrRound();
 		}
@@ -78,9 +86,8 @@ public class Engine {
 	public int getHighestBet() {
 		int highestBet = 0;
 		for (Player player : players){
-			int subject = player.getBet();
-			if (subject > highestBet) {
-				highestBet = subject;
+			if (player.getBet() > highestBet) {
+				highestBet = player.getBet();
 			}
 		}
 		return highestBet;
@@ -88,7 +95,9 @@ public class Engine {
 
 	public void playerCall(String session) {
 		if (currentPlayerId == getPlayerBySession(session).getId()){
-			getPlayerBySession(session).increaseBet(getHighestBet() - getPlayerBySession(session).getBet());
+			int vanaBet = getPlayerBySession(session).getBet();
+			int uusBet = getHighestBet() - vanaBet;
+			getPlayerBySession(session).increaseBet(uusBet);
 			getPlayerBySession(session).setHasActed(true);
 			selectNextPlayerOrRound();
 		}
@@ -103,7 +112,8 @@ public class Engine {
 	}
 
 	public void playerCheck(String session) {
-		if (currentPlayerId == getPlayerBySession(session).getId() & checkEnabled){
+		if (currentPlayerId == getPlayerBySession(session).getId() && checkEnabled){
+			getPlayerBySession(session).setHasActed(true);
 			selectNextPlayerOrRound();
 		}
 	}
@@ -112,6 +122,7 @@ public class Engine {
 		if (currentPlayerId == getPlayerBySession(session).getId()){
 			if (checkEnabled) checkEnabled = false;
 			getPlayerBySession(session).increaseBet(betAmount);
+			getPlayerBySession(session).setHasActed(true);
 			selectNextPlayerOrRound();
 		}
 	}
@@ -166,7 +177,7 @@ public class Engine {
 	      } else {
 	          if(round == Round.PREFLOP) {
 	        	  betAmount = 10;
-	        	  currentPlayerId++;
+	        	  nextPlayer(currentPlayerId);
 	        	  dealTableCards();
 	        	  round = Round.FLOP;
 	          }
@@ -181,7 +192,6 @@ public class Engine {
 	        			  resetPlayerHasActed();
 	        			  round = Round.TURN;
 	        		  }
-	        		  resetPlayerHasActed();
 	        	  }
 	        	  everybodyReady = true;
 	        	  nextPlayer(currentPlayerId);
@@ -197,7 +207,6 @@ public class Engine {
 	        			  resetPlayerHasActed();
 	        			  round = Round.RIVER;
 	        		  }
-	        		  resetPlayerHasActed();
 	        	  }
 	        	  everybodyReady = true;
 	        	  nextPlayer(currentPlayerId);
@@ -211,6 +220,8 @@ public class Engine {
 	        		  if (areBetsEqual()) {
 	        			  collectBets();
 	        			  resetPlayerHasActed();
+	        			  currentPlayerId = 999;
+	        			  round = Round.CLOSING;
 	        			  closeHand();
 	        		  }
 	        	  }
@@ -228,10 +239,13 @@ public class Engine {
 	public Hand findBestHand(Card card1, Card card2, Card card3, 
 	                          Card card4, Card card5, Card card6, 
 	                          Card card7) {
+		System.out.println("***** Mootor");
+		
 		Card[] cards = { card1, card2, card3, card4, card5, card6, card7 };
-		Hand bestHand = new Hand(new Card((short) 0,(short) 1), 
-				new Card((short) 0,(short) 1), new Card((short) 0,(short) 1), 
-				new Card((short) 0,(short) 1), new Card((short) 0,(short) 1));
+		Card card = new Card(0,0);
+		System.out.println(card.getRank() + " / " + card.getSuit());
+		Hand bestHand = new Hand(card, card, card, card, card);
+		bestHand.displayAll();
 		Hand tempHand = new Hand();
 		int combinations[][] = {	
 							{0, 1, 2, 3, 4},
@@ -275,8 +289,6 @@ public class Engine {
 				if (player.isActive()) winnerPlayerId = player.getId();
 			}
 		} else {
-			
-			
 			for (Player player : players) {
 				if (player.isActive()) {
 					player.setBestHand(findBestHand(tablecards[0], tablecards[1], 
@@ -286,6 +298,7 @@ public class Engine {
 					                              );
 				}
 			}
+			/*
 			for (int i=0 ; i<players.size() ; i++) {
 				if (players.get(i).isActive()){
 					boolean win = true;
@@ -299,15 +312,29 @@ public class Engine {
 					}
 					if (win == true) {
 						winnerPlayerId = players.get(i).getId();
-						break;
 					}
+				}
+			}*/
+			
+			for (Player player : players) {
+				boolean win = true;
+				if (player.isActive()){
+					for (Player enemy : players) {
+						if (player.getId() == enemy.getId()) continue;
+						else if (player.getBestHand().compareTo(enemy.getBestHand()) != 1) {
+							win = false;
+						}
+					}
+				}
+				if (win) {
+					winnerPlayerId = player.getId();
+					break;
 				}
 			}
 			
 			potToWinner(winnerPlayerId);
 			///TODO!
 			round = Round.BETWEEN_HANDS;
-			this.winnerPlayerId = (Integer) null;
 		}
 	}
 	
@@ -340,11 +367,15 @@ public class Engine {
 	}
 	
 	public void nextPlayer(int startId) {
-		for (int i = startId+1 ; i<players.size() ;  i++) {
-			if (players.get(i).isActive()) this.currentPlayerId = i; return;
+		for (Player player : players) {
+			if (player.getId() > startId) {
+				if (player.isActive()) this.currentPlayerId = player.getId(); return;
+			}
 		}
-		for (int i=0 ; i<startId+1 ; i++) {
-			if (players.get(i).isActive()) this.currentPlayerId = i; return;
+		for (Player player : players) {
+			if (player.getId() < startId) {
+				if (player.isActive()) this.currentPlayerId = player.getId(); return;
+			}
 		}
 	}
 	
@@ -365,9 +396,11 @@ public class Engine {
 			int dealerPos = fixateDealer();
 			nextPlayer(dealerPos);
 			this.round = Round.PREFLOP;
-			players.get(currentPlayerId).setBet(smallBlind);
+			players.get(currentPlayerId).increaseBet(smallBlind);
+			players.get(currentPlayerId).setHasActed(true);
 			nextPlayer(currentPlayerId);
-			players.get(currentPlayerId).setBet(bigBlind);
+			players.get(currentPlayerId).increaseBet(bigBlind);
+			players.get(currentPlayerId).setHasActed(true);
 			for (Player player : players) {
 				if (player.isActive()){
 					dealPlayerCards(player);
@@ -382,4 +415,30 @@ public class Engine {
 	public void addToPot(int amount) {
 		this.pot=this.pot+amount;
 	}
+
+	public String whatRound(Round round) {
+		if (round == Round.SETUP) {
+			return "Setup";
+		}
+		else if (round == Round.PREFLOP) {
+			return "Preflop";
+		}
+		else if (round == Round.FLOP) {
+			return "Flop";
+		}
+		else if (round == Round.TURN) {
+			return "Turn";
+		}
+		else if (round == Round.RIVER) {
+			return "River";
+		}
+		else if (round == Round.BETWEEN_HANDS) {
+			return "Between hands";
+		}
+		else if (round == Round.CLOSING) {
+			return "Closing";
+		}
+		return null;
+	}
+
 }
