@@ -217,7 +217,7 @@ public class Hand {
 		System.out.println(s);
 	}
 
-	void displayAll()
+	public void displayAll()
 	{
 		for (int x=0; x<5; x++)
 			System.out.println(cards[x]);

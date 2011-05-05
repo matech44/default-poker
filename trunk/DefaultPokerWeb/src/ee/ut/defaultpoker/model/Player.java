@@ -67,8 +67,12 @@ public class Player {
 	}
 	
 	public void increaseBet(int amount) {
-		setBet(amount);
+		addToBet(amount);
 		reduceChips(amount);
+	}
+	
+	public void addToBet(int amount) {
+		this.bet += amount;
 	}
 	
 	public int getChips() {
