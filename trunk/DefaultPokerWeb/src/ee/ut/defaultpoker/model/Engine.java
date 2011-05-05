@@ -5,9 +5,11 @@ import java.util.List;
 
 import ee.ut.defaultpoker.evaluation.Card;
 import ee.ut.defaultpoker.evaluation.Deck;
+import ee.ut.defaultpoker.evaluation.Hand;
 
 public class Engine {
 	private int currentPlayerId;
+	private int winnerPlayerId;
 	private boolean checkEnabled = false;
 	private int betAmount;
 	private int smallBlind = 5;
@@ -29,7 +31,6 @@ public class Engine {
 			if (player != null) {
 				pot += player.getBet();
 				player.setBet(0);
-				player.setHasActed(false);
 			}
 		}
 	}
@@ -56,7 +57,14 @@ public class Engine {
 		for (Player player : players){
 			if (player.getSession() == __session) return player;
 		}
-		return null; ///TODO!
+		return null; /// Erindi peaks siia äkki tegema?
+	}
+	
+	public Player getPlayerById(int __id) {
+		for (Player player : players){
+			if (player.getId() == __id) return player;
+		}
+		return null; /// Erindi peaks siia äkki tegema?
 	}
 
 	public void playerFold(String session) {
@@ -90,10 +98,8 @@ public class Engine {
 		this.pot = __pot;
 	}
 	
-	public void checkDeck() {
-		if (this.deck.getTotalCards() < ((this.players.size() * 2) + 5)) {
-			this.deck = new Deck();
-		}
+	public void newDeck() {
+		this.deck = new Deck();
 	}
 
 	public void playerCheck(String session) {
@@ -151,11 +157,11 @@ public class Engine {
 			if (player.isActive()) activePlayers++;
 		}
 	      if(activePlayers == 0) {
-	          /// WHY?
+	          /// siis on nagu midagi väga valesti :D
 	      } 
 	      if (activePlayers == 1) {
 	    	  for (Player player : players) {  
-	    		  if (player.isActive()); ///TODO! Siis tema v6itis
+	    		  if (player.isActive()) closeHand();
 	    	  } 
 	      } else {
 	          if(round == Round.PREFLOP) {
@@ -171,11 +177,14 @@ public class Engine {
 	        	  }
 	        	  if (everybodyReady) {
 	        		  if (areBetsEqual()) {
+	        			  collectBets();
 	        			  resetPlayerHasActed();
 	        			  round = Round.TURN;
 	        		  }
+	        		  resetPlayerHasActed();
 	        	  }
-	        	  currentPlayerId++;
+	        	  everybodyReady = true;
+	        	  nextPlayer(currentPlayerId);
 	          }
 	          else if(round == Round.TURN) {
 	        	  betAmount = 10;
@@ -184,11 +193,14 @@ public class Engine {
 	        	  }
 	        	  if (everybodyReady) {
 	        		  if (areBetsEqual()) {
+	        			  collectBets();
 	        			  resetPlayerHasActed();
 	        			  round = Round.RIVER;
 	        		  }
+	        		  resetPlayerHasActed();
 	        	  }
-	        	  currentPlayerId++;
+	        	  everybodyReady = true;
+	        	  nextPlayer(currentPlayerId);
 	          }
 	          else if(round == Round.RIVER) {
 	        	  betAmount = 20;
@@ -197,19 +209,106 @@ public class Engine {
 	        	  }
 	        	  if (everybodyReady) {
 	        		  if (areBetsEqual()) {
+	        			  collectBets();
 	        			  resetPlayerHasActed();
-	        			  round = Round.BETWEEN_HANDS;
 	        			  closeHand();
-	        		  } else {
-	        			  currentPlayerId++;
 	        		  }
-	        	  } else currentPlayerId++;
+	        	  }
+	        	  everybodyReady = true;
+	        	  nextPlayer(currentPlayerId);
 	          }
 	      }
 	}
 	
-	public void closeHand() {
+	public void potToWinner(int __Id) {
+		getPlayerById(__Id).addChips(pot);
+		this.setPot(0);
+	}
+	
+	public Hand findBestHand(Card card1, Card card2, Card card3, 
+	                          Card card4, Card card5, Card card6, 
+	                          Card card7) {
+		Card[] cards = { card1, card2, card3, card4, card5, card6, card7 };
+		Hand bestHand = new Hand(new Card((short) 0,(short) 1), 
+				new Card((short) 0,(short) 1), new Card((short) 0,(short) 1), 
+				new Card((short) 0,(short) 1), new Card((short) 0,(short) 1));
+		Hand tempHand = new Hand();
+		int combinations[][] = {	
+							{0, 1, 2, 3, 4},
+							{0, 1, 2, 3, 5},
+							{0, 1, 2, 3, 6}, 
+							{0, 1, 2, 4, 5},
+							{0, 1, 2, 4, 6},
+							{0, 1, 3, 4, 5},
+							{0, 1, 3, 5, 6},
+							{0, 1, 4, 5, 6},
+							{0, 2, 3, 4, 5},
+							{0, 2, 3, 5, 6},
+							{0, 2, 4, 5, 6},
+							{0, 3, 4, 5, 6},
+							{1, 2, 3, 4, 5},
+							{1, 2, 3, 4, 6},
+							{1, 2, 3, 5, 6},
+							{1, 2, 4, 5, 6},
+							{1, 3, 4, 5, 6},
+							{2, 3, 4, 5, 6}
+							};
 		
+		for (int[] combination : combinations) {
+			tempHand = new Hand(cards[combination[0]],
+					cards[combination[1]], cards[combination[2]],
+					cards[combination[3]], cards[combination[4]]);
+			if (tempHand.compareTo(bestHand) == 1) {
+				bestHand = tempHand;
+			}
+		}
+		return bestHand;
+	}
+	
+	public void closeHand() {
+		int activePlayers = 0;
+		for (Player player : players) {
+			if (player.isActive()) activePlayers++;
+		}
+		if (activePlayers == 1) {
+			for (Player player : players) {
+				if (player.isActive()) winnerPlayerId = player.getId();
+			}
+		} else {
+			
+			
+			for (Player player : players) {
+				if (player.isActive()) {
+					player.setBestHand(findBestHand(tablecards[0], tablecards[1], 
+					                              tablecards[2], tablecards[3], 
+					                              tablecards[4], player.getCard1(),
+					                              player.getCard2())
+					                              );
+				}
+			}
+			for (int i=0 ; i<players.size() ; i++) {
+				if (players.get(i).isActive()){
+					boolean win = true;
+					for (int j=0 ; j<players.size() ; j++) {
+						if (i==j) continue;
+						else if (players.get(j).isActive()){
+							if (players.get(i).getBestHand().compareTo(players.get(j).getBestHand()) != 1) {
+								win = false;
+							}
+						}
+					}
+					if (win == true) {
+						winnerPlayerId = players.get(i).getId();
+						break;
+					}
+				}
+			}
+			
+			potToWinner(winnerPlayerId);
+			///TODO!
+			round = Round.BETWEEN_HANDS;
+			this.winnerPlayerId = (Integer) null;
+		}
 	}
 	
 	public int fixateDealer() {
@@ -230,7 +329,7 @@ public class Engine {
 				}
 			}
 		}
-		players.get(0).setDealer(true); ///TODO!
+		players.get(0).setDealer(true);
 		return 0;
 	}
 	
@@ -240,10 +339,18 @@ public class Engine {
 		}
 	}
 	
+	public void nextPlayer(int startId) {
+		for (int i = startId+1 ; i<players.size() ;  i++) {
+			if (players.get(i).isActive()) this.currentPlayerId = i; return;
+		}
+		for (int i=0 ; i<startId+1 ; i++) {
+			if (players.get(i).isActive()) this.currentPlayerId = i; return;
+		}
+	}
+	
 	public void startNewHand() {
 		if (round == Round.SETUP || round == Round.BETWEEN_HANDS) {
 			initializePlayers();
-			
 			for (Player player : players) {
 				if (player.getChips() < smallBlind ) {
 					player.setActive(false);
@@ -254,28 +361,24 @@ public class Engine {
 			}
 			
 			setPot(0);
-			checkDeck();
+			newDeck();
 			int dealerPos = fixateDealer();
-			this.currentPlayerId = dealerPos + 1;
+			nextPlayer(dealerPos);
 			this.round = Round.PREFLOP;
-			
 			players.get(currentPlayerId).setBet(smallBlind);
-			currentPlayerId++;
+			nextPlayer(currentPlayerId);
 			players.get(currentPlayerId).setBet(bigBlind);
-			this.setPot(bigBlind);
 			for (Player player : players) {
 				if (player.isActive()){
 					dealPlayerCards(player);
 				}
 			}
-			
 			selectNextPlayerOrRound();
 			
 		} else {
 			
 		}
 	}
-	
 	public void addToPot(int amount) {
 		this.pot=this.pot+amount;
 	}

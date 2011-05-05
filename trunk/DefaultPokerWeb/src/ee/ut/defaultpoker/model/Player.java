@@ -1,5 +1,6 @@
 package ee.ut.defaultpoker.model;
 import ee.ut.defaultpoker.evaluation.Card;
+import ee.ut.defaultpoker.evaluation.Hand;
 public class Player {
 	private int id;
 	private String name;
@@ -11,6 +12,7 @@ public class Player {
 	private boolean active = true;
 	private boolean hasActed = false;
 	private Card[] cards = new Card[2];
+	private Hand bestHand;
 	
 	public Player() {
 		
@@ -24,6 +26,14 @@ public class Player {
 		this.name=name;
 	}
 
+	public Card getCard1() {
+		return cards[0];
+	}
+	
+	public Card getCard2() {
+		return cards[1];
+	}
+	
 	public boolean getFold() {
 		return fold;
 	}
@@ -111,6 +121,14 @@ public class Player {
 
 	public boolean isHasActed() {
 		return hasActed;
+	}
+
+	public void setBestHand(Hand bestHand) {
+		this.bestHand = bestHand;
+	}
+
+	public Hand getBestHand() {
+		return bestHand;
 	}
 	
 	

@@ -3,21 +3,21 @@ package ee.ut.defaultpoker.evaluation;
 public class Hand {
 	private Card[] cards;
 	private int[] value;
+	
+	public Hand() {
+		
+	}
 
-	Hand(Card[] __cards)
+	public Hand(Card card1, Card card2, Card card3, Card card4, Card card5)
 	{
 		value = new int[6];
-		cards = new Card[5];
+		Card[] cards = {card1, card2, card3, card4, card5};
 		/*
 		for (int x=0; x<5; x++)
 		{
 			cards[x] = d.drawFromDeck();
 		}
 		*/
-		for (int x=0; x<5; x++)
-		{
-			cards[x] = __cards[x];
-		}
 		
 		int[] ranks = new int[14];
 		int[] orderedRanks = new int[5];	 //miscellaneous cards that are not otherwise significant
@@ -223,7 +223,7 @@ public class Hand {
 			System.out.println(cards[x]);
 	}
 
-	int compareTo(Hand that)
+	public int compareTo(Hand that)
 	{
 		for (int x=0; x<6; x++)
 		{
