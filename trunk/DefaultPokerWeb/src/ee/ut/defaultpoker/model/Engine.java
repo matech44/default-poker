@@ -28,6 +28,22 @@ public class Engine {
 	private GameInfoFactory infoFactory;
 	private GameInfoContainer infoContainer;
 	
+	public int getBetAmount() {
+		return betAmount;
+	}
+
+	public void setBetAmount(int betAmount) {
+		this.betAmount = betAmount;
+	}
+
+	public boolean getCheckEnabled() {
+		return checkEnabled;
+	}
+
+	public void setCheckEnabled(boolean checkEnabled) {
+		this.checkEnabled = checkEnabled;
+	}
+
 	public Card[] getTablecards() {
 		return tablecards;
 	}
