@@ -306,9 +306,61 @@ public class engineTest {
 			
 			assertTrue(playerTest.getBet()==150);
 			assertTrue(playerTest.getHasActed());
+	 }
+	 
+	 @Test
+	 public void newDeck() {
+		 Deck deck = engine.getDeck();
+		 engine.newDeck();
+		 assertNotSame(deck ,engine.getDeck());
+	 }
+	 
+	 @Test
+	 public void playerCheck() {
+			assertEquals(0, engine2.getPlayersSize());
+			engine2.createPlayer("Ardi", "ProoviHash");
+			Player playerTest = engine2.getPlayerBySession("ProoviHash");
 			
+			engine2.setCheckEnabled(true);
+			engine2.setCurrentPlayerId(playerTest.getId());
+			assertTrue(engine2.getCurrentPlayerId()==playerTest.getId());
+			assertFalse(playerTest.getHasActed());
+			
+			engine2.playerCheck("ProoviHash");
+			assertTrue(playerTest.getHasActed());
+	 }
+	 
+	 @Test
+	 public void playerRaise() {
+			assertEquals(0, engine2.getPlayersSize());
+			
+			engine2.createPlayer("Ardi", "ProoviHash");
+			
+			engine2.setCheckEnabled(true);
+			Player playerTest = engine2.getPlayerBySession("ProoviHash");
+			
+			playerTest.setBet(50);
+			playerTest.setHasActed(false);
+			
+			engine2.setCurrentPlayerId(playerTest.getId());
+			assertTrue(engine2.getCurrentPlayerId()==playerTest.getId());
+			engine2.setBetAmount(200);
+			
+			engine2.playerRaise("ProoviHash");
+			assertFalse(engine2.getCheckEnabled());
+			assertTrue(playerTest.getHasActed());
+			assertTrue(playerTest.getBet()==250);
+	 }
+	 
+	 @Test
+	 public void potToWinner() {
+		 engine.setPot(100);
+		 player.setId(0);
+		 
+		 engine.potToWinner(0);
+		 assertTrue(engine.getPot()==0);
+		 assertTrue(player.getChips()==600);
 	 }
 	 
 	 
-	
 }
