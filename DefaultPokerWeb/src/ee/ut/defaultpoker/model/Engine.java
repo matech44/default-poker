@@ -217,6 +217,8 @@ public class Engine {
 	        	  nextPlayer(currentPlayerId);
 	        	  dealTableCards();
 	        	  round = Round.FLOP;
+	        	  
+	        	  roundChangedEvent("flop");
 	          }
 	          else if(round == Round.FLOP) {
 	        	  betAmount = 10;
@@ -228,6 +230,7 @@ public class Engine {
 	        			  collectBets();
 	        			  resetPlayerHasActed();
 	        			  round = Round.TURN;
+	        			  roundChangedEvent("turn");
 	        		  }
 	        	  }
 	        	  everybodyReady = true;
@@ -243,6 +246,7 @@ public class Engine {
 	        			  collectBets();
 	        			  resetPlayerHasActed();
 	        			  round = Round.RIVER;
+	        			  roundChangedEvent("river");
 	        		  }
 	        	  }
 	        	  everybodyReady = true;
@@ -268,6 +272,7 @@ public class Engine {
 	      }
 	}
 	
+
 	public void potToWinner(int __Id) {
 		getPlayerById(__Id).addChips(pot);
 		this.setPot(0);
@@ -433,6 +438,7 @@ public class Engine {
 			int dealerPos = fixateDealer();
 			nextPlayer(dealerPos);
 			this.round = Round.PREFLOP;
+			roundChangedEvent("preflop");
 			players.get(currentPlayerId).increaseBet(smallBlind);
 			players.get(currentPlayerId).setHasActed(true);
 			nextPlayer(currentPlayerId);
@@ -441,6 +447,7 @@ public class Engine {
 			for (Player player : players) {
 				if (player.isActive()){
 					dealPlayerCards(player);
+					dealPlayerCardsEvent(player);
 				}
 			}
 			selectNextPlayerOrRound();
@@ -449,6 +456,7 @@ public class Engine {
 			
 		}
 	}
+
 	public void addToPot(int amount) {
 		this.pot=this.pot+amount;
 	}
@@ -486,6 +494,38 @@ public class Engine {
 		}
 		
 		info.setSession(session);
+		infoContainer.add(info);
+	}
+	
+	private void roundChangedEvent(String round) {
+		for(Player player : players) {
+			GameInfo info = infoFactory.getNewRoundInfo();
+			
+			info.addData(round);
+			info.setSession(player.getSession());
+			
+			infoContainer.add(info);
+		}
+	}
+	
+	private void dealPlayerCardsEvent(Player player) {
+		GameInfo info = infoFactory.getPlayerCardsInfo();
+		
+		String firstRank = String.valueOf(player.getCard1().getRank());
+		String firstSuit = String.valueOf(player.getCard1().getSuit());
+		
+		String firstCard = firstRank + "," + firstSuit;
+		
+		String secondRank = String.valueOf(player.getCard2().getRank());
+		String secondSuit = String.valueOf(player.getCard2().getSuit());
+		
+		String secondCard = secondRank + "," + secondSuit;
+		
+		info.addData(firstCard);
+		info.addData(secondCard);
+		
+		info.setSession(player.getSession());
+		
 		infoContainer.add(info);
 	}
 	
