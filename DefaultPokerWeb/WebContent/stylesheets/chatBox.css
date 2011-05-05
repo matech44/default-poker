@@ -2,31 +2,36 @@
 
 #chatoutput {
 	width:210px;
-	height:270px;
+	height:260px;
 	resize: none;
 	/*background-color: #606060;*/
 	background-color: transparent;
 	border: solid 1px #808080;
+	border-radius: 20px;
 	color: #DDDDDD;
+	margin-bottom: 5px;
+	margin-top: 2px;
 }
 	
 #usermsg {
 	width: 210px;
+	height: 22px;
 	/*background-color: #777777;*/
 	background-color: transparent;
 	border: solid 1px #808080;
-	font-family: "Courier New";
+	border-radius: 20px;
 	color: white;
+	margin-bottom: 5px;
 }
 
 #submitmsg {
 	/*background-color: #606060;*/
 	background-color: transparent;
 	border: solid 1px #808080;
-	font-family: "Courier New";
-	font-size: medium;
+	border-radius: 20px;
+	font-size: 15px;
 	text-align: center;
-	width: 45px;
-	height: 18px;
+	width: 50px;
+	height: 22px;
 	color: #DDDDDD;
 }
