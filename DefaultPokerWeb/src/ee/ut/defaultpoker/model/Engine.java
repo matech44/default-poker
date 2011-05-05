@@ -6,18 +6,27 @@ import java.util.List;
 import ee.ut.defaultpoker.evaluation.Card;
 import ee.ut.defaultpoker.evaluation.Deck;
 import ee.ut.defaultpoker.evaluation.Hand;
+import ee.ut.defaultpoker.model.info.GameInfo;
+import ee.ut.defaultpoker.model.info.GameInfoContainer;
+import ee.ut.defaultpoker.model.info.GameInfoFactory;
 
 public class Engine {
 	public int currentPlayerId = 0;
 	public int winnerPlayerId;
 	private boolean checkEnabled = false;
+	
 	private int betAmount;
 	private int smallBlind = 5;
 	private int bigBlind = 10;
+	private int pot;
+	
 	Card[] tablecards = new Card[5];
 	Deck deck = new Deck();
 	List<Player> players = new ArrayList<Player>();
-	private int pot;
+	
+	
+	private GameInfoFactory infoFactory;
+	private GameInfoContainer infoContainer;
 	
 	public int getPlayersSize() {
 		return players.size();
@@ -57,6 +66,9 @@ public class Engine {
 	}
 
 	public Engine() {
+		infoFactory = new GameInfoFactory();
+		infoContainer = new GameInfoContainer();
+		
 		round = Round.SETUP;
 	}
 	
@@ -162,10 +174,12 @@ public class Engine {
 		__player.setCards(cards);
 	}
 	
-	public void createPlayer(String session, String name) {
+	public void createPlayer(String name, String session) {
 		 Player player = new Player(name);
 		 player.setSession(session);
 		 players.add(player);
+		 
+		 newPlayerAddedEvent(session);
 	}
 
 	public void dealTableCards() {
@@ -462,6 +476,25 @@ public class Engine {
 			return "Closing";
 		}
 		return null;
+	}
+	
+	public void newPlayerAddedEvent(String session) {
+		GameInfo info = infoFactory.getNewPlayersInfo();
+		
+		for(Player player : players) {
+			info.addData(player.getName());
+		}
+		
+		info.setSession(session);
+		infoContainer.add(info);
+	}
+	
+	public boolean hasNewInfo(String session) {
+		return infoContainer.checkForNewInfo(session);
+	}
+	
+	public GameInfo fetchNewInfo(String session) {
+		return infoContainer.popInfoFor(session);
 	}
 
 }
