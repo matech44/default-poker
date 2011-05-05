@@ -75,10 +75,8 @@ public class Engine {
 	
 	public void collectBets() {
 		for (Player player : players) {
-			if (player != null) {
-				pot += player.getBet();
-				player.setBet(0);
-			}
+			pot += player.getBet();
+			player.setBet(0);
 		}
 	}
 	
@@ -290,30 +288,22 @@ public class Engine {
 		Hand bestHand = new Hand(lowCard1, lowCard2, lowCard3, lowCard4, lowCard5);
 		Hand tempHand = new Hand();
 		int combinations[][] = {	
-							{0, 1, 2, 3, 4},
-							{0, 1, 2, 3, 5},
-							{0, 1, 2, 3, 6}, 
-							{0, 1, 2, 4, 5},
-							{0, 1, 2, 4, 6},
-							{0, 1, 3, 4, 5},
-							{0, 1, 3, 5, 6},
-							{0, 1, 4, 5, 6},
-							{0, 2, 3, 4, 5},
-							{0, 2, 3, 5, 6},
-							{0, 2, 4, 5, 6},
-							{0, 3, 4, 5, 6},
-							{1, 2, 3, 4, 5},
-							{1, 2, 3, 4, 6},
-							{1, 2, 3, 5, 6},
-							{1, 2, 4, 5, 6},
-							{1, 3, 4, 5, 6},
-							{2, 3, 4, 5, 6}
+							{0, 1, 2},
+							{0, 1, 3},
+							{0, 1, 4}, 
+							{0, 2, 3},
+							{0, 2, 4},
+							{0, 3, 4},
+							{1, 2, 3},
+							{1, 2, 4},
+							{1, 3, 4},
+							{2, 3, 4}
 							};
 		
 		for (int[] combination : combinations) {
 			tempHand = new Hand(cards[combination[0]],
 					cards[combination[1]], cards[combination[2]],
-					cards[combination[3]], cards[combination[4]]);
+					cards[5], cards[6]);
 			if (tempHand.compareTo(bestHand) == 1) {
 				bestHand = tempHand;
 			}
@@ -340,23 +330,6 @@ public class Engine {
 					                              );
 				}
 			}
-			/*
-			for (int i=0 ; i<players.size() ; i++) {
-				if (players.get(i).isActive()){
-					boolean win = true;
-					for (int j=0 ; j<players.size() ; j++) {
-						if (i==j) continue;
-						else if (players.get(j).isActive()){
-							if (players.get(i).getBestHand().compareTo(players.get(j).getBestHand()) != 1) {
-								win = false;
-							}
-						}
-					}
-					if (win == true) {
-						winnerPlayerId = players.get(i).getId();
-					}
-				}
-			}*/
 			
 			for (Player player : players) {
 				boolean win = true;
