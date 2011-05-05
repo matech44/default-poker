@@ -16,22 +16,50 @@ public class Engine {
 	private int bigBlind = 10;
 	Card[] tablecards = new Card[5];
 	Deck deck = new Deck();
-	private int pot;
 	List<Player> players = new ArrayList<Player>();
+	private int pot;
 	
+	public int getPlayersSize() {
+		return players.size();
+	}
+	
+	public int getCurrentPlayerId() {
+		return currentPlayerId;
+	}
+
+	public void setCurrentPlayerId(int currentPlayerId) {
+		this.currentPlayerId = currentPlayerId;
+	}
+
+	public Player getFirstPlayer() {
+		return players.get(0);
+	}
+
+	public void setPlayers(Player player) {
+		this.players.add(player);
+	}
 	public enum Round  {
 		  SETUP, PREFLOP, FLOP, TURN, RIVER, CLOSING, BETWEEN_HANDS;
 	      }
 
 	Round round;
 	
+	public int getPot() {
+		return pot;
+	}
+
+	public Deck getDeck() {
+		return deck;
+	}
+
+	public void setDeck(Deck deck) {
+		this.deck = deck;
+	}
+
 	public Engine() {
 		round = Round.SETUP;
 	}
 	
-	public int getPot() {
-		return this.pot;
-	}
 	
 	public void collectBets() {
 		for (Player player : players) {
@@ -125,11 +153,6 @@ public class Engine {
 			getPlayerBySession(session).setHasActed(true);
 			selectNextPlayerOrRound();
 		}
-	}
-
-
-	public void createNewDeck() {
-		deck = new Deck();
 	}
 
 	public void dealPlayerCards(Player __player) {
