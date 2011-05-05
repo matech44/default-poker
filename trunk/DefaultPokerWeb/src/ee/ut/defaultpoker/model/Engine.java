@@ -79,47 +79,6 @@ public class Engine {
 	 */
 	private GameInfoContainer infoContainer;
 
-	
-	public int getBetAmount() {
-		return betAmount;
-	}
-
-	public void setBetAmount(int betAmount) {
-		this.betAmount = betAmount;
-	}
-
-	public boolean getCheckEnabled() {
-		return checkEnabled;
-	}
-
-	public void setCheckEnabled(boolean checkEnabled) {
-		this.checkEnabled = checkEnabled;
-	}
-
-	public Card[] getTablecards() {
-		return tablecards;
-	}
-
-	public void setTablecards(Card[] tablecards) {
-		this.tablecards = tablecards;
-	}
-
-	public Round getRound() {
-		return round;
-	}
-
-	public void setRound(Round round) {
-		this.round = round;
-	}
-
-	public int getPlayersSize() {
-		return players.size();
-	}
-	
-	public int getCurrentPlayerId() {
-		return currentPlayerId;
-	}
-
 	/**
 	 * Constants used to define current round of the game contains
 	 * <code>getName()</code> method to return round name as a String
