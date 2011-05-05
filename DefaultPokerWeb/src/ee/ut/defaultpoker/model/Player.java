@@ -18,6 +18,8 @@ public class Player {
 		
 	}
 	
+	
+	
 	public boolean getHasActed() {
 		return this.hasActed;
 	}
@@ -32,6 +34,14 @@ public class Player {
 	
 	public Card getCard2() {
 		return cards[1];
+	}
+	
+	public void setCard1(Card card) {
+		cards[0]= card;
+	}
+	
+	public void setCard2(Card card) {
+		cards[1] = card;
 	}
 	
 	public boolean getFold() {
