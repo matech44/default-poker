@@ -28,6 +28,22 @@ public class Engine {
 	private GameInfoFactory infoFactory;
 	private GameInfoContainer infoContainer;
 	
+	public Card[] getTablecards() {
+		return tablecards;
+	}
+
+	public void setTablecards(Card[] tablecards) {
+		this.tablecards = tablecards;
+	}
+
+	public Round getRound() {
+		return round;
+	}
+
+	public void setRound(Round round) {
+		this.round = round;
+	}
+
 	public int getPlayersSize() {
 		return players.size();
 	}
