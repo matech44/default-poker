@@ -177,7 +177,7 @@ public class Hand {
 	}
    
 
-	void display()
+	public void display()
 	{
 		String s;
 		switch( value[0] )
