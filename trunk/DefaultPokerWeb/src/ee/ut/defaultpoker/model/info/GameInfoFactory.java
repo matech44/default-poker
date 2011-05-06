@@ -47,4 +47,14 @@ public class GameInfoFactory {
 		return info;
 	}
 
+	public GameInfo getNewChatInfo() {
+		GameInfo info = new GameInfo("chat");
+		return info;
+	}
+
+	public GameInfo getNewPotInfo() {
+		GameInfo info = new GameInfo("pot");
+		return info;
+	}
+
 }
