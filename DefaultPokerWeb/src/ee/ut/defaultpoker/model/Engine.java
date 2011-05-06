@@ -114,6 +114,168 @@ public class Engine {
 
 		setNewRound(Round.SETUP);
 	}
+	
+	
+	// Following methods are used mainly for testing in engineTest.java
+	public int getCurrentPlayerId() {
+		return currentPlayerId;
+	}
+
+
+
+	public void setCurrentPlayerId(int currentPlayerId) {
+		this.currentPlayerId = currentPlayerId;
+	}
+
+
+
+	public int getWinnerPlayerId() {
+		return winnerPlayerId;
+	}
+
+
+
+	public void setWinnerPlayerId(int winnerPlayerId) {
+		this.winnerPlayerId = winnerPlayerId;
+	}
+
+
+
+	public boolean isCheckEnabled() {
+		return checkEnabled;
+	}
+
+
+
+	public void setCheckEnabled(boolean checkEnabled) {
+		this.checkEnabled = checkEnabled;
+	}
+
+
+
+	public int getBetAmount() {
+		return betAmount;
+	}
+
+
+
+	public void setBetAmount(int betAmount) {
+		this.betAmount = betAmount;
+	}
+
+
+
+	public int getSmallBlind() {
+		return smallBlind;
+	}
+
+
+
+	public void setSmallBlind(int smallBlind) {
+		this.smallBlind = smallBlind;
+	}
+
+
+
+	public int getBigBlind() {
+		return bigBlind;
+	}
+
+
+
+	public void setBigBlind(int bigBlind) {
+		this.bigBlind = bigBlind;
+	}
+
+
+
+	public int getPot() {
+		return pot;
+	}
+
+
+
+	public void setPot(int pot) {
+		this.pot = pot;
+	}
+
+
+
+	public Card[] getTablecards() {
+		return tablecards;
+	}
+
+
+
+	public void setTablecards(Card[] tablecards) {
+		this.tablecards = tablecards;
+	}
+
+
+
+	public Deck getDeck() {
+		return deck;
+	}
+
+
+
+	public void setDeck(Deck deck) {
+		this.deck = deck;
+	}
+
+
+
+	public List<Player> getPlayers() {
+		return players;
+	}
+
+	public Player getFirstPlayer() {
+		return players.get(0);
+	}
+
+	public void setPlayers(Player player) {
+		this.players.add(player);
+	}
+	
+	public int getPlayersSize() {
+		return this.players.size();
+	}
+
+	public GameInfoFactory getInfoFactory() {
+		return infoFactory;
+	}
+
+
+
+	public void setInfoFactory(GameInfoFactory infoFactory) {
+		this.infoFactory = infoFactory;
+	}
+
+
+
+	public GameInfoContainer getInfoContainer() {
+		return infoContainer;
+	}
+
+
+
+	public void setInfoContainer(GameInfoContainer infoContainer) {
+		this.infoContainer = infoContainer;
+	}
+
+
+
+	public Round getRound() {
+		return round;
+	}
+
+
+
+	public void setRound(Round round) {
+		this.round = round;
+	}
+
+	//END OF TEST METHODS
 
 	/**
 	 * Called from UI to join game
