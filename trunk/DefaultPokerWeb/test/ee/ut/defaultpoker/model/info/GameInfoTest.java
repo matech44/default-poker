@@ -1,39 +1,68 @@
 package ee.ut.defaultpoker.model.info;
 
-/*import static org.junit.Assert.assertTrue;
-
-import java.util.ArrayList;
-import java.util.List;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class GameInfoTest {
 	private GameInfoFactory factory;
-	private List<String> strings;
+	private GameInfoContainer container;
 	
 	@Before
 	public void setUp() {
 		factory = new GameInfoFactory();
-		strings = new ArrayList<String>();
+		container = new GameInfoContainer();
 	}
 	
 	@Test
-	public void testGameInfoCreation() {
+	public void testCheckForFoundNewInfo() {
 		GameInfo info = factory.getNewPlayersInfo();
 		
-		assertTrue(info.getType().equals("players"));
+		String session = "A1B2C3D4E5F6";
+		info.setSession(session);
+		container.add(info);
+		
+		assertTrue(container.checkForNewInfo(session));
 	}
 	
 	@Test
-	public void testGameInfoSetData() {
+	public void testCheckForNewInfoNotFound() {
 		GameInfo info = factory.getNewPlayersInfo();
 		
+		String session = "A1B2C3D4E5F6";
+		String requestSession = "BBBBBBBBBBB";
+		info.setSession(session);
+		container.add(info);
 		
+		assertFalse(container.checkForNewInfo(requestSession));
+	}
+	
+	@Test
+	public void testForFetchingNewInfo() {
+		GameInfo info = factory.getNewPlayersInfo();
 		
-		info.setData(strings);
+		String session = "A1B2C3D4E5F6";
+		info.setSession(session);
+		info.addData("tere");
+		container.add(info);
 		
-		assertTrue(info.getType().equals("players"));
+		String expected = "tere";
+		String actual = container.popInfoFor(session).getData().get(0);
+		
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testForContainerRemoval() {
+		GameInfo info = factory.getNewPlayersInfo();
+		
+		String session = "A1B2C3D4E5F6";
+		info.setSession(session);
+		info.addData("tere");
+		container.add(info);
+		container.popInfoFor(session);
+		
+		assertFalse(container.checkForNewInfo(session));
 	}
 }
-*/
