@@ -5,6 +5,7 @@ import java.util.List;
 
 public class GameInfo {
 	private String type;
+	private String name;
 	private List<String> data;
 	private int id;
 	private String session;
@@ -14,12 +15,21 @@ public class GameInfo {
 		this.type = type;
 	}
 	
+	public String getType() {
+		return type;
+	}
+	
+	
 	public List<String> getData() {
 		return data;
 	}
 	
 	public void setData(List<String> data) {
 		this.data = data;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public int getId() {
