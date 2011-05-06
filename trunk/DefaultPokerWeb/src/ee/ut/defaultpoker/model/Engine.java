@@ -18,12 +18,12 @@ public class Engine {
 	/**
 	 * Describes which player can call methods
 	 */
-	public int currentPlayerId = 0;
+	private int currentPlayerId;
 
 	/**
 	 * Player who wins
 	 */
-	public int winnerPlayerId;
+	private int winnerPlayerId;
 
 	/**
 	 * Can player check at this stage?
@@ -109,121 +109,86 @@ public class Engine {
 	 * @see PokerServlet.java
 	 */
 	public Engine() {
+		currentPlayerId = 0;
+
 		infoFactory = new GameInfoFactory();
 		infoContainer = new GameInfoContainer();
 
 		setNewRound(Round.SETUP);
 	}
-	
-	
+
 	// Following methods are used mainly for testing in engineTest.java
 	public int getCurrentPlayerId() {
 		return currentPlayerId;
 	}
 
-
-
 	public void setCurrentPlayerId(int currentPlayerId) {
 		this.currentPlayerId = currentPlayerId;
 	}
-
-
 
 	public int getWinnerPlayerId() {
 		return winnerPlayerId;
 	}
 
-
-
 	public void setWinnerPlayerId(int winnerPlayerId) {
 		this.winnerPlayerId = winnerPlayerId;
 	}
-
-
 
 	public boolean isCheckEnabled() {
 		return checkEnabled;
 	}
 
-
-
 	public void setCheckEnabled(boolean checkEnabled) {
 		this.checkEnabled = checkEnabled;
 	}
-
-
 
 	public int getBetAmount() {
 		return betAmount;
 	}
 
-
-
 	public void setBetAmount(int betAmount) {
 		this.betAmount = betAmount;
 	}
-
-
 
 	public int getSmallBlind() {
 		return smallBlind;
 	}
 
-
-
 	public void setSmallBlind(int smallBlind) {
 		this.smallBlind = smallBlind;
 	}
-
-
 
 	public int getBigBlind() {
 		return bigBlind;
 	}
 
-
-
 	public void setBigBlind(int bigBlind) {
 		this.bigBlind = bigBlind;
 	}
-
-
 
 	public int getPot() {
 		return pot;
 	}
 
-
-
 	public void setPot(int pot) {
 		this.pot = pot;
 	}
-
-
 
 	public Card[] getTablecards() {
 		return tablecards;
 	}
 
-
-
 	public void setTablecards(Card[] tablecards) {
 		this.tablecards = tablecards;
 	}
-
-
 
 	public Deck getDeck() {
 		return deck;
 	}
 
-
-
 	public void setDeck(Deck deck) {
 		this.deck = deck;
 	}
-
-
 
 	public List<Player> getPlayers() {
 		return players;
@@ -236,7 +201,7 @@ public class Engine {
 	public void setPlayers(Player player) {
 		this.players.add(player);
 	}
-	
+
 	public int getPlayersSize() {
 		return this.players.size();
 	}
@@ -245,37 +210,27 @@ public class Engine {
 		return infoFactory;
 	}
 
-
-
 	public void setInfoFactory(GameInfoFactory infoFactory) {
 		this.infoFactory = infoFactory;
 	}
-
-
 
 	public GameInfoContainer getInfoContainer() {
 		return infoContainer;
 	}
 
-
-
 	public void setInfoContainer(GameInfoContainer infoContainer) {
 		this.infoContainer = infoContainer;
 	}
-
-
 
 	public Round getRound() {
 		return round;
 	}
 
-
-
 	public void setRound(Round round) {
 		this.round = round;
 	}
 
-	//END OF TEST METHODS
+	// END OF TEST METHODS
 
 	/**
 	 * Called from UI to join game
@@ -288,10 +243,12 @@ public class Engine {
 		player.setSession(session);
 		players.add(player);
 
+		// update UI - new player has joined
 		newPlayerAddedEvent(session);
+		systemMessageEvent("Player " + name + " joined game");
 	}
-	
-	/* ==============PLAYER CHOISES============ */
+
+	/* ==============PLAYER INTERACTION============ */
 
 	/**
 	 * Called from UI to fold player hand
@@ -303,7 +260,16 @@ public class Engine {
 			getPlayerBySession(session).setFold(true);
 			getPlayerBySession(session).setHasActed(true);
 			getPlayerBySession(session).setActive(false);
+
+			// update UI - player has folded
+			playerFoldEvent(getPlayerBySession(session));
+			systemMessageEvent("Player "
+					+ getPlayerBySession(session).getName() + " folded");
+
 			selectNextPlayerOrRound();
+		} else {
+			systemMessageEvent(session,
+					"You can not act right now - your session id is " + session);
 		}
 	}
 
@@ -318,10 +284,16 @@ public class Engine {
 			int previousBet = getPlayerBySession(session).getBet();
 			int newBet = getHighestBet() - previousBet;
 
-			getPlayerBySession(session).increaseBet(newBet);
+			increasePlayerBet(session, newBet);
 			getPlayerBySession(session).setHasActed(true);
 
+			systemMessageEvent("Player "
+					+ getPlayerBySession(session).getName() + " folded");
+
 			selectNextPlayerOrRound();
+		} else {
+			systemMessageEvent(session,
+					"You can not act right now - your session id is " + session);
 		}
 	}
 
@@ -359,16 +331,26 @@ public class Engine {
 
 		}
 	}
-	
+
+	/**
+	 * Called from UI - player chats
+	 * 
+	 * @param message
+	 * @param session
+	 */
+	public void playerChat(String message, String session) {
+		chatEvent(getPlayerBySession(session), message);
+	}
+
 	/* ==============GAME LOGIC============ */
-	
+
 	/**
 	 * @param session
 	 * @return player with desired browser session
 	 */
 	public Player getPlayerBySession(String session) {
 		for (Player player : players) {
-			if (player.getSession() == session)
+			if (player.getSession().equals(session))
 				return player;
 		}
 		return null; // / Erindi peaks siia äkki tegema?
@@ -382,6 +364,7 @@ public class Engine {
 	 */
 	public void startNewHand() {
 		if (round == Round.SETUP || round == Round.BETWEEN_HANDS) {
+			systemMessageEvent("Starting new hand");
 
 			initializePlayers();
 
@@ -397,24 +380,27 @@ public class Engine {
 			pot = 0;
 			createNewDeck();
 			int dealerPos = fixateDealer();
-			
+
+			// update UI - new dealer
 			setNewDealerEvent(players.get(dealerPos));
-			
+
 			selectNextPlayer(dealerPos);
 
 			setNewRound(Round.PREFLOP);
 
-			players.get(currentPlayerId).increaseBet(smallBlind);
+			increasePlayerBet(currentPlayerId, smallBlind);
 			players.get(currentPlayerId).setHasActed(true);
 
 			selectNextPlayer(currentPlayerId);
 
-			players.get(currentPlayerId).increaseBet(bigBlind);
+			increasePlayerBet(currentPlayerId, bigBlind);
 			players.get(currentPlayerId).setHasActed(true);
 
 			for (Player player : players) {
 				if (player.isActive()) {
 					dealPlayerCards(player);
+
+					// update UI player pocket cards
 					dealPlayerCardsEvent(player);
 				}
 			}
@@ -424,6 +410,16 @@ public class Engine {
 		} else {
 			// TODO throw exception
 		}
+	}
+
+	private void increasePlayerBet(int id, int amount) {
+		players.get(id).increaseBet(amount);
+		playerBetChangedEvent(players.get(id));
+	}
+
+	private void increasePlayerBet(String session, int amount) {
+		getPlayerBySession(session).increaseBet(amount);
+		playerBetChangedEvent(getPlayerBySession(session));
 	}
 
 	/**
@@ -481,9 +477,10 @@ public class Engine {
 
 		return 0;
 	}
-	
+
 	/**
 	 * Deals pocket cards to desired player
+	 * 
 	 * @param player
 	 */
 	public void dealPlayerCards(Player player) {
@@ -502,16 +499,20 @@ public class Engine {
 
 		for (Player player : players) {
 			if (player.getId() > startId) {
-				if (player.isActive())
+				if (player.isActive()) {
 					currentPlayerId = player.getId();
+					systemMessageEvent("It is " + player.getName() + "'s turn");
+				}
 				return; // short circuit
 			}
 		}
 
 		for (Player player : players) {
 			if (player.getId() < startId) {
-				if (player.isActive())
+				if (player.isActive()) {
 					currentPlayerId = player.getId();
+					systemMessageEvent("It is " + player.getName() + "'s turn");
+				}
 				return; // short circuit
 			}
 		}
@@ -526,6 +527,9 @@ public class Engine {
 
 		int activePlayers = getActivePlayersAmount();
 
+		systemMessageEvent("There are " + activePlayers
+				+ " active players in this round");
+
 		if (activePlayers == 0) {
 			// TODO throw exception
 		}
@@ -539,10 +543,25 @@ public class Engine {
 		} else {
 			if (round == Round.PREFLOP) {
 				betAmount = 10;
-				selectNextPlayer(currentPlayerId);
-				dealTableCards();
-				setNewRound(Round.FLOP);
 
+				for (Player player : players) {
+					if (!player.isHasActed())
+						everybodyReady = false;
+					break;
+				}
+
+				if (everybodyReady) {
+					if (areBetsEqual()) {
+						collectBets();
+						resetPlayerHasActed();
+						setNewRound(Round.FLOP);
+						dealTableCards();
+						flopEvent();
+					}
+				}
+				
+				everybodyReady = true;
+				selectNextPlayer(currentPlayerId);
 			} else if (round == Round.FLOP) {
 				betAmount = 10;
 
@@ -610,7 +629,7 @@ public class Engine {
 	/**
 	 * @return amount of players participating in hand
 	 */
-	private int getActivePlayersAmount() {
+	public int getActivePlayersAmount() {
 		int activePlayers = 0;
 
 		for (Player player : players) {
@@ -620,7 +639,7 @@ public class Engine {
 
 		return activePlayers;
 	}
-	
+
 	/**
 	 * @return comparison of all the bets players have made
 	 */
@@ -644,7 +663,7 @@ public class Engine {
 
 		return equality;
 	}
-	
+
 	/**
 	 * Sets all players not acted
 	 */
@@ -653,7 +672,7 @@ public class Engine {
 			player.setHasActed(false);
 		}
 	}
-	
+
 	/**
 	 * Deals community cards
 	 */
@@ -668,20 +687,20 @@ public class Engine {
 	}
 
 	/**
-	 * Declares winner
-	 * winner gets pot
+	 * Declares winner winner gets pot
 	 */
 	public void closeHand() {
-		int activePlayers = 0;
-		for (Player player : players) {
-			if (player.isActive())
-				activePlayers++;
-		}
+		String winningReason = "Non";
+		int activePlayers = getActivePlayersAmount();
+
 		if (activePlayers == 1) {
 			for (Player player : players) {
 				if (player.isActive())
 					winnerPlayerId = player.getId();
 			}
+
+			winningReason = "others folded";
+
 		} else {
 			for (Player player : players) {
 				if (player.isActive()) {
@@ -705,14 +724,21 @@ public class Engine {
 				}
 				if (win) {
 					winnerPlayerId = player.getId();
+					winningReason = "best hand";
 					break;
 				}
 			}
 
-			potToWinner(winnerPlayerId);
-			// /TODO!
-			setNewRound(Round.BETWEEN_HANDS);
 		}
+
+		potToWinner(winnerPlayerId);
+		// /TODO!
+		setNewRound(Round.BETWEEN_HANDS);
+
+		systemMessageEvent("Player " + getPlayerById(winnerPlayerId).getName()
+				+ " won - " + winningReason);
+
+		// playerWonEvent(getPlayerById(winnerPlayerId), winningReason);
 	}
 
 	/**
@@ -759,7 +785,7 @@ public class Engine {
 		getPlayerById(id).addChips(pot);
 		pot = 0;
 	}
-	
+
 	/**
 	 * @param id
 	 * @return player with desired id
@@ -792,7 +818,12 @@ public class Engine {
 		for (Player player : players) {
 			pot += player.getBet();
 			player.setBet(0);
+			
+			// UI update
+			playerBetChangedEvent(player);
 		}
+		
+		potChangedEvent(pot);
 	}
 
 	public void addToPot(int amount) {
@@ -849,12 +880,96 @@ public class Engine {
 			infoContainer.add(info);
 		}
 	}
-	
+
 	private void setNewDealerEvent(Player dealer) {
 		for (Player player : players) {
 			GameInfo info = infoFactory.getNewDealerInfo();
 
 			info.setId(dealer.getId());
+			info.setSession(player.getSession());
+
+			infoContainer.add(info);
+		}
+	}
+
+	private void playerBetChangedEvent(Player increasedPlayer) {
+		for (Player player : players) {
+			GameInfo info = infoFactory.getNewBetInfo();
+
+			info.addData(String.valueOf(increasedPlayer.getBet()));
+			info.setId(increasedPlayer.getId());
+			info.setSession(player.getSession());
+
+			infoContainer.add(info);
+		}
+	}
+
+	private void playerFoldEvent(Player foldedPlayer) {
+		for (Player player : players) {
+			GameInfo info = infoFactory.getNewFoldInfo();
+
+			info.setId(foldedPlayer.getId());
+			info.setSession(player.getSession());
+
+			infoContainer.add(info);
+		}
+	}
+
+	/**
+	 * System broadcast
+	 * 
+	 * @param message
+	 */
+	private void systemMessageEvent(String message) {
+		for (Player player : players) {
+			GameInfo info = infoFactory.getNewSystemMessageInfo();
+
+			info.addData(message);
+			info.setSession(player.getSession());
+
+			infoContainer.add(info);
+		}
+	}
+
+	/**
+	 * System private message
+	 * 
+	 * @param session
+	 * @param message
+	 */
+	private void systemMessageEvent(String session, String message) {
+		GameInfo info = infoFactory.getNewSystemMessageInfo();
+
+		info.addData(message);
+		info.setSession(session);
+
+		infoContainer.add(info);
+
+	}
+
+	private void chatEvent(Player chattingPlayer, String message) {
+		for (Player player : players) {
+			GameInfo info = infoFactory.getNewChatInfo();
+
+			info.addData(message);
+			info.setName(chattingPlayer.getName());
+			info.setSession(player.getSession());
+
+			infoContainer.add(info);
+		}
+	}
+
+	private void flopEvent() {
+		for (Player player : players) {
+			GameInfo info = infoFactory.getNewFlopInfo();
+
+			for (int i = 0; i < 3; i++) {
+				String rank = String.valueOf(tablecards[i].getRank());
+				String suit = String.valueOf(tablecards[i].getSuit());
+				String card = rank + "-" + suit;
+				info.addData(card);
+			}
+
 			info.setSession(player.getSession());
 
 			infoContainer.add(info);
@@ -881,6 +996,21 @@ public class Engine {
 		info.setSession(player.getSession());
 
 		infoContainer.add(info);
+	}
+
+	private void playerWonEvent(Player winner, String winningReason) {
+		// TODO implement
+	}
+	
+	private void potChangedEvent(int amount) {
+		for (Player player : players) {
+			GameInfo info = infoFactory.getNewPotInfo();
+
+			info.addData(String.valueOf(amount));
+			info.setSession(player.getSession());
+
+			infoContainer.add(info);
+		}
 	}
 
 }
