@@ -235,6 +235,9 @@ public class Engine {
 			pot = 0;
 			createNewDeck();
 			int dealerPos = fixateDealer();
+			
+			setNewDealerEvent(players.get(dealerPos));
+			
 			selectNextPlayer(dealerPos);
 
 			setNewRound(Round.PREFLOP);
@@ -254,7 +257,7 @@ public class Engine {
 				}
 			}
 
-			// selectNextPlayerOrRound();
+			selectNextPlayerOrRound();
 
 		} else {
 			// TODO throw exception
@@ -679,6 +682,17 @@ public class Engine {
 			GameInfo info = infoFactory.getNewRoundInfo();
 
 			info.addData(round);
+			info.setSession(player.getSession());
+
+			infoContainer.add(info);
+		}
+	}
+	
+	private void setNewDealerEvent(Player dealer) {
+		for (Player player : players) {
+			GameInfo info = infoFactory.getNewDealerInfo();
+
+			info.setId(dealer.getId());
 			info.setSession(player.getSession());
 
 			infoContainer.add(info);
