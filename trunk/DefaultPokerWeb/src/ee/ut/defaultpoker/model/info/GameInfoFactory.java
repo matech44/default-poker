@@ -22,4 +22,29 @@ public class GameInfoFactory {
 		return info;
 	}
 
+	public GameInfo getNewDealerInfo() {
+		GameInfo info = new GameInfo("dealer");
+		return info;
+	}
+
+	public GameInfo getNewBetInfo() {
+		GameInfo info = new GameInfo("bet");
+		return info;
+	}
+
+	public GameInfo getNewFoldInfo() {
+		GameInfo info = new GameInfo("fold");
+		return info;
+	}
+
+	public GameInfo getNewSystemMessageInfo() {
+		GameInfo info = new GameInfo("message");
+		return info;
+	}
+
+	public GameInfo getNewFlopInfo() {
+		GameInfo info = new GameInfo("flop");
+		return info;
+	}
+
 }
