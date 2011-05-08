@@ -270,7 +270,7 @@ public class Engine {
 		if (currentPlayerId == getPlayerBySession(session).getId()) {
 			getPlayerBySession(session).setFold(true);
 			getPlayerBySession(session).setHasActed(true);
-			getPlayerBySession(session).setActive(false);
+			//getPlayerBySession(session).setActive(false);
 
 			// update UI - player has folded
 			playerFoldEvent(getPlayerBySession(session));
@@ -317,6 +317,7 @@ public class Engine {
 	 * 
 	 * @param session
 	 */
+	/* Pole vaja?
 	public void playerCheck(String session) {
 		if (currentPlayerId == getPlayerBySession(session).getId()
 				&& checkEnabled) {
@@ -327,7 +328,7 @@ public class Engine {
 
 		}
 	}
-
+	*/
 	/**
 	 * Called from UI - player raises previous bet
 	 * 
@@ -335,15 +336,23 @@ public class Engine {
 	 */
 	public void playerRaise(String session) {
 		if (currentPlayerId == getPlayerBySession(session).getId()) {
-
-			if (checkEnabled)
-				checkEnabled = false;
-
-			getPlayerBySession(session).increaseBet(betAmount);
+			
+			int previousBet = getPlayerBySession(session).getBet();
+			int newBet = getHighestBet() - previousBet + betAmount;
+			
+			increasePlayerBet(session, newBet);
 			getPlayerBySession(session).setHasActed(true);
+			
+			systemMessageEvent("Player "
+					+ getPlayerBySession(session).getName() + " raised by " + betAmount);
 
 			selectNextPlayerOrRound();
 
+		} else {
+			systemMessageEvent(session,
+					"You can not act right now - it is "
+							+ getPlayerById(currentPlayerId).getName()
+							+ "'s turn");
 		}
 	}
 
@@ -431,7 +440,7 @@ public class Engine {
 			if (player.getChips() < smallBlind) {
 				player.setActive(false);
 			} else {
-				player.setActive(true);
+				//player.setActive(true);
 				player.setFold(false);
 			}
 		}
@@ -553,7 +562,7 @@ public class Engine {
 
 		for (Player player : players) {
 			if (player.getId() > startId) {
-				if (player.isActive()) {
+				if (player.isActive() && !player.getFold()) {
 					currentPlayerId = player.getId();
 					systemMessageEvent("It is " + player.getName() + "'s turn");
 				}
@@ -563,7 +572,7 @@ public class Engine {
 
 		for (Player player : players) {
 			if (player.getId() < startId) {
-				if (player.isActive()) {
+				if (player.isActive() && !player.getFold()) {
 					currentPlayerId = player.getId();
 					systemMessageEvent("It is " + player.getName() + "'s turn");
 				}
@@ -664,7 +673,7 @@ public class Engine {
 	private boolean allPlayersHaveActed() {
 
 		for (Player player : players) {
-			if (!player.isHasActed())
+			if (player.isActive() && !player.isHasActed())
 				return false;
 		}
 
