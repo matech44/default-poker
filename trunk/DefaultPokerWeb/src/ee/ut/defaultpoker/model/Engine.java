@@ -231,7 +231,7 @@ public class Engine {
 	}
 
 	// END OF TEST METHODS
-	
+
 	/**
 	 * Called from UI to spectate
 	 * 
@@ -239,7 +239,7 @@ public class Engine {
 	 */
 	public void spectate(String session) {
 		askForWholePackageEvent(session);
-		
+
 		systemMessageEvent("Someone spectates");
 	}
 
@@ -280,7 +280,9 @@ public class Engine {
 			selectNextPlayerOrRound();
 		} else {
 			systemMessageEvent(session,
-					"You can not act right now - your session id is " + session);
+					"You can not act right now - your session it is "
+							+ getPlayerById(currentPlayerId).getName()
+							+ "'s turn");
 		}
 	}
 
@@ -299,12 +301,14 @@ public class Engine {
 			getPlayerBySession(session).setHasActed(true);
 
 			systemMessageEvent("Player "
-					+ getPlayerBySession(session).getName() + " folded");
+					+ getPlayerBySession(session).getName() + " called");
 
 			selectNextPlayerOrRound();
 		} else {
 			systemMessageEvent(session,
-					"You can not act right now - your session id is " + session);
+					"You can not act right now - your session it is "
+							+ getPlayerById(currentPlayerId).getName()
+							+ "'s turn");
 		}
 	}
 
@@ -380,7 +384,7 @@ public class Engine {
 			// give IDs
 			initializePlayers();
 
-			// set 
+			// set players with not enough chips inactive
 			for (Player player : players) {
 				if (player.getChips() < smallBlind) {
 					player.setActive(false);
@@ -389,21 +393,25 @@ public class Engine {
 					player.setFold(false);
 				}
 			}
+			
+			int activePlayers = getActivePlayersAmount();
+
+			systemMessageEvent("There are " + activePlayers
+					+ " active players in this round");
 
 			// reset pot
 			pot = 0;
 			potChangedEvent(pot);
-			
-			// 
+
 			createNewDeck();
-			
+
 			// PREFLOP starts
 			setNewRound(Round.PREFLOP);
-			
+
 			// new dealer
 			int dealerPos = fixateDealer();
 			setNewDealerEvent(players.get(dealerPos));
-			
+
 			// set blinds - hasActed should stay false
 			selectNextPlayer(dealerPos);
 			increasePlayerBet(currentPlayerId, smallBlind);
@@ -428,11 +436,23 @@ public class Engine {
 		}
 	}
 
+	/**
+	 * Increase player bet and let UI know
+	 * 
+	 * @param id
+	 * @param amount
+	 */
 	private void increasePlayerBet(int id, int amount) {
 		players.get(id).increaseBet(amount);
 		playerBetChangedEvent(players.get(id));
 	}
 
+	/**
+	 * Same as above
+	 * 
+	 * @param session
+	 * @param amount
+	 */
 	private void increasePlayerBet(String session, int amount) {
 		getPlayerBySession(session).increaseBet(amount);
 		playerBetChangedEvent(getPlayerBySession(session));
@@ -462,6 +482,21 @@ public class Engine {
 	private void setNewRound(Round newRound) {
 		round = newRound;
 		roundChangedEvent(round.getName());
+
+		betAmount = getAppropriateBetAmount();
+
+		if (round == Round.FLOP) {
+			dealTableCards();
+			flopEvent();
+		}
+	}
+
+	private int getAppropriateBetAmount() {
+
+		if (round == Round.RIVER)
+			return 20;
+
+		return 10;
 	}
 
 	/**
@@ -539,107 +574,80 @@ public class Engine {
 	 * to act or closes hand
 	 */
 	public void selectNextPlayerOrRound() {
-		boolean everybodyReady = true;
 
+		// Players not folded
 		int activePlayers = getActivePlayersAmount();
 
 		systemMessageEvent("There are " + activePlayers
 				+ " active players in this round");
 
-		if (activePlayers == 0) {
-			// TODO throw exception
-		}
-
+		// All but one have folded
 		if (activePlayers == 1) {
 			for (Player player : players) {
 				if (player.isActive())
 					closeHand();
 			}
 
+			// There are more than one player active
 		} else {
-			if (round == Round.PREFLOP) {
-				betAmount = 10;
 
-				for (Player player : players) {
-					if (!player.isHasActed())
-						everybodyReady = false;
-					break;
+			// Round has finished
+			if (checkBettingRoundFinished()) {
+
+				collectBets();
+
+				// Last betting round has finished
+				if (round == Round.RIVER) {
+					currentPlayerId = 999;
+					closeHand();
 				}
 
-				if (everybodyReady) {
-					if (areBetsEqual()) {
-						collectBets();
-						resetPlayerHasActed();
-						setNewRound(Round.FLOP);
-						dealTableCards();
-						flopEvent();
-					}
-				}
-				
-				everybodyReady = true;
-				selectNextPlayer(currentPlayerId);
-			} else if (round == Round.FLOP) {
-				betAmount = 10;
+				resetPlayerHasActed();
+				selectNextRound();
 
-				for (Player player : players) {
-					if (!player.isHasActed())
-						everybodyReady = false;
-					break;
-				}
-
-				if (everybodyReady) {
-					if (areBetsEqual()) {
-						collectBets();
-						resetPlayerHasActed();
-						setNewRound(Round.TURN);
-					}
-				}
-
-				everybodyReady = true;
-				selectNextPlayer(currentPlayerId);
-
-			} else if (round == Round.TURN) {
-				betAmount = 10;
-
-				for (Player player : players) {
-					if (!player.isHasActed())
-						everybodyReady = false;
-					break;
-				}
-
-				if (everybodyReady) {
-					if (areBetsEqual()) {
-						collectBets();
-						resetPlayerHasActed();
-						setNewRound(Round.RIVER);
-					}
-				}
-
-				everybodyReady = true;
-				selectNextPlayer(currentPlayerId);
-
-			} else if (round == Round.RIVER) {
-				betAmount = 20;
-
-				for (Player player : players) {
-					if (!player.isHasActed())
-						everybodyReady = false;
-				}
-
-				if (everybodyReady) {
-					if (areBetsEqual()) {
-						collectBets();
-						resetPlayerHasActed();
-						currentPlayerId = 999;
-						setNewRound(Round.CLOSING);
-						closeHand();
-					}
-				}
-
-				everybodyReady = true;
-				selectNextPlayer(currentPlayerId);
 			}
+
+			// Wait for next player to act
+			selectNextPlayer(currentPlayerId);
 		}
+	}
+
+	/**
+	 * Sets next round
+	 */
+	private void selectNextRound() {
+
+		if (round == Round.PREFLOP) {
+			setNewRound(Round.FLOP);
+		} else if (round == Round.FLOP) {
+			setNewRound(Round.TURN);
+		} else if (round == Round.TURN) {
+			setNewRound(Round.RIVER);
+		} else if (round == Round.RIVER) {
+			setNewRound(Round.CLOSING);
+		}
+
+	}
+
+	/**
+	 * Checks if everybody has acted and bets are equal
+	 * 
+	 * @return true if all players have acted and bets are equal
+	 */
+	private boolean checkBettingRoundFinished() {
+		boolean everybodyReady = true;
+
+		for (Player player : players) {
+			if (!player.isHasActed())
+				everybodyReady = false;
+			break;
+		}
+
+		if (everybodyReady && areBetsEqual()) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
@@ -834,11 +842,12 @@ public class Engine {
 		for (Player player : players) {
 			pot += player.getBet();
 			player.setBet(0);
-			
+
 			// UI update
 			playerBetChangedEvent(player);
 		}
-		
+
+		// UI update
 		potChangedEvent(pot);
 	}
 
@@ -985,7 +994,7 @@ public class Engine {
 	private void playerWonEvent(Player winner, String winningReason) {
 		// TODO implement
 	}
-	
+
 	private void potChangedEvent(int amount) {
 		for (Player player : players) {
 			GameInfo info = infoFactory.getNewPotInfo();
@@ -996,7 +1005,7 @@ public class Engine {
 			infoContainer.add(info);
 		}
 	}
-	
+
 	/**
 	 * System broadcast
 	 * 
@@ -1027,7 +1036,7 @@ public class Engine {
 
 		infoContainer.add(info);
 	}
-	
+
 	/**
 	 * Called when spectator asks for game data/player re-opens window
 	 * 
@@ -1056,7 +1065,7 @@ public class Engine {
 
 			infoContainer.add(info);
 		}
-		
+
 		// pot
 		info = infoFactory.getNewPotInfo();
 
@@ -1064,9 +1073,9 @@ public class Engine {
 		info.setSession(session);
 
 		infoContainer.add(info);
-		
+
 		// set proper round
-		if(round == Round.FLOP) {
+		if (round == Round.FLOP) {
 			info = infoFactory.getNewFlopInfo();
 
 			for (int i = 0; i < 3; i++) {
