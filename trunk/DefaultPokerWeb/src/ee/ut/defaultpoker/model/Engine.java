@@ -384,18 +384,9 @@ public class Engine {
 			// give IDs
 			initializePlayers();
 
-			// set players with not enough chips inactive
-			for (Player player : players) {
-				if (player.getChips() < smallBlind) {
-					player.setActive(false);
-				} else {
-					player.setActive(true);
-					player.setFold(false);
-				}
-			}
-			
-			int activePlayers = getActivePlayersAmount();
+			setPlayersWithNotEnoughChipsInactive();
 
+			int activePlayers = getActivePlayersAmount();
 			systemMessageEvent("There are " + activePlayers
 					+ " active players in this round");
 
@@ -418,21 +409,31 @@ public class Engine {
 			selectNextPlayer(currentPlayerId);
 			increasePlayerBet(currentPlayerId, bigBlind);
 
-			// give pocket cards
-			for (Player player : players) {
-				if (player.isActive()) {
-					dealPlayerCards(player);
+			// deal pocket cards
+			dealPlayerCards();
 
-					// update UI player pocket cards
-					dealPlayerCardsEvent(player);
-				}
-			}
+			resetPlayerHasActed();
 
 			// give control flow to selectNextPlayerOrRound
 			selectNextPlayerOrRound();
 
 		} else {
-			// TODO throw exception
+			systemMessageEvent("Can not start new hand in round "
+					+ round.getName());
+		}
+	}
+
+	/**
+	 * Players with not enough chips cannot interact
+	 */
+	private void setPlayersWithNotEnoughChipsInactive() {
+		for (Player player : players) {
+			if (player.getChips() < smallBlind) {
+				player.setActive(false);
+			} else {
+				player.setActive(true);
+				player.setFold(false);
+			}
 		}
 	}
 
@@ -534,11 +535,18 @@ public class Engine {
 	 * 
 	 * @param player
 	 */
-	public void dealPlayerCards(Player player) {
-		Card[] cards = new Card[2];
-		cards[0] = deck.drawFromDeck();
-		cards[1] = deck.drawFromDeck();
-		player.setCards(cards);
+	public void dealPlayerCards() {
+
+		for (Player player : players) {
+			if (player.isActive()) {
+				Card[] cards = new Card[2];
+				cards[0] = deck.drawFromDeck();
+				cards[1] = deck.drawFromDeck();
+				player.setCards(cards);
+
+				dealPlayerCardsEvent(player);
+			}
+		}
 	}
 
 	/**
@@ -635,19 +643,27 @@ public class Engine {
 	 * @return true if all players have acted and bets are equal
 	 */
 	private boolean checkBettingRoundFinished() {
-		boolean everybodyReady = true;
 
-		for (Player player : players) {
-			if (!player.isHasActed())
-				everybodyReady = false;
-			break;
-		}
-
-		if (everybodyReady && areBetsEqual()) {
+		if (allPlayersHaveActed() && areBetsEqual()) {
 			return true;
 		}
 
 		return false;
+	}
+
+	/**
+	 * Have all players taken turn?
+	 * 
+	 * @return true if everybody has acted
+	 */
+	private boolean allPlayersHaveActed() {
+		
+		for(Player player : players) {
+			if(!player.isHasActed())
+				return false;
+		}
+
+		return true;
 	}
 
 	/**
