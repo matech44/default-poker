@@ -231,6 +231,17 @@ public class Engine {
 	}
 
 	// END OF TEST METHODS
+	
+	/**
+	 * Called from UI to spectate
+	 * 
+	 * @param session
+	 */
+	public void spectate(String session) {
+		askForWholePackageEvent(session);
+		
+		systemMessageEvent("Someone spectates");
+	}
 
 	/**
 	 * Called from UI to join game
@@ -366,8 +377,10 @@ public class Engine {
 		if (round == Round.SETUP || round == Round.BETWEEN_HANDS) {
 			systemMessageEvent("Starting new hand");
 
+			// give IDs
 			initializePlayers();
 
+			// set 
 			for (Player player : players) {
 				if (player.getChips() < smallBlind) {
 					player.setActive(false);
@@ -377,25 +390,27 @@ public class Engine {
 				}
 			}
 
+			// reset pot
 			pot = 0;
+			potChangedEvent(pot);
+			
+			// 
 			createNewDeck();
-			int dealerPos = fixateDealer();
-
-			// update UI - new dealer
-			setNewDealerEvent(players.get(dealerPos));
-
-			selectNextPlayer(dealerPos);
-
+			
+			// PREFLOP starts
 			setNewRound(Round.PREFLOP);
-
+			
+			// new dealer
+			int dealerPos = fixateDealer();
+			setNewDealerEvent(players.get(dealerPos));
+			
+			// set blinds - hasActed should stay false
+			selectNextPlayer(dealerPos);
 			increasePlayerBet(currentPlayerId, smallBlind);
-			players.get(currentPlayerId).setHasActed(true);
-
 			selectNextPlayer(currentPlayerId);
-
 			increasePlayerBet(currentPlayerId, bigBlind);
-			players.get(currentPlayerId).setHasActed(true);
 
+			// give pocket cards
 			for (Player player : players) {
 				if (player.isActive()) {
 					dealPlayerCards(player);
@@ -405,6 +420,7 @@ public class Engine {
 				}
 			}
 
+			// give control flow to selectNextPlayerOrRound
 			selectNextPlayerOrRound();
 
 		} else {
@@ -915,38 +931,6 @@ public class Engine {
 		}
 	}
 
-	/**
-	 * System broadcast
-	 * 
-	 * @param message
-	 */
-	private void systemMessageEvent(String message) {
-		for (Player player : players) {
-			GameInfo info = infoFactory.getNewSystemMessageInfo();
-
-			info.addData(message);
-			info.setSession(player.getSession());
-
-			infoContainer.add(info);
-		}
-	}
-
-	/**
-	 * System private message
-	 * 
-	 * @param session
-	 * @param message
-	 */
-	private void systemMessageEvent(String session, String message) {
-		GameInfo info = infoFactory.getNewSystemMessageInfo();
-
-		info.addData(message);
-		info.setSession(session);
-
-		infoContainer.add(info);
-
-	}
-
 	private void chatEvent(Player chattingPlayer, String message) {
 		for (Player player : players) {
 			GameInfo info = infoFactory.getNewChatInfo();
@@ -1008,6 +992,91 @@ public class Engine {
 
 			info.addData(String.valueOf(amount));
 			info.setSession(player.getSession());
+
+			infoContainer.add(info);
+		}
+	}
+	
+	/**
+	 * System broadcast
+	 * 
+	 * @param message
+	 */
+	private void systemMessageEvent(String message) {
+		for (Player player : players) {
+			GameInfo info = infoFactory.getNewSystemMessageInfo();
+
+			info.addData(message);
+			info.setSession(player.getSession());
+
+			infoContainer.add(info);
+		}
+	}
+
+	/**
+	 * System private message
+	 * 
+	 * @param session
+	 * @param message
+	 */
+	private void systemMessageEvent(String session, String message) {
+		GameInfo info = infoFactory.getNewSystemMessageInfo();
+
+		info.addData(message);
+		info.setSession(session);
+
+		infoContainer.add(info);
+	}
+	
+	/**
+	 * Called when spectator asks for game data/player re-opens window
+	 * 
+	 * @param session
+	 */
+	private void askForWholePackageEvent(String session) {
+
+		// all players
+		GameInfo info = infoFactory.getNewPlayersInfo();
+
+		for (Player player2 : players) {
+			info.addData(player2.getName());
+		}
+
+		info.setSession(session);
+		infoContainer.add(info);
+
+		// all bets
+		for (Player player : players) {
+
+			info = infoFactory.getNewBetInfo();
+
+			info.addData(String.valueOf(player.getBet()));
+			info.setId(player.getId());
+			info.setSession(session);
+
+			infoContainer.add(info);
+		}
+		
+		// pot
+		info = infoFactory.getNewPotInfo();
+
+		info.addData(String.valueOf(pot));
+		info.setSession(session);
+
+		infoContainer.add(info);
+		
+		// set proper round
+		if(round == Round.FLOP) {
+			info = infoFactory.getNewFlopInfo();
+
+			for (int i = 0; i < 3; i++) {
+				String rank = String.valueOf(tablecards[i].getRank());
+				String suit = String.valueOf(tablecards[i].getSuit());
+				String card = rank + "-" + suit;
+				info.addData(card);
+			}
+
+			info.setSession(session);
 
 			infoContainer.add(info);
 		}
