@@ -52,23 +52,20 @@ public class PokerServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession(true);
-
 		PrintWriter out = response.getWriter();
-		
-		String parameter = request.getParameter("task");
-		String sessionId = session.getId(); 
-		
 		Gson gson = new Gson();
 
-		if(parameter.equals("getinfo")) {
-			if(engine.hasNewInfo(sessionId)) {
+		String sessionId = request.getSession(true).getId();
+		String parameter = request.getParameter("task");
+
+		if (parameter.equals("getinfo")) {
+			if (engine.hasNewInfo(sessionId)) {
 				out.println(gson.toJson(engine.fetchNewInfo(sessionId)));
 			} else {
 				out.println(gson.toJson("null"));
 			}
 		}
-		
+
 	}
 
 	/**
@@ -77,22 +74,24 @@ public class PokerServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
+
 		HttpSession session = request.getSession(true);
-		
+
 		String parameter = request.getParameter("task");
 		String sessionId = session.getId();
-		
-		if(parameter.equals("join")) {
+
+		if (parameter.equals("join")) {
 			String name = request.getParameter("name");
 			engine.createPlayer(name, sessionId);
-		} else if(parameter.equals("starthand")) {
+		} else if (parameter.equals("spec")) {
+			engine.spectate(sessionId);
+		} else if (parameter.equals("starthand")) {
 			engine.startNewHand();
-		} else if(parameter.equals("fold")) {
+		} else if (parameter.equals("fold")) {
 			engine.playerFold(sessionId);
-		} else if(parameter.equals("call")) {
+		} else if (parameter.equals("call")) {
 			engine.playerCall(sessionId);
-		} else if(parameter.equals("chat")) {
+		} else if (parameter.equals("chat")) {
 			String message = request.getParameter("message");
 			engine.playerChat(message, sessionId);
 		}
