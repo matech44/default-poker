@@ -26,7 +26,7 @@ public class Player {
 		this.bet = 0;
 		this.fold = false;
 		this.dealer = false;
-		this.active = false;
+		this.active = true;
 		this.hasActed = false;
 		this.cards = new Card[2];
 	}
