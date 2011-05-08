@@ -397,7 +397,7 @@ public class Engine {
 			createNewDeck();
 
 			// PREFLOP starts
-			setNewRound(Round.PREFLOP);
+			selectNextRound();
 
 			// new dealer
 			int dealerPos = fixateDealer();
@@ -485,11 +485,6 @@ public class Engine {
 		roundChangedEvent(round.getName());
 
 		betAmount = getAppropriateBetAmount();
-
-		if (round == Round.FLOP) {
-			dealTableCards();
-			flopEvent();
-		}
 	}
 
 	private int getAppropriateBetAmount() {
@@ -607,7 +602,11 @@ public class Engine {
 				// Last betting round has finished
 				if (round == Round.RIVER) {
 					currentPlayerId = 999;
+					
+					selectNextRound();
 					closeHand();
+					
+					return; // closeHand takes over
 				}
 
 				resetPlayerHasActed();
@@ -625,14 +624,20 @@ public class Engine {
 	 */
 	private void selectNextRound() {
 
-		if (round == Round.PREFLOP) {
+		if (round == Round.BETWEEN_HANDS || round == Round.SETUP) {
+			setNewRound(Round.PREFLOP);
+		} else if (round == Round.PREFLOP) {
 			setNewRound(Round.FLOP);
+			dealTableCards();
+			flopEvent();
 		} else if (round == Round.FLOP) {
 			setNewRound(Round.TURN);
+			turnEvent();
 		} else if (round == Round.TURN) {
 			setNewRound(Round.RIVER);
+			riverEvent();
 		} else if (round == Round.RIVER) {
-			setNewRound(Round.CLOSING);
+			setNewRound(Round.BETWEEN_HANDS);
 		}
 
 	}
@@ -657,9 +662,9 @@ public class Engine {
 	 * @return true if everybody has acted
 	 */
 	private boolean allPlayersHaveActed() {
-		
-		for(Player player : players) {
-			if(!player.isHasActed())
+
+		for (Player player : players) {
+			if (!player.isHasActed())
 				return false;
 		}
 
@@ -733,6 +738,7 @@ public class Engine {
 		String winningReason = "Non";
 		int activePlayers = getActivePlayersAmount();
 
+		// Other players folded
 		if (activePlayers == 1) {
 			for (Player player : players) {
 				if (player.isActive())
@@ -741,6 +747,7 @@ public class Engine {
 
 			winningReason = "others folded";
 
+			// Showdown
 		} else {
 			for (Player player : players) {
 				if (player.isActive()) {
@@ -773,12 +780,14 @@ public class Engine {
 
 		potToWinner(winnerPlayerId);
 		// /TODO!
-		setNewRound(Round.BETWEEN_HANDS);
 
 		systemMessageEvent("Player " + getPlayerById(winnerPlayerId).getName()
 				+ " won - " + winningReason);
 
-		// playerWonEvent(getPlayerById(winnerPlayerId), winningReason);
+		showOthersCardsEvent();
+		showdownEvent(getPlayerById(winnerPlayerId), winningReason);
+		
+		startNewHand();
 	}
 
 	/**
@@ -824,6 +833,8 @@ public class Engine {
 	public void potToWinner(int id) {
 		getPlayerById(id).addChips(pot);
 		pot = 0;
+
+		potChangedEvent(pot);
 	}
 
 	/**
@@ -985,6 +996,36 @@ public class Engine {
 		}
 	}
 
+	private void turnEvent() {
+		for (Player player : players) {
+			GameInfo info = infoFactory.getNewTurnInfo();
+
+			String rank = String.valueOf(tablecards[3].getRank());
+			String suit = String.valueOf(tablecards[3].getSuit());
+			String card = rank + "-" + suit;
+			info.addData(card);
+
+			info.setSession(player.getSession());
+
+			infoContainer.add(info);
+		}
+	}
+
+	private void riverEvent() {
+		for (Player player : players) {
+			GameInfo info = infoFactory.getNewRiverInfo();
+
+			String rank = String.valueOf(tablecards[4].getRank());
+			String suit = String.valueOf(tablecards[4].getSuit());
+			String card = rank + "-" + suit;
+			info.addData(card);
+
+			info.setSession(player.getSession());
+
+			infoContainer.add(info);
+		}
+	}
+
 	private void dealPlayerCardsEvent(Player player) {
 		GameInfo info = infoFactory.getPlayerCardsInfo();
 
@@ -1007,8 +1048,38 @@ public class Engine {
 		infoContainer.add(info);
 	}
 
-	private void playerWonEvent(Player winner, String winningReason) {
-		// TODO implement
+	private void showdownEvent(Player winner, String winningReason) {
+		for (Player player : players) {
+			GameInfo info = infoFactory.getNewShowdownInfo();
+
+			info.setName(winner.getName());
+			info.setSession(player.getSession());
+
+			infoContainer.add(info);
+		}
+	}
+
+	private void showOthersCardsEvent() {
+		for (Player player : players) {
+
+			for (Player player2 : players) {
+
+				GameInfo info = infoFactory.getNewOthersCardsInfo();
+
+				for (Card playercard : player2.getCards()) {
+					String rank = String.valueOf(playercard.getRank());
+					String suit = String.valueOf(playercard.getSuit());
+					String card = rank + "-" + suit;
+					info.addData(card);
+				}
+
+				info.setId(player2.getId());
+				info.setSession(player.getSession());
+				infoContainer.add(info);
+
+			}
+
+		}
 	}
 
 	private void potChangedEvent(int amount) {
@@ -1059,6 +1130,8 @@ public class Engine {
 	 * @param session
 	 */
 	private void askForWholePackageEvent(String session) {
+
+		// TODO all of this
 
 		// all players
 		GameInfo info = infoFactory.getNewPlayersInfo();
