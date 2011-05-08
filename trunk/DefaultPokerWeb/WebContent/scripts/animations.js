@@ -1094,13 +1094,12 @@ function flipRiver(card) {
  });
  }
  */
-function playerCardsBackside() {
+
+function cardsBackside() {
 	$(document).ready(function() {
-		for (i = 1; i < 22; i++) {
+		for (i = 1; i < 24; i++) {
 			$("#dealoutcard" + i).attr("src", "images/cardBackSide.png");
 		}
-		$("#dealourcard1").attr("src", "images/cardBackSide.png");
-		$("#dealourcard2").attr("src", "images/cardBackSide.png");
 	});
 }
 
