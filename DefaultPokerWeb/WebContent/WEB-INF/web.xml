@@ -12,7 +12,7 @@
   
   <servlet-mapping>
     <servlet-name>PokerServlet</servlet-name>
-    <url-pattern>/poker/PokerService</url-pattern>
+    <url-pattern>/server</url-pattern>
   </servlet-mapping>
 
   <!-- Default page to serve -->
