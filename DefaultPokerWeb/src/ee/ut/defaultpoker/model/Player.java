@@ -4,28 +4,35 @@ import ee.ut.defaultpoker.evaluation.Hand;
 public class Player {
 	private int id;
 	private String name;
-	private int chips = 500;
+	private int chips;
 	private int bet;
-	private boolean fold = false;
-	private boolean dealer = false;
+	private boolean fold;
+	private boolean dealer;
 	private String session;
-	private boolean active = true;
-	private boolean hasActed = false;
-	private Card[] cards = new Card[2];
+	private boolean active;
+	private boolean hasActed;
+	private Card[] cards;
 	private Hand bestHand;
 	
 	public Player() {
-		
+
+	}
+	
+	public Player(String name) {
+		this.name = name;
+		this.chips = 500;
+		this.bet = 0;
+		this.fold = false;
+		this.dealer = false;
+		this.active = false;
+		this.hasActed = false;
+		this.cards = new Card[2];
 	}
 	
 	
 	
 	public boolean getHasActed() {
 		return this.hasActed;
-	}
-	
-	public Player(String name) {
-		this.name=name;
 	}
 
 	public Card getCard1() {
