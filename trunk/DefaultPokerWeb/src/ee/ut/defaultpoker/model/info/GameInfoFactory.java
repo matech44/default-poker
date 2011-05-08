@@ -57,4 +57,24 @@ public class GameInfoFactory {
 		return info;
 	}
 
+	public GameInfo getNewShowdownInfo() {
+		GameInfo info = new GameInfo("showdown");
+		return info;
+	}
+
+	public GameInfo getNewOthersCardsInfo() {
+		GameInfo info = new GameInfo("otherscards");
+		return info;
+	}
+
+	public GameInfo getNewTurnInfo() {
+		GameInfo info = new GameInfo("turn");
+		return info;
+	}
+
+	public GameInfo getNewRiverInfo() {
+		GameInfo info = new GameInfo("river");
+		return info;
+	}
+
 }
