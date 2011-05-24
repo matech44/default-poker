@@ -9,16 +9,16 @@ function initGame() {
 	initDisplay();
 	
 	startUpdater();
-	
-	//spectate();
+	spectate();
 }
 
 function initDisplay() {
-	hidePlayers(9);
+	// hidePlayers(9);
 }
 
 function startUpdater() {
-	setInterval('getNewInfoAndUpdateUI()', 200);
+	// setInterval('getNewInfoAndUpdateUI()', 600);
+	getNewInfoAndUpdateUI();
 }
 
 /* ===========Click handlers===========*/
@@ -33,6 +33,7 @@ $(document).ready(function() {
 			type: "POST",
 			url: "server",
 			data: "task=starthand",
+			cache: false,
 			success: function(result){
 				}
 			});
@@ -43,6 +44,7 @@ $(document).ready(function() {
 			type: "POST",
 			url: "server",
 			data: "task=fold",
+			cache: false,
 			success: function(result){
 				}
 			});
@@ -53,6 +55,18 @@ $(document).ready(function() {
 			type: "POST",
 			url: "server",
 			data: "task=call",
+			cache: false,
+			success: function(result){
+				}
+			});
+	});
+	
+	$("#buttonraise").click(function() {
+		$.ajax({
+			type: "POST",
+			url: "server",
+			data: "task=raise",
+			cache: false,
 			success: function(result){
 				}
 			});
@@ -76,6 +90,7 @@ function spectate() {
 		type: "POST",
 		url: "server",
 		data: "task=spec",
+		cache: false,
 		success: function(result){
 			
 			}
@@ -89,6 +104,7 @@ function joinGame() {
 		type: "POST",
 		url: "server",
 		data: "task=join&name=" + name,
+		cache: false,
 		success: function(result){
 			
 			}
@@ -103,6 +119,7 @@ function getNewInfoAndUpdateUI() {
 		cache: false,
 		success: function(result){
 			processData(result);
+			getNewInfoAndUpdateUI();
 		 }
 		});
 }
@@ -111,9 +128,9 @@ function chat() {
 	var message = $("#usermsg").val();
 	
 	$.ajax({
-		type: "POST",
 		url: "server",
 		data: "task=chat&message=" + message,
+		cache: false,
 		success: function(result){
 			$("#usermsg").val("");
 			}
@@ -156,7 +173,7 @@ function processData(data) {
 		}
 		
 		updateCards(infoId, cards);
-		dealCards(playerAmount);
+		setTimeout('dealCards(' + playerAmount + ')', 1400);
 		
 	// DEALER
 	} else if(infoType == "dealer") {	
@@ -166,9 +183,13 @@ function processData(data) {
 	} else if(infoType == "bet") {	
 		updateBet(infoId, infoData);
 		
-	// FOLD
-	} else if(infoType == "fold") {	
-		updateFold(infoId);
+	// FOLD/CALL/BET
+	} else if(infoType == "status") {	
+		updateStatus(infoId, infoName);
+		
+	// RESET STATUS
+	} else if(infoType == "resetstatus") {	
+		updateResetStatus();
 		
 	// SYSTEM MESSAGE
 	} else if(infoType == "message") {	
@@ -235,7 +256,8 @@ function processData(data) {
 /* ===========UI actions===========*/
 
 function updatePlayers(players) {
-	showPlayers(players.length);
+	showPlayers(9);
+	hidePlayers(9 - players.length);
 	
 	for(var i = 0; i < players.length; i++) {
 		changePlayerName(i+1, players[i]);
@@ -243,7 +265,7 @@ function updatePlayers(players) {
 }
 
 function updateRound(round) {
-	showAnnouncement(1000, 26, round);
+	showAnnouncement(4000, 26, round);
 }
 
 function updateCards(id, cards) {
@@ -264,9 +286,10 @@ function updateBet(id, amount) {
 	changePlayerBet(Number(id)+1, amount);
 }
 
-function updateFold(id) {
-	fadePlayer(Number(id)+1);
-	changeDisplay(Number(id)+1, "Fold");
+function updateStatus(id, status) {
+	if(status == "Fold")
+		fadePlayer(Number(id)+1);
+	changeDisplay(Number(id)+1, status);
 }
 
 function updateMessage(message) {
@@ -314,11 +337,17 @@ function updatePot(amount) {
 }
 
 function updateWinner(name) {
-	showAnnouncement(2000, 26, name + " takes pot");
+	showAnnouncement(6000, 26, name);
 	
-	unDealCards(playerAmount);
-	unDealTableCards(1000);
-	cardsBackside();
+	setTimeout('unDealCards(' + playerAmount + ')', 1400);
+	unDealTableCards(0);
+	setTimeout('cardsBackside()', 800);
+}
+
+function updateResetStatus() {
+	for(var i = 0; i < playerAmount; i++) {
+		changeDisplay(i+1, "Idle");
+	}
 }
 
 /* ===========Misc===========*/
