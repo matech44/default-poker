@@ -232,15 +232,34 @@ public class Engine {
 
 	// END OF TEST METHODS
 
+	/* ==============PLAYER SPECS/JOINS============ */
+
 	/**
 	 * Called from UI to spectate
 	 * 
 	 * @param session
 	 */
 	public void spectate(String session) {
-		askForWholePackageEvent(session);
 
-		systemMessageEvent("Someone spectates");
+		for (Player player : players) {
+
+			// player already in game - maybe re-opens window
+			if (session.equals(player.getSession())) {
+
+				// TODO update UI
+
+				return; // do nothing more
+			}
+		}
+
+		// New spectator
+		Player player = new Player("Spectator");
+		player.setSession(session);
+		player.setActive(false);
+		players.add(player);
+
+		newPlayerAddedEvent(session);
+		systemMessageEvent("New spectator");
 	}
 
 	/**
@@ -249,17 +268,48 @@ public class Engine {
 	 * @param name
 	 * @param session
 	 */
-	public void createPlayer(String name, String session) {
-		Player player = new Player(name);
-		player.setSession(session);
-		players.add(player);
+	public void joinGame(String name, String session) {
+
+		// change name and set active
+		getPlayerBySession(session).setName(name);
+		getPlayerBySession(session).setActive(true);
 
 		// update UI - new player has joined
 		newPlayerAddedEvent(session);
 		systemMessageEvent("Player " + name + " joined game");
+		
+		if(getActivePlayersAmount() == players.size()) {
+			startNewHand();
+		}
 	}
 
 	/* ==============PLAYER INTERACTION============ */
+
+	/**
+	 * Called from UI to interact
+	 * 
+	 * @param session
+	 */
+	public void registerAction(String action, String session) {
+		
+		// if player is allowed to act
+		if (currentPlayerId == getPlayerBySession(session).getId()) {
+
+			if (action.equals("call")) {
+				playerCall(session);
+			} else if (action.equals("bet")) {
+				playerRaise(session);
+			} else if (action.equals("fold")) {
+				playerFold(session);
+			}
+
+			selectNextPlayerOrRound();
+
+		} else {
+			systemMessageEvent(session, "You can not act right now - it is "
+					+ getPlayerById(currentPlayerId).getName() + "'s turn");
+		}
+	}
 
 	/**
 	 * Called from UI to fold player hand
@@ -267,23 +317,15 @@ public class Engine {
 	 * @param session
 	 */
 	public void playerFold(String session) {
-		if (currentPlayerId == getPlayerBySession(session).getId()) {
-			getPlayerBySession(session).setFold(true);
-			getPlayerBySession(session).setHasActed(true);
-			//getPlayerBySession(session).setActive(false);
 
-			// update UI - player has folded
-			playerFoldEvent(getPlayerBySession(session));
-			systemMessageEvent("Player "
-					+ getPlayerBySession(session).getName() + " folded");
+		getPlayerBySession(session).setFold(true);
+		getPlayerBySession(session).setHasActed(true);
 
-			selectNextPlayerOrRound();
-		} else {
-			systemMessageEvent(session,
-					"You can not act right now - your session it is "
-							+ getPlayerById(currentPlayerId).getName()
-							+ "'s turn");
-		}
+		// update UI - player has folded
+		playerStatusChangedEvent(getPlayerBySession(session), "Fold");
+		systemMessageEvent("Player " + getPlayerBySession(session).getName()
+				+ " folded");
+
 	}
 
 	/**
@@ -292,68 +334,38 @@ public class Engine {
 	 * @param session
 	 */
 	public void playerCall(String session) {
-		if (currentPlayerId == getPlayerBySession(session).getId()) {
 
-			int previousBet = getPlayerBySession(session).getBet();
-			int newBet = getHighestBet() - previousBet;
+		int previousBet = getPlayerBySession(session).getBet();
+		int newBet = getHighestBet() - previousBet;
 
-			increasePlayerBet(session, newBet);
-			getPlayerBySession(session).setHasActed(true);
+		increasePlayerBet(session, newBet);
+		getPlayerBySession(session).setHasActed(true);
 
-			systemMessageEvent("Player "
-					+ getPlayerBySession(session).getName() + " called");
+		// update UI - player has called
+		playerStatusChangedEvent(getPlayerBySession(session), "Call");
+		systemMessageEvent("Player " + getPlayerBySession(session).getName()
+				+ " called/checked");
 
-			selectNextPlayerOrRound();
-		} else {
-			systemMessageEvent(session,
-					"You can not act right now - your session it is "
-							+ getPlayerById(currentPlayerId).getName()
-							+ "'s turn");
-		}
 	}
 
-	/**
-	 * Called from UI - player buys highest bet
-	 * 
-	 * @param session
-	 */
-	/* Pole vaja?
-	public void playerCheck(String session) {
-		if (currentPlayerId == getPlayerBySession(session).getId()
-				&& checkEnabled) {
-
-			getPlayerBySession(session).setHasActed(true);
-
-			selectNextPlayerOrRound();
-
-		}
-	}
-	*/
 	/**
 	 * Called from UI - player raises previous bet
 	 * 
 	 * @param session
 	 */
 	public void playerRaise(String session) {
-		if (currentPlayerId == getPlayerBySession(session).getId()) {
-			
-			int previousBet = getPlayerBySession(session).getBet();
-			int newBet = getHighestBet() - previousBet + betAmount;
-			
-			increasePlayerBet(session, newBet);
-			getPlayerBySession(session).setHasActed(true);
-			
-			systemMessageEvent("Player "
-					+ getPlayerBySession(session).getName() + " raised by " + betAmount);
 
-			selectNextPlayerOrRound();
+		int previousBet = getPlayerBySession(session).getBet();
+		int newBet = getHighestBet() - previousBet + betAmount;
 
-		} else {
-			systemMessageEvent(session,
-					"You can not act right now - it is "
-							+ getPlayerById(currentPlayerId).getName()
-							+ "'s turn");
-		}
+		increasePlayerBet(session, newBet);
+		getPlayerBySession(session).setHasActed(true);
+
+		// update UI - player has raised
+		playerStatusChangedEvent(getPlayerBySession(session), "Bet");
+		systemMessageEvent("Player " + getPlayerBySession(session).getName()
+				+ " raised by " + betAmount);
+
 	}
 
 	/**
@@ -440,7 +452,7 @@ public class Engine {
 			if (player.getChips() < smallBlind) {
 				player.setActive(false);
 			} else {
-				//player.setActive(true);
+				// player.setActive(true);
 				player.setFold(false);
 			}
 		}
@@ -491,7 +503,9 @@ public class Engine {
 	 */
 	private void setNewRound(Round newRound) {
 		round = newRound;
-		roundChangedEvent(round.getName());
+		
+		if(round != Round.BETWEEN_HANDS && round != Round.PREFLOP)
+			roundChangedEvent(round.getName());
 
 		betAmount = getAppropriateBetAmount();
 	}
@@ -565,8 +579,8 @@ public class Engine {
 				if (player.isActive() && !player.getFold()) {
 					currentPlayerId = player.getId();
 					systemMessageEvent("It is " + player.getName() + "'s turn");
+					return; // short circuit
 				}
-				return; // short circuit
 			}
 		}
 
@@ -575,8 +589,8 @@ public class Engine {
 				if (player.isActive() && !player.getFold()) {
 					currentPlayerId = player.getId();
 					systemMessageEvent("It is " + player.getName() + "'s turn");
+					return; // short circuit
 				}
-				return; // short circuit
 			}
 		}
 	}
@@ -590,31 +604,31 @@ public class Engine {
 		// Players not folded
 		int activePlayers = getActivePlayersAmount();
 
-		systemMessageEvent("There are " + activePlayers
-				+ " active players in this round");
-
 		// All but one have folded
 		if (activePlayers == 1) {
-			for (Player player : players) {
-				if (player.isActive())
-					closeHand();
-			}
+			resetPlayerStatusEvent();
+			setNewRound(Round.BETWEEN_HANDS);
+			
+			closeHand();
+
+			return; // closeHand takes over
 
 			// There are more than one player active
 		} else {
 
 			// Round has finished
 			if (checkBettingRoundFinished()) {
+				resetPlayerStatusEvent();
 
 				collectBets();
 
 				// Last betting round has finished
 				if (round == Round.RIVER) {
 					currentPlayerId = 999;
-					
-					selectNextRound();
+
+					selectNextRound(); // changes to BETWEEN_HANDS
 					closeHand();
-					
+
 					return; // closeHand takes over
 				}
 
@@ -673,7 +687,7 @@ public class Engine {
 	private boolean allPlayersHaveActed() {
 
 		for (Player player : players) {
-			if (player.isActive() && !player.isHasActed())
+			if (player.isActive() && !player.getFold() && !player.isHasActed())
 				return false;
 		}
 
@@ -687,7 +701,7 @@ public class Engine {
 		int activePlayers = 0;
 
 		for (Player player : players) {
-			if (player.isActive())
+			if (player.isActive() && !player.getFold())
 				activePlayers++;
 		}
 
@@ -702,14 +716,15 @@ public class Engine {
 		boolean equality = true;
 
 		for (Player player : players) {
-			if (player.isActive()) {
+			if (player.isActive() && !player.getFold()) {
 				bet = player.getBet();
 				break;
 			}
 		}
 
 		for (Player player : players) {
-			if (player.isActive() && player.getBet() != bet) {
+			if (player.isActive() && !player.getFold()
+					&& player.getBet() != bet) {
 				equality = false;
 				break;
 			}
@@ -745,12 +760,14 @@ public class Engine {
 	 */
 	public void closeHand() {
 		String winningReason = "Non";
+
 		int activePlayers = getActivePlayersAmount();
 
 		// Other players folded
 		if (activePlayers == 1) {
+
 			for (Player player : players) {
-				if (player.isActive())
+				if (player.isActive() && !player.getFold())
 					winnerPlayerId = player.getId();
 			}
 
@@ -758,8 +775,9 @@ public class Engine {
 
 			// Showdown
 		} else {
+
 			for (Player player : players) {
-				if (player.isActive()) {
+				if (player.isActive() && !player.getFold()) {
 					player.setBestHand(findBestHand(tablecards[0],
 							tablecards[1], tablecards[2], tablecards[3],
 							tablecards[4], player.getCard1(), player.getCard2()));
@@ -768,11 +786,11 @@ public class Engine {
 
 			for (Player player : players) {
 				boolean win = true;
-				if (player.isActive()) {
+				if (player.isActive() && !player.getFold()) {
 					for (Player enemy : players) {
-						if (player.getId() == enemy.getId())
+						if (player.getId() == enemy.getId() || enemy.getFold()) {
 							continue;
-						else if (player.getBestHand().compareTo(
+						} else if (player.getBestHand().compareTo(
 								enemy.getBestHand()) != 1) {
 							win = false;
 						}
@@ -780,7 +798,7 @@ public class Engine {
 				}
 				if (win) {
 					winnerPlayerId = player.getId();
-					winningReason = "best hand";
+					winningReason = "best hand - " + player.getBestHand().display();
 					break;
 				}
 			}
@@ -788,14 +806,14 @@ public class Engine {
 		}
 
 		potToWinner(winnerPlayerId);
-		// /TODO!
 
 		systemMessageEvent("Player " + getPlayerById(winnerPlayerId).getName()
 				+ " won - " + winningReason);
 
 		showOthersCardsEvent();
 		showdownEvent(getPlayerById(winnerPlayerId), winningReason);
-		
+
+		// Everything starts all over
 		startNewHand();
 	}
 
@@ -965,11 +983,22 @@ public class Engine {
 		}
 	}
 
-	private void playerFoldEvent(Player foldedPlayer) {
+	private void playerStatusChangedEvent(Player changedPlayer, String status) {
 		for (Player player : players) {
-			GameInfo info = infoFactory.getNewFoldInfo();
+			GameInfo info = infoFactory.getNewStatusInfo();
 
-			info.setId(foldedPlayer.getId());
+			info.setId(changedPlayer.getId());
+			info.setName(status);
+			info.setSession(player.getSession());
+
+			infoContainer.add(info);
+		}
+	}
+	
+	private void resetPlayerStatusEvent() {
+		for (Player player : players) {
+			GameInfo info = infoFactory.getNewStatusResetInfo();
+
 			info.setSession(player.getSession());
 
 			infoContainer.add(info);
@@ -1061,7 +1090,7 @@ public class Engine {
 		for (Player player : players) {
 			GameInfo info = infoFactory.getNewShowdownInfo();
 
-			info.setName(winner.getName());
+			info.setName(winner.getName() + " takes pot - " + winningReason);
 			info.setSession(player.getSession());
 
 			infoContainer.add(info);
