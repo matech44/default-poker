@@ -77,4 +77,14 @@ public class GameInfoFactory {
 		return info;
 	}
 
+	public GameInfo getNewStatusInfo() {
+		GameInfo info = new GameInfo("status");
+		return info;
+	}
+
+	public GameInfo getNewStatusResetInfo() {
+		GameInfo info = new GameInfo("resetstatus");
+		return info;
+	}
+
 }
