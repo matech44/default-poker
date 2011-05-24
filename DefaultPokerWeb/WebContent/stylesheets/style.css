@@ -103,36 +103,38 @@ body {
 }
 
 #newgamebutton {
-	background-image: url("../images/buttonNewGame.png");
+	background-image: url("../images/buttons.png");
+	background-position: -1176px 0px;
 	display: block;
 	position: relative;
 	float: left;
 	margin-right: 8px;
-	width: 101px;
+	width: 97px;
 	height: 33px;
 }
 #newgamebutton:hover {
-	background-image: url("../images/buttonNewGameHover.png");
+	background-position: -1274px 0px;
 }
 #newgamebutton:active {
-	background-image: url("../images/buttonNewGamePress.png");
+	background-position: -1372px 0px;
 }
 
 #exitbutton {
-	background-image: url("../images/buttonExit.png");
+	background-image: url("../images/buttons.png");
+	background-position: -882px 0px;
 	display: block;
 	position: relative;
 	float: left;
-	width: 101px;
+	width: 98px;
 	height: 33px;
 }
 
 #exitbutton:hover {
-	background-image: url("../images/buttonExitHover.png");
+	background-position: -980px 0px;
 }
 
 #exitbutton:active{
-	background-image: url("../images/buttonExitPress.png");
+	background-position: -1078px 0px;
 }
 
 #slider-1 {
@@ -232,7 +234,8 @@ body {
 }
 
 #buttonfold {
-	background-image: url("../images/buttonFold.png");
+	background-image: url("../images/buttons.png");
+	background-position: -294px 0px;
 	display: block;
 	position:relative;
 	margin-bottom: 5px;
@@ -242,15 +245,16 @@ body {
 }
 
 #buttonfold:hover {
-	background-image: url("../images/buttonFoldHover.png");
+	background-position: -392px 0px;
 }
 
 #buttonfold:active {
-	background-image: url("../images/buttonFoldPress.png");
+	background-position: -490px 0px;
 }
 
 #buttoncall {
-	background-image: url("../images/buttonCheck.png");
+	background-image: url("../images/buttons.png");
+	background-position:0px 0px;
 	display: block;
 	position:relative;
 	margin-bottom: 5px;
@@ -260,15 +264,16 @@ body {
 }
 
 #buttoncall:hover {
-	background-image: url("../images/buttonCheckHover.png");
+	background-position: -98px 0px;
 }
 
 #buttoncall:active {
-	background-image: url("../images/buttonCheckPress.png");
+	background-position: -196px 0px;
 }
 
 #buttonraise {
-	background-image: url("../images/buttonRaise.png");
+	background-image: url("../images/buttons.png");
+	background-position: -588px 0px;
 	display: block;
 	position:relative;
 	margin-bottom: 5px;
@@ -278,43 +283,12 @@ body {
 }
 
 #buttonraise:hover {
-	background-image: url("../images/buttonRaiseHover.png");
+	background-position: -686px 0px;
 }
 
 #buttonraise:active {
-	background-image: url("../images/buttonRaisePress.png");
+	background-position: -784px 0px;
 }
-
-#checkboxSitOut {
-	position:relative;
-	}
-#checkboxNextHand {
-	position:relative;
-	}
-checkboxBigBlind {
-	position:relative;
-	}
-#checkboxSitOutDiv {
-	color: white;
-	position:relative;
-	top: 611px;
-	left: 235px;
-	font-size: 12px;
-	}
-#checkboxNextHandDiv {
-	color: white;
-	position:relative;
-	top: 592px;
-	left: 90px;
-	font-size: 12px;
-	}
-#checkboxBigBlindDiv {
-	color: white;
-	position:relative;
-	top: 590px;
-	left: 115px;
-	font-size: 12px;
-	}
 
 .cards {
 	height: 70px;
