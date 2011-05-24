@@ -2,8 +2,15 @@ package ee.ut.defaultpoker.server;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import javax.servlet.AsyncContext;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +24,11 @@ import ee.ut.defaultpoker.model.info.GameInfo;
 /**
  * Servlet implementation class PokerServlet
  */
-@WebServlet("/server")
+@WebServlet(urlPatterns = "/server", asyncSupported = true)
 public class PokerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	private Gson gson;
 
 	private Engine engine;
 
@@ -36,13 +45,14 @@ public class PokerServlet extends HttpServlet {
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		engine = new Engine();
+		gson = new Gson();
 	}
 
 	/**
 	 * @see Servlet#destroy()
 	 */
 	public void destroy() {
-		// TODO Auto-generated method stub
+
 	}
 
 	/**
@@ -51,19 +61,23 @@ public class PokerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
-		PrintWriter out = response.getWriter();
-		Gson gson = new Gson();
 
-		String sessionId = request.getSession(true).getId();
+		PrintWriter out = response.getWriter();
+		String sessionId = request.getSession().getId();
 		String parameter = request.getParameter("task");
 
 		if (parameter.equals("getinfo")) {
-			if (engine.hasNewInfo(sessionId)) {
-				out.println(gson.toJson(engine.fetchNewInfo(sessionId)));
-			} else {
-				out.println(gson.toJson("null"));
+			
+			while(!engine.hasNewInfo(sessionId)) {
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
+			
+			out.println(gson.toJson(engine.fetchNewInfo(sessionId)));
+
 		}
 
 	}
@@ -82,15 +96,17 @@ public class PokerServlet extends HttpServlet {
 
 		if (parameter.equals("join")) {
 			String name = request.getParameter("name");
-			engine.createPlayer(name, sessionId);
+			engine.joinGame(name, sessionId);
 		} else if (parameter.equals("spec")) {
 			engine.spectate(sessionId);
 		} else if (parameter.equals("starthand")) {
 			engine.startNewHand();
 		} else if (parameter.equals("fold")) {
-			engine.playerFold(sessionId);
+			engine.registerAction("fold", sessionId);
 		} else if (parameter.equals("call")) {
-			engine.playerCall(sessionId);
+			engine.registerAction("call", sessionId);
+		} else if (parameter.equals("raise")) {
+			engine.registerAction("bet", sessionId);
 		} else if (parameter.equals("chat")) {
 			String message = request.getParameter("message");
 			engine.playerChat(message, sessionId);
