@@ -1,0 +1,368 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/chatBox.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/statsBox.css" />
+<script type="text/javascript" src="scripts/jquery-1.5.js"></script>
+<script type="text/javascript" src="scripts/JSONparser.js"></script>
+<script type="text/javascript" src="scripts/animations.js"></script>
+<script type="text/javascript" src="scripts/controller.js"></script>
+<script type="text/javascript" src="scripts/pokerTable.js"></script>
+</head>
+
+<body onLoad="draw(); initGame();">
+
+<div id="maincontainer">
+<div id="left">
+<div id="left-top">
+
+<div id="table">
+
+<div id="tablecanvas"><canvas id="pokerTable" width="600"
+	height="300"> Your browser does not support the canvas
+element. </canvas></div>
+
+</div>
+
+<div id="announcement"></div>
+
+<div id=tablelogoimagediv><img src="images/logo2.png"
+	class="tablelogoimage" /></div>
+
+<!-- PLAYER1 -->
+<div id="player1" class="players">
+<div class="cards">
+<div class="card1"><img src="images/cards/clubsAce.png"
+	class="cardimage" /></div>
+<div class="card2"><img src="images/cards/heartsQueen.png"
+	class="cardimage" /></div>
+</div>
+<div class="playerdata">
+<div class="playerdisplay"><img src="images/displayIdle.png"
+	class="playerdisplayimage" /></div>
+<div class="playerdetail">
+<div class="playersum"> </div>
+<div class="playerstatus"><img src="images/chipDealer.png" class="playerstatusimage" /></div>
+</div>
+</div>
+<div class="playername">Player1</div>
+</div>
+
+<!-- PLAYER2 -->
+<div id="player2" class="players">
+	<div class="cards">
+		<div class="card1">
+			<img src="images/cards/heartsSeven.png" class="cardimage" />
+		</div>
+		<div class="card2">
+			<img src="images/cards/spadesSix.png" class="cardimage" />
+		</div>
+	</div>
+	<div class="playerdata">
+		<div class="playerdisplay">
+			<img src="images/displayIdle.png" class="playerdisplayimage" />
+		</div>
+		<div class="playerdetail">
+			<div class="playersum"> </div>
+				<div class="playerstatus">
+					<img src="images/chipDealer.png" class="playerstatusimage" />
+				</div>
+		</div>
+	</div>
+	<div class="playername">
+		Player2
+	</div>
+</div>
+
+
+<!-- PLAYER3 -->
+<div id="player3" class="players">
+<div class="cards">
+<div class="card1"><img src="images/cardBackSide.png"
+	class="cardimage" /></div>
+<div class="card2"><img src="images/cardBackSide.png"
+	class="cardimage" /></div>
+</div>
+<div class="playerdata">
+<div class="playerdisplay"><img src="images/displayIdle.png"
+	class="playerdisplayimage" /></div>
+<div class="playerdetail">
+<div class="playersum"> </div>
+<div class="playerstatus"><img src="images/chipDealer.png"
+	class="playerstatusimage" /></div>
+</div>
+</div>
+<div class="playername">Player3</div>
+</div>
+
+<!-- PLAYER4 -->
+<div id="player4" class="players">
+<div class="cards">
+<div class="card1"><img src="images/cardBackSide.png"
+	class="cardimage" /></div>
+<div class="card2"><img src="images/cardBackSide.png"
+	class="cardimage" /></div>
+</div>
+<div class="playerdata">
+<div class="playerdisplay"><img src="images/displayIdle.png"
+	class="playerdisplayimage" /></div>
+<div class="playerdetail">
+<div class="playersum"> </div>
+<div class="playerstatus"><img src="images/chipDealer.png" class="playerstatusimage" /></div>
+</div>
+</div>
+<div class="playername">Player4</div>
+</div>
+
+<!-- PLAYER5 -->
+<div id="player5" class="players">
+<div class="cards">
+<div class="card1"><img src="images/cards/diamondsTwo.png"
+	class="cardimage" /></div>
+<div class="card2"><img src="images/cards/spadesJack.png"
+	class="cardimage" /></div>
+</div>
+<div class="playerdata">
+<div class="playerdisplay"><img src="images/displayIdle.png"
+	class="playerdisplayimage" /></div>
+<div class="playerdetail">
+<div class="playersum"> </div>
+<div class="playerstatus"><img src="images/chipDealer.png" class="playerstatusimage" /></div>
+</div>
+</div>
+<div class="playername">Player5</div>
+</div>
+
+<!-- PLAYER6 -->
+<div id="player6" class="players">
+<div class="cards">
+<div class="card1"><img src="images/cardBackSide.png"
+	class="cardimage" /></div>
+<div class="card2"><img src="images/cardBackSide.png"
+	class="cardimage" /></div>
+</div>
+<div class="playerdata">
+<div class="playerdisplay"><img src="images/displayIdle.png"
+	class="playerdisplayimage" /></div>
+<div class="playerdetail">
+<div class="playersum"> </div>
+<div class="playerstatus"><img src="images/chipDealer.png" class="playerstatusimage" /></div>
+</div>
+</div>
+<div class="playername">Player6</div>
+</div>
+
+<!-- PLAYER7 -->
+<div id="player7" class="players">
+<div class="cards">
+<div class="card1"><img src="images/cardBackSide.png"
+	class="cardimage" /></div>
+<div class="card2"><img src="images/cardBackSide.png"
+	class="cardimage" /></div>
+</div>
+<div class="playerdata">
+<div class="playerdisplay"><img src="images/displayIdle.png"
+	class="playerdisplayimage" /></div>
+<div class="playerdetail">
+<div class="playersum"> </div>
+<div class="playerstatus"><img src="images/chipDealer.png" class="playerstatusimage" /></div>
+</div>
+</div>
+<div class="playername">Player7</div>
+</div>
+
+<!-- PLAYER8 -->
+<div id="player8" class="players">
+<div class="cards">
+<div class="card1"><img src="images/cardBackSide.png"
+	class="cardimage" /></div>
+<div class="card2"><img src="images/cardBackSide.png"
+	class="cardimage" /></div>
+</div>
+<div class="playerdata">
+<div class="playerdisplay"><img src="images/displayIdle.png"
+	class="playerdisplayimage" /></div>
+<div class="playerdetail">
+<div class="playersum"> </div>
+<div class="playerstatus"><img src="images/chipDealer.png" class="playerstatusimage" /></div>
+</div>
+</div>
+<div class="playername">Player8</div>
+</div>
+
+
+
+<!-- OUR PLAYER -->
+<!-- 
+<div id="ourplayer">
+<div id="ourdisplay"><img src="images/displayIdle.png"
+	id="ourdisplayimage" /></div>
+<div id="ourcards">
+<div id="ourcard1"></div>
+<div id="ourcard2"></div>
+</div>
+<div id="oursum"> </div>
+</div>
+<div id="ourbuttons">
+<div id="buttonfold"></div>
+<div id="buttoncall"></div>
+<div id="buttonraise"></div>
+</div>
+-->
+
+<!-- PLAYER9 -->
+<div id="player9" class="players">
+	<div class="cards">
+		<div class="card1">
+			<img src="images/cards/heartsSeven.png" class="cardimage" />
+		</div>
+		<div class="card2">
+			<img src="images/cards/spadesSix.png" class="cardimage" />
+		</div>
+	</div>
+	<div class="playerdata">
+		<div class="playerdisplay">
+			<img src="images/displayIdle.png" class="playerdisplayimage" />
+		</div>
+		<div class="playerdetail">
+			<div class="playersum"> </div>
+				<div class="playerstatus">
+					<img src="images/chipDealer.png" class="playerstatusimage" />
+				</div>
+		</div>
+	</div>
+	<div class="playername">
+		Player9
+	</div>
+</div>
+
+<!-- Info/Buttons panel for the player -->
+<div class="gamepanel">
+<div class="gamebuttons">
+	<div id="buttonfold"></div>
+	<div id="buttoncall"></div>
+	<div id="buttonraise"></div>
+</div>
+<div class="gameinfo">
+Mingi muu info?
+</div>
+</div>
+
+
+
+<div id="tablecards">
+<div id="tablecard1"></div>
+<div id="tablecard2"></div>
+<div id="tablecard3"></div>
+<div id="tablecard4"></div>
+<div id="tablecard5"></div>
+<img src="images/cardBackSide.png" id="dealoutcard1" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealoutcard2" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealoutcard3" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealoutcard4" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealoutcard5" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealoutcard6" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealoutcard7" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealoutcard8" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealoutcard9" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealoutcard10" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealoutcard11" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealoutcard12" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealoutcard13" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealoutcard14" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealoutcard15" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealoutcard16" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealoutcard17" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealoutcard18" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealoutcard19" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealoutcard20" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealoutcard21" class="dealoutcardClass" />
+<!-- <img src="images/cardBackSide.png" id="dealourcard1" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealourcard2" class="dealoutcardClass" /> -->
+<img src="images/cardBackSide.png" id="dealoutcard22" class="dealoutcardClass" />
+<img src="images/cardBackSide.png" id="dealoutcard23" class="dealoutcardClass" />
+</div>
+
+<div>
+<img id="chipimageplayer1" class="chipimage" src="images/chip50.png" />
+<img id="chipimageplayer2" class="chipimage" src="images/chip200.png" />
+<img id="chipimageplayer3" class="chipimage" src="images/chip100.png" />
+<img id="chipimageplayer4" class="chipimage" src="images/chip50.png" />
+<img id="chipimageplayer5" class="chipimage" src="images/chip200.png" />
+<img id="chipimageplayer6" class="chipimage" src="images/chip100.png" />
+<img id="chipimageplayer7" class="chipimage" src="images/chip50.png" />
+<img id="chipimageplayer8" class="chipimage" src="images/chip100.png" />
+<!--<img id="chipimageourplayer" class="chipimage" src="images/chip50.png" />-->
+<img id="chipimageplayer9" class="chipimage" src="images/chip50.png" />
+</div>
+
+
+<div id="tabletinfo" class="tablebetinfo">
+	<!-- <div id="ourbetinfo">
+		<div id="ourbet"></div>
+	</div> -->
+	<div id="tablebetinfo1">
+		<div id="playerbet1" class="playerbetbox"></div>
+	</div>
+	<div id="tablebetinfo2">
+		<div id="playerbet2" class="playerbetbox"></div>
+	</div>
+	<div id="tablebetinfo3">
+		<div id="playerbet3" class="playerbetbox"></div>
+	</div>
+	<div id="tablebetinfo4">
+		<div id="playerbet4" class="playerbetbox"></div>
+	</div>
+	<div id="tablebetinfo5">
+		<div id="playerbet5" class="playerbetbox"></div>
+	</div>
+	<div id="tablebetinfo6">
+		<div id="playerbet6" class="playerbetbox"></div>
+	</div>
+	<div id="tablebetinfo7">
+		<div id="playerbet7" class="playerbetbox"></div>
+	</div>
+	<div id="tablebetinfo8">
+		<div id="playerbet8" class="playerbetbox"></div>
+	</div>
+	<div id="tablebetinfo9">
+		<div id="playerbet9" class="playerbetbox"></div>
+	</div>
+	<div id="pot"> </div>
+</div>
+
+</div>
+
+</div>
+
+<div id="right">
+	<div id="right-top">
+		<div id="menu">
+			<div id="newgamebutton">
+			</div>
+			<div id="exitbutton">
+			</div>
+		</div>
+		<div id="loginfo">
+			<textarea id="stats" class="statsoutput" readonly="readonly"> Start of log:
+			</textarea>
+		</div>
+	</div>
+
+	<div id="right-bottom">
+			<div><textarea id="chatoutput" readonly="readonly"> ChatBox 
+				</textarea>
+			</div>
+			<div>
+				<input type="text" id="usermsg" />
+				<button id="submitmsg">Send</button>
+			</div>
+	</div>
+</div>
+
+</div>
+</body>
+
+</html>
