@@ -125,16 +125,11 @@ var jsonParse = (function () {
     // Loop over remaining tokens maintaining a stack of uncompleted objects and
     // arrays.
     var stack = [result];
-    for (var i = 1 - topLevelPrimitive, n = toks.length; i < n; ++i) {
+    for (i = 1 - topLevelPrimitive, n = toks.length; i < n; ++i) {
       tok = toks[i];
 
       var cont;
       switch (tok.charCodeAt(0)) {
-        default:  // sign or digit
-          cont = stack[0];
-          cont[key || cont.length] = +(tok);
-          key = void 0;
-          break;
         case 0x22:  // '"'
           tok = tok.substring(1, tok.length - 1);
           if (tok.indexOf(SLASH) !== -1) {
@@ -183,6 +178,11 @@ var jsonParse = (function () {
         case 0x7d:  // '}'
           stack.shift();
           break;
+        default:  // sign or digit
+            cont = stack[0];
+            cont[key || cont.length] = +(tok);
+            key = void 0;
+            break;
       }
     }
     // Fail if we've got an uncompleted object.
@@ -223,7 +223,7 @@ var jsonParse = (function () {
             }
           }
           if (toDelete) {
-            for (var i = toDelete.length; --i >= 0;) {
+            for (i = toDelete.length; --i >= 0;) {
               delete value[toDelete[i]];
             }
           }
