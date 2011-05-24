@@ -624,18 +624,18 @@ function removePlayer(player) {
 }
 
 function hidePlayerButtons(i) {
-	if (i == true) {
+	if (i) {
 		$("#ourbuttons").hide('slow', function() {
 		});
 	}
-	if (i == false) {
+	if (!i) {
 		$("#ourbuttons").show(600);
 	}
 }
 
 function hidePlayers(number) {
 
-	for ( var i = 0; i < number; i++) {
+	for (i = 0; i < number; i++) {
 		hidePlayer(9 - i);
 	}
 
@@ -678,6 +678,16 @@ function cardsBackside() {
 	});
 }
 
+function clearDealer() {
+	$(document).ready(function() {
+	for (i = 1; i <= 9; i++) {
+					$("#player" + i).children(".playerdata").children(
+							".playerdetail").children(".playerstatus")
+							.children(".playerstatusimage").hide();
+				}
+	});
+}
+	
 function setDealer(player) {
 	clearDealer();
 	$(document).ready(
@@ -687,15 +697,4 @@ function setDealer(player) {
 						".playerstatusimage").show();
 			});
 
-}
-
-function clearDealer() {
-	for (i = 1; i <= 9; i++) {
-		$(document).ready(
-				function() {
-					$("#player" + i).children(".playerdata").children(
-							".playerdetail").children(".playerstatus")
-							.children(".playerstatusimage").hide();
-				});
-	}
 }
