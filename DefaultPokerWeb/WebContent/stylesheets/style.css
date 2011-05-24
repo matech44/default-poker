@@ -1,5 +1,61 @@
 @CHARSET "ISO-8859-1";
 
+textarea.statsoutput {
+	width:210px;
+	height:296px;
+	resize: none;
+	background-color: transparent;
+	border: solid 1px #808080;
+	border-radius: 20px;
+	color: #EAC117;
+	font-size: 11px;
+}
+
+body {
+	background-color: black;
+}
+
+#firstWindowText {
+	color:white;
+	font-family: "Lucida Console", Monaco, monospace;
+	}
+
+#chatoutput {
+	width:210px;
+	height:260px;
+	resize: none;
+	background-color: transparent;
+	border: solid 1px #808080;
+	border-radius: 20px;
+	color: #DDDDDD;
+	margin-bottom: 5px;
+	margin-top: 2px;
+	font-size: 11px;
+}
+	
+#usermsg {
+	width: 210px;
+	height: 22px;
+	background-color: transparent;
+	border: solid 1px #808080;
+	border-radius: 20px;
+	color: white;
+	margin-bottom: 5px;
+	font-size: 11px;
+}
+
+#submitmsg {
+	background-color: transparent;
+	border: solid 1px #808080;
+	border-radius: 20px;
+	font-size: 15px;
+	text-align: center;
+	width: 50px;
+	height: 22px;
+	color: #DDDDDD;
+	font-size: 11px;
+}
+
 body {
 	margin: 0px;
 	padding: 0px;
