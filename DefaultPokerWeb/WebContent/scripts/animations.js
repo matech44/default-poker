@@ -2,101 +2,18 @@
  * Animations.js Default Name 2011 *Default Poker*
  */
 
-function hideMainDiv(i) {
-	if (i == true) {
-		$("#left").hide("slow");
-		$("div#right > div#right-top > div#loginfo").hide("slow");
-	}
-	if (i == false) {
-		$("#left").show(600);
-		$("div#right > div#right-top > div#loginfo").show(600);
-	}
-}
-
 function fadePlayer(player) {
-	$(document).ready(function() {
-		switch (player) {
-		case 1:
-			$("#dealoutcard1").fadeTo(1000, 0.3);
-			$("#dealoutcard2").fadeTo(1000, 0.3);
-			break;
-		case 2:
-			$("#dealoutcard3").fadeTo(1000, 0.3);
-			$("#dealoutcard4").fadeTo(1000, 0.3);
-			break;
-		case 3:
-			$("#dealoutcard5").fadeTo(1000, 0.3);
-			$("#dealoutcard6").fadeTo(1000, 0.3);
-			break;
-		case 4:
-			$("#dealoutcard7").fadeTo(1000, 0.3);
-			$("#dealoutcard8").fadeTo(1000, 0.3);
-			break;
-		case 5:
-			$("#dealoutcard9").fadeTo(1000, 0.3);
-			$("#dealoutcard10").fadeTo(1000, 0.3);
-			break;
-		case 6:
-			$("#dealoutcard11").fadeTo(1000, 0.3);
-			$("#dealoutcard12").fadeTo(1000, 0.3);
-			break;
-		case 7:
-			$("#dealoutcard13").fadeTo(1000, 0.3);
-			$("#dealoutcard14").fadeTo(1000, 0.3);
-			break;
-		case 8:
-			$("#dealoutcard15").fadeTo(1000, 0.3);
-			$("#dealoutcard16").fadeTo(1000, 0.3);
-			break;
-		case 9:
-			$("#dealoutcard17").fadeTo(1000, 0.3);
-			$("#dealoutcard18").fadeTo(1000, 0.3);
-			break;
-		}
-	});
+
+	$("#dealoutcard" + (2 * player - 1)).fadeTo(1000, 0.3);
+	$("#dealoutcard" + (2 * player)).fadeTo(1000, 0.3);
+
 }
 
 function fadeBackPlayer(player) {
-	$(document).ready(function() {
-		switch (player) {
-		case 1:
-			$("#dealoutcard1").fadeTo(1000, 1);
-			$("#dealoutcard2").fadeTo(1000, 1);
-			break;
-		case 2:
-			$("#dealoutcard3").fadeTo(1000, 1);
-			$("#dealoutcard4").fadeTo(1000, 1);
-			break;
-		case 3:
-			$("#dealoutcard5").fadeTo(1000, 1);
-			$("#dealoutcard6").fadeTo(1000, 1);
-			break;
-		case 4:
-			$("#dealoutcard7").fadeTo(1000, 1);
-			$("#dealoutcard8").fadeTo(1000, 1);
-			break;
-		case 5:
-			$("#dealoutcard9").fadeTo(1000, 1);
-			$("#dealoutcard10").fadeTo(1000, 1);
-			break;
-		case 6:
-			$("#dealoutcard11").fadeTo(1000, 1);
-			$("#dealoutcard12").fadeTo(1000, 1);
-			break;
-		case 7:
-			$("#dealoutcard13").fadeTo(1000, 1);
-			$("#dealoutcard14").fadeTo(1000, 1);
-			break;
-		case 8:
-			$("#dealoutcard15").fadeTo(1000, 1);
-			$("#dealoutcard16").fadeTo(1000, 1);
-			break;
-		case 9:
-			$("#dealoutcard17").fadeTo(1000, 1);
-			$("#dealoutcard18").fadeTo(1000, 1);
-			break;
-		}
-	});
+
+	$("#dealoutcard" + (2 * player - 1)).fadeTo(1000, 1);
+	$("#dealoutcard" + (2 * player)).fadeTo(1000, 1);
+
 }
 
 function showPlayers(amount) {
@@ -105,11 +22,9 @@ function showPlayers(amount) {
 	}
 }
 
-
 function changePlayerBet(playerNum, newBet) {
 	$("#playerbet" + playerNum).html(newBet + "");
 }
-
 
 function changePlayerName(playerNum, newName) {
 	$("div#player" + playerNum + "> div.playername").html(newName);
@@ -132,7 +47,7 @@ function setPlayerMoney(playerNum, sum) {
 }
 
 function addTextToHistory(text) {
-	$("#stats").append("Server> " + text + "\n");
+	$("#stats").append("Server> " + text + "\n---\n");
 
 	var elem = document.getElementById('stats');
 	elem.scrollTop = elem.scrollHeight;
@@ -584,7 +499,7 @@ function unDealCardsToPlayer8(n) {
 		}, 1000);
 	});
 }
-// / TODO!
+
 function dealCardsToPlayer9(n) {
 	$(document).ready(function() {
 		$("#dealoutcard17").delay(n).animate({
@@ -603,7 +518,7 @@ function dealCardsToPlayer9(n) {
 		}, 1000);
 	});
 }
-// / TODO!
+
 function unDealCardsToPlayer9(n) {
 	$(document).ready(function() {
 		$("#dealoutcard17").delay(n).animate({
@@ -719,142 +634,20 @@ function hidePlayerButtons(i) {
 }
 
 function hidePlayers(number) {
-	switch (number) {
-	case 0:
-		break;
-	case 1:
-		hidePlayer(9);
-		break;
-	case 2:
-		hidePlayer(9);
-		hidePlayer(8);
-		break;
-	case 3:
-		hidePlayer(9);
-		hidePlayer(8);
-		hidePlayer(7);
-		break;
-	case 4:
-		hidePlayer(9);
-		hidePlayer(8);
-		hidePlayer(7);
-		hidePlayer(6);
-		break;
-	case 5:
-		hidePlayer(9);
-		hidePlayer(8);
-		hidePlayer(7);
-		hidePlayer(6);
-		hidePlayer(5);
-		break;
-	case 6:
-		hidePlayer(9);
-		hidePlayer(8);
-		hidePlayer(7);
-		hidePlayer(6);
-		hidePlayer(5);
-		hidePlayer(4);
-		break;
-	case 7:
-		hidePlayer(9);
-		hidePlayer(8);
-		hidePlayer(7);
-		hidePlayer(6);
-		hidePlayer(5);
-		hidePlayer(4);
-		hidePlayer(3);
-		break;
-	case 8:
-		hidePlayer(9);
-		hidePlayer(8);
-		hidePlayer(7);
-		hidePlayer(6);
-		hidePlayer(5);
-		hidePlayer(4);
-		hidePlayer(3);
-		hidePlayer(2);
-		break;
-	case 9:
-		hidePlayer(9);
-		hidePlayer(8);
-		hidePlayer(7);
-		hidePlayer(6);
-		hidePlayer(5);
-		hidePlayer(4);
-		hidePlayer(3);
-		hidePlayer(2);
-		hidePlayer(1);
-		break;
-	}
-}
 
-function showPlayerNumberDialog() {
-	var playernumber = prompt("Please enter number of players (1-8).", "");
-	// if (playernumber!=null && playernumber!="" && playernumber!="1-8") {
-	return playernumber;
-	// }
+	for ( var i = 0; i < number; i++) {
+		hidePlayer(9 - i);
+	}
+
 }
 
 function flipCards(player, card1, card2) {
-	switch (player) {
-	case 1:
-		$(document).ready(function() {
-			$("#dealoutcard1").attr("src", "images/cards/" + card1 + ".png");
-			$("#dealoutcard2").attr("src", "images/cards/" + card2 + ".png");
-		});
-		break;
-	case 2:
-		$(document).ready(function() {
-			$("#dealoutcard3").attr("src", "images/cards/" + card1 + ".png");
-			$("#dealoutcard4").attr("src", "images/cards/" + card2 + ".png");
-		});
-		break;
-	case 3:
-		$(document).ready(function() {
-			$("#dealoutcard5").attr("src", "images/cards/" + card1 + ".png");
-			$("#dealoutcard6").attr("src", "images/cards/" + card2 + ".png");
-		});
-		break;
-	case 4:
-		$(document).ready(function() {
-			$("#dealoutcard7").attr("src", "images/cards/" + card1 + ".png");
-			$("#dealoutcard8").attr("src", "images/cards/" + card2 + ".png");
-		});
-		break;
-	case 5:
-		$(document).ready(function() {
-			$("#dealoutcard9").attr("src", "images/cards/" + card1 + ".png");
-			$("#dealoutcard10").attr("src", "images/cards/" + card2 + ".png");
-		});
-		break;
-	case 6:
-		$(document).ready(
-				function() {
-					$("img#dealoutcard11").attr("src",
-							"images/cards/" + card1 + ".png");
-					$("img#dealoutcard12").attr("src",
-							"images/cards/" + card2 + ".png");
-				});
-		break;
-	case 7:
-		$(document).ready(function() {
-			$("#dealoutcard13").attr("src", "images/cards/" + card1 + ".png");
-			$("#dealoutcard14").attr("src", "images/cards/" + card2 + ".png");
-		});
-		break;
-	case 8:
-		$(document).ready(function() {
-			$("#dealoutcard15").attr("src", "images/cards/" + card1 + ".png");
-			$("#dealoutcard16").attr("src", "images/cards/" + card2 + ".png");
-		});
-		break;
-	case 9:
-		$(document).ready(function() {
-			$("#dealoutcard17").attr("src", "images/cards/" + card1 + ".png");
-			$("#dealoutcard18").attr("src", "images/cards/" + card2 + ".png");
-		});
-		break;
-	}
+
+	$("#dealoutcard" + (2 * player - 1)).attr("src",
+			"images/cards/" + card1 + ".png");
+	$("#dealoutcard" + (2 * player)).attr("src",
+			"images/cards/" + card2 + ".png");
+
 }
 
 function flipFlop(card1, card2, card3) {
@@ -895,7 +688,7 @@ function setDealer(player) {
 			});
 
 }
-/// OK!
+
 function clearDealer() {
 	for (i = 1; i <= 9; i++) {
 		$(document).ready(
