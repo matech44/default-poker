@@ -20,7 +20,7 @@
 	<property name="build.web.xml" value="${build.WEB-INF}/web.xml" />
 
 	<!-- UPDATE THIS! -->
-	<property name="catalina.home" value="../../../../apache-tomcat-7.0.8" />
+	<property name="catalina.home" value="../../../../Program Files/Apache Software Foundation/Tomcat 7.0" />
 
 	<!-- ==================== External Dependencies =========================== -->
 
