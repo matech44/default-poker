@@ -9,11 +9,6 @@ body {
 	background-color: #000000;
 }
 
-/**
- * PAGE STRUCTURE FORMED BY UNIQUE DIV's 
- */
- 
-/* Holds everything */
 #maincontainer {
 	margin: 0px;
 	padding: 0px;
@@ -22,16 +17,14 @@ body {
 	background-color: transparent;
 }
 
-/* Left container holding table and bet buttons */
 #left {
 	position: relative;
 	width: 80%;
 	height: 100%;
 	float: left;
-	//min-width: 840px;
+	min-width: 840px;
 }
 
-/* Poker table with other players */
 #left-top {
 	position: relative;
 	clear: both;
@@ -40,7 +33,6 @@ body {
 	background-color: transparent;
 }
 
-/* Bet buttons/our player? */
 #left-bottom {
 	position: relative;
 	clear: both;
@@ -49,7 +41,6 @@ body {
 	background-color: transparent;
 }
 
-/* Right container holding chat/statistics */
 #right {
 	position: relative;
 	width: 20%;
@@ -87,7 +78,6 @@ body {
 	width: 600px;
 }
 
-/* Poker table image container */
 #tablecanvas {
 	position: absolute;
 	top: 0px;
@@ -108,7 +98,6 @@ body {
 	
 	}
 
-/* Poker table image */
 #tableimage {
 	width: 600px;
 }
@@ -164,10 +153,6 @@ body {
 	text-align: center;
 }
 
-/**
- * UNIQUE PLAYER DIV's
- */
-
 .players {
 	position: absolute;
 	height: 160px;
@@ -218,55 +203,7 @@ body {
 	top: 500px;
 	left: 470px;
 }
-/*
-#ourplayer {
-	position: absolute;
-	height: 120px;
-	width: 300px;
-	top: 490px;
-	left: 270px;
-}
 
-/**
- * OUR PLAYER STRUCTURE
- */
- /*
-#ourdisplay {
-	position:relative;
-	width: 100px;
-	float: left;
-}
-
-#ourdisplayimage {
-	width: 100px;
-}
-
-#ourcards {
-	position:relative;
-	width: 200px;
-	float: left;
-}
-
-#ourcard1 {
-	position:relative;
-	left: 20px;
-	height: 120px;
-	float: left;
-}
-
-#ourcard2 {
-	position:relative;
-	height: 120px;
-	float: right;
-}
-
-.ourcardimage {
-	height: 120px;
-}
-*/
-/***
-* BUTTONS
-*/
 .gamepanel {
 	position: absolute;
 	height:	115px;
@@ -348,41 +285,6 @@ body {
 	background-image: url("../images/buttonRaisePress.png");
 }
 
-/*
-#buttoncheck {
-	background-image: url("../images/buttonCheck.png");
-	position:relative;
-	float:left;
-	margin-right:5px;
-	height:33px;
-	width:55px;
-}
-
-#buttoncheck:hover {
-	background-image: url("../images/buttonCheckHover.png");
-}
-
-#buttoncheck:active {
-	background-image: url("../images/buttonCheckPress.png");
-}
-
-#buttonbet {
-	background-image: url("../images/buttonBet.png");
-	position:relative;
-	float:left;
-	height:33px;
-	width:55px;
-}
-
-#buttonbet:hover {
-	background-image: url("../images/buttonBetHover.png");
-}
-
-#buttonbet:active {
-	background-image: url("../images/buttonBetPress.png");
-}
-*/
-
 #checkboxSitOut {
 	position:relative;
 	}
@@ -414,17 +316,11 @@ checkboxBigBlind {
 	font-size: 12px;
 	}
 
-/**
- * ENEMY PLAYERS STRUCTURE
- */
-
-/* Cards container DIV on top */
 .cards {
 	height: 70px;
 	width: 100%;
 }
 
-/* First card DIV container little higher */
 .card1 {
 	position: relative;
 	top: -10px;
@@ -433,7 +329,6 @@ checkboxBigBlind {
 	float: left;
 }
 
-/* Second card DIV container overlapping the first */
 .card2 {
 	position: relative;
 	left: -20px;
@@ -441,7 +336,6 @@ checkboxBigBlind {
 	float: left;
 }
 
-/* Single card IMG */
 .cardimage {
 	height: 70px;
 	opacity: 0;
@@ -451,13 +345,11 @@ checkboxBigBlind {
 	
 	}
 
-/* Player display image/money/status images DIV in the center*/
 .playerdata {
 	height: 60px;
 	width: 100%;
 }
 
-/* Player display image DIV container */
 .playerdisplay {
 	position: relative;
 	float: left;
@@ -465,26 +357,23 @@ checkboxBigBlind {
 	width: 50%;
 }
 
-/* Player diplay IMG */
 .playerdisplayimage {
 	width: 60px;
 }
 
-/* Player money/status images DIV container */
 .playerdetail {
 	position: relative;
 	float: right;
 	width: 50%;
 }
 
-/* Player money DIV */
 .playersum  {
 	width: 100%;
 	height: 50%;
 	text-align: center;
 	font-family: "Trebuchet MS";
-	font-size: 14;
-	//font-weight: bold;
+	font-size: 14px;
+	font-weight: bold;
 	color: #EAC117;
 }
 
@@ -492,33 +381,26 @@ checkboxBigBlind {
 	color: #EAC117;
 	}
 
-/* Player status images DIV container */
 .playerstatus {
 	width: 100%;
 	height: 50%;
 }
 
-/* Player status IMG */
 .playerstatusimage {
 	width: 30px;
 	float: left;
 }
 
-/* Player name DIV on the bottom */
 .playername {
 	height: 30px;
 	width: 100%;
 	text-align: center;
 	font-family: "Courier New";
-	font-size: 15;
-	//font-weight: bold;
+	font-size: 16px;
+	font-weight: bold;
 	color: #BBBBBB;
 }
 
-/**
- * TABLE CARDS
- */
- 
 #tablecards {
 	position: absolute;
 	z-index:1;
@@ -706,11 +588,7 @@ checkboxBigBlind {
 #playerbet9 {
 	float:bottom;
 }
-/*
-#outbet {
-	float:bottom;
-}
-*/
+
 #pot {
 	position:absolute;
 	height:30px;
