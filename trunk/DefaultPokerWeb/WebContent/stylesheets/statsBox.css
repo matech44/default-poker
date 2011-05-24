@@ -4,11 +4,9 @@ textarea.statsoutput {
 	width:210px;
 	height:296px;
 	resize: none;
-	/*background-color: #505050;*/
 	background-color: transparent;
 	border: solid 1px #808080;
 	border-radius: 20px;
 	color: #EAC117;
 	font-size: 11px;
 }
-
