@@ -2,15 +2,8 @@ package ee.ut.defaultpoker.server;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import javax.servlet.AsyncContext;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import ee.ut.defaultpoker.model.Engine;
-import ee.ut.defaultpoker.model.info.GameInfo;
 
 /**
  * Servlet implementation class PokerServlet
@@ -61,6 +53,8 @@ public class PokerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
+		response.setContentType("text/html;charset=utf-8");
 
 		PrintWriter out = response.getWriter();
 		String sessionId = request.getSession().getId();
